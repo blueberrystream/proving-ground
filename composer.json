@@ -5,6 +5,12 @@
     "propel/propel": "~2.0@dev"
   },
   "require-dev": {
-    "heroku/heroku-buildpack-php": "*"
+    "heroku/heroku-buildpack-php": "*",
+    "vlucas/phpdotenv": "^2.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "src/app"
+    }
   }
 }
