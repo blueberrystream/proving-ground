@@ -66,11 +66,11 @@
     <table name="player_deck">
         <column name="id" type="integer" required="true" primarykey="true" autoincrement="true"/>
         <column name="player_id" type="integer" required="true"/>
-        <column name="player_item1_id" type="integer" required="true"/>
-        <column name="player_item2_id" type="integer" required="true"/>
-        <column name="player_item3_id" type="integer" required="true"/>
-        <column name="player_item4_id" type="integer" required="true"/>
-        <column name="player_item5_id" type="integer" required="true"/>
+        <column name="player_item1_id" type="integer"/>
+        <column name="player_item2_id" type="integer"/>
+        <column name="player_item3_id" type="integer"/>
+        <column name="player_item4_id" type="integer"/>
+        <column name="player_item5_id" type="integer"/>
         <column name="created_at" type="timestamp" required="true"/>
         <column name="updated_at" type="timestamp" required="true"/>
         <foreign-key foreigntable="player">

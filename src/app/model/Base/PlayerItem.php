@@ -870,9 +870,10 @@ abstract class PlayerItem implements ActiveRecordInterface
 
             if ($this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion !== null) {
                 if (!$this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion->isEmpty()) {
-                    \app\model\PlayerDeckQuery::create()
-                        ->filterByPrimaryKeys($this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion->getPrimaryKeys(false))
-                        ->delete($con);
+                    foreach ($this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion as $playerDeckRelatedByPlayerItem1Id) {
+                        // need to save related object because we set the relation to null
+                        $playerDeckRelatedByPlayerItem1Id->save($con);
+                    }
                     $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion = null;
                 }
             }
@@ -887,9 +888,10 @@ abstract class PlayerItem implements ActiveRecordInterface
 
             if ($this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion !== null) {
                 if (!$this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion->isEmpty()) {
-                    \app\model\PlayerDeckQuery::create()
-                        ->filterByPrimaryKeys($this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion->getPrimaryKeys(false))
-                        ->delete($con);
+                    foreach ($this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion as $playerDeckRelatedByPlayerItem2Id) {
+                        // need to save related object because we set the relation to null
+                        $playerDeckRelatedByPlayerItem2Id->save($con);
+                    }
                     $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion = null;
                 }
             }
@@ -904,9 +906,10 @@ abstract class PlayerItem implements ActiveRecordInterface
 
             if ($this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion !== null) {
                 if (!$this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion->isEmpty()) {
-                    \app\model\PlayerDeckQuery::create()
-                        ->filterByPrimaryKeys($this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion->getPrimaryKeys(false))
-                        ->delete($con);
+                    foreach ($this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion as $playerDeckRelatedByPlayerItem3Id) {
+                        // need to save related object because we set the relation to null
+                        $playerDeckRelatedByPlayerItem3Id->save($con);
+                    }
                     $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion = null;
                 }
             }
@@ -921,9 +924,10 @@ abstract class PlayerItem implements ActiveRecordInterface
 
             if ($this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion !== null) {
                 if (!$this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion->isEmpty()) {
-                    \app\model\PlayerDeckQuery::create()
-                        ->filterByPrimaryKeys($this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion->getPrimaryKeys(false))
-                        ->delete($con);
+                    foreach ($this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion as $playerDeckRelatedByPlayerItem4Id) {
+                        // need to save related object because we set the relation to null
+                        $playerDeckRelatedByPlayerItem4Id->save($con);
+                    }
                     $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion = null;
                 }
             }
@@ -938,9 +942,10 @@ abstract class PlayerItem implements ActiveRecordInterface
 
             if ($this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion !== null) {
                 if (!$this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion->isEmpty()) {
-                    \app\model\PlayerDeckQuery::create()
-                        ->filterByPrimaryKeys($this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion->getPrimaryKeys(false))
-                        ->delete($con);
+                    foreach ($this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion as $playerDeckRelatedByPlayerItem5Id) {
+                        // need to save related object because we set the relation to null
+                        $playerDeckRelatedByPlayerItem5Id->save($con);
+                    }
                     $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion = null;
                 }
             }
@@ -1909,7 +1914,7 @@ abstract class PlayerItem implements ActiveRecordInterface
                 $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion = clone $this->collPlayerDecksRelatedByPlayerItem1Id;
                 $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion[]= clone $playerDeckRelatedByPlayerItem1Id;
+            $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion[]= $playerDeckRelatedByPlayerItem1Id;
             $playerDeckRelatedByPlayerItem1Id->setPlayerItemRelatedByPlayerItem1Id(null);
         }
 
@@ -2159,7 +2164,7 @@ abstract class PlayerItem implements ActiveRecordInterface
                 $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion = clone $this->collPlayerDecksRelatedByPlayerItem2Id;
                 $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion[]= clone $playerDeckRelatedByPlayerItem2Id;
+            $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion[]= $playerDeckRelatedByPlayerItem2Id;
             $playerDeckRelatedByPlayerItem2Id->setPlayerItemRelatedByPlayerItem2Id(null);
         }
 
@@ -2409,7 +2414,7 @@ abstract class PlayerItem implements ActiveRecordInterface
                 $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion = clone $this->collPlayerDecksRelatedByPlayerItem3Id;
                 $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion[]= clone $playerDeckRelatedByPlayerItem3Id;
+            $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion[]= $playerDeckRelatedByPlayerItem3Id;
             $playerDeckRelatedByPlayerItem3Id->setPlayerItemRelatedByPlayerItem3Id(null);
         }
 
@@ -2659,7 +2664,7 @@ abstract class PlayerItem implements ActiveRecordInterface
                 $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion = clone $this->collPlayerDecksRelatedByPlayerItem4Id;
                 $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion[]= clone $playerDeckRelatedByPlayerItem4Id;
+            $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion[]= $playerDeckRelatedByPlayerItem4Id;
             $playerDeckRelatedByPlayerItem4Id->setPlayerItemRelatedByPlayerItem4Id(null);
         }
 
@@ -2909,7 +2914,7 @@ abstract class PlayerItem implements ActiveRecordInterface
                 $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion = clone $this->collPlayerDecksRelatedByPlayerItem5Id;
                 $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion[]= clone $playerDeckRelatedByPlayerItem5Id;
+            $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion[]= $playerDeckRelatedByPlayerItem5Id;
             $playerDeckRelatedByPlayerItem5Id->setPlayerItemRelatedByPlayerItem5Id(null);
         }
 

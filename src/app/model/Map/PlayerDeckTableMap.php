@@ -169,11 +169,11 @@ class PlayerDeckTableMap extends TableMap
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('player_id', 'PlayerId', 'INTEGER', 'player', 'id', true, null, null);
-        $this->addForeignKey('player_item1_id', 'PlayerItem1Id', 'INTEGER', 'player_item', 'id', true, null, null);
-        $this->addForeignKey('player_item2_id', 'PlayerItem2Id', 'INTEGER', 'player_item', 'id', true, null, null);
-        $this->addForeignKey('player_item3_id', 'PlayerItem3Id', 'INTEGER', 'player_item', 'id', true, null, null);
-        $this->addForeignKey('player_item4_id', 'PlayerItem4Id', 'INTEGER', 'player_item', 'id', true, null, null);
-        $this->addForeignKey('player_item5_id', 'PlayerItem5Id', 'INTEGER', 'player_item', 'id', true, null, null);
+        $this->addForeignKey('player_item1_id', 'PlayerItem1Id', 'INTEGER', 'player_item', 'id', false, null, null);
+        $this->addForeignKey('player_item2_id', 'PlayerItem2Id', 'INTEGER', 'player_item', 'id', false, null, null);
+        $this->addForeignKey('player_item3_id', 'PlayerItem3Id', 'INTEGER', 'player_item', 'id', false, null, null);
+        $this->addForeignKey('player_item4_id', 'PlayerItem4Id', 'INTEGER', 'player_item', 'id', false, null, null);
+        $this->addForeignKey('player_item5_id', 'PlayerItem5Id', 'INTEGER', 'player_item', 'id', false, null, null);
         $this->addColumn('created_at', 'CreatedAt', 'TIMESTAMP', true, null, null);
         $this->addColumn('updated_at', 'UpdatedAt', 'TIMESTAMP', true, null, null);
     } // initialize()

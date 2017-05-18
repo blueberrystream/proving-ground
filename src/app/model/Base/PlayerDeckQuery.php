@@ -831,7 +831,7 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function joinPlayerItemRelatedByPlayerItem1Id($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinPlayerItemRelatedByPlayerItem1Id($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('PlayerItemRelatedByPlayerItem1Id');
@@ -866,7 +866,7 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return \app\model\PlayerItemQuery A secondary query class using the current class as primary query
      */
-    public function usePlayerItemRelatedByPlayerItem1IdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function usePlayerItemRelatedByPlayerItem1IdQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
             ->joinPlayerItemRelatedByPlayerItem1Id($relationAlias, $joinType)
@@ -908,7 +908,7 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function joinPlayerItemRelatedByPlayerItem2Id($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinPlayerItemRelatedByPlayerItem2Id($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('PlayerItemRelatedByPlayerItem2Id');
@@ -943,7 +943,7 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return \app\model\PlayerItemQuery A secondary query class using the current class as primary query
      */
-    public function usePlayerItemRelatedByPlayerItem2IdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function usePlayerItemRelatedByPlayerItem2IdQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
             ->joinPlayerItemRelatedByPlayerItem2Id($relationAlias, $joinType)
@@ -985,7 +985,7 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function joinPlayerItemRelatedByPlayerItem3Id($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinPlayerItemRelatedByPlayerItem3Id($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('PlayerItemRelatedByPlayerItem3Id');
@@ -1020,7 +1020,7 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return \app\model\PlayerItemQuery A secondary query class using the current class as primary query
      */
-    public function usePlayerItemRelatedByPlayerItem3IdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function usePlayerItemRelatedByPlayerItem3IdQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
             ->joinPlayerItemRelatedByPlayerItem3Id($relationAlias, $joinType)
@@ -1062,7 +1062,7 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function joinPlayerItemRelatedByPlayerItem4Id($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinPlayerItemRelatedByPlayerItem4Id($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('PlayerItemRelatedByPlayerItem4Id');
@@ -1097,7 +1097,7 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return \app\model\PlayerItemQuery A secondary query class using the current class as primary query
      */
-    public function usePlayerItemRelatedByPlayerItem4IdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function usePlayerItemRelatedByPlayerItem4IdQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
             ->joinPlayerItemRelatedByPlayerItem4Id($relationAlias, $joinType)
@@ -1139,7 +1139,7 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function joinPlayerItemRelatedByPlayerItem5Id($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinPlayerItemRelatedByPlayerItem5Id($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('PlayerItemRelatedByPlayerItem5Id');
@@ -1174,7 +1174,7 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return \app\model\PlayerItemQuery A secondary query class using the current class as primary query
      */
-    public function usePlayerItemRelatedByPlayerItem5IdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function usePlayerItemRelatedByPlayerItem5IdQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
             ->joinPlayerItemRelatedByPlayerItem5Id($relationAlias, $joinType)

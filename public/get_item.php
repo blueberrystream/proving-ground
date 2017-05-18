@@ -13,7 +13,7 @@ if (is_null($player_id)) {
 $player = PlayerQuery::create()->findPK($player_id);
 
 $items = ItemQuery::create()->find();
-$random = mt_rand(0, count($items));
+$random = mt_rand(0, count($items) - 1);
 $item = $items[$random];
 $player_item = new PlayerItem();
 $player_item->setPlayer($player);
