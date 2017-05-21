@@ -1,16 +1,21 @@
 <?php
 require_once '../autoload.php';
 
+use Propel\Runtime\Propel;
+use Propel\Runtime\ActiveQuery\Criteria;
+
 use app\model\PlayerQuery;
+use app\model\PlayerBattleLog;
+use app\model\Map\PlayerBattleLogTableMap;
 
 $player_id = $_COOKIE['player_id'];
 if (is_null($player_id)) {
     header('Location: /index.php');
 }
 
-if (isset($_POST['"enemy_player_id"'])) {
+if (isset($_POST['enemy_player_id'])) {
     $player = PlayerQuery::create()->findPK($player_id);
-    $enemy_player = PlayerQuery::create()->findPK($_POST['"enemy_player_id"']);
+    $enemy_player = PlayerQuery::create()->findPK($_POST['enemy_player_id']);
 
     $player_deck = $player->getPlayerDecks()->getFirst();
     $enemy_player_deck = $enemy_player->getPlayerDecks()->getFirst();
@@ -40,20 +45,48 @@ if (isset($_POST['"enemy_player_id"'])) {
         }
     }
 
+    $player_battle_log = new PlayerBattleLog();
+    $player_battle_log->fromArray([
+        'player_id' => $player->getId(),
+        'enemy_player_id' => $enemy_player->getId(),
+        'challenged' => true,
+    ], PlayerBattleLogTableMap::TYPE_FIELDNAME);
+    $enemy_player_battle_log = new PlayerBattleLog();
+    $enemy_player_battle_log->fromArray([
+        'player_id' => $enemy_player->getId(),
+        'enemy_player_id' => $player->getId(),
+        'challenged' => false,
+    ], PlayerBattleLogTableMap::TYPE_FIELDNAME);
     if ($win < 0) {
-        echo 'lose';
+        echo '負けた...<br>';
+        $player_battle_log->setResult(PlayerBattleLog::RESULT_LOSE);
+        $enemy_player_battle_log->setResult(PlayerBattleLog::RESULT_WIN);
     } elseif (0 < $win) {
-        echo 'win';
+        echo '勝った！<br>';
+        $player_battle_log->setResult(PlayerBattleLog::RESULT_WIN);
+        $enemy_player_battle_log->setResult(PlayerBattleLog::RESULT_LOSE);
     } else {
-        echo 'draw';
+        echo '引き分け<br>';
+        $player_battle_log->setResult(PlayerBattleLog::RESULT_DRAW);
+        $enemy_player_battle_log->setResult(PlayerBattleLog::RESULT_DRAW);
     }
-} else {
+
+    $connection = Propel::getWriteConnection(PlayerBattleLogTableMap::DATABASE_NAME);
+    try {
+        $player_battle_log->save();
+        $enemy_player_battle_log->save();
+        $connection->commit();
+    } catch (\Exception $e) {
+        $connection->rollback();
+        throw $e;
+    }
+}
 ?>
 デッキ構築した人としかバトルできません。
 <form method="post">
 <select name="enemy_player_id">
 <?php
-$players = PlayerQuery::create()->find();
+$players = PlayerQuery::create()->filterById($player_id, Criteria::NOT_EQUAL)->find();
 foreach ($players as $player) {
     $player_deck = $player->getPlayerDecks()->getFirst();
     $is_battlable = !is_null($player_deck);
@@ -73,5 +106,3 @@ foreach ($players as $player) {
 </select>
 <input type="submit">
 </form>
-<?php
-}

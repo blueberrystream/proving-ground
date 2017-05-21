@@ -97,7 +97,8 @@
         <column name="id" type="integer" required="true" primarykey="true" autoincrement="true"/>
         <column name="player_id" type="integer" required="true"/>
         <column name="enemy_player_id" type="integer" required="true"/>
-        <column name="win" type="boolean" required="true"/>
+        <column name="result" type="integer" required="true"/>
+        <column name="challenged" type="boolean" required="true"/>
         <column name="created_at" type="timestamp" required="true"/>
         <column name="updated_at" type="timestamp" required="true"/>
         <foreign-key foreigntable="player" name="player_battle_log_fk_player">

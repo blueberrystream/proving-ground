@@ -59,7 +59,7 @@ class PlayerBattleLogTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 6;
+    const NUM_COLUMNS = 7;
 
     /**
      * The number of lazy-loaded columns
@@ -69,7 +69,7 @@ class PlayerBattleLogTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 6;
+    const NUM_HYDRATE_COLUMNS = 7;
 
     /**
      * the column name for the id field
@@ -87,9 +87,14 @@ class PlayerBattleLogTableMap extends TableMap
     const COL_ENEMY_PLAYER_ID = 'player_battle_log.enemy_player_id';
 
     /**
-     * the column name for the win field
+     * the column name for the result field
      */
-    const COL_WIN = 'player_battle_log.win';
+    const COL_RESULT = 'player_battle_log.result';
+
+    /**
+     * the column name for the challenged field
+     */
+    const COL_CHALLENGED = 'player_battle_log.challenged';
 
     /**
      * the column name for the created_at field
@@ -113,11 +118,11 @@ class PlayerBattleLogTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'PlayerId', 'EnemyPlayerId', 'Win', 'CreatedAt', 'UpdatedAt', ),
-        self::TYPE_CAMELNAME     => array('id', 'playerId', 'enemyPlayerId', 'win', 'createdAt', 'updatedAt', ),
-        self::TYPE_COLNAME       => array(PlayerBattleLogTableMap::COL_ID, PlayerBattleLogTableMap::COL_PLAYER_ID, PlayerBattleLogTableMap::COL_ENEMY_PLAYER_ID, PlayerBattleLogTableMap::COL_WIN, PlayerBattleLogTableMap::COL_CREATED_AT, PlayerBattleLogTableMap::COL_UPDATED_AT, ),
-        self::TYPE_FIELDNAME     => array('id', 'player_id', 'enemy_player_id', 'win', 'created_at', 'updated_at', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, )
+        self::TYPE_PHPNAME       => array('Id', 'PlayerId', 'EnemyPlayerId', 'Result', 'Challenged', 'CreatedAt', 'UpdatedAt', ),
+        self::TYPE_CAMELNAME     => array('id', 'playerId', 'enemyPlayerId', 'result', 'challenged', 'createdAt', 'updatedAt', ),
+        self::TYPE_COLNAME       => array(PlayerBattleLogTableMap::COL_ID, PlayerBattleLogTableMap::COL_PLAYER_ID, PlayerBattleLogTableMap::COL_ENEMY_PLAYER_ID, PlayerBattleLogTableMap::COL_RESULT, PlayerBattleLogTableMap::COL_CHALLENGED, PlayerBattleLogTableMap::COL_CREATED_AT, PlayerBattleLogTableMap::COL_UPDATED_AT, ),
+        self::TYPE_FIELDNAME     => array('id', 'player_id', 'enemy_player_id', 'result', 'challenged', 'created_at', 'updated_at', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
     );
 
     /**
@@ -127,11 +132,11 @@ class PlayerBattleLogTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'PlayerId' => 1, 'EnemyPlayerId' => 2, 'Win' => 3, 'CreatedAt' => 4, 'UpdatedAt' => 5, ),
-        self::TYPE_CAMELNAME     => array('id' => 0, 'playerId' => 1, 'enemyPlayerId' => 2, 'win' => 3, 'createdAt' => 4, 'updatedAt' => 5, ),
-        self::TYPE_COLNAME       => array(PlayerBattleLogTableMap::COL_ID => 0, PlayerBattleLogTableMap::COL_PLAYER_ID => 1, PlayerBattleLogTableMap::COL_ENEMY_PLAYER_ID => 2, PlayerBattleLogTableMap::COL_WIN => 3, PlayerBattleLogTableMap::COL_CREATED_AT => 4, PlayerBattleLogTableMap::COL_UPDATED_AT => 5, ),
-        self::TYPE_FIELDNAME     => array('id' => 0, 'player_id' => 1, 'enemy_player_id' => 2, 'win' => 3, 'created_at' => 4, 'updated_at' => 5, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, )
+        self::TYPE_PHPNAME       => array('Id' => 0, 'PlayerId' => 1, 'EnemyPlayerId' => 2, 'Result' => 3, 'Challenged' => 4, 'CreatedAt' => 5, 'UpdatedAt' => 6, ),
+        self::TYPE_CAMELNAME     => array('id' => 0, 'playerId' => 1, 'enemyPlayerId' => 2, 'result' => 3, 'challenged' => 4, 'createdAt' => 5, 'updatedAt' => 6, ),
+        self::TYPE_COLNAME       => array(PlayerBattleLogTableMap::COL_ID => 0, PlayerBattleLogTableMap::COL_PLAYER_ID => 1, PlayerBattleLogTableMap::COL_ENEMY_PLAYER_ID => 2, PlayerBattleLogTableMap::COL_RESULT => 3, PlayerBattleLogTableMap::COL_CHALLENGED => 4, PlayerBattleLogTableMap::COL_CREATED_AT => 5, PlayerBattleLogTableMap::COL_UPDATED_AT => 6, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'player_id' => 1, 'enemy_player_id' => 2, 'result' => 3, 'challenged' => 4, 'created_at' => 5, 'updated_at' => 6, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
     );
 
     /**
@@ -155,7 +160,8 @@ class PlayerBattleLogTableMap extends TableMap
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('player_id', 'PlayerId', 'INTEGER', 'player', 'id', true, null, null);
         $this->addForeignKey('enemy_player_id', 'EnemyPlayerId', 'INTEGER', 'player', 'id', true, null, null);
-        $this->addColumn('win', 'Win', 'BOOLEAN', true, null, null);
+        $this->addColumn('result', 'Result', 'INTEGER', true, null, null);
+        $this->addColumn('challenged', 'Challenged', 'BOOLEAN', true, null, null);
         $this->addColumn('created_at', 'CreatedAt', 'TIMESTAMP', true, null, null);
         $this->addColumn('updated_at', 'UpdatedAt', 'TIMESTAMP', true, null, null);
     } // initialize()
@@ -338,14 +344,16 @@ class PlayerBattleLogTableMap extends TableMap
             $criteria->addSelectColumn(PlayerBattleLogTableMap::COL_ID);
             $criteria->addSelectColumn(PlayerBattleLogTableMap::COL_PLAYER_ID);
             $criteria->addSelectColumn(PlayerBattleLogTableMap::COL_ENEMY_PLAYER_ID);
-            $criteria->addSelectColumn(PlayerBattleLogTableMap::COL_WIN);
+            $criteria->addSelectColumn(PlayerBattleLogTableMap::COL_RESULT);
+            $criteria->addSelectColumn(PlayerBattleLogTableMap::COL_CHALLENGED);
             $criteria->addSelectColumn(PlayerBattleLogTableMap::COL_CREATED_AT);
             $criteria->addSelectColumn(PlayerBattleLogTableMap::COL_UPDATED_AT);
         } else {
             $criteria->addSelectColumn($alias . '.id');
             $criteria->addSelectColumn($alias . '.player_id');
             $criteria->addSelectColumn($alias . '.enemy_player_id');
-            $criteria->addSelectColumn($alias . '.win');
+            $criteria->addSelectColumn($alias . '.result');
+            $criteria->addSelectColumn($alias . '.challenged');
             $criteria->addSelectColumn($alias . '.created_at');
             $criteria->addSelectColumn($alias . '.updated_at');
         }

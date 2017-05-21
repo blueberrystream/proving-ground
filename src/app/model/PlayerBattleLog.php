@@ -16,5 +16,7 @@ use app\model\Base\PlayerBattleLog as BasePlayerBattleLog;
  */
 class PlayerBattleLog extends BasePlayerBattleLog
 {
-
+    const RESULT_LOSE = -1;
+    const RESULT_DRAW = 0;
+    const RESULT_WIN = 1;
 }

@@ -2,6 +2,7 @@
 require_once '../autoload.php';
 
 use app\model\PlayerQuery;
+use app\model\PlayerBattleLog;
 
 $player_id = $_COOKIE['player_id'];
 if (is_null($player_id)) {
@@ -52,6 +53,39 @@ if ($player->countPlayerItems() === 0) {
     foreach ($player_items as $player_item) {
         $item = $player_item->getItem();
         printf('<li>[%s][%s] %s</li>', $item->getProprium()->getName(), $item->getPart()->getName(), $item->getName());
+    }
+}
+?>
+</ul>
+
+<h2>battle_logs</h2>
+<ul>
+<?php
+$player_battle_logs = $player->getPlayerBattleLogsRelatedByPlayerId();
+if ($player->countPlayerBattleLogsRelatedByPlayerId() === 0) {
+    echo '<li>no battle log</li>';
+} else {
+    foreach ($player_battle_logs as $player_battle_log) {
+        $enemy_player = PlayerQuery::create()->findPK($player_battle_log->getEnemyPlayerId());
+        echo '<li>';
+        echo $enemy_player->getName() . 'に';
+        echo $player_battle_log->getChallenged() ? '挑んで' : '挑まれて';
+        switch ($player_battle_log->getResult()) {
+            case PlayerBattleLog::RESULT_LOSE:
+                echo '負けた...';
+                break;
+            case PlayerBattleLog::RESULT_DRAW:
+                echo '引き分け';
+                break;
+            case PlayerBattleLog::RESULT_WIN:
+                echo '勝った！';
+                break;
+            default:
+                break;
+
+        }
+        printf('(%s)', $player_battle_log->getCreatedAt()->format('Y/m/d H:i:s'));
+        echo '</li>';
     }
 }
 ?>

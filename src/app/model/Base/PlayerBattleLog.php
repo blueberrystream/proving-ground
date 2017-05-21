@@ -86,11 +86,18 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
     protected $enemy_player_id;
 
     /**
-     * The value for the win field.
+     * The value for the result field.
+     *
+     * @var        int
+     */
+    protected $result;
+
+    /**
+     * The value for the challenged field.
      *
      * @var        boolean
      */
-    protected $win;
+    protected $challenged;
 
     /**
      * The value for the created_at field.
@@ -380,23 +387,33 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
     }
 
     /**
-     * Get the [win] column value.
+     * Get the [result] column value.
      *
-     * @return boolean
+     * @return int
      */
-    public function getWin()
+    public function getResult()
     {
-        return $this->win;
+        return $this->result;
     }
 
     /**
-     * Get the [win] column value.
+     * Get the [challenged] column value.
      *
      * @return boolean
      */
-    public function isWin()
+    public function getChallenged()
     {
-        return $this->getWin();
+        return $this->challenged;
+    }
+
+    /**
+     * Get the [challenged] column value.
+     *
+     * @return boolean
+     */
+    public function isChallenged()
+    {
+        return $this->getChallenged();
     }
 
     /**
@@ -508,7 +525,27 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
     } // setEnemyPlayerId()
 
     /**
-     * Sets the value of the [win] column.
+     * Set the value of [result] column.
+     *
+     * @param int $v new value
+     * @return $this|\app\model\PlayerBattleLog The current object (for fluent API support)
+     */
+    public function setResult($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->result !== $v) {
+            $this->result = $v;
+            $this->modifiedColumns[PlayerBattleLogTableMap::COL_RESULT] = true;
+        }
+
+        return $this;
+    } // setResult()
+
+    /**
+     * Sets the value of the [challenged] column.
      * Non-boolean arguments are converted using the following rules:
      *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
      *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
@@ -517,7 +554,7 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
      * @param  boolean|integer|string $v The new value
      * @return $this|\app\model\PlayerBattleLog The current object (for fluent API support)
      */
-    public function setWin($v)
+    public function setChallenged($v)
     {
         if ($v !== null) {
             if (is_string($v)) {
@@ -527,13 +564,13 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
             }
         }
 
-        if ($this->win !== $v) {
-            $this->win = $v;
-            $this->modifiedColumns[PlayerBattleLogTableMap::COL_WIN] = true;
+        if ($this->challenged !== $v) {
+            $this->challenged = $v;
+            $this->modifiedColumns[PlayerBattleLogTableMap::COL_CHALLENGED] = true;
         }
 
         return $this;
-    } // setWin()
+    } // setChallenged()
 
     /**
      * Sets the value of [created_at] column to a normalized version of the date/time value specified.
@@ -620,13 +657,16 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
             $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : PlayerBattleLogTableMap::translateFieldName('EnemyPlayerId', TableMap::TYPE_PHPNAME, $indexType)];
             $this->enemy_player_id = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : PlayerBattleLogTableMap::translateFieldName('Win', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->win = (null !== $col) ? (boolean) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : PlayerBattleLogTableMap::translateFieldName('Result', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->result = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : PlayerBattleLogTableMap::translateFieldName('CreatedAt', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : PlayerBattleLogTableMap::translateFieldName('Challenged', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->challenged = (null !== $col) ? (boolean) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : PlayerBattleLogTableMap::translateFieldName('CreatedAt', TableMap::TYPE_PHPNAME, $indexType)];
             $this->created_at = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : PlayerBattleLogTableMap::translateFieldName('UpdatedAt', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : PlayerBattleLogTableMap::translateFieldName('UpdatedAt', TableMap::TYPE_PHPNAME, $indexType)];
             $this->updated_at = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
             $this->resetModified();
 
@@ -636,7 +676,7 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 6; // 6 = PlayerBattleLogTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 7; // 7 = PlayerBattleLogTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\app\\model\\PlayerBattleLog'), 0, $e);
@@ -894,8 +934,11 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
         if ($this->isColumnModified(PlayerBattleLogTableMap::COL_ENEMY_PLAYER_ID)) {
             $modifiedColumns[':p' . $index++]  = 'enemy_player_id';
         }
-        if ($this->isColumnModified(PlayerBattleLogTableMap::COL_WIN)) {
-            $modifiedColumns[':p' . $index++]  = 'win';
+        if ($this->isColumnModified(PlayerBattleLogTableMap::COL_RESULT)) {
+            $modifiedColumns[':p' . $index++]  = 'result';
+        }
+        if ($this->isColumnModified(PlayerBattleLogTableMap::COL_CHALLENGED)) {
+            $modifiedColumns[':p' . $index++]  = 'challenged';
         }
         if ($this->isColumnModified(PlayerBattleLogTableMap::COL_CREATED_AT)) {
             $modifiedColumns[':p' . $index++]  = 'created_at';
@@ -923,8 +966,11 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
                     case 'enemy_player_id':
                         $stmt->bindValue($identifier, $this->enemy_player_id, PDO::PARAM_INT);
                         break;
-                    case 'win':
-                        $stmt->bindValue($identifier, $this->win, PDO::PARAM_BOOL);
+                    case 'result':
+                        $stmt->bindValue($identifier, $this->result, PDO::PARAM_INT);
+                        break;
+                    case 'challenged':
+                        $stmt->bindValue($identifier, $this->challenged, PDO::PARAM_BOOL);
                         break;
                     case 'created_at':
                         $stmt->bindValue($identifier, $this->created_at ? $this->created_at->format("Y-m-d H:i:s.u") : null, PDO::PARAM_STR);
@@ -997,12 +1043,15 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
                 return $this->getEnemyPlayerId();
                 break;
             case 3:
-                return $this->getWin();
+                return $this->getResult();
                 break;
             case 4:
-                return $this->getCreatedAt();
+                return $this->getChallenged();
                 break;
             case 5:
+                return $this->getCreatedAt();
+                break;
+            case 6:
                 return $this->getUpdatedAt();
                 break;
             default:
@@ -1038,16 +1087,17 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
             $keys[0] => $this->getId(),
             $keys[1] => $this->getPlayerId(),
             $keys[2] => $this->getEnemyPlayerId(),
-            $keys[3] => $this->getWin(),
-            $keys[4] => $this->getCreatedAt(),
-            $keys[5] => $this->getUpdatedAt(),
+            $keys[3] => $this->getResult(),
+            $keys[4] => $this->getChallenged(),
+            $keys[5] => $this->getCreatedAt(),
+            $keys[6] => $this->getUpdatedAt(),
         );
-        if ($result[$keys[4]] instanceof \DateTimeInterface) {
-            $result[$keys[4]] = $result[$keys[4]]->format('c');
-        }
-
         if ($result[$keys[5]] instanceof \DateTimeInterface) {
             $result[$keys[5]] = $result[$keys[5]]->format('c');
+        }
+
+        if ($result[$keys[6]] instanceof \DateTimeInterface) {
+            $result[$keys[6]] = $result[$keys[6]]->format('c');
         }
 
         $virtualColumns = $this->virtualColumns;
@@ -1130,12 +1180,15 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
                 $this->setEnemyPlayerId($value);
                 break;
             case 3:
-                $this->setWin($value);
+                $this->setResult($value);
                 break;
             case 4:
-                $this->setCreatedAt($value);
+                $this->setChallenged($value);
                 break;
             case 5:
+                $this->setCreatedAt($value);
+                break;
+            case 6:
                 $this->setUpdatedAt($value);
                 break;
         } // switch()
@@ -1174,13 +1227,16 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
             $this->setEnemyPlayerId($arr[$keys[2]]);
         }
         if (array_key_exists($keys[3], $arr)) {
-            $this->setWin($arr[$keys[3]]);
+            $this->setResult($arr[$keys[3]]);
         }
         if (array_key_exists($keys[4], $arr)) {
-            $this->setCreatedAt($arr[$keys[4]]);
+            $this->setChallenged($arr[$keys[4]]);
         }
         if (array_key_exists($keys[5], $arr)) {
-            $this->setUpdatedAt($arr[$keys[5]]);
+            $this->setCreatedAt($arr[$keys[5]]);
+        }
+        if (array_key_exists($keys[6], $arr)) {
+            $this->setUpdatedAt($arr[$keys[6]]);
         }
     }
 
@@ -1232,8 +1288,11 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
         if ($this->isColumnModified(PlayerBattleLogTableMap::COL_ENEMY_PLAYER_ID)) {
             $criteria->add(PlayerBattleLogTableMap::COL_ENEMY_PLAYER_ID, $this->enemy_player_id);
         }
-        if ($this->isColumnModified(PlayerBattleLogTableMap::COL_WIN)) {
-            $criteria->add(PlayerBattleLogTableMap::COL_WIN, $this->win);
+        if ($this->isColumnModified(PlayerBattleLogTableMap::COL_RESULT)) {
+            $criteria->add(PlayerBattleLogTableMap::COL_RESULT, $this->result);
+        }
+        if ($this->isColumnModified(PlayerBattleLogTableMap::COL_CHALLENGED)) {
+            $criteria->add(PlayerBattleLogTableMap::COL_CHALLENGED, $this->challenged);
         }
         if ($this->isColumnModified(PlayerBattleLogTableMap::COL_CREATED_AT)) {
             $criteria->add(PlayerBattleLogTableMap::COL_CREATED_AT, $this->created_at);
@@ -1329,7 +1388,8 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
     {
         $copyObj->setPlayerId($this->getPlayerId());
         $copyObj->setEnemyPlayerId($this->getEnemyPlayerId());
-        $copyObj->setWin($this->getWin());
+        $copyObj->setResult($this->getResult());
+        $copyObj->setChallenged($this->getChallenged());
         $copyObj->setCreatedAt($this->getCreatedAt());
         $copyObj->setUpdatedAt($this->getUpdatedAt());
         if ($makeNew) {
@@ -1478,7 +1538,8 @@ abstract class PlayerBattleLog implements ActiveRecordInterface
         $this->id = null;
         $this->player_id = null;
         $this->enemy_player_id = null;
-        $this->win = null;
+        $this->result = null;
+        $this->challenged = null;
         $this->created_at = null;
         $this->updated_at = null;
         $this->alreadyInSave = false;
