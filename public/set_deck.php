@@ -11,9 +11,7 @@ if (is_null($player_id)) {
 
 $player = PlayerQuery::create()->findPK($player_id);
 
-if (isset($_POST['player_items'])) {
-    $player_items = $_POST['player_items'];
-
+if (!empty($_POST)) {
     if ($player->countPlayerDecks() === 0) {
         $player_deck = new PlayerDeck();
         $player_deck->setPlayer($player);
@@ -21,37 +19,67 @@ if (isset($_POST['player_items'])) {
         $player_deck = $player->getPlayerDecks()->getFirst();
     }
 
-    for ($i = 1; $i <= 5; $i++) {
-        $method_name = "setPlayerItem${i}Id";
-        $player_item = $player_items[$i - 1];
-        if (isset($player_item)) {
-            $player_deck->$method_name($player_item);
-        } else {
-            $player_deck->$method_name(null);
-        }
-    }
+    $player_deck->setHeadPlayerItemId($_POST['head_player_item_id']);
+    $player_deck->setLeftArmPlayerItemId($_POST['left_arm_player_item_id']);
+    $player_deck->setRightArmPlayerItemId($_POST['right_arm_player_item_id']);
+    $player_deck->setLeftLegPlayerItemId($_POST['left_leg_player_item_id']);
+    $player_deck->setRightLegPlayerItemId($_POST['right_leg_player_item_id']);
 
     $player_deck->save();
     header('Location: /menu.php');
 } else {
+    $player_items = $player->getPlayerItems();
+    foreach ($player_items as $player_item) {
+        $item = $player_item->getItem();
+        $sorted_player_items[$item->getPartId()][] = $player_item;
+    }
 ?>
 <form method="post">
-何個でも選べるけど、上から数えて5番目までしか設定できないよ。
-<ul style="list-style-type: none">
+頭:<select name="head_player_item_id">
+<option value="null">装備なし</option>
 <?php
-$player_items = $player->getPlayerItems();
-foreach ($player_items as $player_item) {
-    $item = $player_item->getItem();
-    printf(
-        '<li><label><input type="checkbox" name="player_items[]" value="%d">[%s][%s] %s</label></li>',
-        $player_item->getId(),
-        $item->getProprium()->getName(),
-        $item->getPart()->getName(),
-        $item->getName()
-    );
-}
+    foreach ($sorted_player_items[1] as $player_item) { // $sorted_player_items[1] の 1 ってなんやねん
+        $item = $player_item->getItem();
+        printf('<option value="%d">[%s] %s</option>', $player_item->getId(), $item->getProprium()->getName(), $item->getName());
+    }
 ?>
-</ul>
+</select><br>
+左腕:<select name="left_arm_player_item_id">
+<option value="null">装備なし</option>
+<?php
+    foreach ($sorted_player_items[2] as $player_item) {
+        $item = $player_item->getItem();
+        printf('<option value="%d">[%s] %s</option>', $player_item->getId(), $item->getProprium()->getName(), $item->getName());
+    }
+?>
+</select><br>
+右腕:<select name="right_arm_player_item_id">
+<option value="null">装備なし</option>
+<?php
+    foreach ($sorted_player_items[3] as $player_item) {
+        $item = $player_item->getItem();
+        printf('<option value="%d">[%s] %s</option>', $player_item->getId(), $item->getProprium()->getName(), $item->getName());
+    }
+?>
+</select><br>
+左脚:<select name="left_leg_player_item_id">
+<option value="null">装備なし</option>
+<?php
+    foreach ($sorted_player_items[4] as $player_item) {
+        $item = $player_item->getItem();
+        printf('<option value="%d">[%s] %s</option>', $player_item->getId(), $item->getProprium()->getName(), $item->getName());
+    }
+?>
+</select><br>
+右脚:<select name="right_leg_player_item_id">
+<option value="null">装備なし</option>
+<?php
+    foreach ($sorted_player_items[5] as $player_item) {
+        $item = $player_item->getItem();
+        printf('<option value="%d">[%s] %s</option>', $player_item->getId(), $item->getProprium()->getName(), $item->getName());
+    }
+?>
+</select><br>
 <input type="submit">
 </form>
 <?php

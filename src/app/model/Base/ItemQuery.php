@@ -24,11 +24,17 @@ use app\model\Map\ItemTableMap;
  * @method     ChildItemQuery orderByName($order = Criteria::ASC) Order by the name column
  * @method     ChildItemQuery orderByPropriumId($order = Criteria::ASC) Order by the proprium_id column
  * @method     ChildItemQuery orderByPartId($order = Criteria::ASC) Order by the part_id column
+ * @method     ChildItemQuery orderByHitPoint($order = Criteria::ASC) Order by the hit_point column
+ * @method     ChildItemQuery orderByAttackPoint($order = Criteria::ASC) Order by the attack_point column
+ * @method     ChildItemQuery orderByDefensePoint($order = Criteria::ASC) Order by the defense_point column
  *
  * @method     ChildItemQuery groupById() Group by the id column
  * @method     ChildItemQuery groupByName() Group by the name column
  * @method     ChildItemQuery groupByPropriumId() Group by the proprium_id column
  * @method     ChildItemQuery groupByPartId() Group by the part_id column
+ * @method     ChildItemQuery groupByHitPoint() Group by the hit_point column
+ * @method     ChildItemQuery groupByAttackPoint() Group by the attack_point column
+ * @method     ChildItemQuery groupByDefensePoint() Group by the defense_point column
  *
  * @method     ChildItemQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChildItemQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -76,7 +82,10 @@ use app\model\Map\ItemTableMap;
  * @method     ChildItem findOneById(int $id) Return the first ChildItem filtered by the id column
  * @method     ChildItem findOneByName(string $name) Return the first ChildItem filtered by the name column
  * @method     ChildItem findOneByPropriumId(int $proprium_id) Return the first ChildItem filtered by the proprium_id column
- * @method     ChildItem findOneByPartId(int $part_id) Return the first ChildItem filtered by the part_id column *
+ * @method     ChildItem findOneByPartId(int $part_id) Return the first ChildItem filtered by the part_id column
+ * @method     ChildItem findOneByHitPoint(int $hit_point) Return the first ChildItem filtered by the hit_point column
+ * @method     ChildItem findOneByAttackPoint(int $attack_point) Return the first ChildItem filtered by the attack_point column
+ * @method     ChildItem findOneByDefensePoint(int $defense_point) Return the first ChildItem filtered by the defense_point column *
 
  * @method     ChildItem requirePk($key, ConnectionInterface $con = null) Return the ChildItem by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildItem requireOne(ConnectionInterface $con = null) Return the first ChildItem matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -85,12 +94,18 @@ use app\model\Map\ItemTableMap;
  * @method     ChildItem requireOneByName(string $name) Return the first ChildItem filtered by the name column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildItem requireOneByPropriumId(int $proprium_id) Return the first ChildItem filtered by the proprium_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildItem requireOneByPartId(int $part_id) Return the first ChildItem filtered by the part_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildItem requireOneByHitPoint(int $hit_point) Return the first ChildItem filtered by the hit_point column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildItem requireOneByAttackPoint(int $attack_point) Return the first ChildItem filtered by the attack_point column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildItem requireOneByDefensePoint(int $defense_point) Return the first ChildItem filtered by the defense_point column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildItem[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildItem objects based on current ModelCriteria
  * @method     ChildItem[]|ObjectCollection findById(int $id) Return ChildItem objects filtered by the id column
  * @method     ChildItem[]|ObjectCollection findByName(string $name) Return ChildItem objects filtered by the name column
  * @method     ChildItem[]|ObjectCollection findByPropriumId(int $proprium_id) Return ChildItem objects filtered by the proprium_id column
  * @method     ChildItem[]|ObjectCollection findByPartId(int $part_id) Return ChildItem objects filtered by the part_id column
+ * @method     ChildItem[]|ObjectCollection findByHitPoint(int $hit_point) Return ChildItem objects filtered by the hit_point column
+ * @method     ChildItem[]|ObjectCollection findByAttackPoint(int $attack_point) Return ChildItem objects filtered by the attack_point column
+ * @method     ChildItem[]|ObjectCollection findByDefensePoint(int $defense_point) Return ChildItem objects filtered by the defense_point column
  * @method     ChildItem[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
  */
@@ -189,7 +204,7 @@ abstract class ItemQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, name, proprium_id, part_id FROM item WHERE id = :p0';
+        $sql = 'SELECT id, name, proprium_id, part_id, hit_point, attack_point, defense_point FROM item WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -429,6 +444,129 @@ abstract class ItemQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ItemTableMap::COL_PART_ID, $partId, $comparison);
+    }
+
+    /**
+     * Filter the query on the hit_point column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByHitPoint(1234); // WHERE hit_point = 1234
+     * $query->filterByHitPoint(array(12, 34)); // WHERE hit_point IN (12, 34)
+     * $query->filterByHitPoint(array('min' => 12)); // WHERE hit_point > 12
+     * </code>
+     *
+     * @param     mixed $hitPoint The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildItemQuery The current query, for fluid interface
+     */
+    public function filterByHitPoint($hitPoint = null, $comparison = null)
+    {
+        if (is_array($hitPoint)) {
+            $useMinMax = false;
+            if (isset($hitPoint['min'])) {
+                $this->addUsingAlias(ItemTableMap::COL_HIT_POINT, $hitPoint['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($hitPoint['max'])) {
+                $this->addUsingAlias(ItemTableMap::COL_HIT_POINT, $hitPoint['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ItemTableMap::COL_HIT_POINT, $hitPoint, $comparison);
+    }
+
+    /**
+     * Filter the query on the attack_point column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByAttackPoint(1234); // WHERE attack_point = 1234
+     * $query->filterByAttackPoint(array(12, 34)); // WHERE attack_point IN (12, 34)
+     * $query->filterByAttackPoint(array('min' => 12)); // WHERE attack_point > 12
+     * </code>
+     *
+     * @param     mixed $attackPoint The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildItemQuery The current query, for fluid interface
+     */
+    public function filterByAttackPoint($attackPoint = null, $comparison = null)
+    {
+        if (is_array($attackPoint)) {
+            $useMinMax = false;
+            if (isset($attackPoint['min'])) {
+                $this->addUsingAlias(ItemTableMap::COL_ATTACK_POINT, $attackPoint['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($attackPoint['max'])) {
+                $this->addUsingAlias(ItemTableMap::COL_ATTACK_POINT, $attackPoint['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ItemTableMap::COL_ATTACK_POINT, $attackPoint, $comparison);
+    }
+
+    /**
+     * Filter the query on the defense_point column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByDefensePoint(1234); // WHERE defense_point = 1234
+     * $query->filterByDefensePoint(array(12, 34)); // WHERE defense_point IN (12, 34)
+     * $query->filterByDefensePoint(array('min' => 12)); // WHERE defense_point > 12
+     * </code>
+     *
+     * @param     mixed $defensePoint The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildItemQuery The current query, for fluid interface
+     */
+    public function filterByDefensePoint($defensePoint = null, $comparison = null)
+    {
+        if (is_array($defensePoint)) {
+            $useMinMax = false;
+            if (isset($defensePoint['min'])) {
+                $this->addUsingAlias(ItemTableMap::COL_DEFENSE_POINT, $defensePoint['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($defensePoint['max'])) {
+                $this->addUsingAlias(ItemTableMap::COL_DEFENSE_POINT, $defensePoint['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ItemTableMap::COL_DEFENSE_POINT, $defensePoint, $comparison);
     }
 
     /**

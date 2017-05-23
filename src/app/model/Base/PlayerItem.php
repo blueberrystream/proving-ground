@@ -118,32 +118,32 @@ abstract class PlayerItem implements ActiveRecordInterface
     /**
      * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
      */
-    protected $collPlayerDecksRelatedByPlayerItem1Id;
-    protected $collPlayerDecksRelatedByPlayerItem1IdPartial;
+    protected $collPlayerDecksRelatedByHeadPlayerItemId;
+    protected $collPlayerDecksRelatedByHeadPlayerItemIdPartial;
 
     /**
      * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
      */
-    protected $collPlayerDecksRelatedByPlayerItem2Id;
-    protected $collPlayerDecksRelatedByPlayerItem2IdPartial;
+    protected $collPlayerDecksRelatedByLeftArmPlayerItemId;
+    protected $collPlayerDecksRelatedByLeftArmPlayerItemIdPartial;
 
     /**
      * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
      */
-    protected $collPlayerDecksRelatedByPlayerItem3Id;
-    protected $collPlayerDecksRelatedByPlayerItem3IdPartial;
+    protected $collPlayerDecksRelatedByRightArmPlayerItemId;
+    protected $collPlayerDecksRelatedByRightArmPlayerItemIdPartial;
 
     /**
      * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
      */
-    protected $collPlayerDecksRelatedByPlayerItem4Id;
-    protected $collPlayerDecksRelatedByPlayerItem4IdPartial;
+    protected $collPlayerDecksRelatedByLeftLegPlayerItemId;
+    protected $collPlayerDecksRelatedByLeftLegPlayerItemIdPartial;
 
     /**
      * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
      */
-    protected $collPlayerDecksRelatedByPlayerItem5Id;
-    protected $collPlayerDecksRelatedByPlayerItem5IdPartial;
+    protected $collPlayerDecksRelatedByRightLegPlayerItemId;
+    protected $collPlayerDecksRelatedByRightLegPlayerItemIdPartial;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -157,31 +157,31 @@ abstract class PlayerItem implements ActiveRecordInterface
      * An array of objects scheduled for deletion.
      * @var ObjectCollection|ChildPlayerDeck[]
      */
-    protected $playerDecksRelatedByPlayerItem1IdScheduledForDeletion = null;
+    protected $playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
      * @var ObjectCollection|ChildPlayerDeck[]
      */
-    protected $playerDecksRelatedByPlayerItem2IdScheduledForDeletion = null;
+    protected $playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
      * @var ObjectCollection|ChildPlayerDeck[]
      */
-    protected $playerDecksRelatedByPlayerItem3IdScheduledForDeletion = null;
+    protected $playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
      * @var ObjectCollection|ChildPlayerDeck[]
      */
-    protected $playerDecksRelatedByPlayerItem4IdScheduledForDeletion = null;
+    protected $playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
      * @var ObjectCollection|ChildPlayerDeck[]
      */
-    protected $playerDecksRelatedByPlayerItem5IdScheduledForDeletion = null;
+    protected $playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion = null;
 
     /**
      * Initializes internal state of app\model\Base\PlayerItem object.
@@ -713,15 +713,15 @@ abstract class PlayerItem implements ActiveRecordInterface
 
             $this->aPlayer = null;
             $this->aItem = null;
-            $this->collPlayerDecksRelatedByPlayerItem1Id = null;
+            $this->collPlayerDecksRelatedByHeadPlayerItemId = null;
 
-            $this->collPlayerDecksRelatedByPlayerItem2Id = null;
+            $this->collPlayerDecksRelatedByLeftArmPlayerItemId = null;
 
-            $this->collPlayerDecksRelatedByPlayerItem3Id = null;
+            $this->collPlayerDecksRelatedByRightArmPlayerItemId = null;
 
-            $this->collPlayerDecksRelatedByPlayerItem4Id = null;
+            $this->collPlayerDecksRelatedByLeftLegPlayerItemId = null;
 
-            $this->collPlayerDecksRelatedByPlayerItem5Id = null;
+            $this->collPlayerDecksRelatedByRightLegPlayerItemId = null;
 
         } // if (deep)
     }
@@ -868,90 +868,90 @@ abstract class PlayerItem implements ActiveRecordInterface
                 $this->resetModified();
             }
 
-            if ($this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion !== null) {
-                if (!$this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion->isEmpty()) {
-                    foreach ($this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion as $playerDeckRelatedByPlayerItem1Id) {
+            if ($this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion !== null) {
+                if (!$this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion->isEmpty()) {
+                    foreach ($this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion as $playerDeckRelatedByHeadPlayerItemId) {
                         // need to save related object because we set the relation to null
-                        $playerDeckRelatedByPlayerItem1Id->save($con);
+                        $playerDeckRelatedByHeadPlayerItemId->save($con);
                     }
-                    $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion = null;
+                    $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collPlayerDecksRelatedByPlayerItem1Id !== null) {
-                foreach ($this->collPlayerDecksRelatedByPlayerItem1Id as $referrerFK) {
+            if ($this->collPlayerDecksRelatedByHeadPlayerItemId !== null) {
+                foreach ($this->collPlayerDecksRelatedByHeadPlayerItemId as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
                 }
             }
 
-            if ($this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion !== null) {
-                if (!$this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion->isEmpty()) {
-                    foreach ($this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion as $playerDeckRelatedByPlayerItem2Id) {
+            if ($this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion !== null) {
+                if (!$this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion->isEmpty()) {
+                    foreach ($this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion as $playerDeckRelatedByLeftArmPlayerItemId) {
                         // need to save related object because we set the relation to null
-                        $playerDeckRelatedByPlayerItem2Id->save($con);
+                        $playerDeckRelatedByLeftArmPlayerItemId->save($con);
                     }
-                    $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion = null;
+                    $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collPlayerDecksRelatedByPlayerItem2Id !== null) {
-                foreach ($this->collPlayerDecksRelatedByPlayerItem2Id as $referrerFK) {
+            if ($this->collPlayerDecksRelatedByLeftArmPlayerItemId !== null) {
+                foreach ($this->collPlayerDecksRelatedByLeftArmPlayerItemId as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
                 }
             }
 
-            if ($this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion !== null) {
-                if (!$this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion->isEmpty()) {
-                    foreach ($this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion as $playerDeckRelatedByPlayerItem3Id) {
+            if ($this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion !== null) {
+                if (!$this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion->isEmpty()) {
+                    foreach ($this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion as $playerDeckRelatedByRightArmPlayerItemId) {
                         // need to save related object because we set the relation to null
-                        $playerDeckRelatedByPlayerItem3Id->save($con);
+                        $playerDeckRelatedByRightArmPlayerItemId->save($con);
                     }
-                    $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion = null;
+                    $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collPlayerDecksRelatedByPlayerItem3Id !== null) {
-                foreach ($this->collPlayerDecksRelatedByPlayerItem3Id as $referrerFK) {
+            if ($this->collPlayerDecksRelatedByRightArmPlayerItemId !== null) {
+                foreach ($this->collPlayerDecksRelatedByRightArmPlayerItemId as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
                 }
             }
 
-            if ($this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion !== null) {
-                if (!$this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion->isEmpty()) {
-                    foreach ($this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion as $playerDeckRelatedByPlayerItem4Id) {
+            if ($this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion !== null) {
+                if (!$this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion->isEmpty()) {
+                    foreach ($this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion as $playerDeckRelatedByLeftLegPlayerItemId) {
                         // need to save related object because we set the relation to null
-                        $playerDeckRelatedByPlayerItem4Id->save($con);
+                        $playerDeckRelatedByLeftLegPlayerItemId->save($con);
                     }
-                    $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion = null;
+                    $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collPlayerDecksRelatedByPlayerItem4Id !== null) {
-                foreach ($this->collPlayerDecksRelatedByPlayerItem4Id as $referrerFK) {
+            if ($this->collPlayerDecksRelatedByLeftLegPlayerItemId !== null) {
+                foreach ($this->collPlayerDecksRelatedByLeftLegPlayerItemId as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
                 }
             }
 
-            if ($this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion !== null) {
-                if (!$this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion->isEmpty()) {
-                    foreach ($this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion as $playerDeckRelatedByPlayerItem5Id) {
+            if ($this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion !== null) {
+                if (!$this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion->isEmpty()) {
+                    foreach ($this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion as $playerDeckRelatedByRightLegPlayerItemId) {
                         // need to save related object because we set the relation to null
-                        $playerDeckRelatedByPlayerItem5Id->save($con);
+                        $playerDeckRelatedByRightLegPlayerItemId->save($con);
                     }
-                    $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion = null;
+                    $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collPlayerDecksRelatedByPlayerItem5Id !== null) {
-                foreach ($this->collPlayerDecksRelatedByPlayerItem5Id as $referrerFK) {
+            if ($this->collPlayerDecksRelatedByRightLegPlayerItemId !== null) {
+                foreach ($this->collPlayerDecksRelatedByRightLegPlayerItemId as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -1184,7 +1184,7 @@ abstract class PlayerItem implements ActiveRecordInterface
 
                 $result[$key] = $this->aItem->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->collPlayerDecksRelatedByPlayerItem1Id) {
+            if (null !== $this->collPlayerDecksRelatedByHeadPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
@@ -1197,9 +1197,9 @@ abstract class PlayerItem implements ActiveRecordInterface
                         $key = 'PlayerDecks';
                 }
 
-                $result[$key] = $this->collPlayerDecksRelatedByPlayerItem1Id->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+                $result[$key] = $this->collPlayerDecksRelatedByHeadPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
-            if (null !== $this->collPlayerDecksRelatedByPlayerItem2Id) {
+            if (null !== $this->collPlayerDecksRelatedByLeftArmPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
@@ -1212,9 +1212,9 @@ abstract class PlayerItem implements ActiveRecordInterface
                         $key = 'PlayerDecks';
                 }
 
-                $result[$key] = $this->collPlayerDecksRelatedByPlayerItem2Id->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+                $result[$key] = $this->collPlayerDecksRelatedByLeftArmPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
-            if (null !== $this->collPlayerDecksRelatedByPlayerItem3Id) {
+            if (null !== $this->collPlayerDecksRelatedByRightArmPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
@@ -1227,9 +1227,9 @@ abstract class PlayerItem implements ActiveRecordInterface
                         $key = 'PlayerDecks';
                 }
 
-                $result[$key] = $this->collPlayerDecksRelatedByPlayerItem3Id->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+                $result[$key] = $this->collPlayerDecksRelatedByRightArmPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
-            if (null !== $this->collPlayerDecksRelatedByPlayerItem4Id) {
+            if (null !== $this->collPlayerDecksRelatedByLeftLegPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
@@ -1242,9 +1242,9 @@ abstract class PlayerItem implements ActiveRecordInterface
                         $key = 'PlayerDecks';
                 }
 
-                $result[$key] = $this->collPlayerDecksRelatedByPlayerItem4Id->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+                $result[$key] = $this->collPlayerDecksRelatedByLeftLegPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
-            if (null !== $this->collPlayerDecksRelatedByPlayerItem5Id) {
+            if (null !== $this->collPlayerDecksRelatedByRightLegPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
@@ -1257,7 +1257,7 @@ abstract class PlayerItem implements ActiveRecordInterface
                         $key = 'PlayerDecks';
                 }
 
-                $result[$key] = $this->collPlayerDecksRelatedByPlayerItem5Id->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+                $result[$key] = $this->collPlayerDecksRelatedByRightLegPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1501,33 +1501,33 @@ abstract class PlayerItem implements ActiveRecordInterface
             // the getter/setter methods for fkey referrer objects.
             $copyObj->setNew(false);
 
-            foreach ($this->getPlayerDecksRelatedByPlayerItem1Id() as $relObj) {
+            foreach ($this->getPlayerDecksRelatedByHeadPlayerItemId() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addPlayerDeckRelatedByPlayerItem1Id($relObj->copy($deepCopy));
+                    $copyObj->addPlayerDeckRelatedByHeadPlayerItemId($relObj->copy($deepCopy));
                 }
             }
 
-            foreach ($this->getPlayerDecksRelatedByPlayerItem2Id() as $relObj) {
+            foreach ($this->getPlayerDecksRelatedByLeftArmPlayerItemId() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addPlayerDeckRelatedByPlayerItem2Id($relObj->copy($deepCopy));
+                    $copyObj->addPlayerDeckRelatedByLeftArmPlayerItemId($relObj->copy($deepCopy));
                 }
             }
 
-            foreach ($this->getPlayerDecksRelatedByPlayerItem3Id() as $relObj) {
+            foreach ($this->getPlayerDecksRelatedByRightArmPlayerItemId() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addPlayerDeckRelatedByPlayerItem3Id($relObj->copy($deepCopy));
+                    $copyObj->addPlayerDeckRelatedByRightArmPlayerItemId($relObj->copy($deepCopy));
                 }
             }
 
-            foreach ($this->getPlayerDecksRelatedByPlayerItem4Id() as $relObj) {
+            foreach ($this->getPlayerDecksRelatedByLeftLegPlayerItemId() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addPlayerDeckRelatedByPlayerItem4Id($relObj->copy($deepCopy));
+                    $copyObj->addPlayerDeckRelatedByLeftLegPlayerItemId($relObj->copy($deepCopy));
                 }
             }
 
-            foreach ($this->getPlayerDecksRelatedByPlayerItem5Id() as $relObj) {
+            foreach ($this->getPlayerDecksRelatedByRightLegPlayerItemId() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addPlayerDeckRelatedByPlayerItem5Id($relObj->copy($deepCopy));
+                    $copyObj->addPlayerDeckRelatedByRightLegPlayerItemId($relObj->copy($deepCopy));
                 }
             }
 
@@ -1674,54 +1674,54 @@ abstract class PlayerItem implements ActiveRecordInterface
      */
     public function initRelation($relationName)
     {
-        if ('PlayerDeckRelatedByPlayerItem1Id' == $relationName) {
-            $this->initPlayerDecksRelatedByPlayerItem1Id();
+        if ('PlayerDeckRelatedByHeadPlayerItemId' == $relationName) {
+            $this->initPlayerDecksRelatedByHeadPlayerItemId();
             return;
         }
-        if ('PlayerDeckRelatedByPlayerItem2Id' == $relationName) {
-            $this->initPlayerDecksRelatedByPlayerItem2Id();
+        if ('PlayerDeckRelatedByLeftArmPlayerItemId' == $relationName) {
+            $this->initPlayerDecksRelatedByLeftArmPlayerItemId();
             return;
         }
-        if ('PlayerDeckRelatedByPlayerItem3Id' == $relationName) {
-            $this->initPlayerDecksRelatedByPlayerItem3Id();
+        if ('PlayerDeckRelatedByRightArmPlayerItemId' == $relationName) {
+            $this->initPlayerDecksRelatedByRightArmPlayerItemId();
             return;
         }
-        if ('PlayerDeckRelatedByPlayerItem4Id' == $relationName) {
-            $this->initPlayerDecksRelatedByPlayerItem4Id();
+        if ('PlayerDeckRelatedByLeftLegPlayerItemId' == $relationName) {
+            $this->initPlayerDecksRelatedByLeftLegPlayerItemId();
             return;
         }
-        if ('PlayerDeckRelatedByPlayerItem5Id' == $relationName) {
-            $this->initPlayerDecksRelatedByPlayerItem5Id();
+        if ('PlayerDeckRelatedByRightLegPlayerItemId' == $relationName) {
+            $this->initPlayerDecksRelatedByRightLegPlayerItemId();
             return;
         }
     }
 
     /**
-     * Clears out the collPlayerDecksRelatedByPlayerItem1Id collection
+     * Clears out the collPlayerDecksRelatedByHeadPlayerItemId collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addPlayerDecksRelatedByPlayerItem1Id()
+     * @see        addPlayerDecksRelatedByHeadPlayerItemId()
      */
-    public function clearPlayerDecksRelatedByPlayerItem1Id()
+    public function clearPlayerDecksRelatedByHeadPlayerItemId()
     {
-        $this->collPlayerDecksRelatedByPlayerItem1Id = null; // important to set this to NULL since that means it is uninitialized
+        $this->collPlayerDecksRelatedByHeadPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Reset is the collPlayerDecksRelatedByPlayerItem1Id collection loaded partially.
+     * Reset is the collPlayerDecksRelatedByHeadPlayerItemId collection loaded partially.
      */
-    public function resetPartialPlayerDecksRelatedByPlayerItem1Id($v = true)
+    public function resetPartialPlayerDecksRelatedByHeadPlayerItemId($v = true)
     {
-        $this->collPlayerDecksRelatedByPlayerItem1IdPartial = $v;
+        $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial = $v;
     }
 
     /**
-     * Initializes the collPlayerDecksRelatedByPlayerItem1Id collection.
+     * Initializes the collPlayerDecksRelatedByHeadPlayerItemId collection.
      *
-     * By default this just sets the collPlayerDecksRelatedByPlayerItem1Id collection to an empty array (like clearcollPlayerDecksRelatedByPlayerItem1Id());
+     * By default this just sets the collPlayerDecksRelatedByHeadPlayerItemId collection to an empty array (like clearcollPlayerDecksRelatedByHeadPlayerItemId());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -1730,16 +1730,16 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @return void
      */
-    public function initPlayerDecksRelatedByPlayerItem1Id($overrideExisting = true)
+    public function initPlayerDecksRelatedByHeadPlayerItemId($overrideExisting = true)
     {
-        if (null !== $this->collPlayerDecksRelatedByPlayerItem1Id && !$overrideExisting) {
+        if (null !== $this->collPlayerDecksRelatedByHeadPlayerItemId && !$overrideExisting) {
             return;
         }
 
         $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
 
-        $this->collPlayerDecksRelatedByPlayerItem1Id = new $collectionClassName;
-        $this->collPlayerDecksRelatedByPlayerItem1Id->setModel('\app\model\PlayerDeck');
+        $this->collPlayerDecksRelatedByHeadPlayerItemId = new $collectionClassName;
+        $this->collPlayerDecksRelatedByHeadPlayerItemId->setModel('\app\model\PlayerDeck');
     }
 
     /**
@@ -1756,48 +1756,48 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      * @throws PropelException
      */
-    public function getPlayerDecksRelatedByPlayerItem1Id(Criteria $criteria = null, ConnectionInterface $con = null)
+    public function getPlayerDecksRelatedByHeadPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByPlayerItem1IdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByPlayerItem1Id || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByPlayerItem1Id) {
+        $partial = $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByHeadPlayerItemId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByHeadPlayerItemId) {
                 // return empty collection
-                $this->initPlayerDecksRelatedByPlayerItem1Id();
+                $this->initPlayerDecksRelatedByHeadPlayerItemId();
             } else {
-                $collPlayerDecksRelatedByPlayerItem1Id = ChildPlayerDeckQuery::create(null, $criteria)
-                    ->filterByPlayerItemRelatedByPlayerItem1Id($this)
+                $collPlayerDecksRelatedByHeadPlayerItemId = ChildPlayerDeckQuery::create(null, $criteria)
+                    ->filterByPlayerItemRelatedByHeadPlayerItemId($this)
                     ->find($con);
 
                 if (null !== $criteria) {
-                    if (false !== $this->collPlayerDecksRelatedByPlayerItem1IdPartial && count($collPlayerDecksRelatedByPlayerItem1Id)) {
-                        $this->initPlayerDecksRelatedByPlayerItem1Id(false);
+                    if (false !== $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial && count($collPlayerDecksRelatedByHeadPlayerItemId)) {
+                        $this->initPlayerDecksRelatedByHeadPlayerItemId(false);
 
-                        foreach ($collPlayerDecksRelatedByPlayerItem1Id as $obj) {
-                            if (false == $this->collPlayerDecksRelatedByPlayerItem1Id->contains($obj)) {
-                                $this->collPlayerDecksRelatedByPlayerItem1Id->append($obj);
+                        foreach ($collPlayerDecksRelatedByHeadPlayerItemId as $obj) {
+                            if (false == $this->collPlayerDecksRelatedByHeadPlayerItemId->contains($obj)) {
+                                $this->collPlayerDecksRelatedByHeadPlayerItemId->append($obj);
                             }
                         }
 
-                        $this->collPlayerDecksRelatedByPlayerItem1IdPartial = true;
+                        $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial = true;
                     }
 
-                    return $collPlayerDecksRelatedByPlayerItem1Id;
+                    return $collPlayerDecksRelatedByHeadPlayerItemId;
                 }
 
-                if ($partial && $this->collPlayerDecksRelatedByPlayerItem1Id) {
-                    foreach ($this->collPlayerDecksRelatedByPlayerItem1Id as $obj) {
+                if ($partial && $this->collPlayerDecksRelatedByHeadPlayerItemId) {
+                    foreach ($this->collPlayerDecksRelatedByHeadPlayerItemId as $obj) {
                         if ($obj->isNew()) {
-                            $collPlayerDecksRelatedByPlayerItem1Id[] = $obj;
+                            $collPlayerDecksRelatedByHeadPlayerItemId[] = $obj;
                         }
                     }
                 }
 
-                $this->collPlayerDecksRelatedByPlayerItem1Id = $collPlayerDecksRelatedByPlayerItem1Id;
-                $this->collPlayerDecksRelatedByPlayerItem1IdPartial = false;
+                $this->collPlayerDecksRelatedByHeadPlayerItemId = $collPlayerDecksRelatedByHeadPlayerItemId;
+                $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial = false;
             }
         }
 
-        return $this->collPlayerDecksRelatedByPlayerItem1Id;
+        return $this->collPlayerDecksRelatedByHeadPlayerItemId;
     }
 
     /**
@@ -1806,29 +1806,29 @@ abstract class PlayerItem implements ActiveRecordInterface
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      Collection $playerDecksRelatedByPlayerItem1Id A Propel collection.
+     * @param      Collection $playerDecksRelatedByHeadPlayerItemId A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function setPlayerDecksRelatedByPlayerItem1Id(Collection $playerDecksRelatedByPlayerItem1Id, ConnectionInterface $con = null)
+    public function setPlayerDecksRelatedByHeadPlayerItemId(Collection $playerDecksRelatedByHeadPlayerItemId, ConnectionInterface $con = null)
     {
-        /** @var ChildPlayerDeck[] $playerDecksRelatedByPlayerItem1IdToDelete */
-        $playerDecksRelatedByPlayerItem1IdToDelete = $this->getPlayerDecksRelatedByPlayerItem1Id(new Criteria(), $con)->diff($playerDecksRelatedByPlayerItem1Id);
+        /** @var ChildPlayerDeck[] $playerDecksRelatedByHeadPlayerItemIdToDelete */
+        $playerDecksRelatedByHeadPlayerItemIdToDelete = $this->getPlayerDecksRelatedByHeadPlayerItemId(new Criteria(), $con)->diff($playerDecksRelatedByHeadPlayerItemId);
 
 
-        $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion = $playerDecksRelatedByPlayerItem1IdToDelete;
+        $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion = $playerDecksRelatedByHeadPlayerItemIdToDelete;
 
-        foreach ($playerDecksRelatedByPlayerItem1IdToDelete as $playerDeckRelatedByPlayerItem1IdRemoved) {
-            $playerDeckRelatedByPlayerItem1IdRemoved->setPlayerItemRelatedByPlayerItem1Id(null);
+        foreach ($playerDecksRelatedByHeadPlayerItemIdToDelete as $playerDeckRelatedByHeadPlayerItemIdRemoved) {
+            $playerDeckRelatedByHeadPlayerItemIdRemoved->setPlayerItemRelatedByHeadPlayerItemId(null);
         }
 
-        $this->collPlayerDecksRelatedByPlayerItem1Id = null;
-        foreach ($playerDecksRelatedByPlayerItem1Id as $playerDeckRelatedByPlayerItem1Id) {
-            $this->addPlayerDeckRelatedByPlayerItem1Id($playerDeckRelatedByPlayerItem1Id);
+        $this->collPlayerDecksRelatedByHeadPlayerItemId = null;
+        foreach ($playerDecksRelatedByHeadPlayerItemId as $playerDeckRelatedByHeadPlayerItemId) {
+            $this->addPlayerDeckRelatedByHeadPlayerItemId($playerDeckRelatedByHeadPlayerItemId);
         }
 
-        $this->collPlayerDecksRelatedByPlayerItem1Id = $playerDecksRelatedByPlayerItem1Id;
-        $this->collPlayerDecksRelatedByPlayerItem1IdPartial = false;
+        $this->collPlayerDecksRelatedByHeadPlayerItemId = $playerDecksRelatedByHeadPlayerItemId;
+        $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial = false;
 
         return $this;
     }
@@ -1842,16 +1842,16 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @return int             Count of related PlayerDeck objects.
      * @throws PropelException
      */
-    public function countPlayerDecksRelatedByPlayerItem1Id(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    public function countPlayerDecksRelatedByHeadPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByPlayerItem1IdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByPlayerItem1Id || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByPlayerItem1Id) {
+        $partial = $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByHeadPlayerItemId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByHeadPlayerItemId) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getPlayerDecksRelatedByPlayerItem1Id());
+                return count($this->getPlayerDecksRelatedByHeadPlayerItemId());
             }
 
             $query = ChildPlayerDeckQuery::create(null, $criteria);
@@ -1860,11 +1860,11 @@ abstract class PlayerItem implements ActiveRecordInterface
             }
 
             return $query
-                ->filterByPlayerItemRelatedByPlayerItem1Id($this)
+                ->filterByPlayerItemRelatedByHeadPlayerItemId($this)
                 ->count($con);
         }
 
-        return count($this->collPlayerDecksRelatedByPlayerItem1Id);
+        return count($this->collPlayerDecksRelatedByHeadPlayerItemId);
     }
 
     /**
@@ -1874,18 +1874,18 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param  ChildPlayerDeck $l ChildPlayerDeck
      * @return $this|\app\model\PlayerItem The current object (for fluent API support)
      */
-    public function addPlayerDeckRelatedByPlayerItem1Id(ChildPlayerDeck $l)
+    public function addPlayerDeckRelatedByHeadPlayerItemId(ChildPlayerDeck $l)
     {
-        if ($this->collPlayerDecksRelatedByPlayerItem1Id === null) {
-            $this->initPlayerDecksRelatedByPlayerItem1Id();
-            $this->collPlayerDecksRelatedByPlayerItem1IdPartial = true;
+        if ($this->collPlayerDecksRelatedByHeadPlayerItemId === null) {
+            $this->initPlayerDecksRelatedByHeadPlayerItemId();
+            $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial = true;
         }
 
-        if (!$this->collPlayerDecksRelatedByPlayerItem1Id->contains($l)) {
-            $this->doAddPlayerDeckRelatedByPlayerItem1Id($l);
+        if (!$this->collPlayerDecksRelatedByHeadPlayerItemId->contains($l)) {
+            $this->doAddPlayerDeckRelatedByHeadPlayerItemId($l);
 
-            if ($this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion and $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion->contains($l)) {
-                $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion->remove($this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion->search($l));
+            if ($this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion and $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion->contains($l)) {
+                $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion->remove($this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion->search($l));
             }
         }
 
@@ -1893,29 +1893,29 @@ abstract class PlayerItem implements ActiveRecordInterface
     }
 
     /**
-     * @param ChildPlayerDeck $playerDeckRelatedByPlayerItem1Id The ChildPlayerDeck object to add.
+     * @param ChildPlayerDeck $playerDeckRelatedByHeadPlayerItemId The ChildPlayerDeck object to add.
      */
-    protected function doAddPlayerDeckRelatedByPlayerItem1Id(ChildPlayerDeck $playerDeckRelatedByPlayerItem1Id)
+    protected function doAddPlayerDeckRelatedByHeadPlayerItemId(ChildPlayerDeck $playerDeckRelatedByHeadPlayerItemId)
     {
-        $this->collPlayerDecksRelatedByPlayerItem1Id[]= $playerDeckRelatedByPlayerItem1Id;
-        $playerDeckRelatedByPlayerItem1Id->setPlayerItemRelatedByPlayerItem1Id($this);
+        $this->collPlayerDecksRelatedByHeadPlayerItemId[]= $playerDeckRelatedByHeadPlayerItemId;
+        $playerDeckRelatedByHeadPlayerItemId->setPlayerItemRelatedByHeadPlayerItemId($this);
     }
 
     /**
-     * @param  ChildPlayerDeck $playerDeckRelatedByPlayerItem1Id The ChildPlayerDeck object to remove.
+     * @param  ChildPlayerDeck $playerDeckRelatedByHeadPlayerItemId The ChildPlayerDeck object to remove.
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function removePlayerDeckRelatedByPlayerItem1Id(ChildPlayerDeck $playerDeckRelatedByPlayerItem1Id)
+    public function removePlayerDeckRelatedByHeadPlayerItemId(ChildPlayerDeck $playerDeckRelatedByHeadPlayerItemId)
     {
-        if ($this->getPlayerDecksRelatedByPlayerItem1Id()->contains($playerDeckRelatedByPlayerItem1Id)) {
-            $pos = $this->collPlayerDecksRelatedByPlayerItem1Id->search($playerDeckRelatedByPlayerItem1Id);
-            $this->collPlayerDecksRelatedByPlayerItem1Id->remove($pos);
-            if (null === $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion) {
-                $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion = clone $this->collPlayerDecksRelatedByPlayerItem1Id;
-                $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion->clear();
+        if ($this->getPlayerDecksRelatedByHeadPlayerItemId()->contains($playerDeckRelatedByHeadPlayerItemId)) {
+            $pos = $this->collPlayerDecksRelatedByHeadPlayerItemId->search($playerDeckRelatedByHeadPlayerItemId);
+            $this->collPlayerDecksRelatedByHeadPlayerItemId->remove($pos);
+            if (null === $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion) {
+                $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByHeadPlayerItemId;
+                $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByPlayerItem1IdScheduledForDeletion[]= $playerDeckRelatedByPlayerItem1Id;
-            $playerDeckRelatedByPlayerItem1Id->setPlayerItemRelatedByPlayerItem1Id(null);
+            $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion[]= $playerDeckRelatedByHeadPlayerItemId;
+            $playerDeckRelatedByHeadPlayerItemId->setPlayerItemRelatedByHeadPlayerItemId(null);
         }
 
         return $this;
@@ -1927,7 +1927,7 @@ abstract class PlayerItem implements ActiveRecordInterface
      * an identical criteria, it returns the collection.
      * Otherwise if this PlayerItem is new, it will return
      * an empty collection; or if this PlayerItem has previously
-     * been saved, it will retrieve related PlayerDecksRelatedByPlayerItem1Id from storage.
+     * been saved, it will retrieve related PlayerDecksRelatedByHeadPlayerItemId from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
@@ -1938,40 +1938,40 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksRelatedByPlayerItem1IdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksRelatedByHeadPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
         $query->joinWith('Player', $joinBehavior);
 
-        return $this->getPlayerDecksRelatedByPlayerItem1Id($query, $con);
+        return $this->getPlayerDecksRelatedByHeadPlayerItemId($query, $con);
     }
 
     /**
-     * Clears out the collPlayerDecksRelatedByPlayerItem2Id collection
+     * Clears out the collPlayerDecksRelatedByLeftArmPlayerItemId collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addPlayerDecksRelatedByPlayerItem2Id()
+     * @see        addPlayerDecksRelatedByLeftArmPlayerItemId()
      */
-    public function clearPlayerDecksRelatedByPlayerItem2Id()
+    public function clearPlayerDecksRelatedByLeftArmPlayerItemId()
     {
-        $this->collPlayerDecksRelatedByPlayerItem2Id = null; // important to set this to NULL since that means it is uninitialized
+        $this->collPlayerDecksRelatedByLeftArmPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Reset is the collPlayerDecksRelatedByPlayerItem2Id collection loaded partially.
+     * Reset is the collPlayerDecksRelatedByLeftArmPlayerItemId collection loaded partially.
      */
-    public function resetPartialPlayerDecksRelatedByPlayerItem2Id($v = true)
+    public function resetPartialPlayerDecksRelatedByLeftArmPlayerItemId($v = true)
     {
-        $this->collPlayerDecksRelatedByPlayerItem2IdPartial = $v;
+        $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial = $v;
     }
 
     /**
-     * Initializes the collPlayerDecksRelatedByPlayerItem2Id collection.
+     * Initializes the collPlayerDecksRelatedByLeftArmPlayerItemId collection.
      *
-     * By default this just sets the collPlayerDecksRelatedByPlayerItem2Id collection to an empty array (like clearcollPlayerDecksRelatedByPlayerItem2Id());
+     * By default this just sets the collPlayerDecksRelatedByLeftArmPlayerItemId collection to an empty array (like clearcollPlayerDecksRelatedByLeftArmPlayerItemId());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -1980,16 +1980,16 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @return void
      */
-    public function initPlayerDecksRelatedByPlayerItem2Id($overrideExisting = true)
+    public function initPlayerDecksRelatedByLeftArmPlayerItemId($overrideExisting = true)
     {
-        if (null !== $this->collPlayerDecksRelatedByPlayerItem2Id && !$overrideExisting) {
+        if (null !== $this->collPlayerDecksRelatedByLeftArmPlayerItemId && !$overrideExisting) {
             return;
         }
 
         $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
 
-        $this->collPlayerDecksRelatedByPlayerItem2Id = new $collectionClassName;
-        $this->collPlayerDecksRelatedByPlayerItem2Id->setModel('\app\model\PlayerDeck');
+        $this->collPlayerDecksRelatedByLeftArmPlayerItemId = new $collectionClassName;
+        $this->collPlayerDecksRelatedByLeftArmPlayerItemId->setModel('\app\model\PlayerDeck');
     }
 
     /**
@@ -2006,48 +2006,48 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      * @throws PropelException
      */
-    public function getPlayerDecksRelatedByPlayerItem2Id(Criteria $criteria = null, ConnectionInterface $con = null)
+    public function getPlayerDecksRelatedByLeftArmPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByPlayerItem2IdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByPlayerItem2Id || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByPlayerItem2Id) {
+        $partial = $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByLeftArmPlayerItemId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByLeftArmPlayerItemId) {
                 // return empty collection
-                $this->initPlayerDecksRelatedByPlayerItem2Id();
+                $this->initPlayerDecksRelatedByLeftArmPlayerItemId();
             } else {
-                $collPlayerDecksRelatedByPlayerItem2Id = ChildPlayerDeckQuery::create(null, $criteria)
-                    ->filterByPlayerItemRelatedByPlayerItem2Id($this)
+                $collPlayerDecksRelatedByLeftArmPlayerItemId = ChildPlayerDeckQuery::create(null, $criteria)
+                    ->filterByPlayerItemRelatedByLeftArmPlayerItemId($this)
                     ->find($con);
 
                 if (null !== $criteria) {
-                    if (false !== $this->collPlayerDecksRelatedByPlayerItem2IdPartial && count($collPlayerDecksRelatedByPlayerItem2Id)) {
-                        $this->initPlayerDecksRelatedByPlayerItem2Id(false);
+                    if (false !== $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial && count($collPlayerDecksRelatedByLeftArmPlayerItemId)) {
+                        $this->initPlayerDecksRelatedByLeftArmPlayerItemId(false);
 
-                        foreach ($collPlayerDecksRelatedByPlayerItem2Id as $obj) {
-                            if (false == $this->collPlayerDecksRelatedByPlayerItem2Id->contains($obj)) {
-                                $this->collPlayerDecksRelatedByPlayerItem2Id->append($obj);
+                        foreach ($collPlayerDecksRelatedByLeftArmPlayerItemId as $obj) {
+                            if (false == $this->collPlayerDecksRelatedByLeftArmPlayerItemId->contains($obj)) {
+                                $this->collPlayerDecksRelatedByLeftArmPlayerItemId->append($obj);
                             }
                         }
 
-                        $this->collPlayerDecksRelatedByPlayerItem2IdPartial = true;
+                        $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial = true;
                     }
 
-                    return $collPlayerDecksRelatedByPlayerItem2Id;
+                    return $collPlayerDecksRelatedByLeftArmPlayerItemId;
                 }
 
-                if ($partial && $this->collPlayerDecksRelatedByPlayerItem2Id) {
-                    foreach ($this->collPlayerDecksRelatedByPlayerItem2Id as $obj) {
+                if ($partial && $this->collPlayerDecksRelatedByLeftArmPlayerItemId) {
+                    foreach ($this->collPlayerDecksRelatedByLeftArmPlayerItemId as $obj) {
                         if ($obj->isNew()) {
-                            $collPlayerDecksRelatedByPlayerItem2Id[] = $obj;
+                            $collPlayerDecksRelatedByLeftArmPlayerItemId[] = $obj;
                         }
                     }
                 }
 
-                $this->collPlayerDecksRelatedByPlayerItem2Id = $collPlayerDecksRelatedByPlayerItem2Id;
-                $this->collPlayerDecksRelatedByPlayerItem2IdPartial = false;
+                $this->collPlayerDecksRelatedByLeftArmPlayerItemId = $collPlayerDecksRelatedByLeftArmPlayerItemId;
+                $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial = false;
             }
         }
 
-        return $this->collPlayerDecksRelatedByPlayerItem2Id;
+        return $this->collPlayerDecksRelatedByLeftArmPlayerItemId;
     }
 
     /**
@@ -2056,29 +2056,29 @@ abstract class PlayerItem implements ActiveRecordInterface
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      Collection $playerDecksRelatedByPlayerItem2Id A Propel collection.
+     * @param      Collection $playerDecksRelatedByLeftArmPlayerItemId A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function setPlayerDecksRelatedByPlayerItem2Id(Collection $playerDecksRelatedByPlayerItem2Id, ConnectionInterface $con = null)
+    public function setPlayerDecksRelatedByLeftArmPlayerItemId(Collection $playerDecksRelatedByLeftArmPlayerItemId, ConnectionInterface $con = null)
     {
-        /** @var ChildPlayerDeck[] $playerDecksRelatedByPlayerItem2IdToDelete */
-        $playerDecksRelatedByPlayerItem2IdToDelete = $this->getPlayerDecksRelatedByPlayerItem2Id(new Criteria(), $con)->diff($playerDecksRelatedByPlayerItem2Id);
+        /** @var ChildPlayerDeck[] $playerDecksRelatedByLeftArmPlayerItemIdToDelete */
+        $playerDecksRelatedByLeftArmPlayerItemIdToDelete = $this->getPlayerDecksRelatedByLeftArmPlayerItemId(new Criteria(), $con)->diff($playerDecksRelatedByLeftArmPlayerItemId);
 
 
-        $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion = $playerDecksRelatedByPlayerItem2IdToDelete;
+        $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion = $playerDecksRelatedByLeftArmPlayerItemIdToDelete;
 
-        foreach ($playerDecksRelatedByPlayerItem2IdToDelete as $playerDeckRelatedByPlayerItem2IdRemoved) {
-            $playerDeckRelatedByPlayerItem2IdRemoved->setPlayerItemRelatedByPlayerItem2Id(null);
+        foreach ($playerDecksRelatedByLeftArmPlayerItemIdToDelete as $playerDeckRelatedByLeftArmPlayerItemIdRemoved) {
+            $playerDeckRelatedByLeftArmPlayerItemIdRemoved->setPlayerItemRelatedByLeftArmPlayerItemId(null);
         }
 
-        $this->collPlayerDecksRelatedByPlayerItem2Id = null;
-        foreach ($playerDecksRelatedByPlayerItem2Id as $playerDeckRelatedByPlayerItem2Id) {
-            $this->addPlayerDeckRelatedByPlayerItem2Id($playerDeckRelatedByPlayerItem2Id);
+        $this->collPlayerDecksRelatedByLeftArmPlayerItemId = null;
+        foreach ($playerDecksRelatedByLeftArmPlayerItemId as $playerDeckRelatedByLeftArmPlayerItemId) {
+            $this->addPlayerDeckRelatedByLeftArmPlayerItemId($playerDeckRelatedByLeftArmPlayerItemId);
         }
 
-        $this->collPlayerDecksRelatedByPlayerItem2Id = $playerDecksRelatedByPlayerItem2Id;
-        $this->collPlayerDecksRelatedByPlayerItem2IdPartial = false;
+        $this->collPlayerDecksRelatedByLeftArmPlayerItemId = $playerDecksRelatedByLeftArmPlayerItemId;
+        $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial = false;
 
         return $this;
     }
@@ -2092,16 +2092,16 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @return int             Count of related PlayerDeck objects.
      * @throws PropelException
      */
-    public function countPlayerDecksRelatedByPlayerItem2Id(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    public function countPlayerDecksRelatedByLeftArmPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByPlayerItem2IdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByPlayerItem2Id || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByPlayerItem2Id) {
+        $partial = $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByLeftArmPlayerItemId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByLeftArmPlayerItemId) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getPlayerDecksRelatedByPlayerItem2Id());
+                return count($this->getPlayerDecksRelatedByLeftArmPlayerItemId());
             }
 
             $query = ChildPlayerDeckQuery::create(null, $criteria);
@@ -2110,11 +2110,11 @@ abstract class PlayerItem implements ActiveRecordInterface
             }
 
             return $query
-                ->filterByPlayerItemRelatedByPlayerItem2Id($this)
+                ->filterByPlayerItemRelatedByLeftArmPlayerItemId($this)
                 ->count($con);
         }
 
-        return count($this->collPlayerDecksRelatedByPlayerItem2Id);
+        return count($this->collPlayerDecksRelatedByLeftArmPlayerItemId);
     }
 
     /**
@@ -2124,18 +2124,18 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param  ChildPlayerDeck $l ChildPlayerDeck
      * @return $this|\app\model\PlayerItem The current object (for fluent API support)
      */
-    public function addPlayerDeckRelatedByPlayerItem2Id(ChildPlayerDeck $l)
+    public function addPlayerDeckRelatedByLeftArmPlayerItemId(ChildPlayerDeck $l)
     {
-        if ($this->collPlayerDecksRelatedByPlayerItem2Id === null) {
-            $this->initPlayerDecksRelatedByPlayerItem2Id();
-            $this->collPlayerDecksRelatedByPlayerItem2IdPartial = true;
+        if ($this->collPlayerDecksRelatedByLeftArmPlayerItemId === null) {
+            $this->initPlayerDecksRelatedByLeftArmPlayerItemId();
+            $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial = true;
         }
 
-        if (!$this->collPlayerDecksRelatedByPlayerItem2Id->contains($l)) {
-            $this->doAddPlayerDeckRelatedByPlayerItem2Id($l);
+        if (!$this->collPlayerDecksRelatedByLeftArmPlayerItemId->contains($l)) {
+            $this->doAddPlayerDeckRelatedByLeftArmPlayerItemId($l);
 
-            if ($this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion and $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion->contains($l)) {
-                $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion->remove($this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion->search($l));
+            if ($this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion and $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion->contains($l)) {
+                $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion->remove($this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion->search($l));
             }
         }
 
@@ -2143,29 +2143,29 @@ abstract class PlayerItem implements ActiveRecordInterface
     }
 
     /**
-     * @param ChildPlayerDeck $playerDeckRelatedByPlayerItem2Id The ChildPlayerDeck object to add.
+     * @param ChildPlayerDeck $playerDeckRelatedByLeftArmPlayerItemId The ChildPlayerDeck object to add.
      */
-    protected function doAddPlayerDeckRelatedByPlayerItem2Id(ChildPlayerDeck $playerDeckRelatedByPlayerItem2Id)
+    protected function doAddPlayerDeckRelatedByLeftArmPlayerItemId(ChildPlayerDeck $playerDeckRelatedByLeftArmPlayerItemId)
     {
-        $this->collPlayerDecksRelatedByPlayerItem2Id[]= $playerDeckRelatedByPlayerItem2Id;
-        $playerDeckRelatedByPlayerItem2Id->setPlayerItemRelatedByPlayerItem2Id($this);
+        $this->collPlayerDecksRelatedByLeftArmPlayerItemId[]= $playerDeckRelatedByLeftArmPlayerItemId;
+        $playerDeckRelatedByLeftArmPlayerItemId->setPlayerItemRelatedByLeftArmPlayerItemId($this);
     }
 
     /**
-     * @param  ChildPlayerDeck $playerDeckRelatedByPlayerItem2Id The ChildPlayerDeck object to remove.
+     * @param  ChildPlayerDeck $playerDeckRelatedByLeftArmPlayerItemId The ChildPlayerDeck object to remove.
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function removePlayerDeckRelatedByPlayerItem2Id(ChildPlayerDeck $playerDeckRelatedByPlayerItem2Id)
+    public function removePlayerDeckRelatedByLeftArmPlayerItemId(ChildPlayerDeck $playerDeckRelatedByLeftArmPlayerItemId)
     {
-        if ($this->getPlayerDecksRelatedByPlayerItem2Id()->contains($playerDeckRelatedByPlayerItem2Id)) {
-            $pos = $this->collPlayerDecksRelatedByPlayerItem2Id->search($playerDeckRelatedByPlayerItem2Id);
-            $this->collPlayerDecksRelatedByPlayerItem2Id->remove($pos);
-            if (null === $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion) {
-                $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion = clone $this->collPlayerDecksRelatedByPlayerItem2Id;
-                $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion->clear();
+        if ($this->getPlayerDecksRelatedByLeftArmPlayerItemId()->contains($playerDeckRelatedByLeftArmPlayerItemId)) {
+            $pos = $this->collPlayerDecksRelatedByLeftArmPlayerItemId->search($playerDeckRelatedByLeftArmPlayerItemId);
+            $this->collPlayerDecksRelatedByLeftArmPlayerItemId->remove($pos);
+            if (null === $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion) {
+                $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByLeftArmPlayerItemId;
+                $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByPlayerItem2IdScheduledForDeletion[]= $playerDeckRelatedByPlayerItem2Id;
-            $playerDeckRelatedByPlayerItem2Id->setPlayerItemRelatedByPlayerItem2Id(null);
+            $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion[]= $playerDeckRelatedByLeftArmPlayerItemId;
+            $playerDeckRelatedByLeftArmPlayerItemId->setPlayerItemRelatedByLeftArmPlayerItemId(null);
         }
 
         return $this;
@@ -2177,7 +2177,7 @@ abstract class PlayerItem implements ActiveRecordInterface
      * an identical criteria, it returns the collection.
      * Otherwise if this PlayerItem is new, it will return
      * an empty collection; or if this PlayerItem has previously
-     * been saved, it will retrieve related PlayerDecksRelatedByPlayerItem2Id from storage.
+     * been saved, it will retrieve related PlayerDecksRelatedByLeftArmPlayerItemId from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
@@ -2188,40 +2188,40 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksRelatedByPlayerItem2IdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksRelatedByLeftArmPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
         $query->joinWith('Player', $joinBehavior);
 
-        return $this->getPlayerDecksRelatedByPlayerItem2Id($query, $con);
+        return $this->getPlayerDecksRelatedByLeftArmPlayerItemId($query, $con);
     }
 
     /**
-     * Clears out the collPlayerDecksRelatedByPlayerItem3Id collection
+     * Clears out the collPlayerDecksRelatedByRightArmPlayerItemId collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addPlayerDecksRelatedByPlayerItem3Id()
+     * @see        addPlayerDecksRelatedByRightArmPlayerItemId()
      */
-    public function clearPlayerDecksRelatedByPlayerItem3Id()
+    public function clearPlayerDecksRelatedByRightArmPlayerItemId()
     {
-        $this->collPlayerDecksRelatedByPlayerItem3Id = null; // important to set this to NULL since that means it is uninitialized
+        $this->collPlayerDecksRelatedByRightArmPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Reset is the collPlayerDecksRelatedByPlayerItem3Id collection loaded partially.
+     * Reset is the collPlayerDecksRelatedByRightArmPlayerItemId collection loaded partially.
      */
-    public function resetPartialPlayerDecksRelatedByPlayerItem3Id($v = true)
+    public function resetPartialPlayerDecksRelatedByRightArmPlayerItemId($v = true)
     {
-        $this->collPlayerDecksRelatedByPlayerItem3IdPartial = $v;
+        $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial = $v;
     }
 
     /**
-     * Initializes the collPlayerDecksRelatedByPlayerItem3Id collection.
+     * Initializes the collPlayerDecksRelatedByRightArmPlayerItemId collection.
      *
-     * By default this just sets the collPlayerDecksRelatedByPlayerItem3Id collection to an empty array (like clearcollPlayerDecksRelatedByPlayerItem3Id());
+     * By default this just sets the collPlayerDecksRelatedByRightArmPlayerItemId collection to an empty array (like clearcollPlayerDecksRelatedByRightArmPlayerItemId());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -2230,16 +2230,16 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @return void
      */
-    public function initPlayerDecksRelatedByPlayerItem3Id($overrideExisting = true)
+    public function initPlayerDecksRelatedByRightArmPlayerItemId($overrideExisting = true)
     {
-        if (null !== $this->collPlayerDecksRelatedByPlayerItem3Id && !$overrideExisting) {
+        if (null !== $this->collPlayerDecksRelatedByRightArmPlayerItemId && !$overrideExisting) {
             return;
         }
 
         $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
 
-        $this->collPlayerDecksRelatedByPlayerItem3Id = new $collectionClassName;
-        $this->collPlayerDecksRelatedByPlayerItem3Id->setModel('\app\model\PlayerDeck');
+        $this->collPlayerDecksRelatedByRightArmPlayerItemId = new $collectionClassName;
+        $this->collPlayerDecksRelatedByRightArmPlayerItemId->setModel('\app\model\PlayerDeck');
     }
 
     /**
@@ -2256,48 +2256,48 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      * @throws PropelException
      */
-    public function getPlayerDecksRelatedByPlayerItem3Id(Criteria $criteria = null, ConnectionInterface $con = null)
+    public function getPlayerDecksRelatedByRightArmPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByPlayerItem3IdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByPlayerItem3Id || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByPlayerItem3Id) {
+        $partial = $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByRightArmPlayerItemId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByRightArmPlayerItemId) {
                 // return empty collection
-                $this->initPlayerDecksRelatedByPlayerItem3Id();
+                $this->initPlayerDecksRelatedByRightArmPlayerItemId();
             } else {
-                $collPlayerDecksRelatedByPlayerItem3Id = ChildPlayerDeckQuery::create(null, $criteria)
-                    ->filterByPlayerItemRelatedByPlayerItem3Id($this)
+                $collPlayerDecksRelatedByRightArmPlayerItemId = ChildPlayerDeckQuery::create(null, $criteria)
+                    ->filterByPlayerItemRelatedByRightArmPlayerItemId($this)
                     ->find($con);
 
                 if (null !== $criteria) {
-                    if (false !== $this->collPlayerDecksRelatedByPlayerItem3IdPartial && count($collPlayerDecksRelatedByPlayerItem3Id)) {
-                        $this->initPlayerDecksRelatedByPlayerItem3Id(false);
+                    if (false !== $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial && count($collPlayerDecksRelatedByRightArmPlayerItemId)) {
+                        $this->initPlayerDecksRelatedByRightArmPlayerItemId(false);
 
-                        foreach ($collPlayerDecksRelatedByPlayerItem3Id as $obj) {
-                            if (false == $this->collPlayerDecksRelatedByPlayerItem3Id->contains($obj)) {
-                                $this->collPlayerDecksRelatedByPlayerItem3Id->append($obj);
+                        foreach ($collPlayerDecksRelatedByRightArmPlayerItemId as $obj) {
+                            if (false == $this->collPlayerDecksRelatedByRightArmPlayerItemId->contains($obj)) {
+                                $this->collPlayerDecksRelatedByRightArmPlayerItemId->append($obj);
                             }
                         }
 
-                        $this->collPlayerDecksRelatedByPlayerItem3IdPartial = true;
+                        $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial = true;
                     }
 
-                    return $collPlayerDecksRelatedByPlayerItem3Id;
+                    return $collPlayerDecksRelatedByRightArmPlayerItemId;
                 }
 
-                if ($partial && $this->collPlayerDecksRelatedByPlayerItem3Id) {
-                    foreach ($this->collPlayerDecksRelatedByPlayerItem3Id as $obj) {
+                if ($partial && $this->collPlayerDecksRelatedByRightArmPlayerItemId) {
+                    foreach ($this->collPlayerDecksRelatedByRightArmPlayerItemId as $obj) {
                         if ($obj->isNew()) {
-                            $collPlayerDecksRelatedByPlayerItem3Id[] = $obj;
+                            $collPlayerDecksRelatedByRightArmPlayerItemId[] = $obj;
                         }
                     }
                 }
 
-                $this->collPlayerDecksRelatedByPlayerItem3Id = $collPlayerDecksRelatedByPlayerItem3Id;
-                $this->collPlayerDecksRelatedByPlayerItem3IdPartial = false;
+                $this->collPlayerDecksRelatedByRightArmPlayerItemId = $collPlayerDecksRelatedByRightArmPlayerItemId;
+                $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial = false;
             }
         }
 
-        return $this->collPlayerDecksRelatedByPlayerItem3Id;
+        return $this->collPlayerDecksRelatedByRightArmPlayerItemId;
     }
 
     /**
@@ -2306,29 +2306,29 @@ abstract class PlayerItem implements ActiveRecordInterface
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      Collection $playerDecksRelatedByPlayerItem3Id A Propel collection.
+     * @param      Collection $playerDecksRelatedByRightArmPlayerItemId A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function setPlayerDecksRelatedByPlayerItem3Id(Collection $playerDecksRelatedByPlayerItem3Id, ConnectionInterface $con = null)
+    public function setPlayerDecksRelatedByRightArmPlayerItemId(Collection $playerDecksRelatedByRightArmPlayerItemId, ConnectionInterface $con = null)
     {
-        /** @var ChildPlayerDeck[] $playerDecksRelatedByPlayerItem3IdToDelete */
-        $playerDecksRelatedByPlayerItem3IdToDelete = $this->getPlayerDecksRelatedByPlayerItem3Id(new Criteria(), $con)->diff($playerDecksRelatedByPlayerItem3Id);
+        /** @var ChildPlayerDeck[] $playerDecksRelatedByRightArmPlayerItemIdToDelete */
+        $playerDecksRelatedByRightArmPlayerItemIdToDelete = $this->getPlayerDecksRelatedByRightArmPlayerItemId(new Criteria(), $con)->diff($playerDecksRelatedByRightArmPlayerItemId);
 
 
-        $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion = $playerDecksRelatedByPlayerItem3IdToDelete;
+        $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion = $playerDecksRelatedByRightArmPlayerItemIdToDelete;
 
-        foreach ($playerDecksRelatedByPlayerItem3IdToDelete as $playerDeckRelatedByPlayerItem3IdRemoved) {
-            $playerDeckRelatedByPlayerItem3IdRemoved->setPlayerItemRelatedByPlayerItem3Id(null);
+        foreach ($playerDecksRelatedByRightArmPlayerItemIdToDelete as $playerDeckRelatedByRightArmPlayerItemIdRemoved) {
+            $playerDeckRelatedByRightArmPlayerItemIdRemoved->setPlayerItemRelatedByRightArmPlayerItemId(null);
         }
 
-        $this->collPlayerDecksRelatedByPlayerItem3Id = null;
-        foreach ($playerDecksRelatedByPlayerItem3Id as $playerDeckRelatedByPlayerItem3Id) {
-            $this->addPlayerDeckRelatedByPlayerItem3Id($playerDeckRelatedByPlayerItem3Id);
+        $this->collPlayerDecksRelatedByRightArmPlayerItemId = null;
+        foreach ($playerDecksRelatedByRightArmPlayerItemId as $playerDeckRelatedByRightArmPlayerItemId) {
+            $this->addPlayerDeckRelatedByRightArmPlayerItemId($playerDeckRelatedByRightArmPlayerItemId);
         }
 
-        $this->collPlayerDecksRelatedByPlayerItem3Id = $playerDecksRelatedByPlayerItem3Id;
-        $this->collPlayerDecksRelatedByPlayerItem3IdPartial = false;
+        $this->collPlayerDecksRelatedByRightArmPlayerItemId = $playerDecksRelatedByRightArmPlayerItemId;
+        $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial = false;
 
         return $this;
     }
@@ -2342,16 +2342,16 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @return int             Count of related PlayerDeck objects.
      * @throws PropelException
      */
-    public function countPlayerDecksRelatedByPlayerItem3Id(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    public function countPlayerDecksRelatedByRightArmPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByPlayerItem3IdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByPlayerItem3Id || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByPlayerItem3Id) {
+        $partial = $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByRightArmPlayerItemId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByRightArmPlayerItemId) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getPlayerDecksRelatedByPlayerItem3Id());
+                return count($this->getPlayerDecksRelatedByRightArmPlayerItemId());
             }
 
             $query = ChildPlayerDeckQuery::create(null, $criteria);
@@ -2360,11 +2360,11 @@ abstract class PlayerItem implements ActiveRecordInterface
             }
 
             return $query
-                ->filterByPlayerItemRelatedByPlayerItem3Id($this)
+                ->filterByPlayerItemRelatedByRightArmPlayerItemId($this)
                 ->count($con);
         }
 
-        return count($this->collPlayerDecksRelatedByPlayerItem3Id);
+        return count($this->collPlayerDecksRelatedByRightArmPlayerItemId);
     }
 
     /**
@@ -2374,18 +2374,18 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param  ChildPlayerDeck $l ChildPlayerDeck
      * @return $this|\app\model\PlayerItem The current object (for fluent API support)
      */
-    public function addPlayerDeckRelatedByPlayerItem3Id(ChildPlayerDeck $l)
+    public function addPlayerDeckRelatedByRightArmPlayerItemId(ChildPlayerDeck $l)
     {
-        if ($this->collPlayerDecksRelatedByPlayerItem3Id === null) {
-            $this->initPlayerDecksRelatedByPlayerItem3Id();
-            $this->collPlayerDecksRelatedByPlayerItem3IdPartial = true;
+        if ($this->collPlayerDecksRelatedByRightArmPlayerItemId === null) {
+            $this->initPlayerDecksRelatedByRightArmPlayerItemId();
+            $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial = true;
         }
 
-        if (!$this->collPlayerDecksRelatedByPlayerItem3Id->contains($l)) {
-            $this->doAddPlayerDeckRelatedByPlayerItem3Id($l);
+        if (!$this->collPlayerDecksRelatedByRightArmPlayerItemId->contains($l)) {
+            $this->doAddPlayerDeckRelatedByRightArmPlayerItemId($l);
 
-            if ($this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion and $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion->contains($l)) {
-                $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion->remove($this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion->search($l));
+            if ($this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion and $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion->contains($l)) {
+                $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion->remove($this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion->search($l));
             }
         }
 
@@ -2393,29 +2393,29 @@ abstract class PlayerItem implements ActiveRecordInterface
     }
 
     /**
-     * @param ChildPlayerDeck $playerDeckRelatedByPlayerItem3Id The ChildPlayerDeck object to add.
+     * @param ChildPlayerDeck $playerDeckRelatedByRightArmPlayerItemId The ChildPlayerDeck object to add.
      */
-    protected function doAddPlayerDeckRelatedByPlayerItem3Id(ChildPlayerDeck $playerDeckRelatedByPlayerItem3Id)
+    protected function doAddPlayerDeckRelatedByRightArmPlayerItemId(ChildPlayerDeck $playerDeckRelatedByRightArmPlayerItemId)
     {
-        $this->collPlayerDecksRelatedByPlayerItem3Id[]= $playerDeckRelatedByPlayerItem3Id;
-        $playerDeckRelatedByPlayerItem3Id->setPlayerItemRelatedByPlayerItem3Id($this);
+        $this->collPlayerDecksRelatedByRightArmPlayerItemId[]= $playerDeckRelatedByRightArmPlayerItemId;
+        $playerDeckRelatedByRightArmPlayerItemId->setPlayerItemRelatedByRightArmPlayerItemId($this);
     }
 
     /**
-     * @param  ChildPlayerDeck $playerDeckRelatedByPlayerItem3Id The ChildPlayerDeck object to remove.
+     * @param  ChildPlayerDeck $playerDeckRelatedByRightArmPlayerItemId The ChildPlayerDeck object to remove.
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function removePlayerDeckRelatedByPlayerItem3Id(ChildPlayerDeck $playerDeckRelatedByPlayerItem3Id)
+    public function removePlayerDeckRelatedByRightArmPlayerItemId(ChildPlayerDeck $playerDeckRelatedByRightArmPlayerItemId)
     {
-        if ($this->getPlayerDecksRelatedByPlayerItem3Id()->contains($playerDeckRelatedByPlayerItem3Id)) {
-            $pos = $this->collPlayerDecksRelatedByPlayerItem3Id->search($playerDeckRelatedByPlayerItem3Id);
-            $this->collPlayerDecksRelatedByPlayerItem3Id->remove($pos);
-            if (null === $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion) {
-                $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion = clone $this->collPlayerDecksRelatedByPlayerItem3Id;
-                $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion->clear();
+        if ($this->getPlayerDecksRelatedByRightArmPlayerItemId()->contains($playerDeckRelatedByRightArmPlayerItemId)) {
+            $pos = $this->collPlayerDecksRelatedByRightArmPlayerItemId->search($playerDeckRelatedByRightArmPlayerItemId);
+            $this->collPlayerDecksRelatedByRightArmPlayerItemId->remove($pos);
+            if (null === $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion) {
+                $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByRightArmPlayerItemId;
+                $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByPlayerItem3IdScheduledForDeletion[]= $playerDeckRelatedByPlayerItem3Id;
-            $playerDeckRelatedByPlayerItem3Id->setPlayerItemRelatedByPlayerItem3Id(null);
+            $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion[]= $playerDeckRelatedByRightArmPlayerItemId;
+            $playerDeckRelatedByRightArmPlayerItemId->setPlayerItemRelatedByRightArmPlayerItemId(null);
         }
 
         return $this;
@@ -2427,7 +2427,7 @@ abstract class PlayerItem implements ActiveRecordInterface
      * an identical criteria, it returns the collection.
      * Otherwise if this PlayerItem is new, it will return
      * an empty collection; or if this PlayerItem has previously
-     * been saved, it will retrieve related PlayerDecksRelatedByPlayerItem3Id from storage.
+     * been saved, it will retrieve related PlayerDecksRelatedByRightArmPlayerItemId from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
@@ -2438,40 +2438,40 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksRelatedByPlayerItem3IdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksRelatedByRightArmPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
         $query->joinWith('Player', $joinBehavior);
 
-        return $this->getPlayerDecksRelatedByPlayerItem3Id($query, $con);
+        return $this->getPlayerDecksRelatedByRightArmPlayerItemId($query, $con);
     }
 
     /**
-     * Clears out the collPlayerDecksRelatedByPlayerItem4Id collection
+     * Clears out the collPlayerDecksRelatedByLeftLegPlayerItemId collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addPlayerDecksRelatedByPlayerItem4Id()
+     * @see        addPlayerDecksRelatedByLeftLegPlayerItemId()
      */
-    public function clearPlayerDecksRelatedByPlayerItem4Id()
+    public function clearPlayerDecksRelatedByLeftLegPlayerItemId()
     {
-        $this->collPlayerDecksRelatedByPlayerItem4Id = null; // important to set this to NULL since that means it is uninitialized
+        $this->collPlayerDecksRelatedByLeftLegPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Reset is the collPlayerDecksRelatedByPlayerItem4Id collection loaded partially.
+     * Reset is the collPlayerDecksRelatedByLeftLegPlayerItemId collection loaded partially.
      */
-    public function resetPartialPlayerDecksRelatedByPlayerItem4Id($v = true)
+    public function resetPartialPlayerDecksRelatedByLeftLegPlayerItemId($v = true)
     {
-        $this->collPlayerDecksRelatedByPlayerItem4IdPartial = $v;
+        $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial = $v;
     }
 
     /**
-     * Initializes the collPlayerDecksRelatedByPlayerItem4Id collection.
+     * Initializes the collPlayerDecksRelatedByLeftLegPlayerItemId collection.
      *
-     * By default this just sets the collPlayerDecksRelatedByPlayerItem4Id collection to an empty array (like clearcollPlayerDecksRelatedByPlayerItem4Id());
+     * By default this just sets the collPlayerDecksRelatedByLeftLegPlayerItemId collection to an empty array (like clearcollPlayerDecksRelatedByLeftLegPlayerItemId());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -2480,16 +2480,16 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @return void
      */
-    public function initPlayerDecksRelatedByPlayerItem4Id($overrideExisting = true)
+    public function initPlayerDecksRelatedByLeftLegPlayerItemId($overrideExisting = true)
     {
-        if (null !== $this->collPlayerDecksRelatedByPlayerItem4Id && !$overrideExisting) {
+        if (null !== $this->collPlayerDecksRelatedByLeftLegPlayerItemId && !$overrideExisting) {
             return;
         }
 
         $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
 
-        $this->collPlayerDecksRelatedByPlayerItem4Id = new $collectionClassName;
-        $this->collPlayerDecksRelatedByPlayerItem4Id->setModel('\app\model\PlayerDeck');
+        $this->collPlayerDecksRelatedByLeftLegPlayerItemId = new $collectionClassName;
+        $this->collPlayerDecksRelatedByLeftLegPlayerItemId->setModel('\app\model\PlayerDeck');
     }
 
     /**
@@ -2506,48 +2506,48 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      * @throws PropelException
      */
-    public function getPlayerDecksRelatedByPlayerItem4Id(Criteria $criteria = null, ConnectionInterface $con = null)
+    public function getPlayerDecksRelatedByLeftLegPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByPlayerItem4IdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByPlayerItem4Id || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByPlayerItem4Id) {
+        $partial = $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByLeftLegPlayerItemId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByLeftLegPlayerItemId) {
                 // return empty collection
-                $this->initPlayerDecksRelatedByPlayerItem4Id();
+                $this->initPlayerDecksRelatedByLeftLegPlayerItemId();
             } else {
-                $collPlayerDecksRelatedByPlayerItem4Id = ChildPlayerDeckQuery::create(null, $criteria)
-                    ->filterByPlayerItemRelatedByPlayerItem4Id($this)
+                $collPlayerDecksRelatedByLeftLegPlayerItemId = ChildPlayerDeckQuery::create(null, $criteria)
+                    ->filterByPlayerItemRelatedByLeftLegPlayerItemId($this)
                     ->find($con);
 
                 if (null !== $criteria) {
-                    if (false !== $this->collPlayerDecksRelatedByPlayerItem4IdPartial && count($collPlayerDecksRelatedByPlayerItem4Id)) {
-                        $this->initPlayerDecksRelatedByPlayerItem4Id(false);
+                    if (false !== $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial && count($collPlayerDecksRelatedByLeftLegPlayerItemId)) {
+                        $this->initPlayerDecksRelatedByLeftLegPlayerItemId(false);
 
-                        foreach ($collPlayerDecksRelatedByPlayerItem4Id as $obj) {
-                            if (false == $this->collPlayerDecksRelatedByPlayerItem4Id->contains($obj)) {
-                                $this->collPlayerDecksRelatedByPlayerItem4Id->append($obj);
+                        foreach ($collPlayerDecksRelatedByLeftLegPlayerItemId as $obj) {
+                            if (false == $this->collPlayerDecksRelatedByLeftLegPlayerItemId->contains($obj)) {
+                                $this->collPlayerDecksRelatedByLeftLegPlayerItemId->append($obj);
                             }
                         }
 
-                        $this->collPlayerDecksRelatedByPlayerItem4IdPartial = true;
+                        $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial = true;
                     }
 
-                    return $collPlayerDecksRelatedByPlayerItem4Id;
+                    return $collPlayerDecksRelatedByLeftLegPlayerItemId;
                 }
 
-                if ($partial && $this->collPlayerDecksRelatedByPlayerItem4Id) {
-                    foreach ($this->collPlayerDecksRelatedByPlayerItem4Id as $obj) {
+                if ($partial && $this->collPlayerDecksRelatedByLeftLegPlayerItemId) {
+                    foreach ($this->collPlayerDecksRelatedByLeftLegPlayerItemId as $obj) {
                         if ($obj->isNew()) {
-                            $collPlayerDecksRelatedByPlayerItem4Id[] = $obj;
+                            $collPlayerDecksRelatedByLeftLegPlayerItemId[] = $obj;
                         }
                     }
                 }
 
-                $this->collPlayerDecksRelatedByPlayerItem4Id = $collPlayerDecksRelatedByPlayerItem4Id;
-                $this->collPlayerDecksRelatedByPlayerItem4IdPartial = false;
+                $this->collPlayerDecksRelatedByLeftLegPlayerItemId = $collPlayerDecksRelatedByLeftLegPlayerItemId;
+                $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial = false;
             }
         }
 
-        return $this->collPlayerDecksRelatedByPlayerItem4Id;
+        return $this->collPlayerDecksRelatedByLeftLegPlayerItemId;
     }
 
     /**
@@ -2556,29 +2556,29 @@ abstract class PlayerItem implements ActiveRecordInterface
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      Collection $playerDecksRelatedByPlayerItem4Id A Propel collection.
+     * @param      Collection $playerDecksRelatedByLeftLegPlayerItemId A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function setPlayerDecksRelatedByPlayerItem4Id(Collection $playerDecksRelatedByPlayerItem4Id, ConnectionInterface $con = null)
+    public function setPlayerDecksRelatedByLeftLegPlayerItemId(Collection $playerDecksRelatedByLeftLegPlayerItemId, ConnectionInterface $con = null)
     {
-        /** @var ChildPlayerDeck[] $playerDecksRelatedByPlayerItem4IdToDelete */
-        $playerDecksRelatedByPlayerItem4IdToDelete = $this->getPlayerDecksRelatedByPlayerItem4Id(new Criteria(), $con)->diff($playerDecksRelatedByPlayerItem4Id);
+        /** @var ChildPlayerDeck[] $playerDecksRelatedByLeftLegPlayerItemIdToDelete */
+        $playerDecksRelatedByLeftLegPlayerItemIdToDelete = $this->getPlayerDecksRelatedByLeftLegPlayerItemId(new Criteria(), $con)->diff($playerDecksRelatedByLeftLegPlayerItemId);
 
 
-        $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion = $playerDecksRelatedByPlayerItem4IdToDelete;
+        $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion = $playerDecksRelatedByLeftLegPlayerItemIdToDelete;
 
-        foreach ($playerDecksRelatedByPlayerItem4IdToDelete as $playerDeckRelatedByPlayerItem4IdRemoved) {
-            $playerDeckRelatedByPlayerItem4IdRemoved->setPlayerItemRelatedByPlayerItem4Id(null);
+        foreach ($playerDecksRelatedByLeftLegPlayerItemIdToDelete as $playerDeckRelatedByLeftLegPlayerItemIdRemoved) {
+            $playerDeckRelatedByLeftLegPlayerItemIdRemoved->setPlayerItemRelatedByLeftLegPlayerItemId(null);
         }
 
-        $this->collPlayerDecksRelatedByPlayerItem4Id = null;
-        foreach ($playerDecksRelatedByPlayerItem4Id as $playerDeckRelatedByPlayerItem4Id) {
-            $this->addPlayerDeckRelatedByPlayerItem4Id($playerDeckRelatedByPlayerItem4Id);
+        $this->collPlayerDecksRelatedByLeftLegPlayerItemId = null;
+        foreach ($playerDecksRelatedByLeftLegPlayerItemId as $playerDeckRelatedByLeftLegPlayerItemId) {
+            $this->addPlayerDeckRelatedByLeftLegPlayerItemId($playerDeckRelatedByLeftLegPlayerItemId);
         }
 
-        $this->collPlayerDecksRelatedByPlayerItem4Id = $playerDecksRelatedByPlayerItem4Id;
-        $this->collPlayerDecksRelatedByPlayerItem4IdPartial = false;
+        $this->collPlayerDecksRelatedByLeftLegPlayerItemId = $playerDecksRelatedByLeftLegPlayerItemId;
+        $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial = false;
 
         return $this;
     }
@@ -2592,16 +2592,16 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @return int             Count of related PlayerDeck objects.
      * @throws PropelException
      */
-    public function countPlayerDecksRelatedByPlayerItem4Id(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    public function countPlayerDecksRelatedByLeftLegPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByPlayerItem4IdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByPlayerItem4Id || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByPlayerItem4Id) {
+        $partial = $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByLeftLegPlayerItemId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByLeftLegPlayerItemId) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getPlayerDecksRelatedByPlayerItem4Id());
+                return count($this->getPlayerDecksRelatedByLeftLegPlayerItemId());
             }
 
             $query = ChildPlayerDeckQuery::create(null, $criteria);
@@ -2610,11 +2610,11 @@ abstract class PlayerItem implements ActiveRecordInterface
             }
 
             return $query
-                ->filterByPlayerItemRelatedByPlayerItem4Id($this)
+                ->filterByPlayerItemRelatedByLeftLegPlayerItemId($this)
                 ->count($con);
         }
 
-        return count($this->collPlayerDecksRelatedByPlayerItem4Id);
+        return count($this->collPlayerDecksRelatedByLeftLegPlayerItemId);
     }
 
     /**
@@ -2624,18 +2624,18 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param  ChildPlayerDeck $l ChildPlayerDeck
      * @return $this|\app\model\PlayerItem The current object (for fluent API support)
      */
-    public function addPlayerDeckRelatedByPlayerItem4Id(ChildPlayerDeck $l)
+    public function addPlayerDeckRelatedByLeftLegPlayerItemId(ChildPlayerDeck $l)
     {
-        if ($this->collPlayerDecksRelatedByPlayerItem4Id === null) {
-            $this->initPlayerDecksRelatedByPlayerItem4Id();
-            $this->collPlayerDecksRelatedByPlayerItem4IdPartial = true;
+        if ($this->collPlayerDecksRelatedByLeftLegPlayerItemId === null) {
+            $this->initPlayerDecksRelatedByLeftLegPlayerItemId();
+            $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial = true;
         }
 
-        if (!$this->collPlayerDecksRelatedByPlayerItem4Id->contains($l)) {
-            $this->doAddPlayerDeckRelatedByPlayerItem4Id($l);
+        if (!$this->collPlayerDecksRelatedByLeftLegPlayerItemId->contains($l)) {
+            $this->doAddPlayerDeckRelatedByLeftLegPlayerItemId($l);
 
-            if ($this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion and $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion->contains($l)) {
-                $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion->remove($this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion->search($l));
+            if ($this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion and $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion->contains($l)) {
+                $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion->remove($this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion->search($l));
             }
         }
 
@@ -2643,29 +2643,29 @@ abstract class PlayerItem implements ActiveRecordInterface
     }
 
     /**
-     * @param ChildPlayerDeck $playerDeckRelatedByPlayerItem4Id The ChildPlayerDeck object to add.
+     * @param ChildPlayerDeck $playerDeckRelatedByLeftLegPlayerItemId The ChildPlayerDeck object to add.
      */
-    protected function doAddPlayerDeckRelatedByPlayerItem4Id(ChildPlayerDeck $playerDeckRelatedByPlayerItem4Id)
+    protected function doAddPlayerDeckRelatedByLeftLegPlayerItemId(ChildPlayerDeck $playerDeckRelatedByLeftLegPlayerItemId)
     {
-        $this->collPlayerDecksRelatedByPlayerItem4Id[]= $playerDeckRelatedByPlayerItem4Id;
-        $playerDeckRelatedByPlayerItem4Id->setPlayerItemRelatedByPlayerItem4Id($this);
+        $this->collPlayerDecksRelatedByLeftLegPlayerItemId[]= $playerDeckRelatedByLeftLegPlayerItemId;
+        $playerDeckRelatedByLeftLegPlayerItemId->setPlayerItemRelatedByLeftLegPlayerItemId($this);
     }
 
     /**
-     * @param  ChildPlayerDeck $playerDeckRelatedByPlayerItem4Id The ChildPlayerDeck object to remove.
+     * @param  ChildPlayerDeck $playerDeckRelatedByLeftLegPlayerItemId The ChildPlayerDeck object to remove.
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function removePlayerDeckRelatedByPlayerItem4Id(ChildPlayerDeck $playerDeckRelatedByPlayerItem4Id)
+    public function removePlayerDeckRelatedByLeftLegPlayerItemId(ChildPlayerDeck $playerDeckRelatedByLeftLegPlayerItemId)
     {
-        if ($this->getPlayerDecksRelatedByPlayerItem4Id()->contains($playerDeckRelatedByPlayerItem4Id)) {
-            $pos = $this->collPlayerDecksRelatedByPlayerItem4Id->search($playerDeckRelatedByPlayerItem4Id);
-            $this->collPlayerDecksRelatedByPlayerItem4Id->remove($pos);
-            if (null === $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion) {
-                $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion = clone $this->collPlayerDecksRelatedByPlayerItem4Id;
-                $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion->clear();
+        if ($this->getPlayerDecksRelatedByLeftLegPlayerItemId()->contains($playerDeckRelatedByLeftLegPlayerItemId)) {
+            $pos = $this->collPlayerDecksRelatedByLeftLegPlayerItemId->search($playerDeckRelatedByLeftLegPlayerItemId);
+            $this->collPlayerDecksRelatedByLeftLegPlayerItemId->remove($pos);
+            if (null === $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion) {
+                $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByLeftLegPlayerItemId;
+                $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByPlayerItem4IdScheduledForDeletion[]= $playerDeckRelatedByPlayerItem4Id;
-            $playerDeckRelatedByPlayerItem4Id->setPlayerItemRelatedByPlayerItem4Id(null);
+            $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion[]= $playerDeckRelatedByLeftLegPlayerItemId;
+            $playerDeckRelatedByLeftLegPlayerItemId->setPlayerItemRelatedByLeftLegPlayerItemId(null);
         }
 
         return $this;
@@ -2677,7 +2677,7 @@ abstract class PlayerItem implements ActiveRecordInterface
      * an identical criteria, it returns the collection.
      * Otherwise if this PlayerItem is new, it will return
      * an empty collection; or if this PlayerItem has previously
-     * been saved, it will retrieve related PlayerDecksRelatedByPlayerItem4Id from storage.
+     * been saved, it will retrieve related PlayerDecksRelatedByLeftLegPlayerItemId from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
@@ -2688,40 +2688,40 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksRelatedByPlayerItem4IdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksRelatedByLeftLegPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
         $query->joinWith('Player', $joinBehavior);
 
-        return $this->getPlayerDecksRelatedByPlayerItem4Id($query, $con);
+        return $this->getPlayerDecksRelatedByLeftLegPlayerItemId($query, $con);
     }
 
     /**
-     * Clears out the collPlayerDecksRelatedByPlayerItem5Id collection
+     * Clears out the collPlayerDecksRelatedByRightLegPlayerItemId collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addPlayerDecksRelatedByPlayerItem5Id()
+     * @see        addPlayerDecksRelatedByRightLegPlayerItemId()
      */
-    public function clearPlayerDecksRelatedByPlayerItem5Id()
+    public function clearPlayerDecksRelatedByRightLegPlayerItemId()
     {
-        $this->collPlayerDecksRelatedByPlayerItem5Id = null; // important to set this to NULL since that means it is uninitialized
+        $this->collPlayerDecksRelatedByRightLegPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Reset is the collPlayerDecksRelatedByPlayerItem5Id collection loaded partially.
+     * Reset is the collPlayerDecksRelatedByRightLegPlayerItemId collection loaded partially.
      */
-    public function resetPartialPlayerDecksRelatedByPlayerItem5Id($v = true)
+    public function resetPartialPlayerDecksRelatedByRightLegPlayerItemId($v = true)
     {
-        $this->collPlayerDecksRelatedByPlayerItem5IdPartial = $v;
+        $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial = $v;
     }
 
     /**
-     * Initializes the collPlayerDecksRelatedByPlayerItem5Id collection.
+     * Initializes the collPlayerDecksRelatedByRightLegPlayerItemId collection.
      *
-     * By default this just sets the collPlayerDecksRelatedByPlayerItem5Id collection to an empty array (like clearcollPlayerDecksRelatedByPlayerItem5Id());
+     * By default this just sets the collPlayerDecksRelatedByRightLegPlayerItemId collection to an empty array (like clearcollPlayerDecksRelatedByRightLegPlayerItemId());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -2730,16 +2730,16 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @return void
      */
-    public function initPlayerDecksRelatedByPlayerItem5Id($overrideExisting = true)
+    public function initPlayerDecksRelatedByRightLegPlayerItemId($overrideExisting = true)
     {
-        if (null !== $this->collPlayerDecksRelatedByPlayerItem5Id && !$overrideExisting) {
+        if (null !== $this->collPlayerDecksRelatedByRightLegPlayerItemId && !$overrideExisting) {
             return;
         }
 
         $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
 
-        $this->collPlayerDecksRelatedByPlayerItem5Id = new $collectionClassName;
-        $this->collPlayerDecksRelatedByPlayerItem5Id->setModel('\app\model\PlayerDeck');
+        $this->collPlayerDecksRelatedByRightLegPlayerItemId = new $collectionClassName;
+        $this->collPlayerDecksRelatedByRightLegPlayerItemId->setModel('\app\model\PlayerDeck');
     }
 
     /**
@@ -2756,48 +2756,48 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      * @throws PropelException
      */
-    public function getPlayerDecksRelatedByPlayerItem5Id(Criteria $criteria = null, ConnectionInterface $con = null)
+    public function getPlayerDecksRelatedByRightLegPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByPlayerItem5IdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByPlayerItem5Id || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByPlayerItem5Id) {
+        $partial = $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByRightLegPlayerItemId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByRightLegPlayerItemId) {
                 // return empty collection
-                $this->initPlayerDecksRelatedByPlayerItem5Id();
+                $this->initPlayerDecksRelatedByRightLegPlayerItemId();
             } else {
-                $collPlayerDecksRelatedByPlayerItem5Id = ChildPlayerDeckQuery::create(null, $criteria)
-                    ->filterByPlayerItemRelatedByPlayerItem5Id($this)
+                $collPlayerDecksRelatedByRightLegPlayerItemId = ChildPlayerDeckQuery::create(null, $criteria)
+                    ->filterByPlayerItemRelatedByRightLegPlayerItemId($this)
                     ->find($con);
 
                 if (null !== $criteria) {
-                    if (false !== $this->collPlayerDecksRelatedByPlayerItem5IdPartial && count($collPlayerDecksRelatedByPlayerItem5Id)) {
-                        $this->initPlayerDecksRelatedByPlayerItem5Id(false);
+                    if (false !== $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial && count($collPlayerDecksRelatedByRightLegPlayerItemId)) {
+                        $this->initPlayerDecksRelatedByRightLegPlayerItemId(false);
 
-                        foreach ($collPlayerDecksRelatedByPlayerItem5Id as $obj) {
-                            if (false == $this->collPlayerDecksRelatedByPlayerItem5Id->contains($obj)) {
-                                $this->collPlayerDecksRelatedByPlayerItem5Id->append($obj);
+                        foreach ($collPlayerDecksRelatedByRightLegPlayerItemId as $obj) {
+                            if (false == $this->collPlayerDecksRelatedByRightLegPlayerItemId->contains($obj)) {
+                                $this->collPlayerDecksRelatedByRightLegPlayerItemId->append($obj);
                             }
                         }
 
-                        $this->collPlayerDecksRelatedByPlayerItem5IdPartial = true;
+                        $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial = true;
                     }
 
-                    return $collPlayerDecksRelatedByPlayerItem5Id;
+                    return $collPlayerDecksRelatedByRightLegPlayerItemId;
                 }
 
-                if ($partial && $this->collPlayerDecksRelatedByPlayerItem5Id) {
-                    foreach ($this->collPlayerDecksRelatedByPlayerItem5Id as $obj) {
+                if ($partial && $this->collPlayerDecksRelatedByRightLegPlayerItemId) {
+                    foreach ($this->collPlayerDecksRelatedByRightLegPlayerItemId as $obj) {
                         if ($obj->isNew()) {
-                            $collPlayerDecksRelatedByPlayerItem5Id[] = $obj;
+                            $collPlayerDecksRelatedByRightLegPlayerItemId[] = $obj;
                         }
                     }
                 }
 
-                $this->collPlayerDecksRelatedByPlayerItem5Id = $collPlayerDecksRelatedByPlayerItem5Id;
-                $this->collPlayerDecksRelatedByPlayerItem5IdPartial = false;
+                $this->collPlayerDecksRelatedByRightLegPlayerItemId = $collPlayerDecksRelatedByRightLegPlayerItemId;
+                $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial = false;
             }
         }
 
-        return $this->collPlayerDecksRelatedByPlayerItem5Id;
+        return $this->collPlayerDecksRelatedByRightLegPlayerItemId;
     }
 
     /**
@@ -2806,29 +2806,29 @@ abstract class PlayerItem implements ActiveRecordInterface
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      Collection $playerDecksRelatedByPlayerItem5Id A Propel collection.
+     * @param      Collection $playerDecksRelatedByRightLegPlayerItemId A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function setPlayerDecksRelatedByPlayerItem5Id(Collection $playerDecksRelatedByPlayerItem5Id, ConnectionInterface $con = null)
+    public function setPlayerDecksRelatedByRightLegPlayerItemId(Collection $playerDecksRelatedByRightLegPlayerItemId, ConnectionInterface $con = null)
     {
-        /** @var ChildPlayerDeck[] $playerDecksRelatedByPlayerItem5IdToDelete */
-        $playerDecksRelatedByPlayerItem5IdToDelete = $this->getPlayerDecksRelatedByPlayerItem5Id(new Criteria(), $con)->diff($playerDecksRelatedByPlayerItem5Id);
+        /** @var ChildPlayerDeck[] $playerDecksRelatedByRightLegPlayerItemIdToDelete */
+        $playerDecksRelatedByRightLegPlayerItemIdToDelete = $this->getPlayerDecksRelatedByRightLegPlayerItemId(new Criteria(), $con)->diff($playerDecksRelatedByRightLegPlayerItemId);
 
 
-        $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion = $playerDecksRelatedByPlayerItem5IdToDelete;
+        $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion = $playerDecksRelatedByRightLegPlayerItemIdToDelete;
 
-        foreach ($playerDecksRelatedByPlayerItem5IdToDelete as $playerDeckRelatedByPlayerItem5IdRemoved) {
-            $playerDeckRelatedByPlayerItem5IdRemoved->setPlayerItemRelatedByPlayerItem5Id(null);
+        foreach ($playerDecksRelatedByRightLegPlayerItemIdToDelete as $playerDeckRelatedByRightLegPlayerItemIdRemoved) {
+            $playerDeckRelatedByRightLegPlayerItemIdRemoved->setPlayerItemRelatedByRightLegPlayerItemId(null);
         }
 
-        $this->collPlayerDecksRelatedByPlayerItem5Id = null;
-        foreach ($playerDecksRelatedByPlayerItem5Id as $playerDeckRelatedByPlayerItem5Id) {
-            $this->addPlayerDeckRelatedByPlayerItem5Id($playerDeckRelatedByPlayerItem5Id);
+        $this->collPlayerDecksRelatedByRightLegPlayerItemId = null;
+        foreach ($playerDecksRelatedByRightLegPlayerItemId as $playerDeckRelatedByRightLegPlayerItemId) {
+            $this->addPlayerDeckRelatedByRightLegPlayerItemId($playerDeckRelatedByRightLegPlayerItemId);
         }
 
-        $this->collPlayerDecksRelatedByPlayerItem5Id = $playerDecksRelatedByPlayerItem5Id;
-        $this->collPlayerDecksRelatedByPlayerItem5IdPartial = false;
+        $this->collPlayerDecksRelatedByRightLegPlayerItemId = $playerDecksRelatedByRightLegPlayerItemId;
+        $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial = false;
 
         return $this;
     }
@@ -2842,16 +2842,16 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @return int             Count of related PlayerDeck objects.
      * @throws PropelException
      */
-    public function countPlayerDecksRelatedByPlayerItem5Id(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    public function countPlayerDecksRelatedByRightLegPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByPlayerItem5IdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByPlayerItem5Id || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByPlayerItem5Id) {
+        $partial = $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByRightLegPlayerItemId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByRightLegPlayerItemId) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getPlayerDecksRelatedByPlayerItem5Id());
+                return count($this->getPlayerDecksRelatedByRightLegPlayerItemId());
             }
 
             $query = ChildPlayerDeckQuery::create(null, $criteria);
@@ -2860,11 +2860,11 @@ abstract class PlayerItem implements ActiveRecordInterface
             }
 
             return $query
-                ->filterByPlayerItemRelatedByPlayerItem5Id($this)
+                ->filterByPlayerItemRelatedByRightLegPlayerItemId($this)
                 ->count($con);
         }
 
-        return count($this->collPlayerDecksRelatedByPlayerItem5Id);
+        return count($this->collPlayerDecksRelatedByRightLegPlayerItemId);
     }
 
     /**
@@ -2874,18 +2874,18 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param  ChildPlayerDeck $l ChildPlayerDeck
      * @return $this|\app\model\PlayerItem The current object (for fluent API support)
      */
-    public function addPlayerDeckRelatedByPlayerItem5Id(ChildPlayerDeck $l)
+    public function addPlayerDeckRelatedByRightLegPlayerItemId(ChildPlayerDeck $l)
     {
-        if ($this->collPlayerDecksRelatedByPlayerItem5Id === null) {
-            $this->initPlayerDecksRelatedByPlayerItem5Id();
-            $this->collPlayerDecksRelatedByPlayerItem5IdPartial = true;
+        if ($this->collPlayerDecksRelatedByRightLegPlayerItemId === null) {
+            $this->initPlayerDecksRelatedByRightLegPlayerItemId();
+            $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial = true;
         }
 
-        if (!$this->collPlayerDecksRelatedByPlayerItem5Id->contains($l)) {
-            $this->doAddPlayerDeckRelatedByPlayerItem5Id($l);
+        if (!$this->collPlayerDecksRelatedByRightLegPlayerItemId->contains($l)) {
+            $this->doAddPlayerDeckRelatedByRightLegPlayerItemId($l);
 
-            if ($this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion and $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion->contains($l)) {
-                $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion->remove($this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion->search($l));
+            if ($this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion and $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion->contains($l)) {
+                $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion->remove($this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion->search($l));
             }
         }
 
@@ -2893,29 +2893,29 @@ abstract class PlayerItem implements ActiveRecordInterface
     }
 
     /**
-     * @param ChildPlayerDeck $playerDeckRelatedByPlayerItem5Id The ChildPlayerDeck object to add.
+     * @param ChildPlayerDeck $playerDeckRelatedByRightLegPlayerItemId The ChildPlayerDeck object to add.
      */
-    protected function doAddPlayerDeckRelatedByPlayerItem5Id(ChildPlayerDeck $playerDeckRelatedByPlayerItem5Id)
+    protected function doAddPlayerDeckRelatedByRightLegPlayerItemId(ChildPlayerDeck $playerDeckRelatedByRightLegPlayerItemId)
     {
-        $this->collPlayerDecksRelatedByPlayerItem5Id[]= $playerDeckRelatedByPlayerItem5Id;
-        $playerDeckRelatedByPlayerItem5Id->setPlayerItemRelatedByPlayerItem5Id($this);
+        $this->collPlayerDecksRelatedByRightLegPlayerItemId[]= $playerDeckRelatedByRightLegPlayerItemId;
+        $playerDeckRelatedByRightLegPlayerItemId->setPlayerItemRelatedByRightLegPlayerItemId($this);
     }
 
     /**
-     * @param  ChildPlayerDeck $playerDeckRelatedByPlayerItem5Id The ChildPlayerDeck object to remove.
+     * @param  ChildPlayerDeck $playerDeckRelatedByRightLegPlayerItemId The ChildPlayerDeck object to remove.
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function removePlayerDeckRelatedByPlayerItem5Id(ChildPlayerDeck $playerDeckRelatedByPlayerItem5Id)
+    public function removePlayerDeckRelatedByRightLegPlayerItemId(ChildPlayerDeck $playerDeckRelatedByRightLegPlayerItemId)
     {
-        if ($this->getPlayerDecksRelatedByPlayerItem5Id()->contains($playerDeckRelatedByPlayerItem5Id)) {
-            $pos = $this->collPlayerDecksRelatedByPlayerItem5Id->search($playerDeckRelatedByPlayerItem5Id);
-            $this->collPlayerDecksRelatedByPlayerItem5Id->remove($pos);
-            if (null === $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion) {
-                $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion = clone $this->collPlayerDecksRelatedByPlayerItem5Id;
-                $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion->clear();
+        if ($this->getPlayerDecksRelatedByRightLegPlayerItemId()->contains($playerDeckRelatedByRightLegPlayerItemId)) {
+            $pos = $this->collPlayerDecksRelatedByRightLegPlayerItemId->search($playerDeckRelatedByRightLegPlayerItemId);
+            $this->collPlayerDecksRelatedByRightLegPlayerItemId->remove($pos);
+            if (null === $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion) {
+                $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByRightLegPlayerItemId;
+                $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByPlayerItem5IdScheduledForDeletion[]= $playerDeckRelatedByPlayerItem5Id;
-            $playerDeckRelatedByPlayerItem5Id->setPlayerItemRelatedByPlayerItem5Id(null);
+            $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion[]= $playerDeckRelatedByRightLegPlayerItemId;
+            $playerDeckRelatedByRightLegPlayerItemId->setPlayerItemRelatedByRightLegPlayerItemId(null);
         }
 
         return $this;
@@ -2927,7 +2927,7 @@ abstract class PlayerItem implements ActiveRecordInterface
      * an identical criteria, it returns the collection.
      * Otherwise if this PlayerItem is new, it will return
      * an empty collection; or if this PlayerItem has previously
-     * been saved, it will retrieve related PlayerDecksRelatedByPlayerItem5Id from storage.
+     * been saved, it will retrieve related PlayerDecksRelatedByRightLegPlayerItemId from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
@@ -2938,12 +2938,12 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksRelatedByPlayerItem5IdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksRelatedByRightLegPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
         $query->joinWith('Player', $joinBehavior);
 
-        return $this->getPlayerDecksRelatedByPlayerItem5Id($query, $con);
+        return $this->getPlayerDecksRelatedByRightLegPlayerItemId($query, $con);
     }
 
     /**
@@ -2982,38 +2982,38 @@ abstract class PlayerItem implements ActiveRecordInterface
     public function clearAllReferences($deep = false)
     {
         if ($deep) {
-            if ($this->collPlayerDecksRelatedByPlayerItem1Id) {
-                foreach ($this->collPlayerDecksRelatedByPlayerItem1Id as $o) {
+            if ($this->collPlayerDecksRelatedByHeadPlayerItemId) {
+                foreach ($this->collPlayerDecksRelatedByHeadPlayerItemId as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collPlayerDecksRelatedByPlayerItem2Id) {
-                foreach ($this->collPlayerDecksRelatedByPlayerItem2Id as $o) {
+            if ($this->collPlayerDecksRelatedByLeftArmPlayerItemId) {
+                foreach ($this->collPlayerDecksRelatedByLeftArmPlayerItemId as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collPlayerDecksRelatedByPlayerItem3Id) {
-                foreach ($this->collPlayerDecksRelatedByPlayerItem3Id as $o) {
+            if ($this->collPlayerDecksRelatedByRightArmPlayerItemId) {
+                foreach ($this->collPlayerDecksRelatedByRightArmPlayerItemId as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collPlayerDecksRelatedByPlayerItem4Id) {
-                foreach ($this->collPlayerDecksRelatedByPlayerItem4Id as $o) {
+            if ($this->collPlayerDecksRelatedByLeftLegPlayerItemId) {
+                foreach ($this->collPlayerDecksRelatedByLeftLegPlayerItemId as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collPlayerDecksRelatedByPlayerItem5Id) {
-                foreach ($this->collPlayerDecksRelatedByPlayerItem5Id as $o) {
+            if ($this->collPlayerDecksRelatedByRightLegPlayerItemId) {
+                foreach ($this->collPlayerDecksRelatedByRightLegPlayerItemId as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
         } // if ($deep)
 
-        $this->collPlayerDecksRelatedByPlayerItem1Id = null;
-        $this->collPlayerDecksRelatedByPlayerItem2Id = null;
-        $this->collPlayerDecksRelatedByPlayerItem3Id = null;
-        $this->collPlayerDecksRelatedByPlayerItem4Id = null;
-        $this->collPlayerDecksRelatedByPlayerItem5Id = null;
+        $this->collPlayerDecksRelatedByHeadPlayerItemId = null;
+        $this->collPlayerDecksRelatedByLeftArmPlayerItemId = null;
+        $this->collPlayerDecksRelatedByRightArmPlayerItemId = null;
+        $this->collPlayerDecksRelatedByLeftLegPlayerItemId = null;
+        $this->collPlayerDecksRelatedByRightLegPlayerItemId = null;
         $this->aPlayer = null;
         $this->aItem = null;
     }

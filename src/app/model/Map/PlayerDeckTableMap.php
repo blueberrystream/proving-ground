@@ -82,29 +82,29 @@ class PlayerDeckTableMap extends TableMap
     const COL_PLAYER_ID = 'player_deck.player_id';
 
     /**
-     * the column name for the player_item1_id field
+     * the column name for the head_player_item_id field
      */
-    const COL_PLAYER_ITEM1_ID = 'player_deck.player_item1_id';
+    const COL_HEAD_PLAYER_ITEM_ID = 'player_deck.head_player_item_id';
 
     /**
-     * the column name for the player_item2_id field
+     * the column name for the left_arm_player_item_id field
      */
-    const COL_PLAYER_ITEM2_ID = 'player_deck.player_item2_id';
+    const COL_LEFT_ARM_PLAYER_ITEM_ID = 'player_deck.left_arm_player_item_id';
 
     /**
-     * the column name for the player_item3_id field
+     * the column name for the right_arm_player_item_id field
      */
-    const COL_PLAYER_ITEM3_ID = 'player_deck.player_item3_id';
+    const COL_RIGHT_ARM_PLAYER_ITEM_ID = 'player_deck.right_arm_player_item_id';
 
     /**
-     * the column name for the player_item4_id field
+     * the column name for the left_leg_player_item_id field
      */
-    const COL_PLAYER_ITEM4_ID = 'player_deck.player_item4_id';
+    const COL_LEFT_LEG_PLAYER_ITEM_ID = 'player_deck.left_leg_player_item_id';
 
     /**
-     * the column name for the player_item5_id field
+     * the column name for the right_leg_player_item_id field
      */
-    const COL_PLAYER_ITEM5_ID = 'player_deck.player_item5_id';
+    const COL_RIGHT_LEG_PLAYER_ITEM_ID = 'player_deck.right_leg_player_item_id';
 
     /**
      * the column name for the created_at field
@@ -128,10 +128,10 @@ class PlayerDeckTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'PlayerId', 'PlayerItem1Id', 'PlayerItem2Id', 'PlayerItem3Id', 'PlayerItem4Id', 'PlayerItem5Id', 'CreatedAt', 'UpdatedAt', ),
-        self::TYPE_CAMELNAME     => array('id', 'playerId', 'playerItem1Id', 'playerItem2Id', 'playerItem3Id', 'playerItem4Id', 'playerItem5Id', 'createdAt', 'updatedAt', ),
-        self::TYPE_COLNAME       => array(PlayerDeckTableMap::COL_ID, PlayerDeckTableMap::COL_PLAYER_ID, PlayerDeckTableMap::COL_PLAYER_ITEM1_ID, PlayerDeckTableMap::COL_PLAYER_ITEM2_ID, PlayerDeckTableMap::COL_PLAYER_ITEM3_ID, PlayerDeckTableMap::COL_PLAYER_ITEM4_ID, PlayerDeckTableMap::COL_PLAYER_ITEM5_ID, PlayerDeckTableMap::COL_CREATED_AT, PlayerDeckTableMap::COL_UPDATED_AT, ),
-        self::TYPE_FIELDNAME     => array('id', 'player_id', 'player_item1_id', 'player_item2_id', 'player_item3_id', 'player_item4_id', 'player_item5_id', 'created_at', 'updated_at', ),
+        self::TYPE_PHPNAME       => array('Id', 'PlayerId', 'HeadPlayerItemId', 'LeftArmPlayerItemId', 'RightArmPlayerItemId', 'LeftLegPlayerItemId', 'RightLegPlayerItemId', 'CreatedAt', 'UpdatedAt', ),
+        self::TYPE_CAMELNAME     => array('id', 'playerId', 'headPlayerItemId', 'leftArmPlayerItemId', 'rightArmPlayerItemId', 'leftLegPlayerItemId', 'rightLegPlayerItemId', 'createdAt', 'updatedAt', ),
+        self::TYPE_COLNAME       => array(PlayerDeckTableMap::COL_ID, PlayerDeckTableMap::COL_PLAYER_ID, PlayerDeckTableMap::COL_HEAD_PLAYER_ITEM_ID, PlayerDeckTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID, PlayerDeckTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID, PlayerDeckTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID, PlayerDeckTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID, PlayerDeckTableMap::COL_CREATED_AT, PlayerDeckTableMap::COL_UPDATED_AT, ),
+        self::TYPE_FIELDNAME     => array('id', 'player_id', 'head_player_item_id', 'left_arm_player_item_id', 'right_arm_player_item_id', 'left_leg_player_item_id', 'right_leg_player_item_id', 'created_at', 'updated_at', ),
         self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, )
     );
 
@@ -142,10 +142,10 @@ class PlayerDeckTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'PlayerId' => 1, 'PlayerItem1Id' => 2, 'PlayerItem2Id' => 3, 'PlayerItem3Id' => 4, 'PlayerItem4Id' => 5, 'PlayerItem5Id' => 6, 'CreatedAt' => 7, 'UpdatedAt' => 8, ),
-        self::TYPE_CAMELNAME     => array('id' => 0, 'playerId' => 1, 'playerItem1Id' => 2, 'playerItem2Id' => 3, 'playerItem3Id' => 4, 'playerItem4Id' => 5, 'playerItem5Id' => 6, 'createdAt' => 7, 'updatedAt' => 8, ),
-        self::TYPE_COLNAME       => array(PlayerDeckTableMap::COL_ID => 0, PlayerDeckTableMap::COL_PLAYER_ID => 1, PlayerDeckTableMap::COL_PLAYER_ITEM1_ID => 2, PlayerDeckTableMap::COL_PLAYER_ITEM2_ID => 3, PlayerDeckTableMap::COL_PLAYER_ITEM3_ID => 4, PlayerDeckTableMap::COL_PLAYER_ITEM4_ID => 5, PlayerDeckTableMap::COL_PLAYER_ITEM5_ID => 6, PlayerDeckTableMap::COL_CREATED_AT => 7, PlayerDeckTableMap::COL_UPDATED_AT => 8, ),
-        self::TYPE_FIELDNAME     => array('id' => 0, 'player_id' => 1, 'player_item1_id' => 2, 'player_item2_id' => 3, 'player_item3_id' => 4, 'player_item4_id' => 5, 'player_item5_id' => 6, 'created_at' => 7, 'updated_at' => 8, ),
+        self::TYPE_PHPNAME       => array('Id' => 0, 'PlayerId' => 1, 'HeadPlayerItemId' => 2, 'LeftArmPlayerItemId' => 3, 'RightArmPlayerItemId' => 4, 'LeftLegPlayerItemId' => 5, 'RightLegPlayerItemId' => 6, 'CreatedAt' => 7, 'UpdatedAt' => 8, ),
+        self::TYPE_CAMELNAME     => array('id' => 0, 'playerId' => 1, 'headPlayerItemId' => 2, 'leftArmPlayerItemId' => 3, 'rightArmPlayerItemId' => 4, 'leftLegPlayerItemId' => 5, 'rightLegPlayerItemId' => 6, 'createdAt' => 7, 'updatedAt' => 8, ),
+        self::TYPE_COLNAME       => array(PlayerDeckTableMap::COL_ID => 0, PlayerDeckTableMap::COL_PLAYER_ID => 1, PlayerDeckTableMap::COL_HEAD_PLAYER_ITEM_ID => 2, PlayerDeckTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID => 3, PlayerDeckTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID => 4, PlayerDeckTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID => 5, PlayerDeckTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID => 6, PlayerDeckTableMap::COL_CREATED_AT => 7, PlayerDeckTableMap::COL_UPDATED_AT => 8, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'player_id' => 1, 'head_player_item_id' => 2, 'left_arm_player_item_id' => 3, 'right_arm_player_item_id' => 4, 'left_leg_player_item_id' => 5, 'right_leg_player_item_id' => 6, 'created_at' => 7, 'updated_at' => 8, ),
         self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, )
     );
 
@@ -169,11 +169,11 @@ class PlayerDeckTableMap extends TableMap
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('player_id', 'PlayerId', 'INTEGER', 'player', 'id', true, null, null);
-        $this->addForeignKey('player_item1_id', 'PlayerItem1Id', 'INTEGER', 'player_item', 'id', false, null, null);
-        $this->addForeignKey('player_item2_id', 'PlayerItem2Id', 'INTEGER', 'player_item', 'id', false, null, null);
-        $this->addForeignKey('player_item3_id', 'PlayerItem3Id', 'INTEGER', 'player_item', 'id', false, null, null);
-        $this->addForeignKey('player_item4_id', 'PlayerItem4Id', 'INTEGER', 'player_item', 'id', false, null, null);
-        $this->addForeignKey('player_item5_id', 'PlayerItem5Id', 'INTEGER', 'player_item', 'id', false, null, null);
+        $this->addForeignKey('head_player_item_id', 'HeadPlayerItemId', 'INTEGER', 'player_item', 'id', false, null, null);
+        $this->addForeignKey('left_arm_player_item_id', 'LeftArmPlayerItemId', 'INTEGER', 'player_item', 'id', false, null, null);
+        $this->addForeignKey('right_arm_player_item_id', 'RightArmPlayerItemId', 'INTEGER', 'player_item', 'id', false, null, null);
+        $this->addForeignKey('left_leg_player_item_id', 'LeftLegPlayerItemId', 'INTEGER', 'player_item', 'id', false, null, null);
+        $this->addForeignKey('right_leg_player_item_id', 'RightLegPlayerItemId', 'INTEGER', 'player_item', 'id', false, null, null);
         $this->addColumn('created_at', 'CreatedAt', 'TIMESTAMP', true, null, null);
         $this->addColumn('updated_at', 'UpdatedAt', 'TIMESTAMP', true, null, null);
     } // initialize()
@@ -190,38 +190,38 @@ class PlayerDeckTableMap extends TableMap
     1 => ':id',
   ),
 ), null, null, null, false);
-        $this->addRelation('PlayerItemRelatedByPlayerItem1Id', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('PlayerItemRelatedByHeadPlayerItemId', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
-    0 => ':player_item1_id',
+    0 => ':head_player_item_id',
     1 => ':id',
   ),
 ), null, null, null, false);
-        $this->addRelation('PlayerItemRelatedByPlayerItem2Id', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('PlayerItemRelatedByLeftArmPlayerItemId', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
-    0 => ':player_item2_id',
+    0 => ':left_arm_player_item_id',
     1 => ':id',
   ),
 ), null, null, null, false);
-        $this->addRelation('PlayerItemRelatedByPlayerItem3Id', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('PlayerItemRelatedByRightArmPlayerItemId', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
-    0 => ':player_item3_id',
+    0 => ':right_arm_player_item_id',
     1 => ':id',
   ),
 ), null, null, null, false);
-        $this->addRelation('PlayerItemRelatedByPlayerItem4Id', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('PlayerItemRelatedByLeftLegPlayerItemId', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
-    0 => ':player_item4_id',
+    0 => ':left_leg_player_item_id',
     1 => ':id',
   ),
 ), null, null, null, false);
-        $this->addRelation('PlayerItemRelatedByPlayerItem5Id', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('PlayerItemRelatedByRightLegPlayerItemId', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
-    0 => ':player_item5_id',
+    0 => ':right_leg_player_item_id',
     1 => ':id',
   ),
 ), null, null, null, false);
@@ -383,21 +383,21 @@ class PlayerDeckTableMap extends TableMap
         if (null === $alias) {
             $criteria->addSelectColumn(PlayerDeckTableMap::COL_ID);
             $criteria->addSelectColumn(PlayerDeckTableMap::COL_PLAYER_ID);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_PLAYER_ITEM1_ID);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_PLAYER_ITEM2_ID);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_PLAYER_ITEM3_ID);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_PLAYER_ITEM4_ID);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_PLAYER_ITEM5_ID);
+            $criteria->addSelectColumn(PlayerDeckTableMap::COL_HEAD_PLAYER_ITEM_ID);
+            $criteria->addSelectColumn(PlayerDeckTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID);
+            $criteria->addSelectColumn(PlayerDeckTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID);
+            $criteria->addSelectColumn(PlayerDeckTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID);
+            $criteria->addSelectColumn(PlayerDeckTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID);
             $criteria->addSelectColumn(PlayerDeckTableMap::COL_CREATED_AT);
             $criteria->addSelectColumn(PlayerDeckTableMap::COL_UPDATED_AT);
         } else {
             $criteria->addSelectColumn($alias . '.id');
             $criteria->addSelectColumn($alias . '.player_id');
-            $criteria->addSelectColumn($alias . '.player_item1_id');
-            $criteria->addSelectColumn($alias . '.player_item2_id');
-            $criteria->addSelectColumn($alias . '.player_item3_id');
-            $criteria->addSelectColumn($alias . '.player_item4_id');
-            $criteria->addSelectColumn($alias . '.player_item5_id');
+            $criteria->addSelectColumn($alias . '.head_player_item_id');
+            $criteria->addSelectColumn($alias . '.left_arm_player_item_id');
+            $criteria->addSelectColumn($alias . '.right_arm_player_item_id');
+            $criteria->addSelectColumn($alias . '.left_leg_player_item_id');
+            $criteria->addSelectColumn($alias . '.right_leg_player_item_id');
             $criteria->addSelectColumn($alias . '.created_at');
             $criteria->addSelectColumn($alias . '.updated_at');
         }

@@ -97,6 +97,29 @@ abstract class Item implements ActiveRecordInterface
     protected $part_id;
 
     /**
+     * The value for the hit_point field.
+     *
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $hit_point;
+
+    /**
+     * The value for the attack_point field.
+     *
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $attack_point;
+
+    /**
+     * The value for the defense_point field.
+     *
+     * @var        int
+     */
+    protected $defense_point;
+
+    /**
      * @var        ChildPart
      */
     protected $aPart;
@@ -127,10 +150,24 @@ abstract class Item implements ActiveRecordInterface
     protected $playerItemsScheduledForDeletion = null;
 
     /**
+     * Applies default values to this object.
+     * This method should be called from the object's constructor (or
+     * equivalent initialization method).
+     * @see __construct()
+     */
+    public function applyDefaultValues()
+    {
+        $this->hit_point = 0;
+        $this->attack_point = 0;
+    }
+
+    /**
      * Initializes internal state of app\model\Base\Item object.
+     * @see applyDefaults()
      */
     public function __construct()
     {
+        $this->applyDefaultValues();
     }
 
     /**
@@ -392,6 +429,36 @@ abstract class Item implements ActiveRecordInterface
     }
 
     /**
+     * Get the [hit_point] column value.
+     *
+     * @return int
+     */
+    public function getHitPoint()
+    {
+        return $this->hit_point;
+    }
+
+    /**
+     * Get the [attack_point] column value.
+     *
+     * @return int
+     */
+    public function getAttackPoint()
+    {
+        return $this->attack_point;
+    }
+
+    /**
+     * Get the [defense_point] column value.
+     *
+     * @return int
+     */
+    public function getDefensePoint()
+    {
+        return $this->defense_point;
+    }
+
+    /**
      * Set the value of [id] column.
      *
      * @param int $v new value
@@ -480,6 +547,66 @@ abstract class Item implements ActiveRecordInterface
     } // setPartId()
 
     /**
+     * Set the value of [hit_point] column.
+     *
+     * @param int $v new value
+     * @return $this|\app\model\Item The current object (for fluent API support)
+     */
+    public function setHitPoint($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->hit_point !== $v) {
+            $this->hit_point = $v;
+            $this->modifiedColumns[ItemTableMap::COL_HIT_POINT] = true;
+        }
+
+        return $this;
+    } // setHitPoint()
+
+    /**
+     * Set the value of [attack_point] column.
+     *
+     * @param int $v new value
+     * @return $this|\app\model\Item The current object (for fluent API support)
+     */
+    public function setAttackPoint($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->attack_point !== $v) {
+            $this->attack_point = $v;
+            $this->modifiedColumns[ItemTableMap::COL_ATTACK_POINT] = true;
+        }
+
+        return $this;
+    } // setAttackPoint()
+
+    /**
+     * Set the value of [defense_point] column.
+     *
+     * @param int $v new value
+     * @return $this|\app\model\Item The current object (for fluent API support)
+     */
+    public function setDefensePoint($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->defense_point !== $v) {
+            $this->defense_point = $v;
+            $this->modifiedColumns[ItemTableMap::COL_DEFENSE_POINT] = true;
+        }
+
+        return $this;
+    } // setDefensePoint()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -489,6 +616,14 @@ abstract class Item implements ActiveRecordInterface
      */
     public function hasOnlyDefaultValues()
     {
+            if ($this->hit_point !== 0) {
+                return false;
+            }
+
+            if ($this->attack_point !== 0) {
+                return false;
+            }
+
         // otherwise, everything was equal, so return TRUE
         return true;
     } // hasOnlyDefaultValues()
@@ -526,6 +661,15 @@ abstract class Item implements ActiveRecordInterface
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : ItemTableMap::translateFieldName('PartId', TableMap::TYPE_PHPNAME, $indexType)];
             $this->part_id = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : ItemTableMap::translateFieldName('HitPoint', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->hit_point = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : ItemTableMap::translateFieldName('AttackPoint', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->attack_point = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : ItemTableMap::translateFieldName('DefensePoint', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->defense_point = (null !== $col) ? (int) $col : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -534,7 +678,7 @@ abstract class Item implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 4; // 4 = ItemTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 7; // 7 = ItemTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\app\\model\\Item'), 0, $e);
@@ -802,6 +946,15 @@ abstract class Item implements ActiveRecordInterface
         if ($this->isColumnModified(ItemTableMap::COL_PART_ID)) {
             $modifiedColumns[':p' . $index++]  = 'part_id';
         }
+        if ($this->isColumnModified(ItemTableMap::COL_HIT_POINT)) {
+            $modifiedColumns[':p' . $index++]  = 'hit_point';
+        }
+        if ($this->isColumnModified(ItemTableMap::COL_ATTACK_POINT)) {
+            $modifiedColumns[':p' . $index++]  = 'attack_point';
+        }
+        if ($this->isColumnModified(ItemTableMap::COL_DEFENSE_POINT)) {
+            $modifiedColumns[':p' . $index++]  = 'defense_point';
+        }
 
         $sql = sprintf(
             'INSERT INTO item (%s) VALUES (%s)',
@@ -824,6 +977,15 @@ abstract class Item implements ActiveRecordInterface
                         break;
                     case 'part_id':
                         $stmt->bindValue($identifier, $this->part_id, PDO::PARAM_INT);
+                        break;
+                    case 'hit_point':
+                        $stmt->bindValue($identifier, $this->hit_point, PDO::PARAM_INT);
+                        break;
+                    case 'attack_point':
+                        $stmt->bindValue($identifier, $this->attack_point, PDO::PARAM_INT);
+                        break;
+                    case 'defense_point':
+                        $stmt->bindValue($identifier, $this->defense_point, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -892,6 +1054,15 @@ abstract class Item implements ActiveRecordInterface
             case 3:
                 return $this->getPartId();
                 break;
+            case 4:
+                return $this->getHitPoint();
+                break;
+            case 5:
+                return $this->getAttackPoint();
+                break;
+            case 6:
+                return $this->getDefensePoint();
+                break;
             default:
                 return null;
                 break;
@@ -926,6 +1097,9 @@ abstract class Item implements ActiveRecordInterface
             $keys[1] => $this->getName(),
             $keys[2] => $this->getPropriumId(),
             $keys[3] => $this->getPartId(),
+            $keys[4] => $this->getHitPoint(),
+            $keys[5] => $this->getAttackPoint(),
+            $keys[6] => $this->getDefensePoint(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1024,6 +1198,15 @@ abstract class Item implements ActiveRecordInterface
             case 3:
                 $this->setPartId($value);
                 break;
+            case 4:
+                $this->setHitPoint($value);
+                break;
+            case 5:
+                $this->setAttackPoint($value);
+                break;
+            case 6:
+                $this->setDefensePoint($value);
+                break;
         } // switch()
 
         return $this;
@@ -1061,6 +1244,15 @@ abstract class Item implements ActiveRecordInterface
         }
         if (array_key_exists($keys[3], $arr)) {
             $this->setPartId($arr[$keys[3]]);
+        }
+        if (array_key_exists($keys[4], $arr)) {
+            $this->setHitPoint($arr[$keys[4]]);
+        }
+        if (array_key_exists($keys[5], $arr)) {
+            $this->setAttackPoint($arr[$keys[5]]);
+        }
+        if (array_key_exists($keys[6], $arr)) {
+            $this->setDefensePoint($arr[$keys[6]]);
         }
     }
 
@@ -1114,6 +1306,15 @@ abstract class Item implements ActiveRecordInterface
         }
         if ($this->isColumnModified(ItemTableMap::COL_PART_ID)) {
             $criteria->add(ItemTableMap::COL_PART_ID, $this->part_id);
+        }
+        if ($this->isColumnModified(ItemTableMap::COL_HIT_POINT)) {
+            $criteria->add(ItemTableMap::COL_HIT_POINT, $this->hit_point);
+        }
+        if ($this->isColumnModified(ItemTableMap::COL_ATTACK_POINT)) {
+            $criteria->add(ItemTableMap::COL_ATTACK_POINT, $this->attack_point);
+        }
+        if ($this->isColumnModified(ItemTableMap::COL_DEFENSE_POINT)) {
+            $criteria->add(ItemTableMap::COL_DEFENSE_POINT, $this->defense_point);
         }
 
         return $criteria;
@@ -1204,6 +1405,9 @@ abstract class Item implements ActiveRecordInterface
         $copyObj->setName($this->getName());
         $copyObj->setPropriumId($this->getPropriumId());
         $copyObj->setPartId($this->getPartId());
+        $copyObj->setHitPoint($this->getHitPoint());
+        $copyObj->setAttackPoint($this->getAttackPoint());
+        $copyObj->setDefensePoint($this->getDefensePoint());
 
         if ($deepCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1632,8 +1836,12 @@ abstract class Item implements ActiveRecordInterface
         $this->name = null;
         $this->proprium_id = null;
         $this->part_id = null;
+        $this->hit_point = null;
+        $this->attack_point = null;
+        $this->defense_point = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();
+        $this->applyDefaultValues();
         $this->resetModified();
         $this->setNew(true);
         $this->setDeleted(false);

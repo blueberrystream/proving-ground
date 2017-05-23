@@ -1730,10 +1730,10 @@ abstract class Player implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksJoinPlayerItemRelatedByPlayerItem1Id(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksJoinPlayerItemRelatedByHeadPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
-        $query->joinWith('PlayerItemRelatedByPlayerItem1Id', $joinBehavior);
+        $query->joinWith('PlayerItemRelatedByHeadPlayerItemId', $joinBehavior);
 
         return $this->getPlayerDecks($query, $con);
     }
@@ -1755,10 +1755,10 @@ abstract class Player implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksJoinPlayerItemRelatedByPlayerItem2Id(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksJoinPlayerItemRelatedByLeftArmPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
-        $query->joinWith('PlayerItemRelatedByPlayerItem2Id', $joinBehavior);
+        $query->joinWith('PlayerItemRelatedByLeftArmPlayerItemId', $joinBehavior);
 
         return $this->getPlayerDecks($query, $con);
     }
@@ -1780,10 +1780,10 @@ abstract class Player implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksJoinPlayerItemRelatedByPlayerItem3Id(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksJoinPlayerItemRelatedByRightArmPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
-        $query->joinWith('PlayerItemRelatedByPlayerItem3Id', $joinBehavior);
+        $query->joinWith('PlayerItemRelatedByRightArmPlayerItemId', $joinBehavior);
 
         return $this->getPlayerDecks($query, $con);
     }
@@ -1805,10 +1805,10 @@ abstract class Player implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksJoinPlayerItemRelatedByPlayerItem4Id(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksJoinPlayerItemRelatedByLeftLegPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
-        $query->joinWith('PlayerItemRelatedByPlayerItem4Id', $joinBehavior);
+        $query->joinWith('PlayerItemRelatedByLeftLegPlayerItemId', $joinBehavior);
 
         return $this->getPlayerDecks($query, $con);
     }
@@ -1830,10 +1830,10 @@ abstract class Player implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksJoinPlayerItemRelatedByPlayerItem5Id(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksJoinPlayerItemRelatedByRightLegPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
-        $query->joinWith('PlayerItemRelatedByPlayerItem5Id', $joinBehavior);
+        $query->joinWith('PlayerItemRelatedByRightLegPlayerItemId', $joinBehavior);
 
         return $this->getPlayerDecks($query, $con);
     }

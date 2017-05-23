@@ -81,39 +81,39 @@ abstract class PlayerDeck implements ActiveRecordInterface
     protected $player_id;
 
     /**
-     * The value for the player_item1_id field.
+     * The value for the head_player_item_id field.
      *
      * @var        int
      */
-    protected $player_item1_id;
+    protected $head_player_item_id;
 
     /**
-     * The value for the player_item2_id field.
+     * The value for the left_arm_player_item_id field.
      *
      * @var        int
      */
-    protected $player_item2_id;
+    protected $left_arm_player_item_id;
 
     /**
-     * The value for the player_item3_id field.
+     * The value for the right_arm_player_item_id field.
      *
      * @var        int
      */
-    protected $player_item3_id;
+    protected $right_arm_player_item_id;
 
     /**
-     * The value for the player_item4_id field.
+     * The value for the left_leg_player_item_id field.
      *
      * @var        int
      */
-    protected $player_item4_id;
+    protected $left_leg_player_item_id;
 
     /**
-     * The value for the player_item5_id field.
+     * The value for the right_leg_player_item_id field.
      *
      * @var        int
      */
-    protected $player_item5_id;
+    protected $right_leg_player_item_id;
 
     /**
      * The value for the created_at field.
@@ -137,27 +137,27 @@ abstract class PlayerDeck implements ActiveRecordInterface
     /**
      * @var        ChildPlayerItem
      */
-    protected $aPlayerItemRelatedByPlayerItem1Id;
+    protected $aPlayerItemRelatedByHeadPlayerItemId;
 
     /**
      * @var        ChildPlayerItem
      */
-    protected $aPlayerItemRelatedByPlayerItem2Id;
+    protected $aPlayerItemRelatedByLeftArmPlayerItemId;
 
     /**
      * @var        ChildPlayerItem
      */
-    protected $aPlayerItemRelatedByPlayerItem3Id;
+    protected $aPlayerItemRelatedByRightArmPlayerItemId;
 
     /**
      * @var        ChildPlayerItem
      */
-    protected $aPlayerItemRelatedByPlayerItem4Id;
+    protected $aPlayerItemRelatedByLeftLegPlayerItemId;
 
     /**
      * @var        ChildPlayerItem
      */
-    protected $aPlayerItemRelatedByPlayerItem5Id;
+    protected $aPlayerItemRelatedByRightLegPlayerItemId;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -413,53 +413,53 @@ abstract class PlayerDeck implements ActiveRecordInterface
     }
 
     /**
-     * Get the [player_item1_id] column value.
+     * Get the [head_player_item_id] column value.
      *
      * @return int
      */
-    public function getPlayerItem1Id()
+    public function getHeadPlayerItemId()
     {
-        return $this->player_item1_id;
+        return $this->head_player_item_id;
     }
 
     /**
-     * Get the [player_item2_id] column value.
+     * Get the [left_arm_player_item_id] column value.
      *
      * @return int
      */
-    public function getPlayerItem2Id()
+    public function getLeftArmPlayerItemId()
     {
-        return $this->player_item2_id;
+        return $this->left_arm_player_item_id;
     }
 
     /**
-     * Get the [player_item3_id] column value.
+     * Get the [right_arm_player_item_id] column value.
      *
      * @return int
      */
-    public function getPlayerItem3Id()
+    public function getRightArmPlayerItemId()
     {
-        return $this->player_item3_id;
+        return $this->right_arm_player_item_id;
     }
 
     /**
-     * Get the [player_item4_id] column value.
+     * Get the [left_leg_player_item_id] column value.
      *
      * @return int
      */
-    public function getPlayerItem4Id()
+    public function getLeftLegPlayerItemId()
     {
-        return $this->player_item4_id;
+        return $this->left_leg_player_item_id;
     }
 
     /**
-     * Get the [player_item5_id] column value.
+     * Get the [right_leg_player_item_id] column value.
      *
      * @return int
      */
-    public function getPlayerItem5Id()
+    public function getRightLegPlayerItemId()
     {
-        return $this->player_item5_id;
+        return $this->right_leg_player_item_id;
     }
 
     /**
@@ -547,124 +547,124 @@ abstract class PlayerDeck implements ActiveRecordInterface
     } // setPlayerId()
 
     /**
-     * Set the value of [player_item1_id] column.
+     * Set the value of [head_player_item_id] column.
      *
      * @param int $v new value
      * @return $this|\app\model\PlayerDeck The current object (for fluent API support)
      */
-    public function setPlayerItem1Id($v)
+    public function setHeadPlayerItemId($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->player_item1_id !== $v) {
-            $this->player_item1_id = $v;
-            $this->modifiedColumns[PlayerDeckTableMap::COL_PLAYER_ITEM1_ID] = true;
+        if ($this->head_player_item_id !== $v) {
+            $this->head_player_item_id = $v;
+            $this->modifiedColumns[PlayerDeckTableMap::COL_HEAD_PLAYER_ITEM_ID] = true;
         }
 
-        if ($this->aPlayerItemRelatedByPlayerItem1Id !== null && $this->aPlayerItemRelatedByPlayerItem1Id->getId() !== $v) {
-            $this->aPlayerItemRelatedByPlayerItem1Id = null;
+        if ($this->aPlayerItemRelatedByHeadPlayerItemId !== null && $this->aPlayerItemRelatedByHeadPlayerItemId->getId() !== $v) {
+            $this->aPlayerItemRelatedByHeadPlayerItemId = null;
         }
 
         return $this;
-    } // setPlayerItem1Id()
+    } // setHeadPlayerItemId()
 
     /**
-     * Set the value of [player_item2_id] column.
+     * Set the value of [left_arm_player_item_id] column.
      *
      * @param int $v new value
      * @return $this|\app\model\PlayerDeck The current object (for fluent API support)
      */
-    public function setPlayerItem2Id($v)
+    public function setLeftArmPlayerItemId($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->player_item2_id !== $v) {
-            $this->player_item2_id = $v;
-            $this->modifiedColumns[PlayerDeckTableMap::COL_PLAYER_ITEM2_ID] = true;
+        if ($this->left_arm_player_item_id !== $v) {
+            $this->left_arm_player_item_id = $v;
+            $this->modifiedColumns[PlayerDeckTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID] = true;
         }
 
-        if ($this->aPlayerItemRelatedByPlayerItem2Id !== null && $this->aPlayerItemRelatedByPlayerItem2Id->getId() !== $v) {
-            $this->aPlayerItemRelatedByPlayerItem2Id = null;
+        if ($this->aPlayerItemRelatedByLeftArmPlayerItemId !== null && $this->aPlayerItemRelatedByLeftArmPlayerItemId->getId() !== $v) {
+            $this->aPlayerItemRelatedByLeftArmPlayerItemId = null;
         }
 
         return $this;
-    } // setPlayerItem2Id()
+    } // setLeftArmPlayerItemId()
 
     /**
-     * Set the value of [player_item3_id] column.
+     * Set the value of [right_arm_player_item_id] column.
      *
      * @param int $v new value
      * @return $this|\app\model\PlayerDeck The current object (for fluent API support)
      */
-    public function setPlayerItem3Id($v)
+    public function setRightArmPlayerItemId($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->player_item3_id !== $v) {
-            $this->player_item3_id = $v;
-            $this->modifiedColumns[PlayerDeckTableMap::COL_PLAYER_ITEM3_ID] = true;
+        if ($this->right_arm_player_item_id !== $v) {
+            $this->right_arm_player_item_id = $v;
+            $this->modifiedColumns[PlayerDeckTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID] = true;
         }
 
-        if ($this->aPlayerItemRelatedByPlayerItem3Id !== null && $this->aPlayerItemRelatedByPlayerItem3Id->getId() !== $v) {
-            $this->aPlayerItemRelatedByPlayerItem3Id = null;
+        if ($this->aPlayerItemRelatedByRightArmPlayerItemId !== null && $this->aPlayerItemRelatedByRightArmPlayerItemId->getId() !== $v) {
+            $this->aPlayerItemRelatedByRightArmPlayerItemId = null;
         }
 
         return $this;
-    } // setPlayerItem3Id()
+    } // setRightArmPlayerItemId()
 
     /**
-     * Set the value of [player_item4_id] column.
+     * Set the value of [left_leg_player_item_id] column.
      *
      * @param int $v new value
      * @return $this|\app\model\PlayerDeck The current object (for fluent API support)
      */
-    public function setPlayerItem4Id($v)
+    public function setLeftLegPlayerItemId($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->player_item4_id !== $v) {
-            $this->player_item4_id = $v;
-            $this->modifiedColumns[PlayerDeckTableMap::COL_PLAYER_ITEM4_ID] = true;
+        if ($this->left_leg_player_item_id !== $v) {
+            $this->left_leg_player_item_id = $v;
+            $this->modifiedColumns[PlayerDeckTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID] = true;
         }
 
-        if ($this->aPlayerItemRelatedByPlayerItem4Id !== null && $this->aPlayerItemRelatedByPlayerItem4Id->getId() !== $v) {
-            $this->aPlayerItemRelatedByPlayerItem4Id = null;
+        if ($this->aPlayerItemRelatedByLeftLegPlayerItemId !== null && $this->aPlayerItemRelatedByLeftLegPlayerItemId->getId() !== $v) {
+            $this->aPlayerItemRelatedByLeftLegPlayerItemId = null;
         }
 
         return $this;
-    } // setPlayerItem4Id()
+    } // setLeftLegPlayerItemId()
 
     /**
-     * Set the value of [player_item5_id] column.
+     * Set the value of [right_leg_player_item_id] column.
      *
      * @param int $v new value
      * @return $this|\app\model\PlayerDeck The current object (for fluent API support)
      */
-    public function setPlayerItem5Id($v)
+    public function setRightLegPlayerItemId($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->player_item5_id !== $v) {
-            $this->player_item5_id = $v;
-            $this->modifiedColumns[PlayerDeckTableMap::COL_PLAYER_ITEM5_ID] = true;
+        if ($this->right_leg_player_item_id !== $v) {
+            $this->right_leg_player_item_id = $v;
+            $this->modifiedColumns[PlayerDeckTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID] = true;
         }
 
-        if ($this->aPlayerItemRelatedByPlayerItem5Id !== null && $this->aPlayerItemRelatedByPlayerItem5Id->getId() !== $v) {
-            $this->aPlayerItemRelatedByPlayerItem5Id = null;
+        if ($this->aPlayerItemRelatedByRightLegPlayerItemId !== null && $this->aPlayerItemRelatedByRightLegPlayerItemId->getId() !== $v) {
+            $this->aPlayerItemRelatedByRightLegPlayerItemId = null;
         }
 
         return $this;
-    } // setPlayerItem5Id()
+    } // setRightLegPlayerItemId()
 
     /**
      * Sets the value of [created_at] column to a normalized version of the date/time value specified.
@@ -748,20 +748,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
             $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : PlayerDeckTableMap::translateFieldName('PlayerId', TableMap::TYPE_PHPNAME, $indexType)];
             $this->player_id = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : PlayerDeckTableMap::translateFieldName('PlayerItem1Id', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->player_item1_id = (null !== $col) ? (int) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : PlayerDeckTableMap::translateFieldName('HeadPlayerItemId', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->head_player_item_id = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : PlayerDeckTableMap::translateFieldName('PlayerItem2Id', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->player_item2_id = (null !== $col) ? (int) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : PlayerDeckTableMap::translateFieldName('LeftArmPlayerItemId', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->left_arm_player_item_id = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : PlayerDeckTableMap::translateFieldName('PlayerItem3Id', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->player_item3_id = (null !== $col) ? (int) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : PlayerDeckTableMap::translateFieldName('RightArmPlayerItemId', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->right_arm_player_item_id = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : PlayerDeckTableMap::translateFieldName('PlayerItem4Id', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->player_item4_id = (null !== $col) ? (int) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : PlayerDeckTableMap::translateFieldName('LeftLegPlayerItemId', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->left_leg_player_item_id = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : PlayerDeckTableMap::translateFieldName('PlayerItem5Id', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->player_item5_id = (null !== $col) ? (int) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : PlayerDeckTableMap::translateFieldName('RightLegPlayerItemId', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->right_leg_player_item_id = (null !== $col) ? (int) $col : null;
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : PlayerDeckTableMap::translateFieldName('CreatedAt', TableMap::TYPE_PHPNAME, $indexType)];
             $this->created_at = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
@@ -801,20 +801,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
         if ($this->aPlayer !== null && $this->player_id !== $this->aPlayer->getId()) {
             $this->aPlayer = null;
         }
-        if ($this->aPlayerItemRelatedByPlayerItem1Id !== null && $this->player_item1_id !== $this->aPlayerItemRelatedByPlayerItem1Id->getId()) {
-            $this->aPlayerItemRelatedByPlayerItem1Id = null;
+        if ($this->aPlayerItemRelatedByHeadPlayerItemId !== null && $this->head_player_item_id !== $this->aPlayerItemRelatedByHeadPlayerItemId->getId()) {
+            $this->aPlayerItemRelatedByHeadPlayerItemId = null;
         }
-        if ($this->aPlayerItemRelatedByPlayerItem2Id !== null && $this->player_item2_id !== $this->aPlayerItemRelatedByPlayerItem2Id->getId()) {
-            $this->aPlayerItemRelatedByPlayerItem2Id = null;
+        if ($this->aPlayerItemRelatedByLeftArmPlayerItemId !== null && $this->left_arm_player_item_id !== $this->aPlayerItemRelatedByLeftArmPlayerItemId->getId()) {
+            $this->aPlayerItemRelatedByLeftArmPlayerItemId = null;
         }
-        if ($this->aPlayerItemRelatedByPlayerItem3Id !== null && $this->player_item3_id !== $this->aPlayerItemRelatedByPlayerItem3Id->getId()) {
-            $this->aPlayerItemRelatedByPlayerItem3Id = null;
+        if ($this->aPlayerItemRelatedByRightArmPlayerItemId !== null && $this->right_arm_player_item_id !== $this->aPlayerItemRelatedByRightArmPlayerItemId->getId()) {
+            $this->aPlayerItemRelatedByRightArmPlayerItemId = null;
         }
-        if ($this->aPlayerItemRelatedByPlayerItem4Id !== null && $this->player_item4_id !== $this->aPlayerItemRelatedByPlayerItem4Id->getId()) {
-            $this->aPlayerItemRelatedByPlayerItem4Id = null;
+        if ($this->aPlayerItemRelatedByLeftLegPlayerItemId !== null && $this->left_leg_player_item_id !== $this->aPlayerItemRelatedByLeftLegPlayerItemId->getId()) {
+            $this->aPlayerItemRelatedByLeftLegPlayerItemId = null;
         }
-        if ($this->aPlayerItemRelatedByPlayerItem5Id !== null && $this->player_item5_id !== $this->aPlayerItemRelatedByPlayerItem5Id->getId()) {
-            $this->aPlayerItemRelatedByPlayerItem5Id = null;
+        if ($this->aPlayerItemRelatedByRightLegPlayerItemId !== null && $this->right_leg_player_item_id !== $this->aPlayerItemRelatedByRightLegPlayerItemId->getId()) {
+            $this->aPlayerItemRelatedByRightLegPlayerItemId = null;
         }
     } // ensureConsistency
 
@@ -856,11 +856,11 @@ abstract class PlayerDeck implements ActiveRecordInterface
         if ($deep) {  // also de-associate any related objects?
 
             $this->aPlayer = null;
-            $this->aPlayerItemRelatedByPlayerItem1Id = null;
-            $this->aPlayerItemRelatedByPlayerItem2Id = null;
-            $this->aPlayerItemRelatedByPlayerItem3Id = null;
-            $this->aPlayerItemRelatedByPlayerItem4Id = null;
-            $this->aPlayerItemRelatedByPlayerItem5Id = null;
+            $this->aPlayerItemRelatedByHeadPlayerItemId = null;
+            $this->aPlayerItemRelatedByLeftArmPlayerItemId = null;
+            $this->aPlayerItemRelatedByRightArmPlayerItemId = null;
+            $this->aPlayerItemRelatedByLeftLegPlayerItemId = null;
+            $this->aPlayerItemRelatedByRightLegPlayerItemId = null;
         } // if (deep)
     }
 
@@ -988,39 +988,39 @@ abstract class PlayerDeck implements ActiveRecordInterface
                 $this->setPlayer($this->aPlayer);
             }
 
-            if ($this->aPlayerItemRelatedByPlayerItem1Id !== null) {
-                if ($this->aPlayerItemRelatedByPlayerItem1Id->isModified() || $this->aPlayerItemRelatedByPlayerItem1Id->isNew()) {
-                    $affectedRows += $this->aPlayerItemRelatedByPlayerItem1Id->save($con);
+            if ($this->aPlayerItemRelatedByHeadPlayerItemId !== null) {
+                if ($this->aPlayerItemRelatedByHeadPlayerItemId->isModified() || $this->aPlayerItemRelatedByHeadPlayerItemId->isNew()) {
+                    $affectedRows += $this->aPlayerItemRelatedByHeadPlayerItemId->save($con);
                 }
-                $this->setPlayerItemRelatedByPlayerItem1Id($this->aPlayerItemRelatedByPlayerItem1Id);
+                $this->setPlayerItemRelatedByHeadPlayerItemId($this->aPlayerItemRelatedByHeadPlayerItemId);
             }
 
-            if ($this->aPlayerItemRelatedByPlayerItem2Id !== null) {
-                if ($this->aPlayerItemRelatedByPlayerItem2Id->isModified() || $this->aPlayerItemRelatedByPlayerItem2Id->isNew()) {
-                    $affectedRows += $this->aPlayerItemRelatedByPlayerItem2Id->save($con);
+            if ($this->aPlayerItemRelatedByLeftArmPlayerItemId !== null) {
+                if ($this->aPlayerItemRelatedByLeftArmPlayerItemId->isModified() || $this->aPlayerItemRelatedByLeftArmPlayerItemId->isNew()) {
+                    $affectedRows += $this->aPlayerItemRelatedByLeftArmPlayerItemId->save($con);
                 }
-                $this->setPlayerItemRelatedByPlayerItem2Id($this->aPlayerItemRelatedByPlayerItem2Id);
+                $this->setPlayerItemRelatedByLeftArmPlayerItemId($this->aPlayerItemRelatedByLeftArmPlayerItemId);
             }
 
-            if ($this->aPlayerItemRelatedByPlayerItem3Id !== null) {
-                if ($this->aPlayerItemRelatedByPlayerItem3Id->isModified() || $this->aPlayerItemRelatedByPlayerItem3Id->isNew()) {
-                    $affectedRows += $this->aPlayerItemRelatedByPlayerItem3Id->save($con);
+            if ($this->aPlayerItemRelatedByRightArmPlayerItemId !== null) {
+                if ($this->aPlayerItemRelatedByRightArmPlayerItemId->isModified() || $this->aPlayerItemRelatedByRightArmPlayerItemId->isNew()) {
+                    $affectedRows += $this->aPlayerItemRelatedByRightArmPlayerItemId->save($con);
                 }
-                $this->setPlayerItemRelatedByPlayerItem3Id($this->aPlayerItemRelatedByPlayerItem3Id);
+                $this->setPlayerItemRelatedByRightArmPlayerItemId($this->aPlayerItemRelatedByRightArmPlayerItemId);
             }
 
-            if ($this->aPlayerItemRelatedByPlayerItem4Id !== null) {
-                if ($this->aPlayerItemRelatedByPlayerItem4Id->isModified() || $this->aPlayerItemRelatedByPlayerItem4Id->isNew()) {
-                    $affectedRows += $this->aPlayerItemRelatedByPlayerItem4Id->save($con);
+            if ($this->aPlayerItemRelatedByLeftLegPlayerItemId !== null) {
+                if ($this->aPlayerItemRelatedByLeftLegPlayerItemId->isModified() || $this->aPlayerItemRelatedByLeftLegPlayerItemId->isNew()) {
+                    $affectedRows += $this->aPlayerItemRelatedByLeftLegPlayerItemId->save($con);
                 }
-                $this->setPlayerItemRelatedByPlayerItem4Id($this->aPlayerItemRelatedByPlayerItem4Id);
+                $this->setPlayerItemRelatedByLeftLegPlayerItemId($this->aPlayerItemRelatedByLeftLegPlayerItemId);
             }
 
-            if ($this->aPlayerItemRelatedByPlayerItem5Id !== null) {
-                if ($this->aPlayerItemRelatedByPlayerItem5Id->isModified() || $this->aPlayerItemRelatedByPlayerItem5Id->isNew()) {
-                    $affectedRows += $this->aPlayerItemRelatedByPlayerItem5Id->save($con);
+            if ($this->aPlayerItemRelatedByRightLegPlayerItemId !== null) {
+                if ($this->aPlayerItemRelatedByRightLegPlayerItemId->isModified() || $this->aPlayerItemRelatedByRightLegPlayerItemId->isNew()) {
+                    $affectedRows += $this->aPlayerItemRelatedByRightLegPlayerItemId->save($con);
                 }
-                $this->setPlayerItemRelatedByPlayerItem5Id($this->aPlayerItemRelatedByPlayerItem5Id);
+                $this->setPlayerItemRelatedByRightLegPlayerItemId($this->aPlayerItemRelatedByRightLegPlayerItemId);
             }
 
             if ($this->isNew() || $this->isModified()) {
@@ -1075,20 +1075,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
         if ($this->isColumnModified(PlayerDeckTableMap::COL_PLAYER_ID)) {
             $modifiedColumns[':p' . $index++]  = 'player_id';
         }
-        if ($this->isColumnModified(PlayerDeckTableMap::COL_PLAYER_ITEM1_ID)) {
-            $modifiedColumns[':p' . $index++]  = 'player_item1_id';
+        if ($this->isColumnModified(PlayerDeckTableMap::COL_HEAD_PLAYER_ITEM_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'head_player_item_id';
         }
-        if ($this->isColumnModified(PlayerDeckTableMap::COL_PLAYER_ITEM2_ID)) {
-            $modifiedColumns[':p' . $index++]  = 'player_item2_id';
+        if ($this->isColumnModified(PlayerDeckTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'left_arm_player_item_id';
         }
-        if ($this->isColumnModified(PlayerDeckTableMap::COL_PLAYER_ITEM3_ID)) {
-            $modifiedColumns[':p' . $index++]  = 'player_item3_id';
+        if ($this->isColumnModified(PlayerDeckTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'right_arm_player_item_id';
         }
-        if ($this->isColumnModified(PlayerDeckTableMap::COL_PLAYER_ITEM4_ID)) {
-            $modifiedColumns[':p' . $index++]  = 'player_item4_id';
+        if ($this->isColumnModified(PlayerDeckTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'left_leg_player_item_id';
         }
-        if ($this->isColumnModified(PlayerDeckTableMap::COL_PLAYER_ITEM5_ID)) {
-            $modifiedColumns[':p' . $index++]  = 'player_item5_id';
+        if ($this->isColumnModified(PlayerDeckTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'right_leg_player_item_id';
         }
         if ($this->isColumnModified(PlayerDeckTableMap::COL_CREATED_AT)) {
             $modifiedColumns[':p' . $index++]  = 'created_at';
@@ -1113,20 +1113,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
                     case 'player_id':
                         $stmt->bindValue($identifier, $this->player_id, PDO::PARAM_INT);
                         break;
-                    case 'player_item1_id':
-                        $stmt->bindValue($identifier, $this->player_item1_id, PDO::PARAM_INT);
+                    case 'head_player_item_id':
+                        $stmt->bindValue($identifier, $this->head_player_item_id, PDO::PARAM_INT);
                         break;
-                    case 'player_item2_id':
-                        $stmt->bindValue($identifier, $this->player_item2_id, PDO::PARAM_INT);
+                    case 'left_arm_player_item_id':
+                        $stmt->bindValue($identifier, $this->left_arm_player_item_id, PDO::PARAM_INT);
                         break;
-                    case 'player_item3_id':
-                        $stmt->bindValue($identifier, $this->player_item3_id, PDO::PARAM_INT);
+                    case 'right_arm_player_item_id':
+                        $stmt->bindValue($identifier, $this->right_arm_player_item_id, PDO::PARAM_INT);
                         break;
-                    case 'player_item4_id':
-                        $stmt->bindValue($identifier, $this->player_item4_id, PDO::PARAM_INT);
+                    case 'left_leg_player_item_id':
+                        $stmt->bindValue($identifier, $this->left_leg_player_item_id, PDO::PARAM_INT);
                         break;
-                    case 'player_item5_id':
-                        $stmt->bindValue($identifier, $this->player_item5_id, PDO::PARAM_INT);
+                    case 'right_leg_player_item_id':
+                        $stmt->bindValue($identifier, $this->right_leg_player_item_id, PDO::PARAM_INT);
                         break;
                     case 'created_at':
                         $stmt->bindValue($identifier, $this->created_at ? $this->created_at->format("Y-m-d H:i:s.u") : null, PDO::PARAM_STR);
@@ -1196,19 +1196,19 @@ abstract class PlayerDeck implements ActiveRecordInterface
                 return $this->getPlayerId();
                 break;
             case 2:
-                return $this->getPlayerItem1Id();
+                return $this->getHeadPlayerItemId();
                 break;
             case 3:
-                return $this->getPlayerItem2Id();
+                return $this->getLeftArmPlayerItemId();
                 break;
             case 4:
-                return $this->getPlayerItem3Id();
+                return $this->getRightArmPlayerItemId();
                 break;
             case 5:
-                return $this->getPlayerItem4Id();
+                return $this->getLeftLegPlayerItemId();
                 break;
             case 6:
-                return $this->getPlayerItem5Id();
+                return $this->getRightLegPlayerItemId();
                 break;
             case 7:
                 return $this->getCreatedAt();
@@ -1248,11 +1248,11 @@ abstract class PlayerDeck implements ActiveRecordInterface
         $result = array(
             $keys[0] => $this->getId(),
             $keys[1] => $this->getPlayerId(),
-            $keys[2] => $this->getPlayerItem1Id(),
-            $keys[3] => $this->getPlayerItem2Id(),
-            $keys[4] => $this->getPlayerItem3Id(),
-            $keys[5] => $this->getPlayerItem4Id(),
-            $keys[6] => $this->getPlayerItem5Id(),
+            $keys[2] => $this->getHeadPlayerItemId(),
+            $keys[3] => $this->getLeftArmPlayerItemId(),
+            $keys[4] => $this->getRightArmPlayerItemId(),
+            $keys[5] => $this->getLeftLegPlayerItemId(),
+            $keys[6] => $this->getRightLegPlayerItemId(),
             $keys[7] => $this->getCreatedAt(),
             $keys[8] => $this->getUpdatedAt(),
         );
@@ -1285,7 +1285,7 @@ abstract class PlayerDeck implements ActiveRecordInterface
 
                 $result[$key] = $this->aPlayer->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->aPlayerItemRelatedByPlayerItem1Id) {
+            if (null !== $this->aPlayerItemRelatedByHeadPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
@@ -1298,9 +1298,9 @@ abstract class PlayerDeck implements ActiveRecordInterface
                         $key = 'PlayerItem';
                 }
 
-                $result[$key] = $this->aPlayerItemRelatedByPlayerItem1Id->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+                $result[$key] = $this->aPlayerItemRelatedByHeadPlayerItemId->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->aPlayerItemRelatedByPlayerItem2Id) {
+            if (null !== $this->aPlayerItemRelatedByLeftArmPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
@@ -1313,9 +1313,9 @@ abstract class PlayerDeck implements ActiveRecordInterface
                         $key = 'PlayerItem';
                 }
 
-                $result[$key] = $this->aPlayerItemRelatedByPlayerItem2Id->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+                $result[$key] = $this->aPlayerItemRelatedByLeftArmPlayerItemId->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->aPlayerItemRelatedByPlayerItem3Id) {
+            if (null !== $this->aPlayerItemRelatedByRightArmPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
@@ -1328,9 +1328,9 @@ abstract class PlayerDeck implements ActiveRecordInterface
                         $key = 'PlayerItem';
                 }
 
-                $result[$key] = $this->aPlayerItemRelatedByPlayerItem3Id->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+                $result[$key] = $this->aPlayerItemRelatedByRightArmPlayerItemId->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->aPlayerItemRelatedByPlayerItem4Id) {
+            if (null !== $this->aPlayerItemRelatedByLeftLegPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
@@ -1343,9 +1343,9 @@ abstract class PlayerDeck implements ActiveRecordInterface
                         $key = 'PlayerItem';
                 }
 
-                $result[$key] = $this->aPlayerItemRelatedByPlayerItem4Id->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+                $result[$key] = $this->aPlayerItemRelatedByLeftLegPlayerItemId->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->aPlayerItemRelatedByPlayerItem5Id) {
+            if (null !== $this->aPlayerItemRelatedByRightLegPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
@@ -1358,7 +1358,7 @@ abstract class PlayerDeck implements ActiveRecordInterface
                         $key = 'PlayerItem';
                 }
 
-                $result[$key] = $this->aPlayerItemRelatedByPlayerItem5Id->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+                $result[$key] = $this->aPlayerItemRelatedByRightLegPlayerItemId->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
         }
 
@@ -1401,19 +1401,19 @@ abstract class PlayerDeck implements ActiveRecordInterface
                 $this->setPlayerId($value);
                 break;
             case 2:
-                $this->setPlayerItem1Id($value);
+                $this->setHeadPlayerItemId($value);
                 break;
             case 3:
-                $this->setPlayerItem2Id($value);
+                $this->setLeftArmPlayerItemId($value);
                 break;
             case 4:
-                $this->setPlayerItem3Id($value);
+                $this->setRightArmPlayerItemId($value);
                 break;
             case 5:
-                $this->setPlayerItem4Id($value);
+                $this->setLeftLegPlayerItemId($value);
                 break;
             case 6:
-                $this->setPlayerItem5Id($value);
+                $this->setRightLegPlayerItemId($value);
                 break;
             case 7:
                 $this->setCreatedAt($value);
@@ -1454,19 +1454,19 @@ abstract class PlayerDeck implements ActiveRecordInterface
             $this->setPlayerId($arr[$keys[1]]);
         }
         if (array_key_exists($keys[2], $arr)) {
-            $this->setPlayerItem1Id($arr[$keys[2]]);
+            $this->setHeadPlayerItemId($arr[$keys[2]]);
         }
         if (array_key_exists($keys[3], $arr)) {
-            $this->setPlayerItem2Id($arr[$keys[3]]);
+            $this->setLeftArmPlayerItemId($arr[$keys[3]]);
         }
         if (array_key_exists($keys[4], $arr)) {
-            $this->setPlayerItem3Id($arr[$keys[4]]);
+            $this->setRightArmPlayerItemId($arr[$keys[4]]);
         }
         if (array_key_exists($keys[5], $arr)) {
-            $this->setPlayerItem4Id($arr[$keys[5]]);
+            $this->setLeftLegPlayerItemId($arr[$keys[5]]);
         }
         if (array_key_exists($keys[6], $arr)) {
-            $this->setPlayerItem5Id($arr[$keys[6]]);
+            $this->setRightLegPlayerItemId($arr[$keys[6]]);
         }
         if (array_key_exists($keys[7], $arr)) {
             $this->setCreatedAt($arr[$keys[7]]);
@@ -1521,20 +1521,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
         if ($this->isColumnModified(PlayerDeckTableMap::COL_PLAYER_ID)) {
             $criteria->add(PlayerDeckTableMap::COL_PLAYER_ID, $this->player_id);
         }
-        if ($this->isColumnModified(PlayerDeckTableMap::COL_PLAYER_ITEM1_ID)) {
-            $criteria->add(PlayerDeckTableMap::COL_PLAYER_ITEM1_ID, $this->player_item1_id);
+        if ($this->isColumnModified(PlayerDeckTableMap::COL_HEAD_PLAYER_ITEM_ID)) {
+            $criteria->add(PlayerDeckTableMap::COL_HEAD_PLAYER_ITEM_ID, $this->head_player_item_id);
         }
-        if ($this->isColumnModified(PlayerDeckTableMap::COL_PLAYER_ITEM2_ID)) {
-            $criteria->add(PlayerDeckTableMap::COL_PLAYER_ITEM2_ID, $this->player_item2_id);
+        if ($this->isColumnModified(PlayerDeckTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID)) {
+            $criteria->add(PlayerDeckTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID, $this->left_arm_player_item_id);
         }
-        if ($this->isColumnModified(PlayerDeckTableMap::COL_PLAYER_ITEM3_ID)) {
-            $criteria->add(PlayerDeckTableMap::COL_PLAYER_ITEM3_ID, $this->player_item3_id);
+        if ($this->isColumnModified(PlayerDeckTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID)) {
+            $criteria->add(PlayerDeckTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID, $this->right_arm_player_item_id);
         }
-        if ($this->isColumnModified(PlayerDeckTableMap::COL_PLAYER_ITEM4_ID)) {
-            $criteria->add(PlayerDeckTableMap::COL_PLAYER_ITEM4_ID, $this->player_item4_id);
+        if ($this->isColumnModified(PlayerDeckTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID)) {
+            $criteria->add(PlayerDeckTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID, $this->left_leg_player_item_id);
         }
-        if ($this->isColumnModified(PlayerDeckTableMap::COL_PLAYER_ITEM5_ID)) {
-            $criteria->add(PlayerDeckTableMap::COL_PLAYER_ITEM5_ID, $this->player_item5_id);
+        if ($this->isColumnModified(PlayerDeckTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID)) {
+            $criteria->add(PlayerDeckTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID, $this->right_leg_player_item_id);
         }
         if ($this->isColumnModified(PlayerDeckTableMap::COL_CREATED_AT)) {
             $criteria->add(PlayerDeckTableMap::COL_CREATED_AT, $this->created_at);
@@ -1629,11 +1629,11 @@ abstract class PlayerDeck implements ActiveRecordInterface
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
         $copyObj->setPlayerId($this->getPlayerId());
-        $copyObj->setPlayerItem1Id($this->getPlayerItem1Id());
-        $copyObj->setPlayerItem2Id($this->getPlayerItem2Id());
-        $copyObj->setPlayerItem3Id($this->getPlayerItem3Id());
-        $copyObj->setPlayerItem4Id($this->getPlayerItem4Id());
-        $copyObj->setPlayerItem5Id($this->getPlayerItem5Id());
+        $copyObj->setHeadPlayerItemId($this->getHeadPlayerItemId());
+        $copyObj->setLeftArmPlayerItemId($this->getLeftArmPlayerItemId());
+        $copyObj->setRightArmPlayerItemId($this->getRightArmPlayerItemId());
+        $copyObj->setLeftLegPlayerItemId($this->getLeftLegPlayerItemId());
+        $copyObj->setRightLegPlayerItemId($this->getRightLegPlayerItemId());
         $copyObj->setCreatedAt($this->getCreatedAt());
         $copyObj->setUpdatedAt($this->getUpdatedAt());
         if ($makeNew) {
@@ -1722,20 +1722,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
      * @return $this|\app\model\PlayerDeck The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setPlayerItemRelatedByPlayerItem1Id(ChildPlayerItem $v = null)
+    public function setPlayerItemRelatedByHeadPlayerItemId(ChildPlayerItem $v = null)
     {
         if ($v === null) {
-            $this->setPlayerItem1Id(NULL);
+            $this->setHeadPlayerItemId(NULL);
         } else {
-            $this->setPlayerItem1Id($v->getId());
+            $this->setHeadPlayerItemId($v->getId());
         }
 
-        $this->aPlayerItemRelatedByPlayerItem1Id = $v;
+        $this->aPlayerItemRelatedByHeadPlayerItemId = $v;
 
         // Add binding for other direction of this n:n relationship.
         // If this object has already been added to the ChildPlayerItem object, it will not be re-added.
         if ($v !== null) {
-            $v->addPlayerDeckRelatedByPlayerItem1Id($this);
+            $v->addPlayerDeckRelatedByHeadPlayerItemId($this);
         }
 
 
@@ -1750,20 +1750,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
      * @return ChildPlayerItem The associated ChildPlayerItem object.
      * @throws PropelException
      */
-    public function getPlayerItemRelatedByPlayerItem1Id(ConnectionInterface $con = null)
+    public function getPlayerItemRelatedByHeadPlayerItemId(ConnectionInterface $con = null)
     {
-        if ($this->aPlayerItemRelatedByPlayerItem1Id === null && ($this->player_item1_id !== null)) {
-            $this->aPlayerItemRelatedByPlayerItem1Id = ChildPlayerItemQuery::create()->findPk($this->player_item1_id, $con);
+        if ($this->aPlayerItemRelatedByHeadPlayerItemId === null && ($this->head_player_item_id !== null)) {
+            $this->aPlayerItemRelatedByHeadPlayerItemId = ChildPlayerItemQuery::create()->findPk($this->head_player_item_id, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aPlayerItemRelatedByPlayerItem1Id->addPlayerDecksRelatedByPlayerItem1Id($this);
+                $this->aPlayerItemRelatedByHeadPlayerItemId->addPlayerDecksRelatedByHeadPlayerItemId($this);
              */
         }
 
-        return $this->aPlayerItemRelatedByPlayerItem1Id;
+        return $this->aPlayerItemRelatedByHeadPlayerItemId;
     }
 
     /**
@@ -1773,20 +1773,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
      * @return $this|\app\model\PlayerDeck The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setPlayerItemRelatedByPlayerItem2Id(ChildPlayerItem $v = null)
+    public function setPlayerItemRelatedByLeftArmPlayerItemId(ChildPlayerItem $v = null)
     {
         if ($v === null) {
-            $this->setPlayerItem2Id(NULL);
+            $this->setLeftArmPlayerItemId(NULL);
         } else {
-            $this->setPlayerItem2Id($v->getId());
+            $this->setLeftArmPlayerItemId($v->getId());
         }
 
-        $this->aPlayerItemRelatedByPlayerItem2Id = $v;
+        $this->aPlayerItemRelatedByLeftArmPlayerItemId = $v;
 
         // Add binding for other direction of this n:n relationship.
         // If this object has already been added to the ChildPlayerItem object, it will not be re-added.
         if ($v !== null) {
-            $v->addPlayerDeckRelatedByPlayerItem2Id($this);
+            $v->addPlayerDeckRelatedByLeftArmPlayerItemId($this);
         }
 
 
@@ -1801,20 +1801,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
      * @return ChildPlayerItem The associated ChildPlayerItem object.
      * @throws PropelException
      */
-    public function getPlayerItemRelatedByPlayerItem2Id(ConnectionInterface $con = null)
+    public function getPlayerItemRelatedByLeftArmPlayerItemId(ConnectionInterface $con = null)
     {
-        if ($this->aPlayerItemRelatedByPlayerItem2Id === null && ($this->player_item2_id !== null)) {
-            $this->aPlayerItemRelatedByPlayerItem2Id = ChildPlayerItemQuery::create()->findPk($this->player_item2_id, $con);
+        if ($this->aPlayerItemRelatedByLeftArmPlayerItemId === null && ($this->left_arm_player_item_id !== null)) {
+            $this->aPlayerItemRelatedByLeftArmPlayerItemId = ChildPlayerItemQuery::create()->findPk($this->left_arm_player_item_id, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aPlayerItemRelatedByPlayerItem2Id->addPlayerDecksRelatedByPlayerItem2Id($this);
+                $this->aPlayerItemRelatedByLeftArmPlayerItemId->addPlayerDecksRelatedByLeftArmPlayerItemId($this);
              */
         }
 
-        return $this->aPlayerItemRelatedByPlayerItem2Id;
+        return $this->aPlayerItemRelatedByLeftArmPlayerItemId;
     }
 
     /**
@@ -1824,20 +1824,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
      * @return $this|\app\model\PlayerDeck The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setPlayerItemRelatedByPlayerItem3Id(ChildPlayerItem $v = null)
+    public function setPlayerItemRelatedByRightArmPlayerItemId(ChildPlayerItem $v = null)
     {
         if ($v === null) {
-            $this->setPlayerItem3Id(NULL);
+            $this->setRightArmPlayerItemId(NULL);
         } else {
-            $this->setPlayerItem3Id($v->getId());
+            $this->setRightArmPlayerItemId($v->getId());
         }
 
-        $this->aPlayerItemRelatedByPlayerItem3Id = $v;
+        $this->aPlayerItemRelatedByRightArmPlayerItemId = $v;
 
         // Add binding for other direction of this n:n relationship.
         // If this object has already been added to the ChildPlayerItem object, it will not be re-added.
         if ($v !== null) {
-            $v->addPlayerDeckRelatedByPlayerItem3Id($this);
+            $v->addPlayerDeckRelatedByRightArmPlayerItemId($this);
         }
 
 
@@ -1852,20 +1852,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
      * @return ChildPlayerItem The associated ChildPlayerItem object.
      * @throws PropelException
      */
-    public function getPlayerItemRelatedByPlayerItem3Id(ConnectionInterface $con = null)
+    public function getPlayerItemRelatedByRightArmPlayerItemId(ConnectionInterface $con = null)
     {
-        if ($this->aPlayerItemRelatedByPlayerItem3Id === null && ($this->player_item3_id !== null)) {
-            $this->aPlayerItemRelatedByPlayerItem3Id = ChildPlayerItemQuery::create()->findPk($this->player_item3_id, $con);
+        if ($this->aPlayerItemRelatedByRightArmPlayerItemId === null && ($this->right_arm_player_item_id !== null)) {
+            $this->aPlayerItemRelatedByRightArmPlayerItemId = ChildPlayerItemQuery::create()->findPk($this->right_arm_player_item_id, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aPlayerItemRelatedByPlayerItem3Id->addPlayerDecksRelatedByPlayerItem3Id($this);
+                $this->aPlayerItemRelatedByRightArmPlayerItemId->addPlayerDecksRelatedByRightArmPlayerItemId($this);
              */
         }
 
-        return $this->aPlayerItemRelatedByPlayerItem3Id;
+        return $this->aPlayerItemRelatedByRightArmPlayerItemId;
     }
 
     /**
@@ -1875,20 +1875,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
      * @return $this|\app\model\PlayerDeck The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setPlayerItemRelatedByPlayerItem4Id(ChildPlayerItem $v = null)
+    public function setPlayerItemRelatedByLeftLegPlayerItemId(ChildPlayerItem $v = null)
     {
         if ($v === null) {
-            $this->setPlayerItem4Id(NULL);
+            $this->setLeftLegPlayerItemId(NULL);
         } else {
-            $this->setPlayerItem4Id($v->getId());
+            $this->setLeftLegPlayerItemId($v->getId());
         }
 
-        $this->aPlayerItemRelatedByPlayerItem4Id = $v;
+        $this->aPlayerItemRelatedByLeftLegPlayerItemId = $v;
 
         // Add binding for other direction of this n:n relationship.
         // If this object has already been added to the ChildPlayerItem object, it will not be re-added.
         if ($v !== null) {
-            $v->addPlayerDeckRelatedByPlayerItem4Id($this);
+            $v->addPlayerDeckRelatedByLeftLegPlayerItemId($this);
         }
 
 
@@ -1903,20 +1903,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
      * @return ChildPlayerItem The associated ChildPlayerItem object.
      * @throws PropelException
      */
-    public function getPlayerItemRelatedByPlayerItem4Id(ConnectionInterface $con = null)
+    public function getPlayerItemRelatedByLeftLegPlayerItemId(ConnectionInterface $con = null)
     {
-        if ($this->aPlayerItemRelatedByPlayerItem4Id === null && ($this->player_item4_id !== null)) {
-            $this->aPlayerItemRelatedByPlayerItem4Id = ChildPlayerItemQuery::create()->findPk($this->player_item4_id, $con);
+        if ($this->aPlayerItemRelatedByLeftLegPlayerItemId === null && ($this->left_leg_player_item_id !== null)) {
+            $this->aPlayerItemRelatedByLeftLegPlayerItemId = ChildPlayerItemQuery::create()->findPk($this->left_leg_player_item_id, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aPlayerItemRelatedByPlayerItem4Id->addPlayerDecksRelatedByPlayerItem4Id($this);
+                $this->aPlayerItemRelatedByLeftLegPlayerItemId->addPlayerDecksRelatedByLeftLegPlayerItemId($this);
              */
         }
 
-        return $this->aPlayerItemRelatedByPlayerItem4Id;
+        return $this->aPlayerItemRelatedByLeftLegPlayerItemId;
     }
 
     /**
@@ -1926,20 +1926,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
      * @return $this|\app\model\PlayerDeck The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setPlayerItemRelatedByPlayerItem5Id(ChildPlayerItem $v = null)
+    public function setPlayerItemRelatedByRightLegPlayerItemId(ChildPlayerItem $v = null)
     {
         if ($v === null) {
-            $this->setPlayerItem5Id(NULL);
+            $this->setRightLegPlayerItemId(NULL);
         } else {
-            $this->setPlayerItem5Id($v->getId());
+            $this->setRightLegPlayerItemId($v->getId());
         }
 
-        $this->aPlayerItemRelatedByPlayerItem5Id = $v;
+        $this->aPlayerItemRelatedByRightLegPlayerItemId = $v;
 
         // Add binding for other direction of this n:n relationship.
         // If this object has already been added to the ChildPlayerItem object, it will not be re-added.
         if ($v !== null) {
-            $v->addPlayerDeckRelatedByPlayerItem5Id($this);
+            $v->addPlayerDeckRelatedByRightLegPlayerItemId($this);
         }
 
 
@@ -1954,20 +1954,20 @@ abstract class PlayerDeck implements ActiveRecordInterface
      * @return ChildPlayerItem The associated ChildPlayerItem object.
      * @throws PropelException
      */
-    public function getPlayerItemRelatedByPlayerItem5Id(ConnectionInterface $con = null)
+    public function getPlayerItemRelatedByRightLegPlayerItemId(ConnectionInterface $con = null)
     {
-        if ($this->aPlayerItemRelatedByPlayerItem5Id === null && ($this->player_item5_id !== null)) {
-            $this->aPlayerItemRelatedByPlayerItem5Id = ChildPlayerItemQuery::create()->findPk($this->player_item5_id, $con);
+        if ($this->aPlayerItemRelatedByRightLegPlayerItemId === null && ($this->right_leg_player_item_id !== null)) {
+            $this->aPlayerItemRelatedByRightLegPlayerItemId = ChildPlayerItemQuery::create()->findPk($this->right_leg_player_item_id, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aPlayerItemRelatedByPlayerItem5Id->addPlayerDecksRelatedByPlayerItem5Id($this);
+                $this->aPlayerItemRelatedByRightLegPlayerItemId->addPlayerDecksRelatedByRightLegPlayerItemId($this);
              */
         }
 
-        return $this->aPlayerItemRelatedByPlayerItem5Id;
+        return $this->aPlayerItemRelatedByRightLegPlayerItemId;
     }
 
     /**
@@ -1980,28 +1980,28 @@ abstract class PlayerDeck implements ActiveRecordInterface
         if (null !== $this->aPlayer) {
             $this->aPlayer->removePlayerDeck($this);
         }
-        if (null !== $this->aPlayerItemRelatedByPlayerItem1Id) {
-            $this->aPlayerItemRelatedByPlayerItem1Id->removePlayerDeckRelatedByPlayerItem1Id($this);
+        if (null !== $this->aPlayerItemRelatedByHeadPlayerItemId) {
+            $this->aPlayerItemRelatedByHeadPlayerItemId->removePlayerDeckRelatedByHeadPlayerItemId($this);
         }
-        if (null !== $this->aPlayerItemRelatedByPlayerItem2Id) {
-            $this->aPlayerItemRelatedByPlayerItem2Id->removePlayerDeckRelatedByPlayerItem2Id($this);
+        if (null !== $this->aPlayerItemRelatedByLeftArmPlayerItemId) {
+            $this->aPlayerItemRelatedByLeftArmPlayerItemId->removePlayerDeckRelatedByLeftArmPlayerItemId($this);
         }
-        if (null !== $this->aPlayerItemRelatedByPlayerItem3Id) {
-            $this->aPlayerItemRelatedByPlayerItem3Id->removePlayerDeckRelatedByPlayerItem3Id($this);
+        if (null !== $this->aPlayerItemRelatedByRightArmPlayerItemId) {
+            $this->aPlayerItemRelatedByRightArmPlayerItemId->removePlayerDeckRelatedByRightArmPlayerItemId($this);
         }
-        if (null !== $this->aPlayerItemRelatedByPlayerItem4Id) {
-            $this->aPlayerItemRelatedByPlayerItem4Id->removePlayerDeckRelatedByPlayerItem4Id($this);
+        if (null !== $this->aPlayerItemRelatedByLeftLegPlayerItemId) {
+            $this->aPlayerItemRelatedByLeftLegPlayerItemId->removePlayerDeckRelatedByLeftLegPlayerItemId($this);
         }
-        if (null !== $this->aPlayerItemRelatedByPlayerItem5Id) {
-            $this->aPlayerItemRelatedByPlayerItem5Id->removePlayerDeckRelatedByPlayerItem5Id($this);
+        if (null !== $this->aPlayerItemRelatedByRightLegPlayerItemId) {
+            $this->aPlayerItemRelatedByRightLegPlayerItemId->removePlayerDeckRelatedByRightLegPlayerItemId($this);
         }
         $this->id = null;
         $this->player_id = null;
-        $this->player_item1_id = null;
-        $this->player_item2_id = null;
-        $this->player_item3_id = null;
-        $this->player_item4_id = null;
-        $this->player_item5_id = null;
+        $this->head_player_item_id = null;
+        $this->left_arm_player_item_id = null;
+        $this->right_arm_player_item_id = null;
+        $this->left_leg_player_item_id = null;
+        $this->right_leg_player_item_id = null;
         $this->created_at = null;
         $this->updated_at = null;
         $this->alreadyInSave = false;
@@ -2025,11 +2025,11 @@ abstract class PlayerDeck implements ActiveRecordInterface
         } // if ($deep)
 
         $this->aPlayer = null;
-        $this->aPlayerItemRelatedByPlayerItem1Id = null;
-        $this->aPlayerItemRelatedByPlayerItem2Id = null;
-        $this->aPlayerItemRelatedByPlayerItem3Id = null;
-        $this->aPlayerItemRelatedByPlayerItem4Id = null;
-        $this->aPlayerItemRelatedByPlayerItem5Id = null;
+        $this->aPlayerItemRelatedByHeadPlayerItemId = null;
+        $this->aPlayerItemRelatedByLeftArmPlayerItemId = null;
+        $this->aPlayerItemRelatedByRightArmPlayerItemId = null;
+        $this->aPlayerItemRelatedByLeftLegPlayerItemId = null;
+        $this->aPlayerItemRelatedByRightLegPlayerItemId = null;
     }
 
     /**

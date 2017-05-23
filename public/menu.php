@@ -29,14 +29,17 @@ if ($player->countPlayerDecks() === 0) {
     echo '<li>not set</li>';
 } else {
     $player_deck = $player->getPlayerDecks()->getFirst();
-    for ($i = 1; $i <= 5; $i++) {
-        $method_name = "getPlayerItemRelatedByPlayerItem${i}Id";
-        $player_item = $player_deck->$method_name();
+    $player_deck_items[] = $player_deck->getPlayerItemRelatedByHeadPlayerItemId();
+    $player_deck_items[] = $player_deck->getPlayerItemRelatedByLeftArmPlayerItemId();
+    $player_deck_items[] = $player_deck->getPlayerItemRelatedByRightArmPlayerItemId();
+    $player_deck_items[] = $player_deck->getPlayerItemRelatedByLeftLegPlayerItemId();
+    $player_deck_items[] = $player_deck->getPlayerItemRelatedByRightLegPlayerItemId();
+    foreach ($player_deck_items as $player_item) {
         if (is_null($player_item)) {
             echo '<li>not set</li>';
         } else {
             $item = $player_item->getItem();
-            printf('<li>[%s][%s] %s</li>', $item->getProprium()->getName(), $item->getPart()->getName(), $item->getName());
+            printf('<li>[%s][%s] %s</li>', $item->getPart()->getName(), $item->getProprium()->getName(), $item->getName());
         }
     }
 }
@@ -52,7 +55,7 @@ if ($player->countPlayerItems() === 0) {
 } else {
     foreach ($player_items as $player_item) {
         $item = $player_item->getItem();
-        printf('<li>[%s][%s] %s</li>', $item->getProprium()->getName(), $item->getPart()->getName(), $item->getName());
+        printf('<li>[%s][%s] %s</li>', $item->getPart()->getName(), $item->getProprium()->getName(), $item->getName());
     }
 }
 ?>
