@@ -14,37 +14,89 @@ if (is_null($player_id)) {
     return;
 }
 
+function getPoints($player) {
+    $player_equipment = $player->getPlayerEquipments()->getFirst();
+    $item_property_names = ['Weapon1', 'Weapon2', 'Head', 'LeftArm', 'RightArm', 'LeftLeg', 'RightLeg'];
+    foreach ($item_property_names as $item_property_name) {
+        $method_name = "getPlayerItemRelatedBy${item_property_name}PlayerItemId";
+        $items[] = $player_equipment->$method_name()->getItem();
+    }
+
+    $points = [
+        'hit_point' => 0,
+        'attack_point' => 0,
+        'defense_point' => 0,
+    ];
+    foreach ($items as $item) {
+        $points['hit_point'] += $item->getHitPoint();
+        $points['attack_point'] += $item->getAttackPoint();
+        $points['defense_point'] += $item->getDefensePoint();
+    }
+
+    return $points;
+}
+
 if (isset($_POST['enemy_player_id'])) {
     $player = PlayerQuery::create()->findPK($player_id);
     $enemy_player = PlayerQuery::create()->findPK($_POST['enemy_player_id']);
 
+    $player_points = getPoints($player);
+    $enemy_player_points = getPoints($enemy_player);
+
+    echo '<pre>';
+    echo 'before battle<br>';
+    echo 'player_points: ';
+    var_dump($player_points);
+    echo 'enemy_player_points: ';
+    var_dump($enemy_player_points);
+    echo '</pre>';
+
     $player_deck = $player->getPlayerDecks()->getFirst();
     $enemy_player_deck = $enemy_player->getPlayerDecks()->getFirst();
 
-    $win = 0;
-    for ($i = 1; $i <= 5; $i++) {
-        $method_name = "getPlayerItemRelatedByPlayerItem${i}Id";
-        $player_item = $player_deck->$method_name();
-        $enemy_player_item = $enemy_player_deck->$method_name();
-
-        $player_raw_item = $player_item->getItem();
-        $enemy_player_raw_item = $enemy_player_item->getItem();
+    $property_names = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
+    foreach ($property_names as $property_name) {
+        $method_name = "get${property_name}PropriumId";
+        $player_proprium_id = $player_deck->$method_name();
+        $enemy_player_proprium_id = $enemy_player_deck->$method_name();
 
         // じゃんけん
-        $diff = $player_raw_item->getPropriumId() - $enemy_player_raw_item->getPropriumId();
+        $diff = $player_proprium_id - $enemy_player_proprium_id;
         switch ($diff) {
             case -1:
             case 2:
-                $win++;
+                $damage_point = $player_points['attack_point'] - $enemy_player_points['defense_point'];
+                if (0 < $damage_point) {
+                    $enemy_player_points['hit_point'] -= $damage_point;
+                }
                 break;
             case -2:
             case 1:
-                $win--;
+                $damage_point = $enemy_player_points['attack_point'] - $player_points['defense_point'];
+                if (0 < $damage_point) {
+                    $player_points['hit_point'] -= $damage_point;
+                }
                 break;
             default:
+                $damage_point = $player_points['attack_point'] - $enemy_player_points['defense_point'];
+                if (0 < $damage_point) {
+                    $enemy_player_points['hit_point'] -= round($damage_point * 0.5);
+                }
+                $damage_point = $enemy_player_points['attack_point'] - $player_points['defense_point'];
+                if (0 < $damage_point) {
+                    $player_points['hit_point'] -= round($damage_point * 0.5);
+                }
                 break;
         }
     }
+
+    echo '<pre>';
+    echo 'after battle<br>';
+    echo 'player_points: ';
+    var_dump($player_points);
+    echo 'enemy_player_points: ';
+    var_dump($enemy_player_points);
+    echo '</pre>';
 
     $player_battle_log = new PlayerBattleLog();
     $player_battle_log->fromArray([
@@ -58,11 +110,12 @@ if (isset($_POST['enemy_player_id'])) {
         'enemy_player_id' => $player->getId(),
         'challenged' => false,
     ], PlayerBattleLogTableMap::TYPE_FIELDNAME);
-    if ($win < 0) {
+
+    if ($player_points['hit_point'] <= 0 || $player_points['hit_point'] < $enemy_player_points['hit_point']) {
         echo '負けた...<br>';
         $player_battle_log->setResult(PlayerBattleLog::RESULT_LOSE);
         $enemy_player_battle_log->setResult(PlayerBattleLog::RESULT_WIN);
-    } elseif (0 < $win) {
+    } elseif ($enemy_player_points['hit_point'] <= 0 || $enemy_player_points['hit_point'] < $player_points['hit_point']) {
         echo '勝った！<br>';
         $player_battle_log->setResult(PlayerBattleLog::RESULT_WIN);
         $enemy_player_battle_log->setResult(PlayerBattleLog::RESULT_LOSE);
@@ -91,13 +144,6 @@ $players = PlayerQuery::create()->filterById($player_id, Criteria::NOT_EQUAL)->f
 foreach ($players as $player) {
     $player_deck = $player->getPlayerDecks()->getFirst();
     $is_battlable = !is_null($player_deck);
-    if ($is_battlable) {
-        for ($i = 1; $i <= 5; $i++) {
-            $method_name = "getPlayerItem${i}Id";
-            $player_item_id = $player_deck->$method_name();
-            $is_battlable = $is_battlable && !is_null($player_item_id);
-        }
-    }
 
     if ($is_battlable) {
         printf('<option value="%d">%s</option>', $player->getId(), $player->getName());
@@ -107,3 +153,4 @@ foreach ($players as $player) {
 </select>
 <input type="submit">
 </form>
+<a href="/menu.php">menu</a>
