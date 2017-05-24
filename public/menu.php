@@ -39,7 +39,15 @@ if ($player->countPlayerEquipments() === 0) {
     $player_equipment_items[] = $player_equipment->getPlayerItemRelatedByRightLegPlayerItemId();
     foreach ($player_equipment_items as $player_item) {
         $item = $player_item->getItem();
-        printf('<li>[%s][%s] %s</li>', $item->getPart()->getName(), $item->getProprium()->getName(), $item->getName());
+        printf(
+            '<li>[%s][%s] %s (HP: %d, ATK: %d, DEF: %d)</li>',
+            $item->getPart()->getName(),
+            $item->getProprium()->getName(),
+            $item->getName(),
+            $item->getHitPoint(),
+            $item->getAttackPoint(),
+            $item->getDefensePoint()
+        );
     }
 }
 ?>
@@ -54,7 +62,15 @@ if ($player->countPlayerItems() === 0) {
 } else {
     foreach ($player_items as $player_item) {
         $item = $player_item->getItem();
-        printf('<li>[%s][%s] %s</li>', $item->getPart()->getName(), $item->getProprium()->getName(), $item->getName());
+        printf(
+            '<li>[%s][%s] %s (HP: %d, ATK: %d, DEF: %d)</li>',
+            $item->getPart()->getName(),
+            $item->getProprium()->getName(),
+            $item->getName(),
+            $item->getHitPoint(),
+            $item->getAttackPoint(),
+            $item->getDefensePoint()
+        );
     }
 }
 ?>

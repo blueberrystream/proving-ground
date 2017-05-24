@@ -51,7 +51,15 @@ if (!empty($_POST)) {
 <?php
     foreach ($sorted_player_items[6] as $player_item) { // $sorted_player_items[6] の 6 ってなんやねん
         $item = $player_item->getItem();
-        printf('<option value="%d">[%s] %s</option>', $player_item->getId(), $item->getProprium()->getName(), $item->getName());
+        printf(
+            '<option value="%d">[%s] %s (HP: %d, ATK: %d, DEF: %d)</option>',
+            $player_item->getId(),
+            $item->getProprium()->getName(),
+            $item->getName(),
+            $item->getHitPoint(),
+            $item->getAttackPoint(),
+            $item->getDefensePoint()
+        );
     }
 ?>
 </select></li>
@@ -59,7 +67,15 @@ if (!empty($_POST)) {
 <?php
     foreach ($sorted_player_items[6] as $player_item) {
         $item = $player_item->getItem();
-        printf('<option value="%d">[%s] %s</option>', $player_item->getId(), $item->getProprium()->getName(), $item->getName());
+        printf(
+            '<option value="%d">[%s] %s (HP: %d, ATK: %d, DEF: %d)</option>',
+            $player_item->getId(),
+            $item->getProprium()->getName(),
+            $item->getName(),
+            $item->getHitPoint(),
+            $item->getAttackPoint(),
+            $item->getDefensePoint()
+        );
     }
 ?>
 </select></li>
@@ -67,7 +83,15 @@ if (!empty($_POST)) {
 <?php
     foreach ($sorted_player_items[1] as $player_item) {
         $item = $player_item->getItem();
-        printf('<option value="%d">[%s] %s</option>', $player_item->getId(), $item->getProprium()->getName(), $item->getName());
+        printf(
+            '<option value="%d">[%s] %s (HP: %d, ATK: %d, DEF: %d)</option>',
+            $player_item->getId(),
+            $item->getProprium()->getName(),
+            $item->getName(),
+            $item->getHitPoint(),
+            $item->getAttackPoint(),
+            $item->getDefensePoint()
+        );
     }
 ?>
 </select></li>
@@ -75,7 +99,15 @@ if (!empty($_POST)) {
 <?php
     foreach ($sorted_player_items[2] as $player_item) {
         $item = $player_item->getItem();
-        printf('<option value="%d">[%s] %s</option>', $player_item->getId(), $item->getProprium()->getName(), $item->getName());
+        printf(
+            '<option value="%d">[%s] %s (HP: %d, ATK: %d, DEF: %d)</option>',
+            $player_item->getId(),
+            $item->getProprium()->getName(),
+            $item->getName(),
+            $item->getHitPoint(),
+            $item->getAttackPoint(),
+            $item->getDefensePoint()
+        );
     }
 ?>
 </select></li>
@@ -83,7 +115,15 @@ if (!empty($_POST)) {
 <?php
     foreach ($sorted_player_items[3] as $player_item) {
         $item = $player_item->getItem();
-        printf('<option value="%d">[%s] %s</option>', $player_item->getId(), $item->getProprium()->getName(), $item->getName());
+        printf(
+            '<option value="%d">[%s] %s (HP: %d, ATK: %d, DEF: %d)</option>',
+            $player_item->getId(),
+            $item->getProprium()->getName(),
+            $item->getName(),
+            $item->getHitPoint(),
+            $item->getAttackPoint(),
+            $item->getDefensePoint()
+        );
     }
 ?>
 </select></li>
@@ -91,7 +131,15 @@ if (!empty($_POST)) {
 <?php
     foreach ($sorted_player_items[4] as $player_item) {
         $item = $player_item->getItem();
-        printf('<option value="%d">[%s] %s</option>', $player_item->getId(), $item->getProprium()->getName(), $item->getName());
+        printf(
+            '<option value="%d">[%s] %s (HP: %d, ATK: %d, DEF: %d)</option>',
+            $player_item->getId(),
+            $item->getProprium()->getName(),
+            $item->getName(),
+            $item->getHitPoint(),
+            $item->getAttackPoint(),
+            $item->getDefensePoint()
+        );
     }
 ?>
 </select></li>
@@ -99,7 +147,15 @@ if (!empty($_POST)) {
 <?php
     foreach ($sorted_player_items[5] as $player_item) {
         $item = $player_item->getItem();
-        printf('<option value="%d">[%s] %s</option>', $player_item->getId(), $item->getProprium()->getName(), $item->getName());
+        printf(
+            '<option value="%d">[%s] %s (HP: %d, ATK: %d, DEF: %d)</option>',
+            $player_item->getId(),
+            $item->getProprium()->getName(),
+            $item->getName(),
+            $item->getHitPoint(),
+            $item->getAttackPoint(),
+            $item->getDefensePoint()
+        );
     }
 ?>
 </select></li>
