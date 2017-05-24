@@ -8,6 +8,7 @@ use app\model\PlayerItem;
 $player_id = $_COOKIE['player_id'];
 if (is_null($player_id)) {
     header('Location: /index.php');
+    return;
 }
 
 $player = PlayerQuery::create()->findPK($player_id);

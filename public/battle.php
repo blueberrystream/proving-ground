@@ -11,6 +11,7 @@ use app\model\Map\PlayerBattleLogTableMap;
 $player_id = $_COOKIE['player_id'];
 if (is_null($player_id)) {
     header('Location: /index.php');
+    return;
 }
 
 if (isset($_POST['enemy_player_id'])) {

@@ -12,6 +12,7 @@ if (isset($_POST['player_id'])) {
 }
 if (isset($player_id)) {
     header('Location: /menu.php');
+    return;
 }
 ?>
 <form method="post">
