@@ -66,33 +66,71 @@
         </foreign-key>
         <behavior name="timestampable"/>
     </table>
-    <table name="player_deck">
+    <table name="player_equipment">
         <column name="id" type="integer" required="true" primarykey="true" autoincrement="true"/>
         <column name="player_id" type="integer" required="true"/>
-        <column name="head_player_item_id" type="integer"/>
-        <column name="left_arm_player_item_id" type="integer"/>
-        <column name="right_arm_player_item_id" type="integer"/>
-        <column name="left_leg_player_item_id" type="integer"/>
-        <column name="right_leg_player_item_id" type="integer"/>
+        <column name="weapon1_player_item_id" type="integer" required="true"/>
+        <column name="weapon2_player_item_id" type="integer" required="true"/>
+        <column name="head_player_item_id" type="integer" required="true"/>
+        <column name="left_arm_player_item_id" type="integer" required="true"/>
+        <column name="right_arm_player_item_id" type="integer" required="true"/>
+        <column name="left_leg_player_item_id" type="integer" required="true"/>
+        <column name="right_leg_player_item_id" type="integer" required="true"/>
         <column name="created_at" type="timestamp" required="true"/>
         <column name="updated_at" type="timestamp" required="true"/>
         <foreign-key foreigntable="player">
             <reference local="player_id" foreign="id"/>
         </foreign-key>
-        <foreign-key foreigntable="player_item" name="player_deck_fk_head_player_item">
+        <foreign-key foreigntable="player_item" name="player_equipment_fk_weapon1_player_item">
+            <reference local="weapon1_player_item_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreigntable="player_item" name="player_equipment_fk_weapon2_player_item">
+            <reference local="weapon2_player_item_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreigntable="player_item" name="player_equipment_fk_head_player_item">
             <reference local="head_player_item_id" foreign="id"/>
         </foreign-key>
-        <foreign-key foreigntable="player_item" name="player_deck_fk_left_arm_player_item">
+        <foreign-key foreigntable="player_item" name="player_equipment_fk_left_arm_player_item">
             <reference local="left_arm_player_item_id" foreign="id"/>
         </foreign-key>
-        <foreign-key foreigntable="player_item" name="player_deck_fk_right_arm_player_item">
+        <foreign-key foreigntable="player_item" name="player_equipment_fk_right_arm_player_item">
             <reference local="right_arm_player_item_id" foreign="id"/>
         </foreign-key>
-        <foreign-key foreigntable="player_item" name="player_deck_fk_left_leg_player_item">
+        <foreign-key foreigntable="player_item" name="player_equipment_fk_left_leg_player_item">
             <reference local="left_leg_player_item_id" foreign="id"/>
         </foreign-key>
-        <foreign-key foreigntable="player_item" name="player_deck_fk_right_leg_player_item">
+        <foreign-key foreigntable="player_item" name="player_equipment_fk_right_leg_player_item">
             <reference local="right_leg_player_item_id" foreign="id"/>
+        </foreign-key>
+        <behavior name="timestampable"/>
+    </table>
+    <table name="player_deck">
+        <column name="id" type="integer" required="true" primarykey="true" autoincrement="true"/>
+        <column name="player_id" type="integer" required="true"/>
+        <column name="first_proprium_id" type="integer" required="true"/>
+        <column name="second_proprium_id" type="integer" required="true"/>
+        <column name="third_proprium_id" type="integer" required="true"/>
+        <column name="fourth_proprium_id" type="integer" required="true"/>
+        <column name="fifth_proprium_id" type="integer" required="true"/>
+        <column name="created_at" type="timestamp" required="true"/>
+        <column name="updated_at" type="timestamp" required="true"/>
+        <foreign-key foreigntable="player">
+            <reference local="player_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreigntable="proprium" name="player_deck_fk_first_proprium">
+            <reference local="first_proprium_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreigntable="proprium" name="player_deck_fk_second_proprium">
+            <reference local="second_proprium_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreigntable="proprium" name="player_deck_fk_third_proprium">
+            <reference local="third_proprium_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreigntable="proprium" name="player_deck_fk_fourth_proprium">
+            <reference local="fourth_proprium_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreigntable="proprium" name="player_deck_fk_fifth_proprium">
+            <reference local="fifth_proprium_id" foreign="id"/>
         </foreign-key>
         <behavior name="timestampable"/>
     </table>

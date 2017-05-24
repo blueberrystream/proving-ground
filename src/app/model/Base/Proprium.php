@@ -18,9 +18,12 @@ use Propel\Runtime\Map\TableMap;
 use Propel\Runtime\Parser\AbstractParser;
 use app\model\Item as ChildItem;
 use app\model\ItemQuery as ChildItemQuery;
+use app\model\PlayerDeck as ChildPlayerDeck;
+use app\model\PlayerDeckQuery as ChildPlayerDeckQuery;
 use app\model\Proprium as ChildProprium;
 use app\model\PropriumQuery as ChildPropriumQuery;
 use app\model\Map\ItemTableMap;
+use app\model\Map\PlayerDeckTableMap;
 use app\model\Map\PropriumTableMap;
 
 /**
@@ -85,6 +88,36 @@ abstract class Proprium implements ActiveRecordInterface
     protected $collItemsPartial;
 
     /**
+     * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
+     */
+    protected $collPlayerDecksRelatedByFirstPropriumId;
+    protected $collPlayerDecksRelatedByFirstPropriumIdPartial;
+
+    /**
+     * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
+     */
+    protected $collPlayerDecksRelatedBySecondPropriumId;
+    protected $collPlayerDecksRelatedBySecondPropriumIdPartial;
+
+    /**
+     * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
+     */
+    protected $collPlayerDecksRelatedByThirdPropriumId;
+    protected $collPlayerDecksRelatedByThirdPropriumIdPartial;
+
+    /**
+     * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
+     */
+    protected $collPlayerDecksRelatedByFourthPropriumId;
+    protected $collPlayerDecksRelatedByFourthPropriumIdPartial;
+
+    /**
+     * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
+     */
+    protected $collPlayerDecksRelatedByFifthPropriumId;
+    protected $collPlayerDecksRelatedByFifthPropriumIdPartial;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      *
@@ -97,6 +130,36 @@ abstract class Proprium implements ActiveRecordInterface
      * @var ObjectCollection|ChildItem[]
      */
     protected $itemsScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ChildPlayerDeck[]
+     */
+    protected $playerDecksRelatedByFirstPropriumIdScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ChildPlayerDeck[]
+     */
+    protected $playerDecksRelatedBySecondPropriumIdScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ChildPlayerDeck[]
+     */
+    protected $playerDecksRelatedByThirdPropriumIdScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ChildPlayerDeck[]
+     */
+    protected $playerDecksRelatedByFourthPropriumIdScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ChildPlayerDeck[]
+     */
+    protected $playerDecksRelatedByFifthPropriumIdScheduledForDeletion = null;
 
     /**
      * Initializes internal state of app\model\Base\Proprium object.
@@ -495,6 +558,16 @@ abstract class Proprium implements ActiveRecordInterface
 
             $this->collItems = null;
 
+            $this->collPlayerDecksRelatedByFirstPropriumId = null;
+
+            $this->collPlayerDecksRelatedBySecondPropriumId = null;
+
+            $this->collPlayerDecksRelatedByThirdPropriumId = null;
+
+            $this->collPlayerDecksRelatedByFourthPropriumId = null;
+
+            $this->collPlayerDecksRelatedByFifthPropriumId = null;
+
         } // if (deep)
     }
 
@@ -620,6 +693,91 @@ abstract class Proprium implements ActiveRecordInterface
 
             if ($this->collItems !== null) {
                 foreach ($this->collItems as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion !== null) {
+                if (!$this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerDeckQuery::create()
+                        ->filterByPrimaryKeys($this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collPlayerDecksRelatedByFirstPropriumId !== null) {
+                foreach ($this->collPlayerDecksRelatedByFirstPropriumId as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion !== null) {
+                if (!$this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerDeckQuery::create()
+                        ->filterByPrimaryKeys($this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collPlayerDecksRelatedBySecondPropriumId !== null) {
+                foreach ($this->collPlayerDecksRelatedBySecondPropriumId as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion !== null) {
+                if (!$this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerDeckQuery::create()
+                        ->filterByPrimaryKeys($this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collPlayerDecksRelatedByThirdPropriumId !== null) {
+                foreach ($this->collPlayerDecksRelatedByThirdPropriumId as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion !== null) {
+                if (!$this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerDeckQuery::create()
+                        ->filterByPrimaryKeys($this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collPlayerDecksRelatedByFourthPropriumId !== null) {
+                foreach ($this->collPlayerDecksRelatedByFourthPropriumId as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion !== null) {
+                if (!$this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerDeckQuery::create()
+                        ->filterByPrimaryKeys($this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collPlayerDecksRelatedByFifthPropriumId !== null) {
+                foreach ($this->collPlayerDecksRelatedByFifthPropriumId as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -798,6 +956,81 @@ abstract class Proprium implements ActiveRecordInterface
                 }
 
                 $result[$key] = $this->collItems->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collPlayerDecksRelatedByFirstPropriumId) {
+
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'playerDecks';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'player_decks';
+                        break;
+                    default:
+                        $key = 'PlayerDecks';
+                }
+
+                $result[$key] = $this->collPlayerDecksRelatedByFirstPropriumId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collPlayerDecksRelatedBySecondPropriumId) {
+
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'playerDecks';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'player_decks';
+                        break;
+                    default:
+                        $key = 'PlayerDecks';
+                }
+
+                $result[$key] = $this->collPlayerDecksRelatedBySecondPropriumId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collPlayerDecksRelatedByThirdPropriumId) {
+
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'playerDecks';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'player_decks';
+                        break;
+                    default:
+                        $key = 'PlayerDecks';
+                }
+
+                $result[$key] = $this->collPlayerDecksRelatedByThirdPropriumId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collPlayerDecksRelatedByFourthPropriumId) {
+
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'playerDecks';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'player_decks';
+                        break;
+                    default:
+                        $key = 'PlayerDecks';
+                }
+
+                $result[$key] = $this->collPlayerDecksRelatedByFourthPropriumId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collPlayerDecksRelatedByFifthPropriumId) {
+
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'playerDecks';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'player_decks';
+                        break;
+                    default:
+                        $key = 'PlayerDecks';
+                }
+
+                $result[$key] = $this->collPlayerDecksRelatedByFifthPropriumId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1017,6 +1250,36 @@ abstract class Proprium implements ActiveRecordInterface
                 }
             }
 
+            foreach ($this->getPlayerDecksRelatedByFirstPropriumId() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addPlayerDeckRelatedByFirstPropriumId($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getPlayerDecksRelatedBySecondPropriumId() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addPlayerDeckRelatedBySecondPropriumId($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getPlayerDecksRelatedByThirdPropriumId() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addPlayerDeckRelatedByThirdPropriumId($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getPlayerDecksRelatedByFourthPropriumId() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addPlayerDeckRelatedByFourthPropriumId($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getPlayerDecksRelatedByFifthPropriumId() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addPlayerDeckRelatedByFifthPropriumId($relObj->copy($deepCopy));
+                }
+            }
+
         } // if ($deepCopy)
 
         if ($makeNew) {
@@ -1060,6 +1323,26 @@ abstract class Proprium implements ActiveRecordInterface
     {
         if ('Item' == $relationName) {
             $this->initItems();
+            return;
+        }
+        if ('PlayerDeckRelatedByFirstPropriumId' == $relationName) {
+            $this->initPlayerDecksRelatedByFirstPropriumId();
+            return;
+        }
+        if ('PlayerDeckRelatedBySecondPropriumId' == $relationName) {
+            $this->initPlayerDecksRelatedBySecondPropriumId();
+            return;
+        }
+        if ('PlayerDeckRelatedByThirdPropriumId' == $relationName) {
+            $this->initPlayerDecksRelatedByThirdPropriumId();
+            return;
+        }
+        if ('PlayerDeckRelatedByFourthPropriumId' == $relationName) {
+            $this->initPlayerDecksRelatedByFourthPropriumId();
+            return;
+        }
+        if ('PlayerDeckRelatedByFifthPropriumId' == $relationName) {
+            $this->initPlayerDecksRelatedByFifthPropriumId();
             return;
         }
     }
@@ -1315,6 +1598,1256 @@ abstract class Proprium implements ActiveRecordInterface
     }
 
     /**
+     * Clears out the collPlayerDecksRelatedByFirstPropriumId collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addPlayerDecksRelatedByFirstPropriumId()
+     */
+    public function clearPlayerDecksRelatedByFirstPropriumId()
+    {
+        $this->collPlayerDecksRelatedByFirstPropriumId = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collPlayerDecksRelatedByFirstPropriumId collection loaded partially.
+     */
+    public function resetPartialPlayerDecksRelatedByFirstPropriumId($v = true)
+    {
+        $this->collPlayerDecksRelatedByFirstPropriumIdPartial = $v;
+    }
+
+    /**
+     * Initializes the collPlayerDecksRelatedByFirstPropriumId collection.
+     *
+     * By default this just sets the collPlayerDecksRelatedByFirstPropriumId collection to an empty array (like clearcollPlayerDecksRelatedByFirstPropriumId());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initPlayerDecksRelatedByFirstPropriumId($overrideExisting = true)
+    {
+        if (null !== $this->collPlayerDecksRelatedByFirstPropriumId && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collPlayerDecksRelatedByFirstPropriumId = new $collectionClassName;
+        $this->collPlayerDecksRelatedByFirstPropriumId->setModel('\app\model\PlayerDeck');
+    }
+
+    /**
+     * Gets an array of ChildPlayerDeck objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildProprium is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @throws PropelException
+     */
+    public function getPlayerDecksRelatedByFirstPropriumId(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerDecksRelatedByFirstPropriumIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByFirstPropriumId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByFirstPropriumId) {
+                // return empty collection
+                $this->initPlayerDecksRelatedByFirstPropriumId();
+            } else {
+                $collPlayerDecksRelatedByFirstPropriumId = ChildPlayerDeckQuery::create(null, $criteria)
+                    ->filterByPropriumRelatedByFirstPropriumId($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collPlayerDecksRelatedByFirstPropriumIdPartial && count($collPlayerDecksRelatedByFirstPropriumId)) {
+                        $this->initPlayerDecksRelatedByFirstPropriumId(false);
+
+                        foreach ($collPlayerDecksRelatedByFirstPropriumId as $obj) {
+                            if (false == $this->collPlayerDecksRelatedByFirstPropriumId->contains($obj)) {
+                                $this->collPlayerDecksRelatedByFirstPropriumId->append($obj);
+                            }
+                        }
+
+                        $this->collPlayerDecksRelatedByFirstPropriumIdPartial = true;
+                    }
+
+                    return $collPlayerDecksRelatedByFirstPropriumId;
+                }
+
+                if ($partial && $this->collPlayerDecksRelatedByFirstPropriumId) {
+                    foreach ($this->collPlayerDecksRelatedByFirstPropriumId as $obj) {
+                        if ($obj->isNew()) {
+                            $collPlayerDecksRelatedByFirstPropriumId[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collPlayerDecksRelatedByFirstPropriumId = $collPlayerDecksRelatedByFirstPropriumId;
+                $this->collPlayerDecksRelatedByFirstPropriumIdPartial = false;
+            }
+        }
+
+        return $this->collPlayerDecksRelatedByFirstPropriumId;
+    }
+
+    /**
+     * Sets a collection of ChildPlayerDeck objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $playerDecksRelatedByFirstPropriumId A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildProprium The current object (for fluent API support)
+     */
+    public function setPlayerDecksRelatedByFirstPropriumId(Collection $playerDecksRelatedByFirstPropriumId, ConnectionInterface $con = null)
+    {
+        /** @var ChildPlayerDeck[] $playerDecksRelatedByFirstPropriumIdToDelete */
+        $playerDecksRelatedByFirstPropriumIdToDelete = $this->getPlayerDecksRelatedByFirstPropriumId(new Criteria(), $con)->diff($playerDecksRelatedByFirstPropriumId);
+
+
+        $this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion = $playerDecksRelatedByFirstPropriumIdToDelete;
+
+        foreach ($playerDecksRelatedByFirstPropriumIdToDelete as $playerDeckRelatedByFirstPropriumIdRemoved) {
+            $playerDeckRelatedByFirstPropriumIdRemoved->setPropriumRelatedByFirstPropriumId(null);
+        }
+
+        $this->collPlayerDecksRelatedByFirstPropriumId = null;
+        foreach ($playerDecksRelatedByFirstPropriumId as $playerDeckRelatedByFirstPropriumId) {
+            $this->addPlayerDeckRelatedByFirstPropriumId($playerDeckRelatedByFirstPropriumId);
+        }
+
+        $this->collPlayerDecksRelatedByFirstPropriumId = $playerDecksRelatedByFirstPropriumId;
+        $this->collPlayerDecksRelatedByFirstPropriumIdPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related PlayerDeck objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related PlayerDeck objects.
+     * @throws PropelException
+     */
+    public function countPlayerDecksRelatedByFirstPropriumId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerDecksRelatedByFirstPropriumIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByFirstPropriumId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByFirstPropriumId) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getPlayerDecksRelatedByFirstPropriumId());
+            }
+
+            $query = ChildPlayerDeckQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByPropriumRelatedByFirstPropriumId($this)
+                ->count($con);
+        }
+
+        return count($this->collPlayerDecksRelatedByFirstPropriumId);
+    }
+
+    /**
+     * Method called to associate a ChildPlayerDeck object to this object
+     * through the ChildPlayerDeck foreign key attribute.
+     *
+     * @param  ChildPlayerDeck $l ChildPlayerDeck
+     * @return $this|\app\model\Proprium The current object (for fluent API support)
+     */
+    public function addPlayerDeckRelatedByFirstPropriumId(ChildPlayerDeck $l)
+    {
+        if ($this->collPlayerDecksRelatedByFirstPropriumId === null) {
+            $this->initPlayerDecksRelatedByFirstPropriumId();
+            $this->collPlayerDecksRelatedByFirstPropriumIdPartial = true;
+        }
+
+        if (!$this->collPlayerDecksRelatedByFirstPropriumId->contains($l)) {
+            $this->doAddPlayerDeckRelatedByFirstPropriumId($l);
+
+            if ($this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion and $this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion->contains($l)) {
+                $this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion->remove($this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ChildPlayerDeck $playerDeckRelatedByFirstPropriumId The ChildPlayerDeck object to add.
+     */
+    protected function doAddPlayerDeckRelatedByFirstPropriumId(ChildPlayerDeck $playerDeckRelatedByFirstPropriumId)
+    {
+        $this->collPlayerDecksRelatedByFirstPropriumId[]= $playerDeckRelatedByFirstPropriumId;
+        $playerDeckRelatedByFirstPropriumId->setPropriumRelatedByFirstPropriumId($this);
+    }
+
+    /**
+     * @param  ChildPlayerDeck $playerDeckRelatedByFirstPropriumId The ChildPlayerDeck object to remove.
+     * @return $this|ChildProprium The current object (for fluent API support)
+     */
+    public function removePlayerDeckRelatedByFirstPropriumId(ChildPlayerDeck $playerDeckRelatedByFirstPropriumId)
+    {
+        if ($this->getPlayerDecksRelatedByFirstPropriumId()->contains($playerDeckRelatedByFirstPropriumId)) {
+            $pos = $this->collPlayerDecksRelatedByFirstPropriumId->search($playerDeckRelatedByFirstPropriumId);
+            $this->collPlayerDecksRelatedByFirstPropriumId->remove($pos);
+            if (null === $this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion) {
+                $this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByFirstPropriumId;
+                $this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion->clear();
+            }
+            $this->playerDecksRelatedByFirstPropriumIdScheduledForDeletion[]= clone $playerDeckRelatedByFirstPropriumId;
+            $playerDeckRelatedByFirstPropriumId->setPropriumRelatedByFirstPropriumId(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Proprium is new, it will return
+     * an empty collection; or if this Proprium has previously
+     * been saved, it will retrieve related PlayerDecksRelatedByFirstPropriumId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Proprium.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     */
+    public function getPlayerDecksRelatedByFirstPropriumIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerDeckQuery::create(null, $criteria);
+        $query->joinWith('Player', $joinBehavior);
+
+        return $this->getPlayerDecksRelatedByFirstPropriumId($query, $con);
+    }
+
+    /**
+     * Clears out the collPlayerDecksRelatedBySecondPropriumId collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addPlayerDecksRelatedBySecondPropriumId()
+     */
+    public function clearPlayerDecksRelatedBySecondPropriumId()
+    {
+        $this->collPlayerDecksRelatedBySecondPropriumId = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collPlayerDecksRelatedBySecondPropriumId collection loaded partially.
+     */
+    public function resetPartialPlayerDecksRelatedBySecondPropriumId($v = true)
+    {
+        $this->collPlayerDecksRelatedBySecondPropriumIdPartial = $v;
+    }
+
+    /**
+     * Initializes the collPlayerDecksRelatedBySecondPropriumId collection.
+     *
+     * By default this just sets the collPlayerDecksRelatedBySecondPropriumId collection to an empty array (like clearcollPlayerDecksRelatedBySecondPropriumId());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initPlayerDecksRelatedBySecondPropriumId($overrideExisting = true)
+    {
+        if (null !== $this->collPlayerDecksRelatedBySecondPropriumId && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collPlayerDecksRelatedBySecondPropriumId = new $collectionClassName;
+        $this->collPlayerDecksRelatedBySecondPropriumId->setModel('\app\model\PlayerDeck');
+    }
+
+    /**
+     * Gets an array of ChildPlayerDeck objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildProprium is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @throws PropelException
+     */
+    public function getPlayerDecksRelatedBySecondPropriumId(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerDecksRelatedBySecondPropriumIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedBySecondPropriumId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedBySecondPropriumId) {
+                // return empty collection
+                $this->initPlayerDecksRelatedBySecondPropriumId();
+            } else {
+                $collPlayerDecksRelatedBySecondPropriumId = ChildPlayerDeckQuery::create(null, $criteria)
+                    ->filterByPropriumRelatedBySecondPropriumId($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collPlayerDecksRelatedBySecondPropriumIdPartial && count($collPlayerDecksRelatedBySecondPropriumId)) {
+                        $this->initPlayerDecksRelatedBySecondPropriumId(false);
+
+                        foreach ($collPlayerDecksRelatedBySecondPropriumId as $obj) {
+                            if (false == $this->collPlayerDecksRelatedBySecondPropriumId->contains($obj)) {
+                                $this->collPlayerDecksRelatedBySecondPropriumId->append($obj);
+                            }
+                        }
+
+                        $this->collPlayerDecksRelatedBySecondPropriumIdPartial = true;
+                    }
+
+                    return $collPlayerDecksRelatedBySecondPropriumId;
+                }
+
+                if ($partial && $this->collPlayerDecksRelatedBySecondPropriumId) {
+                    foreach ($this->collPlayerDecksRelatedBySecondPropriumId as $obj) {
+                        if ($obj->isNew()) {
+                            $collPlayerDecksRelatedBySecondPropriumId[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collPlayerDecksRelatedBySecondPropriumId = $collPlayerDecksRelatedBySecondPropriumId;
+                $this->collPlayerDecksRelatedBySecondPropriumIdPartial = false;
+            }
+        }
+
+        return $this->collPlayerDecksRelatedBySecondPropriumId;
+    }
+
+    /**
+     * Sets a collection of ChildPlayerDeck objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $playerDecksRelatedBySecondPropriumId A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildProprium The current object (for fluent API support)
+     */
+    public function setPlayerDecksRelatedBySecondPropriumId(Collection $playerDecksRelatedBySecondPropriumId, ConnectionInterface $con = null)
+    {
+        /** @var ChildPlayerDeck[] $playerDecksRelatedBySecondPropriumIdToDelete */
+        $playerDecksRelatedBySecondPropriumIdToDelete = $this->getPlayerDecksRelatedBySecondPropriumId(new Criteria(), $con)->diff($playerDecksRelatedBySecondPropriumId);
+
+
+        $this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion = $playerDecksRelatedBySecondPropriumIdToDelete;
+
+        foreach ($playerDecksRelatedBySecondPropriumIdToDelete as $playerDeckRelatedBySecondPropriumIdRemoved) {
+            $playerDeckRelatedBySecondPropriumIdRemoved->setPropriumRelatedBySecondPropriumId(null);
+        }
+
+        $this->collPlayerDecksRelatedBySecondPropriumId = null;
+        foreach ($playerDecksRelatedBySecondPropriumId as $playerDeckRelatedBySecondPropriumId) {
+            $this->addPlayerDeckRelatedBySecondPropriumId($playerDeckRelatedBySecondPropriumId);
+        }
+
+        $this->collPlayerDecksRelatedBySecondPropriumId = $playerDecksRelatedBySecondPropriumId;
+        $this->collPlayerDecksRelatedBySecondPropriumIdPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related PlayerDeck objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related PlayerDeck objects.
+     * @throws PropelException
+     */
+    public function countPlayerDecksRelatedBySecondPropriumId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerDecksRelatedBySecondPropriumIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedBySecondPropriumId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedBySecondPropriumId) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getPlayerDecksRelatedBySecondPropriumId());
+            }
+
+            $query = ChildPlayerDeckQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByPropriumRelatedBySecondPropriumId($this)
+                ->count($con);
+        }
+
+        return count($this->collPlayerDecksRelatedBySecondPropriumId);
+    }
+
+    /**
+     * Method called to associate a ChildPlayerDeck object to this object
+     * through the ChildPlayerDeck foreign key attribute.
+     *
+     * @param  ChildPlayerDeck $l ChildPlayerDeck
+     * @return $this|\app\model\Proprium The current object (for fluent API support)
+     */
+    public function addPlayerDeckRelatedBySecondPropriumId(ChildPlayerDeck $l)
+    {
+        if ($this->collPlayerDecksRelatedBySecondPropriumId === null) {
+            $this->initPlayerDecksRelatedBySecondPropriumId();
+            $this->collPlayerDecksRelatedBySecondPropriumIdPartial = true;
+        }
+
+        if (!$this->collPlayerDecksRelatedBySecondPropriumId->contains($l)) {
+            $this->doAddPlayerDeckRelatedBySecondPropriumId($l);
+
+            if ($this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion and $this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion->contains($l)) {
+                $this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion->remove($this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ChildPlayerDeck $playerDeckRelatedBySecondPropriumId The ChildPlayerDeck object to add.
+     */
+    protected function doAddPlayerDeckRelatedBySecondPropriumId(ChildPlayerDeck $playerDeckRelatedBySecondPropriumId)
+    {
+        $this->collPlayerDecksRelatedBySecondPropriumId[]= $playerDeckRelatedBySecondPropriumId;
+        $playerDeckRelatedBySecondPropriumId->setPropriumRelatedBySecondPropriumId($this);
+    }
+
+    /**
+     * @param  ChildPlayerDeck $playerDeckRelatedBySecondPropriumId The ChildPlayerDeck object to remove.
+     * @return $this|ChildProprium The current object (for fluent API support)
+     */
+    public function removePlayerDeckRelatedBySecondPropriumId(ChildPlayerDeck $playerDeckRelatedBySecondPropriumId)
+    {
+        if ($this->getPlayerDecksRelatedBySecondPropriumId()->contains($playerDeckRelatedBySecondPropriumId)) {
+            $pos = $this->collPlayerDecksRelatedBySecondPropriumId->search($playerDeckRelatedBySecondPropriumId);
+            $this->collPlayerDecksRelatedBySecondPropriumId->remove($pos);
+            if (null === $this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion) {
+                $this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion = clone $this->collPlayerDecksRelatedBySecondPropriumId;
+                $this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion->clear();
+            }
+            $this->playerDecksRelatedBySecondPropriumIdScheduledForDeletion[]= clone $playerDeckRelatedBySecondPropriumId;
+            $playerDeckRelatedBySecondPropriumId->setPropriumRelatedBySecondPropriumId(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Proprium is new, it will return
+     * an empty collection; or if this Proprium has previously
+     * been saved, it will retrieve related PlayerDecksRelatedBySecondPropriumId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Proprium.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     */
+    public function getPlayerDecksRelatedBySecondPropriumIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerDeckQuery::create(null, $criteria);
+        $query->joinWith('Player', $joinBehavior);
+
+        return $this->getPlayerDecksRelatedBySecondPropriumId($query, $con);
+    }
+
+    /**
+     * Clears out the collPlayerDecksRelatedByThirdPropriumId collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addPlayerDecksRelatedByThirdPropriumId()
+     */
+    public function clearPlayerDecksRelatedByThirdPropriumId()
+    {
+        $this->collPlayerDecksRelatedByThirdPropriumId = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collPlayerDecksRelatedByThirdPropriumId collection loaded partially.
+     */
+    public function resetPartialPlayerDecksRelatedByThirdPropriumId($v = true)
+    {
+        $this->collPlayerDecksRelatedByThirdPropriumIdPartial = $v;
+    }
+
+    /**
+     * Initializes the collPlayerDecksRelatedByThirdPropriumId collection.
+     *
+     * By default this just sets the collPlayerDecksRelatedByThirdPropriumId collection to an empty array (like clearcollPlayerDecksRelatedByThirdPropriumId());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initPlayerDecksRelatedByThirdPropriumId($overrideExisting = true)
+    {
+        if (null !== $this->collPlayerDecksRelatedByThirdPropriumId && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collPlayerDecksRelatedByThirdPropriumId = new $collectionClassName;
+        $this->collPlayerDecksRelatedByThirdPropriumId->setModel('\app\model\PlayerDeck');
+    }
+
+    /**
+     * Gets an array of ChildPlayerDeck objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildProprium is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @throws PropelException
+     */
+    public function getPlayerDecksRelatedByThirdPropriumId(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerDecksRelatedByThirdPropriumIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByThirdPropriumId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByThirdPropriumId) {
+                // return empty collection
+                $this->initPlayerDecksRelatedByThirdPropriumId();
+            } else {
+                $collPlayerDecksRelatedByThirdPropriumId = ChildPlayerDeckQuery::create(null, $criteria)
+                    ->filterByPropriumRelatedByThirdPropriumId($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collPlayerDecksRelatedByThirdPropriumIdPartial && count($collPlayerDecksRelatedByThirdPropriumId)) {
+                        $this->initPlayerDecksRelatedByThirdPropriumId(false);
+
+                        foreach ($collPlayerDecksRelatedByThirdPropriumId as $obj) {
+                            if (false == $this->collPlayerDecksRelatedByThirdPropriumId->contains($obj)) {
+                                $this->collPlayerDecksRelatedByThirdPropriumId->append($obj);
+                            }
+                        }
+
+                        $this->collPlayerDecksRelatedByThirdPropriumIdPartial = true;
+                    }
+
+                    return $collPlayerDecksRelatedByThirdPropriumId;
+                }
+
+                if ($partial && $this->collPlayerDecksRelatedByThirdPropriumId) {
+                    foreach ($this->collPlayerDecksRelatedByThirdPropriumId as $obj) {
+                        if ($obj->isNew()) {
+                            $collPlayerDecksRelatedByThirdPropriumId[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collPlayerDecksRelatedByThirdPropriumId = $collPlayerDecksRelatedByThirdPropriumId;
+                $this->collPlayerDecksRelatedByThirdPropriumIdPartial = false;
+            }
+        }
+
+        return $this->collPlayerDecksRelatedByThirdPropriumId;
+    }
+
+    /**
+     * Sets a collection of ChildPlayerDeck objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $playerDecksRelatedByThirdPropriumId A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildProprium The current object (for fluent API support)
+     */
+    public function setPlayerDecksRelatedByThirdPropriumId(Collection $playerDecksRelatedByThirdPropriumId, ConnectionInterface $con = null)
+    {
+        /** @var ChildPlayerDeck[] $playerDecksRelatedByThirdPropriumIdToDelete */
+        $playerDecksRelatedByThirdPropriumIdToDelete = $this->getPlayerDecksRelatedByThirdPropriumId(new Criteria(), $con)->diff($playerDecksRelatedByThirdPropriumId);
+
+
+        $this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion = $playerDecksRelatedByThirdPropriumIdToDelete;
+
+        foreach ($playerDecksRelatedByThirdPropriumIdToDelete as $playerDeckRelatedByThirdPropriumIdRemoved) {
+            $playerDeckRelatedByThirdPropriumIdRemoved->setPropriumRelatedByThirdPropriumId(null);
+        }
+
+        $this->collPlayerDecksRelatedByThirdPropriumId = null;
+        foreach ($playerDecksRelatedByThirdPropriumId as $playerDeckRelatedByThirdPropriumId) {
+            $this->addPlayerDeckRelatedByThirdPropriumId($playerDeckRelatedByThirdPropriumId);
+        }
+
+        $this->collPlayerDecksRelatedByThirdPropriumId = $playerDecksRelatedByThirdPropriumId;
+        $this->collPlayerDecksRelatedByThirdPropriumIdPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related PlayerDeck objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related PlayerDeck objects.
+     * @throws PropelException
+     */
+    public function countPlayerDecksRelatedByThirdPropriumId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerDecksRelatedByThirdPropriumIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByThirdPropriumId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByThirdPropriumId) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getPlayerDecksRelatedByThirdPropriumId());
+            }
+
+            $query = ChildPlayerDeckQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByPropriumRelatedByThirdPropriumId($this)
+                ->count($con);
+        }
+
+        return count($this->collPlayerDecksRelatedByThirdPropriumId);
+    }
+
+    /**
+     * Method called to associate a ChildPlayerDeck object to this object
+     * through the ChildPlayerDeck foreign key attribute.
+     *
+     * @param  ChildPlayerDeck $l ChildPlayerDeck
+     * @return $this|\app\model\Proprium The current object (for fluent API support)
+     */
+    public function addPlayerDeckRelatedByThirdPropriumId(ChildPlayerDeck $l)
+    {
+        if ($this->collPlayerDecksRelatedByThirdPropriumId === null) {
+            $this->initPlayerDecksRelatedByThirdPropriumId();
+            $this->collPlayerDecksRelatedByThirdPropriumIdPartial = true;
+        }
+
+        if (!$this->collPlayerDecksRelatedByThirdPropriumId->contains($l)) {
+            $this->doAddPlayerDeckRelatedByThirdPropriumId($l);
+
+            if ($this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion and $this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion->contains($l)) {
+                $this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion->remove($this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ChildPlayerDeck $playerDeckRelatedByThirdPropriumId The ChildPlayerDeck object to add.
+     */
+    protected function doAddPlayerDeckRelatedByThirdPropriumId(ChildPlayerDeck $playerDeckRelatedByThirdPropriumId)
+    {
+        $this->collPlayerDecksRelatedByThirdPropriumId[]= $playerDeckRelatedByThirdPropriumId;
+        $playerDeckRelatedByThirdPropriumId->setPropriumRelatedByThirdPropriumId($this);
+    }
+
+    /**
+     * @param  ChildPlayerDeck $playerDeckRelatedByThirdPropriumId The ChildPlayerDeck object to remove.
+     * @return $this|ChildProprium The current object (for fluent API support)
+     */
+    public function removePlayerDeckRelatedByThirdPropriumId(ChildPlayerDeck $playerDeckRelatedByThirdPropriumId)
+    {
+        if ($this->getPlayerDecksRelatedByThirdPropriumId()->contains($playerDeckRelatedByThirdPropriumId)) {
+            $pos = $this->collPlayerDecksRelatedByThirdPropriumId->search($playerDeckRelatedByThirdPropriumId);
+            $this->collPlayerDecksRelatedByThirdPropriumId->remove($pos);
+            if (null === $this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion) {
+                $this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByThirdPropriumId;
+                $this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion->clear();
+            }
+            $this->playerDecksRelatedByThirdPropriumIdScheduledForDeletion[]= clone $playerDeckRelatedByThirdPropriumId;
+            $playerDeckRelatedByThirdPropriumId->setPropriumRelatedByThirdPropriumId(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Proprium is new, it will return
+     * an empty collection; or if this Proprium has previously
+     * been saved, it will retrieve related PlayerDecksRelatedByThirdPropriumId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Proprium.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     */
+    public function getPlayerDecksRelatedByThirdPropriumIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerDeckQuery::create(null, $criteria);
+        $query->joinWith('Player', $joinBehavior);
+
+        return $this->getPlayerDecksRelatedByThirdPropriumId($query, $con);
+    }
+
+    /**
+     * Clears out the collPlayerDecksRelatedByFourthPropriumId collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addPlayerDecksRelatedByFourthPropriumId()
+     */
+    public function clearPlayerDecksRelatedByFourthPropriumId()
+    {
+        $this->collPlayerDecksRelatedByFourthPropriumId = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collPlayerDecksRelatedByFourthPropriumId collection loaded partially.
+     */
+    public function resetPartialPlayerDecksRelatedByFourthPropriumId($v = true)
+    {
+        $this->collPlayerDecksRelatedByFourthPropriumIdPartial = $v;
+    }
+
+    /**
+     * Initializes the collPlayerDecksRelatedByFourthPropriumId collection.
+     *
+     * By default this just sets the collPlayerDecksRelatedByFourthPropriumId collection to an empty array (like clearcollPlayerDecksRelatedByFourthPropriumId());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initPlayerDecksRelatedByFourthPropriumId($overrideExisting = true)
+    {
+        if (null !== $this->collPlayerDecksRelatedByFourthPropriumId && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collPlayerDecksRelatedByFourthPropriumId = new $collectionClassName;
+        $this->collPlayerDecksRelatedByFourthPropriumId->setModel('\app\model\PlayerDeck');
+    }
+
+    /**
+     * Gets an array of ChildPlayerDeck objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildProprium is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @throws PropelException
+     */
+    public function getPlayerDecksRelatedByFourthPropriumId(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerDecksRelatedByFourthPropriumIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByFourthPropriumId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByFourthPropriumId) {
+                // return empty collection
+                $this->initPlayerDecksRelatedByFourthPropriumId();
+            } else {
+                $collPlayerDecksRelatedByFourthPropriumId = ChildPlayerDeckQuery::create(null, $criteria)
+                    ->filterByPropriumRelatedByFourthPropriumId($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collPlayerDecksRelatedByFourthPropriumIdPartial && count($collPlayerDecksRelatedByFourthPropriumId)) {
+                        $this->initPlayerDecksRelatedByFourthPropriumId(false);
+
+                        foreach ($collPlayerDecksRelatedByFourthPropriumId as $obj) {
+                            if (false == $this->collPlayerDecksRelatedByFourthPropriumId->contains($obj)) {
+                                $this->collPlayerDecksRelatedByFourthPropriumId->append($obj);
+                            }
+                        }
+
+                        $this->collPlayerDecksRelatedByFourthPropriumIdPartial = true;
+                    }
+
+                    return $collPlayerDecksRelatedByFourthPropriumId;
+                }
+
+                if ($partial && $this->collPlayerDecksRelatedByFourthPropriumId) {
+                    foreach ($this->collPlayerDecksRelatedByFourthPropriumId as $obj) {
+                        if ($obj->isNew()) {
+                            $collPlayerDecksRelatedByFourthPropriumId[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collPlayerDecksRelatedByFourthPropriumId = $collPlayerDecksRelatedByFourthPropriumId;
+                $this->collPlayerDecksRelatedByFourthPropriumIdPartial = false;
+            }
+        }
+
+        return $this->collPlayerDecksRelatedByFourthPropriumId;
+    }
+
+    /**
+     * Sets a collection of ChildPlayerDeck objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $playerDecksRelatedByFourthPropriumId A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildProprium The current object (for fluent API support)
+     */
+    public function setPlayerDecksRelatedByFourthPropriumId(Collection $playerDecksRelatedByFourthPropriumId, ConnectionInterface $con = null)
+    {
+        /** @var ChildPlayerDeck[] $playerDecksRelatedByFourthPropriumIdToDelete */
+        $playerDecksRelatedByFourthPropriumIdToDelete = $this->getPlayerDecksRelatedByFourthPropriumId(new Criteria(), $con)->diff($playerDecksRelatedByFourthPropriumId);
+
+
+        $this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion = $playerDecksRelatedByFourthPropriumIdToDelete;
+
+        foreach ($playerDecksRelatedByFourthPropriumIdToDelete as $playerDeckRelatedByFourthPropriumIdRemoved) {
+            $playerDeckRelatedByFourthPropriumIdRemoved->setPropriumRelatedByFourthPropriumId(null);
+        }
+
+        $this->collPlayerDecksRelatedByFourthPropriumId = null;
+        foreach ($playerDecksRelatedByFourthPropriumId as $playerDeckRelatedByFourthPropriumId) {
+            $this->addPlayerDeckRelatedByFourthPropriumId($playerDeckRelatedByFourthPropriumId);
+        }
+
+        $this->collPlayerDecksRelatedByFourthPropriumId = $playerDecksRelatedByFourthPropriumId;
+        $this->collPlayerDecksRelatedByFourthPropriumIdPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related PlayerDeck objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related PlayerDeck objects.
+     * @throws PropelException
+     */
+    public function countPlayerDecksRelatedByFourthPropriumId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerDecksRelatedByFourthPropriumIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByFourthPropriumId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByFourthPropriumId) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getPlayerDecksRelatedByFourthPropriumId());
+            }
+
+            $query = ChildPlayerDeckQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByPropriumRelatedByFourthPropriumId($this)
+                ->count($con);
+        }
+
+        return count($this->collPlayerDecksRelatedByFourthPropriumId);
+    }
+
+    /**
+     * Method called to associate a ChildPlayerDeck object to this object
+     * through the ChildPlayerDeck foreign key attribute.
+     *
+     * @param  ChildPlayerDeck $l ChildPlayerDeck
+     * @return $this|\app\model\Proprium The current object (for fluent API support)
+     */
+    public function addPlayerDeckRelatedByFourthPropriumId(ChildPlayerDeck $l)
+    {
+        if ($this->collPlayerDecksRelatedByFourthPropriumId === null) {
+            $this->initPlayerDecksRelatedByFourthPropriumId();
+            $this->collPlayerDecksRelatedByFourthPropriumIdPartial = true;
+        }
+
+        if (!$this->collPlayerDecksRelatedByFourthPropriumId->contains($l)) {
+            $this->doAddPlayerDeckRelatedByFourthPropriumId($l);
+
+            if ($this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion and $this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion->contains($l)) {
+                $this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion->remove($this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ChildPlayerDeck $playerDeckRelatedByFourthPropriumId The ChildPlayerDeck object to add.
+     */
+    protected function doAddPlayerDeckRelatedByFourthPropriumId(ChildPlayerDeck $playerDeckRelatedByFourthPropriumId)
+    {
+        $this->collPlayerDecksRelatedByFourthPropriumId[]= $playerDeckRelatedByFourthPropriumId;
+        $playerDeckRelatedByFourthPropriumId->setPropriumRelatedByFourthPropriumId($this);
+    }
+
+    /**
+     * @param  ChildPlayerDeck $playerDeckRelatedByFourthPropriumId The ChildPlayerDeck object to remove.
+     * @return $this|ChildProprium The current object (for fluent API support)
+     */
+    public function removePlayerDeckRelatedByFourthPropriumId(ChildPlayerDeck $playerDeckRelatedByFourthPropriumId)
+    {
+        if ($this->getPlayerDecksRelatedByFourthPropriumId()->contains($playerDeckRelatedByFourthPropriumId)) {
+            $pos = $this->collPlayerDecksRelatedByFourthPropriumId->search($playerDeckRelatedByFourthPropriumId);
+            $this->collPlayerDecksRelatedByFourthPropriumId->remove($pos);
+            if (null === $this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion) {
+                $this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByFourthPropriumId;
+                $this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion->clear();
+            }
+            $this->playerDecksRelatedByFourthPropriumIdScheduledForDeletion[]= clone $playerDeckRelatedByFourthPropriumId;
+            $playerDeckRelatedByFourthPropriumId->setPropriumRelatedByFourthPropriumId(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Proprium is new, it will return
+     * an empty collection; or if this Proprium has previously
+     * been saved, it will retrieve related PlayerDecksRelatedByFourthPropriumId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Proprium.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     */
+    public function getPlayerDecksRelatedByFourthPropriumIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerDeckQuery::create(null, $criteria);
+        $query->joinWith('Player', $joinBehavior);
+
+        return $this->getPlayerDecksRelatedByFourthPropriumId($query, $con);
+    }
+
+    /**
+     * Clears out the collPlayerDecksRelatedByFifthPropriumId collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addPlayerDecksRelatedByFifthPropriumId()
+     */
+    public function clearPlayerDecksRelatedByFifthPropriumId()
+    {
+        $this->collPlayerDecksRelatedByFifthPropriumId = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collPlayerDecksRelatedByFifthPropriumId collection loaded partially.
+     */
+    public function resetPartialPlayerDecksRelatedByFifthPropriumId($v = true)
+    {
+        $this->collPlayerDecksRelatedByFifthPropriumIdPartial = $v;
+    }
+
+    /**
+     * Initializes the collPlayerDecksRelatedByFifthPropriumId collection.
+     *
+     * By default this just sets the collPlayerDecksRelatedByFifthPropriumId collection to an empty array (like clearcollPlayerDecksRelatedByFifthPropriumId());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initPlayerDecksRelatedByFifthPropriumId($overrideExisting = true)
+    {
+        if (null !== $this->collPlayerDecksRelatedByFifthPropriumId && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collPlayerDecksRelatedByFifthPropriumId = new $collectionClassName;
+        $this->collPlayerDecksRelatedByFifthPropriumId->setModel('\app\model\PlayerDeck');
+    }
+
+    /**
+     * Gets an array of ChildPlayerDeck objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildProprium is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @throws PropelException
+     */
+    public function getPlayerDecksRelatedByFifthPropriumId(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerDecksRelatedByFifthPropriumIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByFifthPropriumId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByFifthPropriumId) {
+                // return empty collection
+                $this->initPlayerDecksRelatedByFifthPropriumId();
+            } else {
+                $collPlayerDecksRelatedByFifthPropriumId = ChildPlayerDeckQuery::create(null, $criteria)
+                    ->filterByPropriumRelatedByFifthPropriumId($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collPlayerDecksRelatedByFifthPropriumIdPartial && count($collPlayerDecksRelatedByFifthPropriumId)) {
+                        $this->initPlayerDecksRelatedByFifthPropriumId(false);
+
+                        foreach ($collPlayerDecksRelatedByFifthPropriumId as $obj) {
+                            if (false == $this->collPlayerDecksRelatedByFifthPropriumId->contains($obj)) {
+                                $this->collPlayerDecksRelatedByFifthPropriumId->append($obj);
+                            }
+                        }
+
+                        $this->collPlayerDecksRelatedByFifthPropriumIdPartial = true;
+                    }
+
+                    return $collPlayerDecksRelatedByFifthPropriumId;
+                }
+
+                if ($partial && $this->collPlayerDecksRelatedByFifthPropriumId) {
+                    foreach ($this->collPlayerDecksRelatedByFifthPropriumId as $obj) {
+                        if ($obj->isNew()) {
+                            $collPlayerDecksRelatedByFifthPropriumId[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collPlayerDecksRelatedByFifthPropriumId = $collPlayerDecksRelatedByFifthPropriumId;
+                $this->collPlayerDecksRelatedByFifthPropriumIdPartial = false;
+            }
+        }
+
+        return $this->collPlayerDecksRelatedByFifthPropriumId;
+    }
+
+    /**
+     * Sets a collection of ChildPlayerDeck objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $playerDecksRelatedByFifthPropriumId A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildProprium The current object (for fluent API support)
+     */
+    public function setPlayerDecksRelatedByFifthPropriumId(Collection $playerDecksRelatedByFifthPropriumId, ConnectionInterface $con = null)
+    {
+        /** @var ChildPlayerDeck[] $playerDecksRelatedByFifthPropriumIdToDelete */
+        $playerDecksRelatedByFifthPropriumIdToDelete = $this->getPlayerDecksRelatedByFifthPropriumId(new Criteria(), $con)->diff($playerDecksRelatedByFifthPropriumId);
+
+
+        $this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion = $playerDecksRelatedByFifthPropriumIdToDelete;
+
+        foreach ($playerDecksRelatedByFifthPropriumIdToDelete as $playerDeckRelatedByFifthPropriumIdRemoved) {
+            $playerDeckRelatedByFifthPropriumIdRemoved->setPropriumRelatedByFifthPropriumId(null);
+        }
+
+        $this->collPlayerDecksRelatedByFifthPropriumId = null;
+        foreach ($playerDecksRelatedByFifthPropriumId as $playerDeckRelatedByFifthPropriumId) {
+            $this->addPlayerDeckRelatedByFifthPropriumId($playerDeckRelatedByFifthPropriumId);
+        }
+
+        $this->collPlayerDecksRelatedByFifthPropriumId = $playerDecksRelatedByFifthPropriumId;
+        $this->collPlayerDecksRelatedByFifthPropriumIdPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related PlayerDeck objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related PlayerDeck objects.
+     * @throws PropelException
+     */
+    public function countPlayerDecksRelatedByFifthPropriumId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerDecksRelatedByFifthPropriumIdPartial && !$this->isNew();
+        if (null === $this->collPlayerDecksRelatedByFifthPropriumId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerDecksRelatedByFifthPropriumId) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getPlayerDecksRelatedByFifthPropriumId());
+            }
+
+            $query = ChildPlayerDeckQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByPropriumRelatedByFifthPropriumId($this)
+                ->count($con);
+        }
+
+        return count($this->collPlayerDecksRelatedByFifthPropriumId);
+    }
+
+    /**
+     * Method called to associate a ChildPlayerDeck object to this object
+     * through the ChildPlayerDeck foreign key attribute.
+     *
+     * @param  ChildPlayerDeck $l ChildPlayerDeck
+     * @return $this|\app\model\Proprium The current object (for fluent API support)
+     */
+    public function addPlayerDeckRelatedByFifthPropriumId(ChildPlayerDeck $l)
+    {
+        if ($this->collPlayerDecksRelatedByFifthPropriumId === null) {
+            $this->initPlayerDecksRelatedByFifthPropriumId();
+            $this->collPlayerDecksRelatedByFifthPropriumIdPartial = true;
+        }
+
+        if (!$this->collPlayerDecksRelatedByFifthPropriumId->contains($l)) {
+            $this->doAddPlayerDeckRelatedByFifthPropriumId($l);
+
+            if ($this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion and $this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion->contains($l)) {
+                $this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion->remove($this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ChildPlayerDeck $playerDeckRelatedByFifthPropriumId The ChildPlayerDeck object to add.
+     */
+    protected function doAddPlayerDeckRelatedByFifthPropriumId(ChildPlayerDeck $playerDeckRelatedByFifthPropriumId)
+    {
+        $this->collPlayerDecksRelatedByFifthPropriumId[]= $playerDeckRelatedByFifthPropriumId;
+        $playerDeckRelatedByFifthPropriumId->setPropriumRelatedByFifthPropriumId($this);
+    }
+
+    /**
+     * @param  ChildPlayerDeck $playerDeckRelatedByFifthPropriumId The ChildPlayerDeck object to remove.
+     * @return $this|ChildProprium The current object (for fluent API support)
+     */
+    public function removePlayerDeckRelatedByFifthPropriumId(ChildPlayerDeck $playerDeckRelatedByFifthPropriumId)
+    {
+        if ($this->getPlayerDecksRelatedByFifthPropriumId()->contains($playerDeckRelatedByFifthPropriumId)) {
+            $pos = $this->collPlayerDecksRelatedByFifthPropriumId->search($playerDeckRelatedByFifthPropriumId);
+            $this->collPlayerDecksRelatedByFifthPropriumId->remove($pos);
+            if (null === $this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion) {
+                $this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByFifthPropriumId;
+                $this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion->clear();
+            }
+            $this->playerDecksRelatedByFifthPropriumIdScheduledForDeletion[]= clone $playerDeckRelatedByFifthPropriumId;
+            $playerDeckRelatedByFifthPropriumId->setPropriumRelatedByFifthPropriumId(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Proprium is new, it will return
+     * an empty collection; or if this Proprium has previously
+     * been saved, it will retrieve related PlayerDecksRelatedByFifthPropriumId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Proprium.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     */
+    public function getPlayerDecksRelatedByFifthPropriumIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerDeckQuery::create(null, $criteria);
+        $query->joinWith('Player', $joinBehavior);
+
+        return $this->getPlayerDecksRelatedByFifthPropriumId($query, $con);
+    }
+
+    /**
      * Clears the current object, sets all attributes to their default values and removes
      * outgoing references as well as back-references (from other objects to this one. Results probably in a database
      * change of those foreign objects when you call `save` there).
@@ -1346,9 +2879,39 @@ abstract class Proprium implements ActiveRecordInterface
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collPlayerDecksRelatedByFirstPropriumId) {
+                foreach ($this->collPlayerDecksRelatedByFirstPropriumId as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collPlayerDecksRelatedBySecondPropriumId) {
+                foreach ($this->collPlayerDecksRelatedBySecondPropriumId as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collPlayerDecksRelatedByThirdPropriumId) {
+                foreach ($this->collPlayerDecksRelatedByThirdPropriumId as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collPlayerDecksRelatedByFourthPropriumId) {
+                foreach ($this->collPlayerDecksRelatedByFourthPropriumId as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collPlayerDecksRelatedByFifthPropriumId) {
+                foreach ($this->collPlayerDecksRelatedByFifthPropriumId as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
         } // if ($deep)
 
         $this->collItems = null;
+        $this->collPlayerDecksRelatedByFirstPropriumId = null;
+        $this->collPlayerDecksRelatedBySecondPropriumId = null;
+        $this->collPlayerDecksRelatedByThirdPropriumId = null;
+        $this->collPlayerDecksRelatedByFourthPropriumId = null;
+        $this->collPlayerDecksRelatedByFifthPropriumId = null;
     }
 
     /**

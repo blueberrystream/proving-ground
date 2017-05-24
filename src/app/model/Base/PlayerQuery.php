@@ -44,6 +44,16 @@ use app\model\Map\PlayerTableMap;
  * @method     ChildPlayerQuery rightJoinWithPlayerItem() Adds a RIGHT JOIN clause and with to the query using the PlayerItem relation
  * @method     ChildPlayerQuery innerJoinWithPlayerItem() Adds a INNER JOIN clause and with to the query using the PlayerItem relation
  *
+ * @method     ChildPlayerQuery leftJoinPlayerEquipment($relationAlias = null) Adds a LEFT JOIN clause to the query using the PlayerEquipment relation
+ * @method     ChildPlayerQuery rightJoinPlayerEquipment($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PlayerEquipment relation
+ * @method     ChildPlayerQuery innerJoinPlayerEquipment($relationAlias = null) Adds a INNER JOIN clause to the query using the PlayerEquipment relation
+ *
+ * @method     ChildPlayerQuery joinWithPlayerEquipment($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PlayerEquipment relation
+ *
+ * @method     ChildPlayerQuery leftJoinWithPlayerEquipment() Adds a LEFT JOIN clause and with to the query using the PlayerEquipment relation
+ * @method     ChildPlayerQuery rightJoinWithPlayerEquipment() Adds a RIGHT JOIN clause and with to the query using the PlayerEquipment relation
+ * @method     ChildPlayerQuery innerJoinWithPlayerEquipment() Adds a INNER JOIN clause and with to the query using the PlayerEquipment relation
+ *
  * @method     ChildPlayerQuery leftJoinPlayerDeck($relationAlias = null) Adds a LEFT JOIN clause to the query using the PlayerDeck relation
  * @method     ChildPlayerQuery rightJoinPlayerDeck($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PlayerDeck relation
  * @method     ChildPlayerQuery innerJoinPlayerDeck($relationAlias = null) Adds a INNER JOIN clause to the query using the PlayerDeck relation
@@ -74,7 +84,7 @@ use app\model\Map\PlayerTableMap;
  * @method     ChildPlayerQuery rightJoinWithPlayerBattleLogRelatedByEnemyPlayerId() Adds a RIGHT JOIN clause and with to the query using the PlayerBattleLogRelatedByEnemyPlayerId relation
  * @method     ChildPlayerQuery innerJoinWithPlayerBattleLogRelatedByEnemyPlayerId() Adds a INNER JOIN clause and with to the query using the PlayerBattleLogRelatedByEnemyPlayerId relation
  *
- * @method     \app\model\PlayerItemQuery|\app\model\PlayerDeckQuery|\app\model\PlayerBattleLogQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
+ * @method     \app\model\PlayerItemQuery|\app\model\PlayerEquipmentQuery|\app\model\PlayerDeckQuery|\app\model\PlayerBattleLogQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
  * @method     ChildPlayer findOne(ConnectionInterface $con = null) Return the first ChildPlayer matching the query
  * @method     ChildPlayer findOneOrCreate(ConnectionInterface $con = null) Return the first ChildPlayer matching the query, or a new ChildPlayer object populated from the query conditions when no match is found
@@ -416,6 +426,79 @@ abstract class PlayerQuery extends ModelCriteria
         return $this
             ->joinPlayerItem($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'PlayerItem', '\app\model\PlayerItemQuery');
+    }
+
+    /**
+     * Filter the query by a related \app\model\PlayerEquipment object
+     *
+     * @param \app\model\PlayerEquipment|ObjectCollection $playerEquipment the related object to use as filter
+     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ChildPlayerQuery The current query, for fluid interface
+     */
+    public function filterByPlayerEquipment($playerEquipment, $comparison = null)
+    {
+        if ($playerEquipment instanceof \app\model\PlayerEquipment) {
+            return $this
+                ->addUsingAlias(PlayerTableMap::COL_ID, $playerEquipment->getPlayerId(), $comparison);
+        } elseif ($playerEquipment instanceof ObjectCollection) {
+            return $this
+                ->usePlayerEquipmentQuery()
+                ->filterByPrimaryKeys($playerEquipment->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByPlayerEquipment() only accepts arguments of type \app\model\PlayerEquipment or Collection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the PlayerEquipment relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return $this|ChildPlayerQuery The current query, for fluid interface
+     */
+    public function joinPlayerEquipment($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('PlayerEquipment');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'PlayerEquipment');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the PlayerEquipment relation PlayerEquipment object
+     *
+     * @see useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return \app\model\PlayerEquipmentQuery A secondary query class using the current class as primary query
+     */
+    public function usePlayerEquipmentQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinPlayerEquipment($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PlayerEquipment', '\app\model\PlayerEquipmentQuery');
     }
 
     /**

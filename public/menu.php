@@ -15,26 +15,28 @@ echo $player->getName();
 <h2>menu</h2>
 <ol>
 <?php
-$menu_items = ['get_item', 'set_deck', 'battle', 'battle_log', 'logout'];
+$menu_items = ['get_item', 'equip', 'set_deck', 'battle', 'battle_log', 'logout'];
 foreach ($menu_items as $menu_item) {
     printf('<li><a href="/%s.php">%s</a></li>', $menu_item, $menu_item);
 }
 ?>
 </ol>
 
-<h2>deck</h2>
+<h2>equipment</h2>
 <ul>
 <?php
-if ($player->countPlayerDecks() === 0) {
+if ($player->countPlayerEquipments() === 0) {
     echo '<li>not set</li>';
 } else {
-    $player_deck = $player->getPlayerDecks()->getFirst();
-    $player_deck_items[] = $player_deck->getPlayerItemRelatedByHeadPlayerItemId();
-    $player_deck_items[] = $player_deck->getPlayerItemRelatedByLeftArmPlayerItemId();
-    $player_deck_items[] = $player_deck->getPlayerItemRelatedByRightArmPlayerItemId();
-    $player_deck_items[] = $player_deck->getPlayerItemRelatedByLeftLegPlayerItemId();
-    $player_deck_items[] = $player_deck->getPlayerItemRelatedByRightLegPlayerItemId();
-    foreach ($player_deck_items as $player_item) {
+    $player_equipment = $player->getPlayerEquipments()->getFirst();
+    $player_equipment_items[] = $player_equipment->getPlayerItemRelatedByWeapon1PlayerItemId();
+    $player_equipment_items[] = $player_equipment->getPlayerItemRelatedByWeapon2PlayerItemId();
+    $player_equipment_items[] = $player_equipment->getPlayerItemRelatedByHeadPlayerItemId();
+    $player_equipment_items[] = $player_equipment->getPlayerItemRelatedByLeftArmPlayerItemId();
+    $player_equipment_items[] = $player_equipment->getPlayerItemRelatedByRightArmPlayerItemId();
+    $player_equipment_items[] = $player_equipment->getPlayerItemRelatedByLeftLegPlayerItemId();
+    $player_equipment_items[] = $player_equipment->getPlayerItemRelatedByRightLegPlayerItemId();
+    foreach ($player_equipment_items as $player_item) {
         if (is_null($player_item)) {
             echo '<li>not set</li>';
         } else {

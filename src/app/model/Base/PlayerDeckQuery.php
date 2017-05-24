@@ -22,21 +22,21 @@ use app\model\Map\PlayerDeckTableMap;
  *
  * @method     ChildPlayerDeckQuery orderById($order = Criteria::ASC) Order by the id column
  * @method     ChildPlayerDeckQuery orderByPlayerId($order = Criteria::ASC) Order by the player_id column
- * @method     ChildPlayerDeckQuery orderByHeadPlayerItemId($order = Criteria::ASC) Order by the head_player_item_id column
- * @method     ChildPlayerDeckQuery orderByLeftArmPlayerItemId($order = Criteria::ASC) Order by the left_arm_player_item_id column
- * @method     ChildPlayerDeckQuery orderByRightArmPlayerItemId($order = Criteria::ASC) Order by the right_arm_player_item_id column
- * @method     ChildPlayerDeckQuery orderByLeftLegPlayerItemId($order = Criteria::ASC) Order by the left_leg_player_item_id column
- * @method     ChildPlayerDeckQuery orderByRightLegPlayerItemId($order = Criteria::ASC) Order by the right_leg_player_item_id column
+ * @method     ChildPlayerDeckQuery orderByFirstPropriumId($order = Criteria::ASC) Order by the first_proprium_id column
+ * @method     ChildPlayerDeckQuery orderBySecondPropriumId($order = Criteria::ASC) Order by the second_proprium_id column
+ * @method     ChildPlayerDeckQuery orderByThirdPropriumId($order = Criteria::ASC) Order by the third_proprium_id column
+ * @method     ChildPlayerDeckQuery orderByFourthPropriumId($order = Criteria::ASC) Order by the fourth_proprium_id column
+ * @method     ChildPlayerDeckQuery orderByFifthPropriumId($order = Criteria::ASC) Order by the fifth_proprium_id column
  * @method     ChildPlayerDeckQuery orderByCreatedAt($order = Criteria::ASC) Order by the created_at column
  * @method     ChildPlayerDeckQuery orderByUpdatedAt($order = Criteria::ASC) Order by the updated_at column
  *
  * @method     ChildPlayerDeckQuery groupById() Group by the id column
  * @method     ChildPlayerDeckQuery groupByPlayerId() Group by the player_id column
- * @method     ChildPlayerDeckQuery groupByHeadPlayerItemId() Group by the head_player_item_id column
- * @method     ChildPlayerDeckQuery groupByLeftArmPlayerItemId() Group by the left_arm_player_item_id column
- * @method     ChildPlayerDeckQuery groupByRightArmPlayerItemId() Group by the right_arm_player_item_id column
- * @method     ChildPlayerDeckQuery groupByLeftLegPlayerItemId() Group by the left_leg_player_item_id column
- * @method     ChildPlayerDeckQuery groupByRightLegPlayerItemId() Group by the right_leg_player_item_id column
+ * @method     ChildPlayerDeckQuery groupByFirstPropriumId() Group by the first_proprium_id column
+ * @method     ChildPlayerDeckQuery groupBySecondPropriumId() Group by the second_proprium_id column
+ * @method     ChildPlayerDeckQuery groupByThirdPropriumId() Group by the third_proprium_id column
+ * @method     ChildPlayerDeckQuery groupByFourthPropriumId() Group by the fourth_proprium_id column
+ * @method     ChildPlayerDeckQuery groupByFifthPropriumId() Group by the fifth_proprium_id column
  * @method     ChildPlayerDeckQuery groupByCreatedAt() Group by the created_at column
  * @method     ChildPlayerDeckQuery groupByUpdatedAt() Group by the updated_at column
  *
@@ -58,68 +58,68 @@ use app\model\Map\PlayerDeckTableMap;
  * @method     ChildPlayerDeckQuery rightJoinWithPlayer() Adds a RIGHT JOIN clause and with to the query using the Player relation
  * @method     ChildPlayerDeckQuery innerJoinWithPlayer() Adds a INNER JOIN clause and with to the query using the Player relation
  *
- * @method     ChildPlayerDeckQuery leftJoinPlayerItemRelatedByHeadPlayerItemId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PlayerItemRelatedByHeadPlayerItemId relation
- * @method     ChildPlayerDeckQuery rightJoinPlayerItemRelatedByHeadPlayerItemId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PlayerItemRelatedByHeadPlayerItemId relation
- * @method     ChildPlayerDeckQuery innerJoinPlayerItemRelatedByHeadPlayerItemId($relationAlias = null) Adds a INNER JOIN clause to the query using the PlayerItemRelatedByHeadPlayerItemId relation
+ * @method     ChildPlayerDeckQuery leftJoinPropriumRelatedByFirstPropriumId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PropriumRelatedByFirstPropriumId relation
+ * @method     ChildPlayerDeckQuery rightJoinPropriumRelatedByFirstPropriumId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PropriumRelatedByFirstPropriumId relation
+ * @method     ChildPlayerDeckQuery innerJoinPropriumRelatedByFirstPropriumId($relationAlias = null) Adds a INNER JOIN clause to the query using the PropriumRelatedByFirstPropriumId relation
  *
- * @method     ChildPlayerDeckQuery joinWithPlayerItemRelatedByHeadPlayerItemId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PlayerItemRelatedByHeadPlayerItemId relation
+ * @method     ChildPlayerDeckQuery joinWithPropriumRelatedByFirstPropriumId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PropriumRelatedByFirstPropriumId relation
  *
- * @method     ChildPlayerDeckQuery leftJoinWithPlayerItemRelatedByHeadPlayerItemId() Adds a LEFT JOIN clause and with to the query using the PlayerItemRelatedByHeadPlayerItemId relation
- * @method     ChildPlayerDeckQuery rightJoinWithPlayerItemRelatedByHeadPlayerItemId() Adds a RIGHT JOIN clause and with to the query using the PlayerItemRelatedByHeadPlayerItemId relation
- * @method     ChildPlayerDeckQuery innerJoinWithPlayerItemRelatedByHeadPlayerItemId() Adds a INNER JOIN clause and with to the query using the PlayerItemRelatedByHeadPlayerItemId relation
+ * @method     ChildPlayerDeckQuery leftJoinWithPropriumRelatedByFirstPropriumId() Adds a LEFT JOIN clause and with to the query using the PropriumRelatedByFirstPropriumId relation
+ * @method     ChildPlayerDeckQuery rightJoinWithPropriumRelatedByFirstPropriumId() Adds a RIGHT JOIN clause and with to the query using the PropriumRelatedByFirstPropriumId relation
+ * @method     ChildPlayerDeckQuery innerJoinWithPropriumRelatedByFirstPropriumId() Adds a INNER JOIN clause and with to the query using the PropriumRelatedByFirstPropriumId relation
  *
- * @method     ChildPlayerDeckQuery leftJoinPlayerItemRelatedByLeftArmPlayerItemId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PlayerItemRelatedByLeftArmPlayerItemId relation
- * @method     ChildPlayerDeckQuery rightJoinPlayerItemRelatedByLeftArmPlayerItemId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PlayerItemRelatedByLeftArmPlayerItemId relation
- * @method     ChildPlayerDeckQuery innerJoinPlayerItemRelatedByLeftArmPlayerItemId($relationAlias = null) Adds a INNER JOIN clause to the query using the PlayerItemRelatedByLeftArmPlayerItemId relation
+ * @method     ChildPlayerDeckQuery leftJoinPropriumRelatedBySecondPropriumId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PropriumRelatedBySecondPropriumId relation
+ * @method     ChildPlayerDeckQuery rightJoinPropriumRelatedBySecondPropriumId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PropriumRelatedBySecondPropriumId relation
+ * @method     ChildPlayerDeckQuery innerJoinPropriumRelatedBySecondPropriumId($relationAlias = null) Adds a INNER JOIN clause to the query using the PropriumRelatedBySecondPropriumId relation
  *
- * @method     ChildPlayerDeckQuery joinWithPlayerItemRelatedByLeftArmPlayerItemId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PlayerItemRelatedByLeftArmPlayerItemId relation
+ * @method     ChildPlayerDeckQuery joinWithPropriumRelatedBySecondPropriumId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PropriumRelatedBySecondPropriumId relation
  *
- * @method     ChildPlayerDeckQuery leftJoinWithPlayerItemRelatedByLeftArmPlayerItemId() Adds a LEFT JOIN clause and with to the query using the PlayerItemRelatedByLeftArmPlayerItemId relation
- * @method     ChildPlayerDeckQuery rightJoinWithPlayerItemRelatedByLeftArmPlayerItemId() Adds a RIGHT JOIN clause and with to the query using the PlayerItemRelatedByLeftArmPlayerItemId relation
- * @method     ChildPlayerDeckQuery innerJoinWithPlayerItemRelatedByLeftArmPlayerItemId() Adds a INNER JOIN clause and with to the query using the PlayerItemRelatedByLeftArmPlayerItemId relation
+ * @method     ChildPlayerDeckQuery leftJoinWithPropriumRelatedBySecondPropriumId() Adds a LEFT JOIN clause and with to the query using the PropriumRelatedBySecondPropriumId relation
+ * @method     ChildPlayerDeckQuery rightJoinWithPropriumRelatedBySecondPropriumId() Adds a RIGHT JOIN clause and with to the query using the PropriumRelatedBySecondPropriumId relation
+ * @method     ChildPlayerDeckQuery innerJoinWithPropriumRelatedBySecondPropriumId() Adds a INNER JOIN clause and with to the query using the PropriumRelatedBySecondPropriumId relation
  *
- * @method     ChildPlayerDeckQuery leftJoinPlayerItemRelatedByRightArmPlayerItemId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PlayerItemRelatedByRightArmPlayerItemId relation
- * @method     ChildPlayerDeckQuery rightJoinPlayerItemRelatedByRightArmPlayerItemId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PlayerItemRelatedByRightArmPlayerItemId relation
- * @method     ChildPlayerDeckQuery innerJoinPlayerItemRelatedByRightArmPlayerItemId($relationAlias = null) Adds a INNER JOIN clause to the query using the PlayerItemRelatedByRightArmPlayerItemId relation
+ * @method     ChildPlayerDeckQuery leftJoinPropriumRelatedByThirdPropriumId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PropriumRelatedByThirdPropriumId relation
+ * @method     ChildPlayerDeckQuery rightJoinPropriumRelatedByThirdPropriumId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PropriumRelatedByThirdPropriumId relation
+ * @method     ChildPlayerDeckQuery innerJoinPropriumRelatedByThirdPropriumId($relationAlias = null) Adds a INNER JOIN clause to the query using the PropriumRelatedByThirdPropriumId relation
  *
- * @method     ChildPlayerDeckQuery joinWithPlayerItemRelatedByRightArmPlayerItemId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PlayerItemRelatedByRightArmPlayerItemId relation
+ * @method     ChildPlayerDeckQuery joinWithPropriumRelatedByThirdPropriumId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PropriumRelatedByThirdPropriumId relation
  *
- * @method     ChildPlayerDeckQuery leftJoinWithPlayerItemRelatedByRightArmPlayerItemId() Adds a LEFT JOIN clause and with to the query using the PlayerItemRelatedByRightArmPlayerItemId relation
- * @method     ChildPlayerDeckQuery rightJoinWithPlayerItemRelatedByRightArmPlayerItemId() Adds a RIGHT JOIN clause and with to the query using the PlayerItemRelatedByRightArmPlayerItemId relation
- * @method     ChildPlayerDeckQuery innerJoinWithPlayerItemRelatedByRightArmPlayerItemId() Adds a INNER JOIN clause and with to the query using the PlayerItemRelatedByRightArmPlayerItemId relation
+ * @method     ChildPlayerDeckQuery leftJoinWithPropriumRelatedByThirdPropriumId() Adds a LEFT JOIN clause and with to the query using the PropriumRelatedByThirdPropriumId relation
+ * @method     ChildPlayerDeckQuery rightJoinWithPropriumRelatedByThirdPropriumId() Adds a RIGHT JOIN clause and with to the query using the PropriumRelatedByThirdPropriumId relation
+ * @method     ChildPlayerDeckQuery innerJoinWithPropriumRelatedByThirdPropriumId() Adds a INNER JOIN clause and with to the query using the PropriumRelatedByThirdPropriumId relation
  *
- * @method     ChildPlayerDeckQuery leftJoinPlayerItemRelatedByLeftLegPlayerItemId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PlayerItemRelatedByLeftLegPlayerItemId relation
- * @method     ChildPlayerDeckQuery rightJoinPlayerItemRelatedByLeftLegPlayerItemId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PlayerItemRelatedByLeftLegPlayerItemId relation
- * @method     ChildPlayerDeckQuery innerJoinPlayerItemRelatedByLeftLegPlayerItemId($relationAlias = null) Adds a INNER JOIN clause to the query using the PlayerItemRelatedByLeftLegPlayerItemId relation
+ * @method     ChildPlayerDeckQuery leftJoinPropriumRelatedByFourthPropriumId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PropriumRelatedByFourthPropriumId relation
+ * @method     ChildPlayerDeckQuery rightJoinPropriumRelatedByFourthPropriumId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PropriumRelatedByFourthPropriumId relation
+ * @method     ChildPlayerDeckQuery innerJoinPropriumRelatedByFourthPropriumId($relationAlias = null) Adds a INNER JOIN clause to the query using the PropriumRelatedByFourthPropriumId relation
  *
- * @method     ChildPlayerDeckQuery joinWithPlayerItemRelatedByLeftLegPlayerItemId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PlayerItemRelatedByLeftLegPlayerItemId relation
+ * @method     ChildPlayerDeckQuery joinWithPropriumRelatedByFourthPropriumId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PropriumRelatedByFourthPropriumId relation
  *
- * @method     ChildPlayerDeckQuery leftJoinWithPlayerItemRelatedByLeftLegPlayerItemId() Adds a LEFT JOIN clause and with to the query using the PlayerItemRelatedByLeftLegPlayerItemId relation
- * @method     ChildPlayerDeckQuery rightJoinWithPlayerItemRelatedByLeftLegPlayerItemId() Adds a RIGHT JOIN clause and with to the query using the PlayerItemRelatedByLeftLegPlayerItemId relation
- * @method     ChildPlayerDeckQuery innerJoinWithPlayerItemRelatedByLeftLegPlayerItemId() Adds a INNER JOIN clause and with to the query using the PlayerItemRelatedByLeftLegPlayerItemId relation
+ * @method     ChildPlayerDeckQuery leftJoinWithPropriumRelatedByFourthPropriumId() Adds a LEFT JOIN clause and with to the query using the PropriumRelatedByFourthPropriumId relation
+ * @method     ChildPlayerDeckQuery rightJoinWithPropriumRelatedByFourthPropriumId() Adds a RIGHT JOIN clause and with to the query using the PropriumRelatedByFourthPropriumId relation
+ * @method     ChildPlayerDeckQuery innerJoinWithPropriumRelatedByFourthPropriumId() Adds a INNER JOIN clause and with to the query using the PropriumRelatedByFourthPropriumId relation
  *
- * @method     ChildPlayerDeckQuery leftJoinPlayerItemRelatedByRightLegPlayerItemId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PlayerItemRelatedByRightLegPlayerItemId relation
- * @method     ChildPlayerDeckQuery rightJoinPlayerItemRelatedByRightLegPlayerItemId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PlayerItemRelatedByRightLegPlayerItemId relation
- * @method     ChildPlayerDeckQuery innerJoinPlayerItemRelatedByRightLegPlayerItemId($relationAlias = null) Adds a INNER JOIN clause to the query using the PlayerItemRelatedByRightLegPlayerItemId relation
+ * @method     ChildPlayerDeckQuery leftJoinPropriumRelatedByFifthPropriumId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PropriumRelatedByFifthPropriumId relation
+ * @method     ChildPlayerDeckQuery rightJoinPropriumRelatedByFifthPropriumId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PropriumRelatedByFifthPropriumId relation
+ * @method     ChildPlayerDeckQuery innerJoinPropriumRelatedByFifthPropriumId($relationAlias = null) Adds a INNER JOIN clause to the query using the PropriumRelatedByFifthPropriumId relation
  *
- * @method     ChildPlayerDeckQuery joinWithPlayerItemRelatedByRightLegPlayerItemId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PlayerItemRelatedByRightLegPlayerItemId relation
+ * @method     ChildPlayerDeckQuery joinWithPropriumRelatedByFifthPropriumId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PropriumRelatedByFifthPropriumId relation
  *
- * @method     ChildPlayerDeckQuery leftJoinWithPlayerItemRelatedByRightLegPlayerItemId() Adds a LEFT JOIN clause and with to the query using the PlayerItemRelatedByRightLegPlayerItemId relation
- * @method     ChildPlayerDeckQuery rightJoinWithPlayerItemRelatedByRightLegPlayerItemId() Adds a RIGHT JOIN clause and with to the query using the PlayerItemRelatedByRightLegPlayerItemId relation
- * @method     ChildPlayerDeckQuery innerJoinWithPlayerItemRelatedByRightLegPlayerItemId() Adds a INNER JOIN clause and with to the query using the PlayerItemRelatedByRightLegPlayerItemId relation
+ * @method     ChildPlayerDeckQuery leftJoinWithPropriumRelatedByFifthPropriumId() Adds a LEFT JOIN clause and with to the query using the PropriumRelatedByFifthPropriumId relation
+ * @method     ChildPlayerDeckQuery rightJoinWithPropriumRelatedByFifthPropriumId() Adds a RIGHT JOIN clause and with to the query using the PropriumRelatedByFifthPropriumId relation
+ * @method     ChildPlayerDeckQuery innerJoinWithPropriumRelatedByFifthPropriumId() Adds a INNER JOIN clause and with to the query using the PropriumRelatedByFifthPropriumId relation
  *
- * @method     \app\model\PlayerQuery|\app\model\PlayerItemQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
+ * @method     \app\model\PlayerQuery|\app\model\PropriumQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
  * @method     ChildPlayerDeck findOne(ConnectionInterface $con = null) Return the first ChildPlayerDeck matching the query
  * @method     ChildPlayerDeck findOneOrCreate(ConnectionInterface $con = null) Return the first ChildPlayerDeck matching the query, or a new ChildPlayerDeck object populated from the query conditions when no match is found
  *
  * @method     ChildPlayerDeck findOneById(int $id) Return the first ChildPlayerDeck filtered by the id column
  * @method     ChildPlayerDeck findOneByPlayerId(int $player_id) Return the first ChildPlayerDeck filtered by the player_id column
- * @method     ChildPlayerDeck findOneByHeadPlayerItemId(int $head_player_item_id) Return the first ChildPlayerDeck filtered by the head_player_item_id column
- * @method     ChildPlayerDeck findOneByLeftArmPlayerItemId(int $left_arm_player_item_id) Return the first ChildPlayerDeck filtered by the left_arm_player_item_id column
- * @method     ChildPlayerDeck findOneByRightArmPlayerItemId(int $right_arm_player_item_id) Return the first ChildPlayerDeck filtered by the right_arm_player_item_id column
- * @method     ChildPlayerDeck findOneByLeftLegPlayerItemId(int $left_leg_player_item_id) Return the first ChildPlayerDeck filtered by the left_leg_player_item_id column
- * @method     ChildPlayerDeck findOneByRightLegPlayerItemId(int $right_leg_player_item_id) Return the first ChildPlayerDeck filtered by the right_leg_player_item_id column
+ * @method     ChildPlayerDeck findOneByFirstPropriumId(int $first_proprium_id) Return the first ChildPlayerDeck filtered by the first_proprium_id column
+ * @method     ChildPlayerDeck findOneBySecondPropriumId(int $second_proprium_id) Return the first ChildPlayerDeck filtered by the second_proprium_id column
+ * @method     ChildPlayerDeck findOneByThirdPropriumId(int $third_proprium_id) Return the first ChildPlayerDeck filtered by the third_proprium_id column
+ * @method     ChildPlayerDeck findOneByFourthPropriumId(int $fourth_proprium_id) Return the first ChildPlayerDeck filtered by the fourth_proprium_id column
+ * @method     ChildPlayerDeck findOneByFifthPropriumId(int $fifth_proprium_id) Return the first ChildPlayerDeck filtered by the fifth_proprium_id column
  * @method     ChildPlayerDeck findOneByCreatedAt(string $created_at) Return the first ChildPlayerDeck filtered by the created_at column
  * @method     ChildPlayerDeck findOneByUpdatedAt(string $updated_at) Return the first ChildPlayerDeck filtered by the updated_at column *
 
@@ -128,22 +128,22 @@ use app\model\Map\PlayerDeckTableMap;
  *
  * @method     ChildPlayerDeck requireOneById(int $id) Return the first ChildPlayerDeck filtered by the id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPlayerDeck requireOneByPlayerId(int $player_id) Return the first ChildPlayerDeck filtered by the player_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildPlayerDeck requireOneByHeadPlayerItemId(int $head_player_item_id) Return the first ChildPlayerDeck filtered by the head_player_item_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildPlayerDeck requireOneByLeftArmPlayerItemId(int $left_arm_player_item_id) Return the first ChildPlayerDeck filtered by the left_arm_player_item_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildPlayerDeck requireOneByRightArmPlayerItemId(int $right_arm_player_item_id) Return the first ChildPlayerDeck filtered by the right_arm_player_item_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildPlayerDeck requireOneByLeftLegPlayerItemId(int $left_leg_player_item_id) Return the first ChildPlayerDeck filtered by the left_leg_player_item_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildPlayerDeck requireOneByRightLegPlayerItemId(int $right_leg_player_item_id) Return the first ChildPlayerDeck filtered by the right_leg_player_item_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPlayerDeck requireOneByFirstPropriumId(int $first_proprium_id) Return the first ChildPlayerDeck filtered by the first_proprium_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPlayerDeck requireOneBySecondPropriumId(int $second_proprium_id) Return the first ChildPlayerDeck filtered by the second_proprium_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPlayerDeck requireOneByThirdPropriumId(int $third_proprium_id) Return the first ChildPlayerDeck filtered by the third_proprium_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPlayerDeck requireOneByFourthPropriumId(int $fourth_proprium_id) Return the first ChildPlayerDeck filtered by the fourth_proprium_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPlayerDeck requireOneByFifthPropriumId(int $fifth_proprium_id) Return the first ChildPlayerDeck filtered by the fifth_proprium_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPlayerDeck requireOneByCreatedAt(string $created_at) Return the first ChildPlayerDeck filtered by the created_at column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPlayerDeck requireOneByUpdatedAt(string $updated_at) Return the first ChildPlayerDeck filtered by the updated_at column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildPlayerDeck[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildPlayerDeck objects based on current ModelCriteria
  * @method     ChildPlayerDeck[]|ObjectCollection findById(int $id) Return ChildPlayerDeck objects filtered by the id column
  * @method     ChildPlayerDeck[]|ObjectCollection findByPlayerId(int $player_id) Return ChildPlayerDeck objects filtered by the player_id column
- * @method     ChildPlayerDeck[]|ObjectCollection findByHeadPlayerItemId(int $head_player_item_id) Return ChildPlayerDeck objects filtered by the head_player_item_id column
- * @method     ChildPlayerDeck[]|ObjectCollection findByLeftArmPlayerItemId(int $left_arm_player_item_id) Return ChildPlayerDeck objects filtered by the left_arm_player_item_id column
- * @method     ChildPlayerDeck[]|ObjectCollection findByRightArmPlayerItemId(int $right_arm_player_item_id) Return ChildPlayerDeck objects filtered by the right_arm_player_item_id column
- * @method     ChildPlayerDeck[]|ObjectCollection findByLeftLegPlayerItemId(int $left_leg_player_item_id) Return ChildPlayerDeck objects filtered by the left_leg_player_item_id column
- * @method     ChildPlayerDeck[]|ObjectCollection findByRightLegPlayerItemId(int $right_leg_player_item_id) Return ChildPlayerDeck objects filtered by the right_leg_player_item_id column
+ * @method     ChildPlayerDeck[]|ObjectCollection findByFirstPropriumId(int $first_proprium_id) Return ChildPlayerDeck objects filtered by the first_proprium_id column
+ * @method     ChildPlayerDeck[]|ObjectCollection findBySecondPropriumId(int $second_proprium_id) Return ChildPlayerDeck objects filtered by the second_proprium_id column
+ * @method     ChildPlayerDeck[]|ObjectCollection findByThirdPropriumId(int $third_proprium_id) Return ChildPlayerDeck objects filtered by the third_proprium_id column
+ * @method     ChildPlayerDeck[]|ObjectCollection findByFourthPropriumId(int $fourth_proprium_id) Return ChildPlayerDeck objects filtered by the fourth_proprium_id column
+ * @method     ChildPlayerDeck[]|ObjectCollection findByFifthPropriumId(int $fifth_proprium_id) Return ChildPlayerDeck objects filtered by the fifth_proprium_id column
  * @method     ChildPlayerDeck[]|ObjectCollection findByCreatedAt(string $created_at) Return ChildPlayerDeck objects filtered by the created_at column
  * @method     ChildPlayerDeck[]|ObjectCollection findByUpdatedAt(string $updated_at) Return ChildPlayerDeck objects filtered by the updated_at column
  * @method     ChildPlayerDeck[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
@@ -244,7 +244,7 @@ abstract class PlayerDeckQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, player_id, head_player_item_id, left_arm_player_item_id, right_arm_player_item_id, left_leg_player_item_id, right_leg_player_item_id, created_at, updated_at FROM player_deck WHERE id = :p0';
+        $sql = 'SELECT id, player_id, first_proprium_id, second_proprium_id, third_proprium_id, fourth_proprium_id, fifth_proprium_id, created_at, updated_at FROM player_deck WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -419,18 +419,18 @@ abstract class PlayerDeckQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the head_player_item_id column
+     * Filter the query on the first_proprium_id column
      *
      * Example usage:
      * <code>
-     * $query->filterByHeadPlayerItemId(1234); // WHERE head_player_item_id = 1234
-     * $query->filterByHeadPlayerItemId(array(12, 34)); // WHERE head_player_item_id IN (12, 34)
-     * $query->filterByHeadPlayerItemId(array('min' => 12)); // WHERE head_player_item_id > 12
+     * $query->filterByFirstPropriumId(1234); // WHERE first_proprium_id = 1234
+     * $query->filterByFirstPropriumId(array(12, 34)); // WHERE first_proprium_id IN (12, 34)
+     * $query->filterByFirstPropriumId(array('min' => 12)); // WHERE first_proprium_id > 12
      * </code>
      *
-     * @see       filterByPlayerItemRelatedByHeadPlayerItemId()
+     * @see       filterByPropriumRelatedByFirstPropriumId()
      *
-     * @param     mixed $headPlayerItemId The value to use as filter.
+     * @param     mixed $firstPropriumId The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -438,16 +438,16 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function filterByHeadPlayerItemId($headPlayerItemId = null, $comparison = null)
+    public function filterByFirstPropriumId($firstPropriumId = null, $comparison = null)
     {
-        if (is_array($headPlayerItemId)) {
+        if (is_array($firstPropriumId)) {
             $useMinMax = false;
-            if (isset($headPlayerItemId['min'])) {
-                $this->addUsingAlias(PlayerDeckTableMap::COL_HEAD_PLAYER_ITEM_ID, $headPlayerItemId['min'], Criteria::GREATER_EQUAL);
+            if (isset($firstPropriumId['min'])) {
+                $this->addUsingAlias(PlayerDeckTableMap::COL_FIRST_PROPRIUM_ID, $firstPropriumId['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($headPlayerItemId['max'])) {
-                $this->addUsingAlias(PlayerDeckTableMap::COL_HEAD_PLAYER_ITEM_ID, $headPlayerItemId['max'], Criteria::LESS_EQUAL);
+            if (isset($firstPropriumId['max'])) {
+                $this->addUsingAlias(PlayerDeckTableMap::COL_FIRST_PROPRIUM_ID, $firstPropriumId['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -458,22 +458,22 @@ abstract class PlayerDeckQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(PlayerDeckTableMap::COL_HEAD_PLAYER_ITEM_ID, $headPlayerItemId, $comparison);
+        return $this->addUsingAlias(PlayerDeckTableMap::COL_FIRST_PROPRIUM_ID, $firstPropriumId, $comparison);
     }
 
     /**
-     * Filter the query on the left_arm_player_item_id column
+     * Filter the query on the second_proprium_id column
      *
      * Example usage:
      * <code>
-     * $query->filterByLeftArmPlayerItemId(1234); // WHERE left_arm_player_item_id = 1234
-     * $query->filterByLeftArmPlayerItemId(array(12, 34)); // WHERE left_arm_player_item_id IN (12, 34)
-     * $query->filterByLeftArmPlayerItemId(array('min' => 12)); // WHERE left_arm_player_item_id > 12
+     * $query->filterBySecondPropriumId(1234); // WHERE second_proprium_id = 1234
+     * $query->filterBySecondPropriumId(array(12, 34)); // WHERE second_proprium_id IN (12, 34)
+     * $query->filterBySecondPropriumId(array('min' => 12)); // WHERE second_proprium_id > 12
      * </code>
      *
-     * @see       filterByPlayerItemRelatedByLeftArmPlayerItemId()
+     * @see       filterByPropriumRelatedBySecondPropriumId()
      *
-     * @param     mixed $leftArmPlayerItemId The value to use as filter.
+     * @param     mixed $secondPropriumId The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -481,16 +481,16 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function filterByLeftArmPlayerItemId($leftArmPlayerItemId = null, $comparison = null)
+    public function filterBySecondPropriumId($secondPropriumId = null, $comparison = null)
     {
-        if (is_array($leftArmPlayerItemId)) {
+        if (is_array($secondPropriumId)) {
             $useMinMax = false;
-            if (isset($leftArmPlayerItemId['min'])) {
-                $this->addUsingAlias(PlayerDeckTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID, $leftArmPlayerItemId['min'], Criteria::GREATER_EQUAL);
+            if (isset($secondPropriumId['min'])) {
+                $this->addUsingAlias(PlayerDeckTableMap::COL_SECOND_PROPRIUM_ID, $secondPropriumId['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($leftArmPlayerItemId['max'])) {
-                $this->addUsingAlias(PlayerDeckTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID, $leftArmPlayerItemId['max'], Criteria::LESS_EQUAL);
+            if (isset($secondPropriumId['max'])) {
+                $this->addUsingAlias(PlayerDeckTableMap::COL_SECOND_PROPRIUM_ID, $secondPropriumId['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -501,22 +501,22 @@ abstract class PlayerDeckQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(PlayerDeckTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID, $leftArmPlayerItemId, $comparison);
+        return $this->addUsingAlias(PlayerDeckTableMap::COL_SECOND_PROPRIUM_ID, $secondPropriumId, $comparison);
     }
 
     /**
-     * Filter the query on the right_arm_player_item_id column
+     * Filter the query on the third_proprium_id column
      *
      * Example usage:
      * <code>
-     * $query->filterByRightArmPlayerItemId(1234); // WHERE right_arm_player_item_id = 1234
-     * $query->filterByRightArmPlayerItemId(array(12, 34)); // WHERE right_arm_player_item_id IN (12, 34)
-     * $query->filterByRightArmPlayerItemId(array('min' => 12)); // WHERE right_arm_player_item_id > 12
+     * $query->filterByThirdPropriumId(1234); // WHERE third_proprium_id = 1234
+     * $query->filterByThirdPropriumId(array(12, 34)); // WHERE third_proprium_id IN (12, 34)
+     * $query->filterByThirdPropriumId(array('min' => 12)); // WHERE third_proprium_id > 12
      * </code>
      *
-     * @see       filterByPlayerItemRelatedByRightArmPlayerItemId()
+     * @see       filterByPropriumRelatedByThirdPropriumId()
      *
-     * @param     mixed $rightArmPlayerItemId The value to use as filter.
+     * @param     mixed $thirdPropriumId The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -524,16 +524,16 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function filterByRightArmPlayerItemId($rightArmPlayerItemId = null, $comparison = null)
+    public function filterByThirdPropriumId($thirdPropriumId = null, $comparison = null)
     {
-        if (is_array($rightArmPlayerItemId)) {
+        if (is_array($thirdPropriumId)) {
             $useMinMax = false;
-            if (isset($rightArmPlayerItemId['min'])) {
-                $this->addUsingAlias(PlayerDeckTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID, $rightArmPlayerItemId['min'], Criteria::GREATER_EQUAL);
+            if (isset($thirdPropriumId['min'])) {
+                $this->addUsingAlias(PlayerDeckTableMap::COL_THIRD_PROPRIUM_ID, $thirdPropriumId['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($rightArmPlayerItemId['max'])) {
-                $this->addUsingAlias(PlayerDeckTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID, $rightArmPlayerItemId['max'], Criteria::LESS_EQUAL);
+            if (isset($thirdPropriumId['max'])) {
+                $this->addUsingAlias(PlayerDeckTableMap::COL_THIRD_PROPRIUM_ID, $thirdPropriumId['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -544,22 +544,22 @@ abstract class PlayerDeckQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(PlayerDeckTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID, $rightArmPlayerItemId, $comparison);
+        return $this->addUsingAlias(PlayerDeckTableMap::COL_THIRD_PROPRIUM_ID, $thirdPropriumId, $comparison);
     }
 
     /**
-     * Filter the query on the left_leg_player_item_id column
+     * Filter the query on the fourth_proprium_id column
      *
      * Example usage:
      * <code>
-     * $query->filterByLeftLegPlayerItemId(1234); // WHERE left_leg_player_item_id = 1234
-     * $query->filterByLeftLegPlayerItemId(array(12, 34)); // WHERE left_leg_player_item_id IN (12, 34)
-     * $query->filterByLeftLegPlayerItemId(array('min' => 12)); // WHERE left_leg_player_item_id > 12
+     * $query->filterByFourthPropriumId(1234); // WHERE fourth_proprium_id = 1234
+     * $query->filterByFourthPropriumId(array(12, 34)); // WHERE fourth_proprium_id IN (12, 34)
+     * $query->filterByFourthPropriumId(array('min' => 12)); // WHERE fourth_proprium_id > 12
      * </code>
      *
-     * @see       filterByPlayerItemRelatedByLeftLegPlayerItemId()
+     * @see       filterByPropriumRelatedByFourthPropriumId()
      *
-     * @param     mixed $leftLegPlayerItemId The value to use as filter.
+     * @param     mixed $fourthPropriumId The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -567,16 +567,16 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function filterByLeftLegPlayerItemId($leftLegPlayerItemId = null, $comparison = null)
+    public function filterByFourthPropriumId($fourthPropriumId = null, $comparison = null)
     {
-        if (is_array($leftLegPlayerItemId)) {
+        if (is_array($fourthPropriumId)) {
             $useMinMax = false;
-            if (isset($leftLegPlayerItemId['min'])) {
-                $this->addUsingAlias(PlayerDeckTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID, $leftLegPlayerItemId['min'], Criteria::GREATER_EQUAL);
+            if (isset($fourthPropriumId['min'])) {
+                $this->addUsingAlias(PlayerDeckTableMap::COL_FOURTH_PROPRIUM_ID, $fourthPropriumId['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($leftLegPlayerItemId['max'])) {
-                $this->addUsingAlias(PlayerDeckTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID, $leftLegPlayerItemId['max'], Criteria::LESS_EQUAL);
+            if (isset($fourthPropriumId['max'])) {
+                $this->addUsingAlias(PlayerDeckTableMap::COL_FOURTH_PROPRIUM_ID, $fourthPropriumId['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -587,22 +587,22 @@ abstract class PlayerDeckQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(PlayerDeckTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID, $leftLegPlayerItemId, $comparison);
+        return $this->addUsingAlias(PlayerDeckTableMap::COL_FOURTH_PROPRIUM_ID, $fourthPropriumId, $comparison);
     }
 
     /**
-     * Filter the query on the right_leg_player_item_id column
+     * Filter the query on the fifth_proprium_id column
      *
      * Example usage:
      * <code>
-     * $query->filterByRightLegPlayerItemId(1234); // WHERE right_leg_player_item_id = 1234
-     * $query->filterByRightLegPlayerItemId(array(12, 34)); // WHERE right_leg_player_item_id IN (12, 34)
-     * $query->filterByRightLegPlayerItemId(array('min' => 12)); // WHERE right_leg_player_item_id > 12
+     * $query->filterByFifthPropriumId(1234); // WHERE fifth_proprium_id = 1234
+     * $query->filterByFifthPropriumId(array(12, 34)); // WHERE fifth_proprium_id IN (12, 34)
+     * $query->filterByFifthPropriumId(array('min' => 12)); // WHERE fifth_proprium_id > 12
      * </code>
      *
-     * @see       filterByPlayerItemRelatedByRightLegPlayerItemId()
+     * @see       filterByPropriumRelatedByFifthPropriumId()
      *
-     * @param     mixed $rightLegPlayerItemId The value to use as filter.
+     * @param     mixed $fifthPropriumId The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -610,16 +610,16 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function filterByRightLegPlayerItemId($rightLegPlayerItemId = null, $comparison = null)
+    public function filterByFifthPropriumId($fifthPropriumId = null, $comparison = null)
     {
-        if (is_array($rightLegPlayerItemId)) {
+        if (is_array($fifthPropriumId)) {
             $useMinMax = false;
-            if (isset($rightLegPlayerItemId['min'])) {
-                $this->addUsingAlias(PlayerDeckTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID, $rightLegPlayerItemId['min'], Criteria::GREATER_EQUAL);
+            if (isset($fifthPropriumId['min'])) {
+                $this->addUsingAlias(PlayerDeckTableMap::COL_FIFTH_PROPRIUM_ID, $fifthPropriumId['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($rightLegPlayerItemId['max'])) {
-                $this->addUsingAlias(PlayerDeckTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID, $rightLegPlayerItemId['max'], Criteria::LESS_EQUAL);
+            if (isset($fifthPropriumId['max'])) {
+                $this->addUsingAlias(PlayerDeckTableMap::COL_FIFTH_PROPRIUM_ID, $fifthPropriumId['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -630,7 +630,7 @@ abstract class PlayerDeckQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(PlayerDeckTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID, $rightLegPlayerItemId, $comparison);
+        return $this->addUsingAlias(PlayerDeckTableMap::COL_FIFTH_PROPRIUM_ID, $fifthPropriumId, $comparison);
     }
 
     /**
@@ -797,44 +797,44 @@ abstract class PlayerDeckQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related \app\model\PlayerItem object
+     * Filter the query by a related \app\model\Proprium object
      *
-     * @param \app\model\PlayerItem|ObjectCollection $playerItem The related object(s) to use as filter
+     * @param \app\model\Proprium|ObjectCollection $proprium The related object(s) to use as filter
      * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function filterByPlayerItemRelatedByHeadPlayerItemId($playerItem, $comparison = null)
+    public function filterByPropriumRelatedByFirstPropriumId($proprium, $comparison = null)
     {
-        if ($playerItem instanceof \app\model\PlayerItem) {
+        if ($proprium instanceof \app\model\Proprium) {
             return $this
-                ->addUsingAlias(PlayerDeckTableMap::COL_HEAD_PLAYER_ITEM_ID, $playerItem->getId(), $comparison);
-        } elseif ($playerItem instanceof ObjectCollection) {
+                ->addUsingAlias(PlayerDeckTableMap::COL_FIRST_PROPRIUM_ID, $proprium->getId(), $comparison);
+        } elseif ($proprium instanceof ObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(PlayerDeckTableMap::COL_HEAD_PLAYER_ITEM_ID, $playerItem->toKeyValue('PrimaryKey', 'Id'), $comparison);
+                ->addUsingAlias(PlayerDeckTableMap::COL_FIRST_PROPRIUM_ID, $proprium->toKeyValue('PrimaryKey', 'Id'), $comparison);
         } else {
-            throw new PropelException('filterByPlayerItemRelatedByHeadPlayerItemId() only accepts arguments of type \app\model\PlayerItem or Collection');
+            throw new PropelException('filterByPropriumRelatedByFirstPropriumId() only accepts arguments of type \app\model\Proprium or Collection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the PlayerItemRelatedByHeadPlayerItemId relation
+     * Adds a JOIN clause to the query using the PropriumRelatedByFirstPropriumId relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function joinPlayerItemRelatedByHeadPlayerItemId($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinPropriumRelatedByFirstPropriumId($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('PlayerItemRelatedByHeadPlayerItemId');
+        $relationMap = $tableMap->getRelation('PropriumRelatedByFirstPropriumId');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -849,14 +849,14 @@ abstract class PlayerDeckQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'PlayerItemRelatedByHeadPlayerItemId');
+            $this->addJoinObject($join, 'PropriumRelatedByFirstPropriumId');
         }
 
         return $this;
     }
 
     /**
-     * Use the PlayerItemRelatedByHeadPlayerItemId relation PlayerItem object
+     * Use the PropriumRelatedByFirstPropriumId relation Proprium object
      *
      * @see useQuery()
      *
@@ -864,54 +864,54 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return \app\model\PlayerItemQuery A secondary query class using the current class as primary query
+     * @return \app\model\PropriumQuery A secondary query class using the current class as primary query
      */
-    public function usePlayerItemRelatedByHeadPlayerItemIdQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function usePropriumRelatedByFirstPropriumIdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinPlayerItemRelatedByHeadPlayerItemId($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'PlayerItemRelatedByHeadPlayerItemId', '\app\model\PlayerItemQuery');
+            ->joinPropriumRelatedByFirstPropriumId($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PropriumRelatedByFirstPropriumId', '\app\model\PropriumQuery');
     }
 
     /**
-     * Filter the query by a related \app\model\PlayerItem object
+     * Filter the query by a related \app\model\Proprium object
      *
-     * @param \app\model\PlayerItem|ObjectCollection $playerItem The related object(s) to use as filter
+     * @param \app\model\Proprium|ObjectCollection $proprium The related object(s) to use as filter
      * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function filterByPlayerItemRelatedByLeftArmPlayerItemId($playerItem, $comparison = null)
+    public function filterByPropriumRelatedBySecondPropriumId($proprium, $comparison = null)
     {
-        if ($playerItem instanceof \app\model\PlayerItem) {
+        if ($proprium instanceof \app\model\Proprium) {
             return $this
-                ->addUsingAlias(PlayerDeckTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID, $playerItem->getId(), $comparison);
-        } elseif ($playerItem instanceof ObjectCollection) {
+                ->addUsingAlias(PlayerDeckTableMap::COL_SECOND_PROPRIUM_ID, $proprium->getId(), $comparison);
+        } elseif ($proprium instanceof ObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(PlayerDeckTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID, $playerItem->toKeyValue('PrimaryKey', 'Id'), $comparison);
+                ->addUsingAlias(PlayerDeckTableMap::COL_SECOND_PROPRIUM_ID, $proprium->toKeyValue('PrimaryKey', 'Id'), $comparison);
         } else {
-            throw new PropelException('filterByPlayerItemRelatedByLeftArmPlayerItemId() only accepts arguments of type \app\model\PlayerItem or Collection');
+            throw new PropelException('filterByPropriumRelatedBySecondPropriumId() only accepts arguments of type \app\model\Proprium or Collection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the PlayerItemRelatedByLeftArmPlayerItemId relation
+     * Adds a JOIN clause to the query using the PropriumRelatedBySecondPropriumId relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function joinPlayerItemRelatedByLeftArmPlayerItemId($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinPropriumRelatedBySecondPropriumId($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('PlayerItemRelatedByLeftArmPlayerItemId');
+        $relationMap = $tableMap->getRelation('PropriumRelatedBySecondPropriumId');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -926,14 +926,14 @@ abstract class PlayerDeckQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'PlayerItemRelatedByLeftArmPlayerItemId');
+            $this->addJoinObject($join, 'PropriumRelatedBySecondPropriumId');
         }
 
         return $this;
     }
 
     /**
-     * Use the PlayerItemRelatedByLeftArmPlayerItemId relation PlayerItem object
+     * Use the PropriumRelatedBySecondPropriumId relation Proprium object
      *
      * @see useQuery()
      *
@@ -941,54 +941,54 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return \app\model\PlayerItemQuery A secondary query class using the current class as primary query
+     * @return \app\model\PropriumQuery A secondary query class using the current class as primary query
      */
-    public function usePlayerItemRelatedByLeftArmPlayerItemIdQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function usePropriumRelatedBySecondPropriumIdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinPlayerItemRelatedByLeftArmPlayerItemId($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'PlayerItemRelatedByLeftArmPlayerItemId', '\app\model\PlayerItemQuery');
+            ->joinPropriumRelatedBySecondPropriumId($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PropriumRelatedBySecondPropriumId', '\app\model\PropriumQuery');
     }
 
     /**
-     * Filter the query by a related \app\model\PlayerItem object
+     * Filter the query by a related \app\model\Proprium object
      *
-     * @param \app\model\PlayerItem|ObjectCollection $playerItem The related object(s) to use as filter
+     * @param \app\model\Proprium|ObjectCollection $proprium The related object(s) to use as filter
      * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function filterByPlayerItemRelatedByRightArmPlayerItemId($playerItem, $comparison = null)
+    public function filterByPropriumRelatedByThirdPropriumId($proprium, $comparison = null)
     {
-        if ($playerItem instanceof \app\model\PlayerItem) {
+        if ($proprium instanceof \app\model\Proprium) {
             return $this
-                ->addUsingAlias(PlayerDeckTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID, $playerItem->getId(), $comparison);
-        } elseif ($playerItem instanceof ObjectCollection) {
+                ->addUsingAlias(PlayerDeckTableMap::COL_THIRD_PROPRIUM_ID, $proprium->getId(), $comparison);
+        } elseif ($proprium instanceof ObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(PlayerDeckTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID, $playerItem->toKeyValue('PrimaryKey', 'Id'), $comparison);
+                ->addUsingAlias(PlayerDeckTableMap::COL_THIRD_PROPRIUM_ID, $proprium->toKeyValue('PrimaryKey', 'Id'), $comparison);
         } else {
-            throw new PropelException('filterByPlayerItemRelatedByRightArmPlayerItemId() only accepts arguments of type \app\model\PlayerItem or Collection');
+            throw new PropelException('filterByPropriumRelatedByThirdPropriumId() only accepts arguments of type \app\model\Proprium or Collection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the PlayerItemRelatedByRightArmPlayerItemId relation
+     * Adds a JOIN clause to the query using the PropriumRelatedByThirdPropriumId relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function joinPlayerItemRelatedByRightArmPlayerItemId($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinPropriumRelatedByThirdPropriumId($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('PlayerItemRelatedByRightArmPlayerItemId');
+        $relationMap = $tableMap->getRelation('PropriumRelatedByThirdPropriumId');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -1003,14 +1003,14 @@ abstract class PlayerDeckQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'PlayerItemRelatedByRightArmPlayerItemId');
+            $this->addJoinObject($join, 'PropriumRelatedByThirdPropriumId');
         }
 
         return $this;
     }
 
     /**
-     * Use the PlayerItemRelatedByRightArmPlayerItemId relation PlayerItem object
+     * Use the PropriumRelatedByThirdPropriumId relation Proprium object
      *
      * @see useQuery()
      *
@@ -1018,54 +1018,54 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return \app\model\PlayerItemQuery A secondary query class using the current class as primary query
+     * @return \app\model\PropriumQuery A secondary query class using the current class as primary query
      */
-    public function usePlayerItemRelatedByRightArmPlayerItemIdQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function usePropriumRelatedByThirdPropriumIdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinPlayerItemRelatedByRightArmPlayerItemId($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'PlayerItemRelatedByRightArmPlayerItemId', '\app\model\PlayerItemQuery');
+            ->joinPropriumRelatedByThirdPropriumId($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PropriumRelatedByThirdPropriumId', '\app\model\PropriumQuery');
     }
 
     /**
-     * Filter the query by a related \app\model\PlayerItem object
+     * Filter the query by a related \app\model\Proprium object
      *
-     * @param \app\model\PlayerItem|ObjectCollection $playerItem The related object(s) to use as filter
+     * @param \app\model\Proprium|ObjectCollection $proprium The related object(s) to use as filter
      * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function filterByPlayerItemRelatedByLeftLegPlayerItemId($playerItem, $comparison = null)
+    public function filterByPropriumRelatedByFourthPropriumId($proprium, $comparison = null)
     {
-        if ($playerItem instanceof \app\model\PlayerItem) {
+        if ($proprium instanceof \app\model\Proprium) {
             return $this
-                ->addUsingAlias(PlayerDeckTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID, $playerItem->getId(), $comparison);
-        } elseif ($playerItem instanceof ObjectCollection) {
+                ->addUsingAlias(PlayerDeckTableMap::COL_FOURTH_PROPRIUM_ID, $proprium->getId(), $comparison);
+        } elseif ($proprium instanceof ObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(PlayerDeckTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID, $playerItem->toKeyValue('PrimaryKey', 'Id'), $comparison);
+                ->addUsingAlias(PlayerDeckTableMap::COL_FOURTH_PROPRIUM_ID, $proprium->toKeyValue('PrimaryKey', 'Id'), $comparison);
         } else {
-            throw new PropelException('filterByPlayerItemRelatedByLeftLegPlayerItemId() only accepts arguments of type \app\model\PlayerItem or Collection');
+            throw new PropelException('filterByPropriumRelatedByFourthPropriumId() only accepts arguments of type \app\model\Proprium or Collection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the PlayerItemRelatedByLeftLegPlayerItemId relation
+     * Adds a JOIN clause to the query using the PropriumRelatedByFourthPropriumId relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function joinPlayerItemRelatedByLeftLegPlayerItemId($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinPropriumRelatedByFourthPropriumId($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('PlayerItemRelatedByLeftLegPlayerItemId');
+        $relationMap = $tableMap->getRelation('PropriumRelatedByFourthPropriumId');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -1080,14 +1080,14 @@ abstract class PlayerDeckQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'PlayerItemRelatedByLeftLegPlayerItemId');
+            $this->addJoinObject($join, 'PropriumRelatedByFourthPropriumId');
         }
 
         return $this;
     }
 
     /**
-     * Use the PlayerItemRelatedByLeftLegPlayerItemId relation PlayerItem object
+     * Use the PropriumRelatedByFourthPropriumId relation Proprium object
      *
      * @see useQuery()
      *
@@ -1095,54 +1095,54 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return \app\model\PlayerItemQuery A secondary query class using the current class as primary query
+     * @return \app\model\PropriumQuery A secondary query class using the current class as primary query
      */
-    public function usePlayerItemRelatedByLeftLegPlayerItemIdQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function usePropriumRelatedByFourthPropriumIdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinPlayerItemRelatedByLeftLegPlayerItemId($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'PlayerItemRelatedByLeftLegPlayerItemId', '\app\model\PlayerItemQuery');
+            ->joinPropriumRelatedByFourthPropriumId($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PropriumRelatedByFourthPropriumId', '\app\model\PropriumQuery');
     }
 
     /**
-     * Filter the query by a related \app\model\PlayerItem object
+     * Filter the query by a related \app\model\Proprium object
      *
-     * @param \app\model\PlayerItem|ObjectCollection $playerItem The related object(s) to use as filter
+     * @param \app\model\Proprium|ObjectCollection $proprium The related object(s) to use as filter
      * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @throws \Propel\Runtime\Exception\PropelException
      *
      * @return ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function filterByPlayerItemRelatedByRightLegPlayerItemId($playerItem, $comparison = null)
+    public function filterByPropriumRelatedByFifthPropriumId($proprium, $comparison = null)
     {
-        if ($playerItem instanceof \app\model\PlayerItem) {
+        if ($proprium instanceof \app\model\Proprium) {
             return $this
-                ->addUsingAlias(PlayerDeckTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID, $playerItem->getId(), $comparison);
-        } elseif ($playerItem instanceof ObjectCollection) {
+                ->addUsingAlias(PlayerDeckTableMap::COL_FIFTH_PROPRIUM_ID, $proprium->getId(), $comparison);
+        } elseif ($proprium instanceof ObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(PlayerDeckTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID, $playerItem->toKeyValue('PrimaryKey', 'Id'), $comparison);
+                ->addUsingAlias(PlayerDeckTableMap::COL_FIFTH_PROPRIUM_ID, $proprium->toKeyValue('PrimaryKey', 'Id'), $comparison);
         } else {
-            throw new PropelException('filterByPlayerItemRelatedByRightLegPlayerItemId() only accepts arguments of type \app\model\PlayerItem or Collection');
+            throw new PropelException('filterByPropriumRelatedByFifthPropriumId() only accepts arguments of type \app\model\Proprium or Collection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the PlayerItemRelatedByRightLegPlayerItemId relation
+     * Adds a JOIN clause to the query using the PropriumRelatedByFifthPropriumId relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return $this|ChildPlayerDeckQuery The current query, for fluid interface
      */
-    public function joinPlayerItemRelatedByRightLegPlayerItemId($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinPropriumRelatedByFifthPropriumId($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('PlayerItemRelatedByRightLegPlayerItemId');
+        $relationMap = $tableMap->getRelation('PropriumRelatedByFifthPropriumId');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -1157,14 +1157,14 @@ abstract class PlayerDeckQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'PlayerItemRelatedByRightLegPlayerItemId');
+            $this->addJoinObject($join, 'PropriumRelatedByFifthPropriumId');
         }
 
         return $this;
     }
 
     /**
-     * Use the PlayerItemRelatedByRightLegPlayerItemId relation PlayerItem object
+     * Use the PropriumRelatedByFifthPropriumId relation Proprium object
      *
      * @see useQuery()
      *
@@ -1172,13 +1172,13 @@ abstract class PlayerDeckQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return \app\model\PlayerItemQuery A secondary query class using the current class as primary query
+     * @return \app\model\PropriumQuery A secondary query class using the current class as primary query
      */
-    public function usePlayerItemRelatedByRightLegPlayerItemIdQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function usePropriumRelatedByFifthPropriumIdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinPlayerItemRelatedByRightLegPlayerItemId($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'PlayerItemRelatedByRightLegPlayerItemId', '\app\model\PlayerItemQuery');
+            ->joinPropriumRelatedByFifthPropriumId($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PropriumRelatedByFifthPropriumId', '\app\model\PropriumQuery');
     }
 
     /**

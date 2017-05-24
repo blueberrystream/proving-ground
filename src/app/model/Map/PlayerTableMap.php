@@ -148,6 +148,13 @@ class PlayerTableMap extends TableMap
     1 => ':id',
   ),
 ), null, null, 'PlayerItems', false);
+        $this->addRelation('PlayerEquipment', '\\app\\model\\PlayerEquipment', RelationMap::ONE_TO_MANY, array (
+  0 =>
+  array (
+    0 => ':player_id',
+    1 => ':id',
+  ),
+), null, null, 'PlayerEquipments', false);
         $this->addRelation('PlayerDeck', '\\app\\model\\PlayerDeck', RelationMap::ONE_TO_MANY, array (
   0 =>
   array (

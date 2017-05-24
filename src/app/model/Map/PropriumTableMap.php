@@ -148,6 +148,41 @@ class PropriumTableMap extends TableMap
     1 => ':id',
   ),
 ), null, null, 'Items', false);
+        $this->addRelation('PlayerDeckRelatedByFirstPropriumId', '\\app\\model\\PlayerDeck', RelationMap::ONE_TO_MANY, array (
+  0 =>
+  array (
+    0 => ':first_proprium_id',
+    1 => ':id',
+  ),
+), null, null, 'PlayerDecksRelatedByFirstPropriumId', false);
+        $this->addRelation('PlayerDeckRelatedBySecondPropriumId', '\\app\\model\\PlayerDeck', RelationMap::ONE_TO_MANY, array (
+  0 =>
+  array (
+    0 => ':second_proprium_id',
+    1 => ':id',
+  ),
+), null, null, 'PlayerDecksRelatedBySecondPropriumId', false);
+        $this->addRelation('PlayerDeckRelatedByThirdPropriumId', '\\app\\model\\PlayerDeck', RelationMap::ONE_TO_MANY, array (
+  0 =>
+  array (
+    0 => ':third_proprium_id',
+    1 => ':id',
+  ),
+), null, null, 'PlayerDecksRelatedByThirdPropriumId', false);
+        $this->addRelation('PlayerDeckRelatedByFourthPropriumId', '\\app\\model\\PlayerDeck', RelationMap::ONE_TO_MANY, array (
+  0 =>
+  array (
+    0 => ':fourth_proprium_id',
+    1 => ':id',
+  ),
+), null, null, 'PlayerDecksRelatedByFourthPropriumId', false);
+        $this->addRelation('PlayerDeckRelatedByFifthPropriumId', '\\app\\model\\PlayerDeck', RelationMap::ONE_TO_MANY, array (
+  0 =>
+  array (
+    0 => ':fifth_proprium_id',
+    1 => ':id',
+  ),
+), null, null, 'PlayerDecksRelatedByFifthPropriumId', false);
     } // buildRelations()
 
     /**

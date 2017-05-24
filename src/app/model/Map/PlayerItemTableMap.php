@@ -173,41 +173,55 @@ class PlayerItemTableMap extends TableMap
     1 => ':id',
   ),
 ), null, null, null, false);
-        $this->addRelation('PlayerDeckRelatedByHeadPlayerItemId', '\\app\\model\\PlayerDeck', RelationMap::ONE_TO_MANY, array (
+        $this->addRelation('PlayerEquipmentRelatedByWeapon1PlayerItemId', '\\app\\model\\PlayerEquipment', RelationMap::ONE_TO_MANY, array (
+  0 =>
+  array (
+    0 => ':weapon1_player_item_id',
+    1 => ':id',
+  ),
+), null, null, 'PlayerEquipmentsRelatedByWeapon1PlayerItemId', false);
+        $this->addRelation('PlayerEquipmentRelatedByWeapon2PlayerItemId', '\\app\\model\\PlayerEquipment', RelationMap::ONE_TO_MANY, array (
+  0 =>
+  array (
+    0 => ':weapon2_player_item_id',
+    1 => ':id',
+  ),
+), null, null, 'PlayerEquipmentsRelatedByWeapon2PlayerItemId', false);
+        $this->addRelation('PlayerEquipmentRelatedByHeadPlayerItemId', '\\app\\model\\PlayerEquipment', RelationMap::ONE_TO_MANY, array (
   0 =>
   array (
     0 => ':head_player_item_id',
     1 => ':id',
   ),
-), null, null, 'PlayerDecksRelatedByHeadPlayerItemId', false);
-        $this->addRelation('PlayerDeckRelatedByLeftArmPlayerItemId', '\\app\\model\\PlayerDeck', RelationMap::ONE_TO_MANY, array (
+), null, null, 'PlayerEquipmentsRelatedByHeadPlayerItemId', false);
+        $this->addRelation('PlayerEquipmentRelatedByLeftArmPlayerItemId', '\\app\\model\\PlayerEquipment', RelationMap::ONE_TO_MANY, array (
   0 =>
   array (
     0 => ':left_arm_player_item_id',
     1 => ':id',
   ),
-), null, null, 'PlayerDecksRelatedByLeftArmPlayerItemId', false);
-        $this->addRelation('PlayerDeckRelatedByRightArmPlayerItemId', '\\app\\model\\PlayerDeck', RelationMap::ONE_TO_MANY, array (
+), null, null, 'PlayerEquipmentsRelatedByLeftArmPlayerItemId', false);
+        $this->addRelation('PlayerEquipmentRelatedByRightArmPlayerItemId', '\\app\\model\\PlayerEquipment', RelationMap::ONE_TO_MANY, array (
   0 =>
   array (
     0 => ':right_arm_player_item_id',
     1 => ':id',
   ),
-), null, null, 'PlayerDecksRelatedByRightArmPlayerItemId', false);
-        $this->addRelation('PlayerDeckRelatedByLeftLegPlayerItemId', '\\app\\model\\PlayerDeck', RelationMap::ONE_TO_MANY, array (
+), null, null, 'PlayerEquipmentsRelatedByRightArmPlayerItemId', false);
+        $this->addRelation('PlayerEquipmentRelatedByLeftLegPlayerItemId', '\\app\\model\\PlayerEquipment', RelationMap::ONE_TO_MANY, array (
   0 =>
   array (
     0 => ':left_leg_player_item_id',
     1 => ':id',
   ),
-), null, null, 'PlayerDecksRelatedByLeftLegPlayerItemId', false);
-        $this->addRelation('PlayerDeckRelatedByRightLegPlayerItemId', '\\app\\model\\PlayerDeck', RelationMap::ONE_TO_MANY, array (
+), null, null, 'PlayerEquipmentsRelatedByLeftLegPlayerItemId', false);
+        $this->addRelation('PlayerEquipmentRelatedByRightLegPlayerItemId', '\\app\\model\\PlayerEquipment', RelationMap::ONE_TO_MANY, array (
   0 =>
   array (
     0 => ':right_leg_player_item_id',
     1 => ':id',
   ),
-), null, null, 'PlayerDecksRelatedByRightLegPlayerItemId', false);
+), null, null, 'PlayerEquipmentsRelatedByRightLegPlayerItemId', false);
     } // buildRelations()
 
     /**

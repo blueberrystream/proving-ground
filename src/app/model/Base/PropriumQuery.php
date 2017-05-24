@@ -44,7 +44,57 @@ use app\model\Map\PropriumTableMap;
  * @method     ChildPropriumQuery rightJoinWithItem() Adds a RIGHT JOIN clause and with to the query using the Item relation
  * @method     ChildPropriumQuery innerJoinWithItem() Adds a INNER JOIN clause and with to the query using the Item relation
  *
- * @method     \app\model\ItemQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
+ * @method     ChildPropriumQuery leftJoinPlayerDeckRelatedByFirstPropriumId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PlayerDeckRelatedByFirstPropriumId relation
+ * @method     ChildPropriumQuery rightJoinPlayerDeckRelatedByFirstPropriumId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PlayerDeckRelatedByFirstPropriumId relation
+ * @method     ChildPropriumQuery innerJoinPlayerDeckRelatedByFirstPropriumId($relationAlias = null) Adds a INNER JOIN clause to the query using the PlayerDeckRelatedByFirstPropriumId relation
+ *
+ * @method     ChildPropriumQuery joinWithPlayerDeckRelatedByFirstPropriumId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PlayerDeckRelatedByFirstPropriumId relation
+ *
+ * @method     ChildPropriumQuery leftJoinWithPlayerDeckRelatedByFirstPropriumId() Adds a LEFT JOIN clause and with to the query using the PlayerDeckRelatedByFirstPropriumId relation
+ * @method     ChildPropriumQuery rightJoinWithPlayerDeckRelatedByFirstPropriumId() Adds a RIGHT JOIN clause and with to the query using the PlayerDeckRelatedByFirstPropriumId relation
+ * @method     ChildPropriumQuery innerJoinWithPlayerDeckRelatedByFirstPropriumId() Adds a INNER JOIN clause and with to the query using the PlayerDeckRelatedByFirstPropriumId relation
+ *
+ * @method     ChildPropriumQuery leftJoinPlayerDeckRelatedBySecondPropriumId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PlayerDeckRelatedBySecondPropriumId relation
+ * @method     ChildPropriumQuery rightJoinPlayerDeckRelatedBySecondPropriumId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PlayerDeckRelatedBySecondPropriumId relation
+ * @method     ChildPropriumQuery innerJoinPlayerDeckRelatedBySecondPropriumId($relationAlias = null) Adds a INNER JOIN clause to the query using the PlayerDeckRelatedBySecondPropriumId relation
+ *
+ * @method     ChildPropriumQuery joinWithPlayerDeckRelatedBySecondPropriumId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PlayerDeckRelatedBySecondPropriumId relation
+ *
+ * @method     ChildPropriumQuery leftJoinWithPlayerDeckRelatedBySecondPropriumId() Adds a LEFT JOIN clause and with to the query using the PlayerDeckRelatedBySecondPropriumId relation
+ * @method     ChildPropriumQuery rightJoinWithPlayerDeckRelatedBySecondPropriumId() Adds a RIGHT JOIN clause and with to the query using the PlayerDeckRelatedBySecondPropriumId relation
+ * @method     ChildPropriumQuery innerJoinWithPlayerDeckRelatedBySecondPropriumId() Adds a INNER JOIN clause and with to the query using the PlayerDeckRelatedBySecondPropriumId relation
+ *
+ * @method     ChildPropriumQuery leftJoinPlayerDeckRelatedByThirdPropriumId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PlayerDeckRelatedByThirdPropriumId relation
+ * @method     ChildPropriumQuery rightJoinPlayerDeckRelatedByThirdPropriumId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PlayerDeckRelatedByThirdPropriumId relation
+ * @method     ChildPropriumQuery innerJoinPlayerDeckRelatedByThirdPropriumId($relationAlias = null) Adds a INNER JOIN clause to the query using the PlayerDeckRelatedByThirdPropriumId relation
+ *
+ * @method     ChildPropriumQuery joinWithPlayerDeckRelatedByThirdPropriumId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PlayerDeckRelatedByThirdPropriumId relation
+ *
+ * @method     ChildPropriumQuery leftJoinWithPlayerDeckRelatedByThirdPropriumId() Adds a LEFT JOIN clause and with to the query using the PlayerDeckRelatedByThirdPropriumId relation
+ * @method     ChildPropriumQuery rightJoinWithPlayerDeckRelatedByThirdPropriumId() Adds a RIGHT JOIN clause and with to the query using the PlayerDeckRelatedByThirdPropriumId relation
+ * @method     ChildPropriumQuery innerJoinWithPlayerDeckRelatedByThirdPropriumId() Adds a INNER JOIN clause and with to the query using the PlayerDeckRelatedByThirdPropriumId relation
+ *
+ * @method     ChildPropriumQuery leftJoinPlayerDeckRelatedByFourthPropriumId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PlayerDeckRelatedByFourthPropriumId relation
+ * @method     ChildPropriumQuery rightJoinPlayerDeckRelatedByFourthPropriumId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PlayerDeckRelatedByFourthPropriumId relation
+ * @method     ChildPropriumQuery innerJoinPlayerDeckRelatedByFourthPropriumId($relationAlias = null) Adds a INNER JOIN clause to the query using the PlayerDeckRelatedByFourthPropriumId relation
+ *
+ * @method     ChildPropriumQuery joinWithPlayerDeckRelatedByFourthPropriumId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PlayerDeckRelatedByFourthPropriumId relation
+ *
+ * @method     ChildPropriumQuery leftJoinWithPlayerDeckRelatedByFourthPropriumId() Adds a LEFT JOIN clause and with to the query using the PlayerDeckRelatedByFourthPropriumId relation
+ * @method     ChildPropriumQuery rightJoinWithPlayerDeckRelatedByFourthPropriumId() Adds a RIGHT JOIN clause and with to the query using the PlayerDeckRelatedByFourthPropriumId relation
+ * @method     ChildPropriumQuery innerJoinWithPlayerDeckRelatedByFourthPropriumId() Adds a INNER JOIN clause and with to the query using the PlayerDeckRelatedByFourthPropriumId relation
+ *
+ * @method     ChildPropriumQuery leftJoinPlayerDeckRelatedByFifthPropriumId($relationAlias = null) Adds a LEFT JOIN clause to the query using the PlayerDeckRelatedByFifthPropriumId relation
+ * @method     ChildPropriumQuery rightJoinPlayerDeckRelatedByFifthPropriumId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PlayerDeckRelatedByFifthPropriumId relation
+ * @method     ChildPropriumQuery innerJoinPlayerDeckRelatedByFifthPropriumId($relationAlias = null) Adds a INNER JOIN clause to the query using the PlayerDeckRelatedByFifthPropriumId relation
+ *
+ * @method     ChildPropriumQuery joinWithPlayerDeckRelatedByFifthPropriumId($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PlayerDeckRelatedByFifthPropriumId relation
+ *
+ * @method     ChildPropriumQuery leftJoinWithPlayerDeckRelatedByFifthPropriumId() Adds a LEFT JOIN clause and with to the query using the PlayerDeckRelatedByFifthPropriumId relation
+ * @method     ChildPropriumQuery rightJoinWithPlayerDeckRelatedByFifthPropriumId() Adds a RIGHT JOIN clause and with to the query using the PlayerDeckRelatedByFifthPropriumId relation
+ * @method     ChildPropriumQuery innerJoinWithPlayerDeckRelatedByFifthPropriumId() Adds a INNER JOIN clause and with to the query using the PlayerDeckRelatedByFifthPropriumId relation
+ *
+ * @method     \app\model\ItemQuery|\app\model\PlayerDeckQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
  * @method     ChildProprium findOne(ConnectionInterface $con = null) Return the first ChildProprium matching the query
  * @method     ChildProprium findOneOrCreate(ConnectionInterface $con = null) Return the first ChildProprium matching the query, or a new ChildProprium object populated from the query conditions when no match is found
@@ -386,6 +436,371 @@ abstract class PropriumQuery extends ModelCriteria
         return $this
             ->joinItem($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'Item', '\app\model\ItemQuery');
+    }
+
+    /**
+     * Filter the query by a related \app\model\PlayerDeck object
+     *
+     * @param \app\model\PlayerDeck|ObjectCollection $playerDeck the related object to use as filter
+     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ChildPropriumQuery The current query, for fluid interface
+     */
+    public function filterByPlayerDeckRelatedByFirstPropriumId($playerDeck, $comparison = null)
+    {
+        if ($playerDeck instanceof \app\model\PlayerDeck) {
+            return $this
+                ->addUsingAlias(PropriumTableMap::COL_ID, $playerDeck->getFirstPropriumId(), $comparison);
+        } elseif ($playerDeck instanceof ObjectCollection) {
+            return $this
+                ->usePlayerDeckRelatedByFirstPropriumIdQuery()
+                ->filterByPrimaryKeys($playerDeck->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByPlayerDeckRelatedByFirstPropriumId() only accepts arguments of type \app\model\PlayerDeck or Collection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the PlayerDeckRelatedByFirstPropriumId relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return $this|ChildPropriumQuery The current query, for fluid interface
+     */
+    public function joinPlayerDeckRelatedByFirstPropriumId($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('PlayerDeckRelatedByFirstPropriumId');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'PlayerDeckRelatedByFirstPropriumId');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the PlayerDeckRelatedByFirstPropriumId relation PlayerDeck object
+     *
+     * @see useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return \app\model\PlayerDeckQuery A secondary query class using the current class as primary query
+     */
+    public function usePlayerDeckRelatedByFirstPropriumIdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinPlayerDeckRelatedByFirstPropriumId($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PlayerDeckRelatedByFirstPropriumId', '\app\model\PlayerDeckQuery');
+    }
+
+    /**
+     * Filter the query by a related \app\model\PlayerDeck object
+     *
+     * @param \app\model\PlayerDeck|ObjectCollection $playerDeck the related object to use as filter
+     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ChildPropriumQuery The current query, for fluid interface
+     */
+    public function filterByPlayerDeckRelatedBySecondPropriumId($playerDeck, $comparison = null)
+    {
+        if ($playerDeck instanceof \app\model\PlayerDeck) {
+            return $this
+                ->addUsingAlias(PropriumTableMap::COL_ID, $playerDeck->getSecondPropriumId(), $comparison);
+        } elseif ($playerDeck instanceof ObjectCollection) {
+            return $this
+                ->usePlayerDeckRelatedBySecondPropriumIdQuery()
+                ->filterByPrimaryKeys($playerDeck->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByPlayerDeckRelatedBySecondPropriumId() only accepts arguments of type \app\model\PlayerDeck or Collection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the PlayerDeckRelatedBySecondPropriumId relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return $this|ChildPropriumQuery The current query, for fluid interface
+     */
+    public function joinPlayerDeckRelatedBySecondPropriumId($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('PlayerDeckRelatedBySecondPropriumId');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'PlayerDeckRelatedBySecondPropriumId');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the PlayerDeckRelatedBySecondPropriumId relation PlayerDeck object
+     *
+     * @see useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return \app\model\PlayerDeckQuery A secondary query class using the current class as primary query
+     */
+    public function usePlayerDeckRelatedBySecondPropriumIdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinPlayerDeckRelatedBySecondPropriumId($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PlayerDeckRelatedBySecondPropriumId', '\app\model\PlayerDeckQuery');
+    }
+
+    /**
+     * Filter the query by a related \app\model\PlayerDeck object
+     *
+     * @param \app\model\PlayerDeck|ObjectCollection $playerDeck the related object to use as filter
+     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ChildPropriumQuery The current query, for fluid interface
+     */
+    public function filterByPlayerDeckRelatedByThirdPropriumId($playerDeck, $comparison = null)
+    {
+        if ($playerDeck instanceof \app\model\PlayerDeck) {
+            return $this
+                ->addUsingAlias(PropriumTableMap::COL_ID, $playerDeck->getThirdPropriumId(), $comparison);
+        } elseif ($playerDeck instanceof ObjectCollection) {
+            return $this
+                ->usePlayerDeckRelatedByThirdPropriumIdQuery()
+                ->filterByPrimaryKeys($playerDeck->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByPlayerDeckRelatedByThirdPropriumId() only accepts arguments of type \app\model\PlayerDeck or Collection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the PlayerDeckRelatedByThirdPropriumId relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return $this|ChildPropriumQuery The current query, for fluid interface
+     */
+    public function joinPlayerDeckRelatedByThirdPropriumId($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('PlayerDeckRelatedByThirdPropriumId');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'PlayerDeckRelatedByThirdPropriumId');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the PlayerDeckRelatedByThirdPropriumId relation PlayerDeck object
+     *
+     * @see useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return \app\model\PlayerDeckQuery A secondary query class using the current class as primary query
+     */
+    public function usePlayerDeckRelatedByThirdPropriumIdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinPlayerDeckRelatedByThirdPropriumId($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PlayerDeckRelatedByThirdPropriumId', '\app\model\PlayerDeckQuery');
+    }
+
+    /**
+     * Filter the query by a related \app\model\PlayerDeck object
+     *
+     * @param \app\model\PlayerDeck|ObjectCollection $playerDeck the related object to use as filter
+     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ChildPropriumQuery The current query, for fluid interface
+     */
+    public function filterByPlayerDeckRelatedByFourthPropriumId($playerDeck, $comparison = null)
+    {
+        if ($playerDeck instanceof \app\model\PlayerDeck) {
+            return $this
+                ->addUsingAlias(PropriumTableMap::COL_ID, $playerDeck->getFourthPropriumId(), $comparison);
+        } elseif ($playerDeck instanceof ObjectCollection) {
+            return $this
+                ->usePlayerDeckRelatedByFourthPropriumIdQuery()
+                ->filterByPrimaryKeys($playerDeck->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByPlayerDeckRelatedByFourthPropriumId() only accepts arguments of type \app\model\PlayerDeck or Collection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the PlayerDeckRelatedByFourthPropriumId relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return $this|ChildPropriumQuery The current query, for fluid interface
+     */
+    public function joinPlayerDeckRelatedByFourthPropriumId($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('PlayerDeckRelatedByFourthPropriumId');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'PlayerDeckRelatedByFourthPropriumId');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the PlayerDeckRelatedByFourthPropriumId relation PlayerDeck object
+     *
+     * @see useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return \app\model\PlayerDeckQuery A secondary query class using the current class as primary query
+     */
+    public function usePlayerDeckRelatedByFourthPropriumIdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinPlayerDeckRelatedByFourthPropriumId($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PlayerDeckRelatedByFourthPropriumId', '\app\model\PlayerDeckQuery');
+    }
+
+    /**
+     * Filter the query by a related \app\model\PlayerDeck object
+     *
+     * @param \app\model\PlayerDeck|ObjectCollection $playerDeck the related object to use as filter
+     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ChildPropriumQuery The current query, for fluid interface
+     */
+    public function filterByPlayerDeckRelatedByFifthPropriumId($playerDeck, $comparison = null)
+    {
+        if ($playerDeck instanceof \app\model\PlayerDeck) {
+            return $this
+                ->addUsingAlias(PropriumTableMap::COL_ID, $playerDeck->getFifthPropriumId(), $comparison);
+        } elseif ($playerDeck instanceof ObjectCollection) {
+            return $this
+                ->usePlayerDeckRelatedByFifthPropriumIdQuery()
+                ->filterByPrimaryKeys($playerDeck->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByPlayerDeckRelatedByFifthPropriumId() only accepts arguments of type \app\model\PlayerDeck or Collection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the PlayerDeckRelatedByFifthPropriumId relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return $this|ChildPropriumQuery The current query, for fluid interface
+     */
+    public function joinPlayerDeckRelatedByFifthPropriumId($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('PlayerDeckRelatedByFifthPropriumId');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'PlayerDeckRelatedByFifthPropriumId');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the PlayerDeckRelatedByFifthPropriumId relation PlayerDeck object
+     *
+     * @see useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return \app\model\PlayerDeckQuery A secondary query class using the current class as primary query
+     */
+    public function usePlayerDeckRelatedByFifthPropriumIdQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinPlayerDeckRelatedByFifthPropriumId($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PlayerDeckRelatedByFifthPropriumId', '\app\model\PlayerDeckQuery');
     }
 
     /**

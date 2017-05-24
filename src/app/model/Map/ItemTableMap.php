@@ -163,7 +163,7 @@ class ItemTableMap extends TableMap
         $this->addForeignKey('part_id', 'PartId', 'INTEGER', 'part', 'id', true, null, null);
         $this->addColumn('hit_point', 'HitPoint', 'INTEGER', true, null, 0);
         $this->addColumn('attack_point', 'AttackPoint', 'INTEGER', true, null, 0);
-        $this->addColumn('defense_point', 'DefensePoint', 'INTEGER', true, null, null);
+        $this->addColumn('defense_point', 'DefensePoint', 'INTEGER', true, null, 0);
     } // initialize()
 
     /**

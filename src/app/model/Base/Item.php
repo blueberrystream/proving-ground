@@ -115,6 +115,7 @@ abstract class Item implements ActiveRecordInterface
     /**
      * The value for the defense_point field.
      *
+     * Note: this column has a database default value of: 0
      * @var        int
      */
     protected $defense_point;
@@ -159,6 +160,7 @@ abstract class Item implements ActiveRecordInterface
     {
         $this->hit_point = 0;
         $this->attack_point = 0;
+        $this->defense_point = 0;
     }
 
     /**
@@ -621,6 +623,10 @@ abstract class Item implements ActiveRecordInterface
             }
 
             if ($this->attack_point !== 0) {
+                return false;
+            }
+
+            if ($this->defense_point !== 0) {
                 return false;
             }
 

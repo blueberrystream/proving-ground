@@ -21,12 +21,12 @@ use Propel\Runtime\Util\PropelDateTime;
 use app\model\Item as ChildItem;
 use app\model\ItemQuery as ChildItemQuery;
 use app\model\Player as ChildPlayer;
-use app\model\PlayerDeck as ChildPlayerDeck;
-use app\model\PlayerDeckQuery as ChildPlayerDeckQuery;
+use app\model\PlayerEquipment as ChildPlayerEquipment;
+use app\model\PlayerEquipmentQuery as ChildPlayerEquipmentQuery;
 use app\model\PlayerItem as ChildPlayerItem;
 use app\model\PlayerItemQuery as ChildPlayerItemQuery;
 use app\model\PlayerQuery as ChildPlayerQuery;
-use app\model\Map\PlayerDeckTableMap;
+use app\model\Map\PlayerEquipmentTableMap;
 use app\model\Map\PlayerItemTableMap;
 
 /**
@@ -116,34 +116,46 @@ abstract class PlayerItem implements ActiveRecordInterface
     protected $aItem;
 
     /**
-     * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
+     * @var        ObjectCollection|ChildPlayerEquipment[] Collection to store aggregation of ChildPlayerEquipment objects.
      */
-    protected $collPlayerDecksRelatedByHeadPlayerItemId;
-    protected $collPlayerDecksRelatedByHeadPlayerItemIdPartial;
+    protected $collPlayerEquipmentsRelatedByWeapon1PlayerItemId;
+    protected $collPlayerEquipmentsRelatedByWeapon1PlayerItemIdPartial;
 
     /**
-     * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
+     * @var        ObjectCollection|ChildPlayerEquipment[] Collection to store aggregation of ChildPlayerEquipment objects.
      */
-    protected $collPlayerDecksRelatedByLeftArmPlayerItemId;
-    protected $collPlayerDecksRelatedByLeftArmPlayerItemIdPartial;
+    protected $collPlayerEquipmentsRelatedByWeapon2PlayerItemId;
+    protected $collPlayerEquipmentsRelatedByWeapon2PlayerItemIdPartial;
 
     /**
-     * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
+     * @var        ObjectCollection|ChildPlayerEquipment[] Collection to store aggregation of ChildPlayerEquipment objects.
      */
-    protected $collPlayerDecksRelatedByRightArmPlayerItemId;
-    protected $collPlayerDecksRelatedByRightArmPlayerItemIdPartial;
+    protected $collPlayerEquipmentsRelatedByHeadPlayerItemId;
+    protected $collPlayerEquipmentsRelatedByHeadPlayerItemIdPartial;
 
     /**
-     * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
+     * @var        ObjectCollection|ChildPlayerEquipment[] Collection to store aggregation of ChildPlayerEquipment objects.
      */
-    protected $collPlayerDecksRelatedByLeftLegPlayerItemId;
-    protected $collPlayerDecksRelatedByLeftLegPlayerItemIdPartial;
+    protected $collPlayerEquipmentsRelatedByLeftArmPlayerItemId;
+    protected $collPlayerEquipmentsRelatedByLeftArmPlayerItemIdPartial;
 
     /**
-     * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
+     * @var        ObjectCollection|ChildPlayerEquipment[] Collection to store aggregation of ChildPlayerEquipment objects.
      */
-    protected $collPlayerDecksRelatedByRightLegPlayerItemId;
-    protected $collPlayerDecksRelatedByRightLegPlayerItemIdPartial;
+    protected $collPlayerEquipmentsRelatedByRightArmPlayerItemId;
+    protected $collPlayerEquipmentsRelatedByRightArmPlayerItemIdPartial;
+
+    /**
+     * @var        ObjectCollection|ChildPlayerEquipment[] Collection to store aggregation of ChildPlayerEquipment objects.
+     */
+    protected $collPlayerEquipmentsRelatedByLeftLegPlayerItemId;
+    protected $collPlayerEquipmentsRelatedByLeftLegPlayerItemIdPartial;
+
+    /**
+     * @var        ObjectCollection|ChildPlayerEquipment[] Collection to store aggregation of ChildPlayerEquipment objects.
+     */
+    protected $collPlayerEquipmentsRelatedByRightLegPlayerItemId;
+    protected $collPlayerEquipmentsRelatedByRightLegPlayerItemIdPartial;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -155,33 +167,45 @@ abstract class PlayerItem implements ActiveRecordInterface
 
     /**
      * An array of objects scheduled for deletion.
-     * @var ObjectCollection|ChildPlayerDeck[]
+     * @var ObjectCollection|ChildPlayerEquipment[]
      */
-    protected $playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion = null;
+    protected $playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
-     * @var ObjectCollection|ChildPlayerDeck[]
+     * @var ObjectCollection|ChildPlayerEquipment[]
      */
-    protected $playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion = null;
+    protected $playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
-     * @var ObjectCollection|ChildPlayerDeck[]
+     * @var ObjectCollection|ChildPlayerEquipment[]
      */
-    protected $playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion = null;
+    protected $playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
-     * @var ObjectCollection|ChildPlayerDeck[]
+     * @var ObjectCollection|ChildPlayerEquipment[]
      */
-    protected $playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion = null;
+    protected $playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
-     * @var ObjectCollection|ChildPlayerDeck[]
+     * @var ObjectCollection|ChildPlayerEquipment[]
      */
-    protected $playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion = null;
+    protected $playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ChildPlayerEquipment[]
+     */
+    protected $playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ChildPlayerEquipment[]
+     */
+    protected $playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion = null;
 
     /**
      * Initializes internal state of app\model\Base\PlayerItem object.
@@ -713,15 +737,19 @@ abstract class PlayerItem implements ActiveRecordInterface
 
             $this->aPlayer = null;
             $this->aItem = null;
-            $this->collPlayerDecksRelatedByHeadPlayerItemId = null;
+            $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId = null;
 
-            $this->collPlayerDecksRelatedByLeftArmPlayerItemId = null;
+            $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId = null;
 
-            $this->collPlayerDecksRelatedByRightArmPlayerItemId = null;
+            $this->collPlayerEquipmentsRelatedByHeadPlayerItemId = null;
 
-            $this->collPlayerDecksRelatedByLeftLegPlayerItemId = null;
+            $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId = null;
 
-            $this->collPlayerDecksRelatedByRightLegPlayerItemId = null;
+            $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId = null;
+
+            $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId = null;
+
+            $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId = null;
 
         } // if (deep)
     }
@@ -868,90 +896,119 @@ abstract class PlayerItem implements ActiveRecordInterface
                 $this->resetModified();
             }
 
-            if ($this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion !== null) {
-                if (!$this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion->isEmpty()) {
-                    foreach ($this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion as $playerDeckRelatedByHeadPlayerItemId) {
-                        // need to save related object because we set the relation to null
-                        $playerDeckRelatedByHeadPlayerItemId->save($con);
-                    }
-                    $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion = null;
+            if ($this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion !== null) {
+                if (!$this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerEquipmentQuery::create()
+                        ->filterByPrimaryKeys($this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collPlayerDecksRelatedByHeadPlayerItemId !== null) {
-                foreach ($this->collPlayerDecksRelatedByHeadPlayerItemId as $referrerFK) {
+            if ($this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId !== null) {
+                foreach ($this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
                 }
             }
 
-            if ($this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion !== null) {
-                if (!$this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion->isEmpty()) {
-                    foreach ($this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion as $playerDeckRelatedByLeftArmPlayerItemId) {
-                        // need to save related object because we set the relation to null
-                        $playerDeckRelatedByLeftArmPlayerItemId->save($con);
-                    }
-                    $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion = null;
+            if ($this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion !== null) {
+                if (!$this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerEquipmentQuery::create()
+                        ->filterByPrimaryKeys($this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collPlayerDecksRelatedByLeftArmPlayerItemId !== null) {
-                foreach ($this->collPlayerDecksRelatedByLeftArmPlayerItemId as $referrerFK) {
+            if ($this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId !== null) {
+                foreach ($this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
                 }
             }
 
-            if ($this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion !== null) {
-                if (!$this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion->isEmpty()) {
-                    foreach ($this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion as $playerDeckRelatedByRightArmPlayerItemId) {
-                        // need to save related object because we set the relation to null
-                        $playerDeckRelatedByRightArmPlayerItemId->save($con);
-                    }
-                    $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion = null;
+            if ($this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion !== null) {
+                if (!$this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerEquipmentQuery::create()
+                        ->filterByPrimaryKeys($this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collPlayerDecksRelatedByRightArmPlayerItemId !== null) {
-                foreach ($this->collPlayerDecksRelatedByRightArmPlayerItemId as $referrerFK) {
+            if ($this->collPlayerEquipmentsRelatedByHeadPlayerItemId !== null) {
+                foreach ($this->collPlayerEquipmentsRelatedByHeadPlayerItemId as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
                 }
             }
 
-            if ($this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion !== null) {
-                if (!$this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion->isEmpty()) {
-                    foreach ($this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion as $playerDeckRelatedByLeftLegPlayerItemId) {
-                        // need to save related object because we set the relation to null
-                        $playerDeckRelatedByLeftLegPlayerItemId->save($con);
-                    }
-                    $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion = null;
+            if ($this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion !== null) {
+                if (!$this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerEquipmentQuery::create()
+                        ->filterByPrimaryKeys($this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collPlayerDecksRelatedByLeftLegPlayerItemId !== null) {
-                foreach ($this->collPlayerDecksRelatedByLeftLegPlayerItemId as $referrerFK) {
+            if ($this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId !== null) {
+                foreach ($this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
                 }
             }
 
-            if ($this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion !== null) {
-                if (!$this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion->isEmpty()) {
-                    foreach ($this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion as $playerDeckRelatedByRightLegPlayerItemId) {
-                        // need to save related object because we set the relation to null
-                        $playerDeckRelatedByRightLegPlayerItemId->save($con);
-                    }
-                    $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion = null;
+            if ($this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion !== null) {
+                if (!$this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerEquipmentQuery::create()
+                        ->filterByPrimaryKeys($this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collPlayerDecksRelatedByRightLegPlayerItemId !== null) {
-                foreach ($this->collPlayerDecksRelatedByRightLegPlayerItemId as $referrerFK) {
+            if ($this->collPlayerEquipmentsRelatedByRightArmPlayerItemId !== null) {
+                foreach ($this->collPlayerEquipmentsRelatedByRightArmPlayerItemId as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion !== null) {
+                if (!$this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerEquipmentQuery::create()
+                        ->filterByPrimaryKeys($this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId !== null) {
+                foreach ($this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion !== null) {
+                if (!$this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerEquipmentQuery::create()
+                        ->filterByPrimaryKeys($this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collPlayerEquipmentsRelatedByRightLegPlayerItemId !== null) {
+                foreach ($this->collPlayerEquipmentsRelatedByRightLegPlayerItemId as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -1184,80 +1241,110 @@ abstract class PlayerItem implements ActiveRecordInterface
 
                 $result[$key] = $this->aItem->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->collPlayerDecksRelatedByHeadPlayerItemId) {
+            if (null !== $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
-                        $key = 'playerDecks';
+                        $key = 'playerEquipments';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'player_decks';
+                        $key = 'player_equipments';
                         break;
                     default:
-                        $key = 'PlayerDecks';
+                        $key = 'PlayerEquipments';
                 }
 
-                $result[$key] = $this->collPlayerDecksRelatedByHeadPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+                $result[$key] = $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
-            if (null !== $this->collPlayerDecksRelatedByLeftArmPlayerItemId) {
+            if (null !== $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
-                        $key = 'playerDecks';
+                        $key = 'playerEquipments';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'player_decks';
+                        $key = 'player_equipments';
                         break;
                     default:
-                        $key = 'PlayerDecks';
+                        $key = 'PlayerEquipments';
                 }
 
-                $result[$key] = $this->collPlayerDecksRelatedByLeftArmPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+                $result[$key] = $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
-            if (null !== $this->collPlayerDecksRelatedByRightArmPlayerItemId) {
+            if (null !== $this->collPlayerEquipmentsRelatedByHeadPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
-                        $key = 'playerDecks';
+                        $key = 'playerEquipments';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'player_decks';
+                        $key = 'player_equipments';
                         break;
                     default:
-                        $key = 'PlayerDecks';
+                        $key = 'PlayerEquipments';
                 }
 
-                $result[$key] = $this->collPlayerDecksRelatedByRightArmPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+                $result[$key] = $this->collPlayerEquipmentsRelatedByHeadPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
-            if (null !== $this->collPlayerDecksRelatedByLeftLegPlayerItemId) {
+            if (null !== $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
-                        $key = 'playerDecks';
+                        $key = 'playerEquipments';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'player_decks';
+                        $key = 'player_equipments';
                         break;
                     default:
-                        $key = 'PlayerDecks';
+                        $key = 'PlayerEquipments';
                 }
 
-                $result[$key] = $this->collPlayerDecksRelatedByLeftLegPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+                $result[$key] = $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
-            if (null !== $this->collPlayerDecksRelatedByRightLegPlayerItemId) {
+            if (null !== $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
-                        $key = 'playerDecks';
+                        $key = 'playerEquipments';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'player_decks';
+                        $key = 'player_equipments';
                         break;
                     default:
-                        $key = 'PlayerDecks';
+                        $key = 'PlayerEquipments';
                 }
 
-                $result[$key] = $this->collPlayerDecksRelatedByRightLegPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+                $result[$key] = $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId) {
+
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'playerEquipments';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'player_equipments';
+                        break;
+                    default:
+                        $key = 'PlayerEquipments';
+                }
+
+                $result[$key] = $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId) {
+
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'playerEquipments';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'player_equipments';
+                        break;
+                    default:
+                        $key = 'PlayerEquipments';
+                }
+
+                $result[$key] = $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1501,33 +1588,45 @@ abstract class PlayerItem implements ActiveRecordInterface
             // the getter/setter methods for fkey referrer objects.
             $copyObj->setNew(false);
 
-            foreach ($this->getPlayerDecksRelatedByHeadPlayerItemId() as $relObj) {
+            foreach ($this->getPlayerEquipmentsRelatedByWeapon1PlayerItemId() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addPlayerDeckRelatedByHeadPlayerItemId($relObj->copy($deepCopy));
+                    $copyObj->addPlayerEquipmentRelatedByWeapon1PlayerItemId($relObj->copy($deepCopy));
                 }
             }
 
-            foreach ($this->getPlayerDecksRelatedByLeftArmPlayerItemId() as $relObj) {
+            foreach ($this->getPlayerEquipmentsRelatedByWeapon2PlayerItemId() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addPlayerDeckRelatedByLeftArmPlayerItemId($relObj->copy($deepCopy));
+                    $copyObj->addPlayerEquipmentRelatedByWeapon2PlayerItemId($relObj->copy($deepCopy));
                 }
             }
 
-            foreach ($this->getPlayerDecksRelatedByRightArmPlayerItemId() as $relObj) {
+            foreach ($this->getPlayerEquipmentsRelatedByHeadPlayerItemId() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addPlayerDeckRelatedByRightArmPlayerItemId($relObj->copy($deepCopy));
+                    $copyObj->addPlayerEquipmentRelatedByHeadPlayerItemId($relObj->copy($deepCopy));
                 }
             }
 
-            foreach ($this->getPlayerDecksRelatedByLeftLegPlayerItemId() as $relObj) {
+            foreach ($this->getPlayerEquipmentsRelatedByLeftArmPlayerItemId() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addPlayerDeckRelatedByLeftLegPlayerItemId($relObj->copy($deepCopy));
+                    $copyObj->addPlayerEquipmentRelatedByLeftArmPlayerItemId($relObj->copy($deepCopy));
                 }
             }
 
-            foreach ($this->getPlayerDecksRelatedByRightLegPlayerItemId() as $relObj) {
+            foreach ($this->getPlayerEquipmentsRelatedByRightArmPlayerItemId() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addPlayerDeckRelatedByRightLegPlayerItemId($relObj->copy($deepCopy));
+                    $copyObj->addPlayerEquipmentRelatedByRightArmPlayerItemId($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getPlayerEquipmentsRelatedByLeftLegPlayerItemId() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addPlayerEquipmentRelatedByLeftLegPlayerItemId($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getPlayerEquipmentsRelatedByRightLegPlayerItemId() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addPlayerEquipmentRelatedByRightLegPlayerItemId($relObj->copy($deepCopy));
                 }
             }
 
@@ -1674,54 +1773,62 @@ abstract class PlayerItem implements ActiveRecordInterface
      */
     public function initRelation($relationName)
     {
-        if ('PlayerDeckRelatedByHeadPlayerItemId' == $relationName) {
-            $this->initPlayerDecksRelatedByHeadPlayerItemId();
+        if ('PlayerEquipmentRelatedByWeapon1PlayerItemId' == $relationName) {
+            $this->initPlayerEquipmentsRelatedByWeapon1PlayerItemId();
             return;
         }
-        if ('PlayerDeckRelatedByLeftArmPlayerItemId' == $relationName) {
-            $this->initPlayerDecksRelatedByLeftArmPlayerItemId();
+        if ('PlayerEquipmentRelatedByWeapon2PlayerItemId' == $relationName) {
+            $this->initPlayerEquipmentsRelatedByWeapon2PlayerItemId();
             return;
         }
-        if ('PlayerDeckRelatedByRightArmPlayerItemId' == $relationName) {
-            $this->initPlayerDecksRelatedByRightArmPlayerItemId();
+        if ('PlayerEquipmentRelatedByHeadPlayerItemId' == $relationName) {
+            $this->initPlayerEquipmentsRelatedByHeadPlayerItemId();
             return;
         }
-        if ('PlayerDeckRelatedByLeftLegPlayerItemId' == $relationName) {
-            $this->initPlayerDecksRelatedByLeftLegPlayerItemId();
+        if ('PlayerEquipmentRelatedByLeftArmPlayerItemId' == $relationName) {
+            $this->initPlayerEquipmentsRelatedByLeftArmPlayerItemId();
             return;
         }
-        if ('PlayerDeckRelatedByRightLegPlayerItemId' == $relationName) {
-            $this->initPlayerDecksRelatedByRightLegPlayerItemId();
+        if ('PlayerEquipmentRelatedByRightArmPlayerItemId' == $relationName) {
+            $this->initPlayerEquipmentsRelatedByRightArmPlayerItemId();
+            return;
+        }
+        if ('PlayerEquipmentRelatedByLeftLegPlayerItemId' == $relationName) {
+            $this->initPlayerEquipmentsRelatedByLeftLegPlayerItemId();
+            return;
+        }
+        if ('PlayerEquipmentRelatedByRightLegPlayerItemId' == $relationName) {
+            $this->initPlayerEquipmentsRelatedByRightLegPlayerItemId();
             return;
         }
     }
 
     /**
-     * Clears out the collPlayerDecksRelatedByHeadPlayerItemId collection
+     * Clears out the collPlayerEquipmentsRelatedByWeapon1PlayerItemId collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addPlayerDecksRelatedByHeadPlayerItemId()
+     * @see        addPlayerEquipmentsRelatedByWeapon1PlayerItemId()
      */
-    public function clearPlayerDecksRelatedByHeadPlayerItemId()
+    public function clearPlayerEquipmentsRelatedByWeapon1PlayerItemId()
     {
-        $this->collPlayerDecksRelatedByHeadPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
+        $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Reset is the collPlayerDecksRelatedByHeadPlayerItemId collection loaded partially.
+     * Reset is the collPlayerEquipmentsRelatedByWeapon1PlayerItemId collection loaded partially.
      */
-    public function resetPartialPlayerDecksRelatedByHeadPlayerItemId($v = true)
+    public function resetPartialPlayerEquipmentsRelatedByWeapon1PlayerItemId($v = true)
     {
-        $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial = $v;
+        $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemIdPartial = $v;
     }
 
     /**
-     * Initializes the collPlayerDecksRelatedByHeadPlayerItemId collection.
+     * Initializes the collPlayerEquipmentsRelatedByWeapon1PlayerItemId collection.
      *
-     * By default this just sets the collPlayerDecksRelatedByHeadPlayerItemId collection to an empty array (like clearcollPlayerDecksRelatedByHeadPlayerItemId());
+     * By default this just sets the collPlayerEquipmentsRelatedByWeapon1PlayerItemId collection to an empty array (like clearcollPlayerEquipmentsRelatedByWeapon1PlayerItemId());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -1730,20 +1837,20 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @return void
      */
-    public function initPlayerDecksRelatedByHeadPlayerItemId($overrideExisting = true)
+    public function initPlayerEquipmentsRelatedByWeapon1PlayerItemId($overrideExisting = true)
     {
-        if (null !== $this->collPlayerDecksRelatedByHeadPlayerItemId && !$overrideExisting) {
+        if (null !== $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId && !$overrideExisting) {
             return;
         }
 
-        $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
+        $collectionClassName = PlayerEquipmentTableMap::getTableMap()->getCollectionClassName();
 
-        $this->collPlayerDecksRelatedByHeadPlayerItemId = new $collectionClassName;
-        $this->collPlayerDecksRelatedByHeadPlayerItemId->setModel('\app\model\PlayerDeck');
+        $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId = new $collectionClassName;
+        $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId->setModel('\app\model\PlayerEquipment');
     }
 
     /**
-     * Gets an array of ChildPlayerDeck objects which contain a foreign key that references this object.
+     * Gets an array of ChildPlayerEquipment objects which contain a foreign key that references this object.
      *
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
@@ -1753,108 +1860,608 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      ConnectionInterface $con optional connection object
-     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
      * @throws PropelException
      */
-    public function getPlayerDecksRelatedByHeadPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
+    public function getPlayerEquipmentsRelatedByWeapon1PlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByHeadPlayerItemId || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByHeadPlayerItemId) {
+        $partial = $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId) {
                 // return empty collection
-                $this->initPlayerDecksRelatedByHeadPlayerItemId();
+                $this->initPlayerEquipmentsRelatedByWeapon1PlayerItemId();
             } else {
-                $collPlayerDecksRelatedByHeadPlayerItemId = ChildPlayerDeckQuery::create(null, $criteria)
-                    ->filterByPlayerItemRelatedByHeadPlayerItemId($this)
+                $collPlayerEquipmentsRelatedByWeapon1PlayerItemId = ChildPlayerEquipmentQuery::create(null, $criteria)
+                    ->filterByPlayerItemRelatedByWeapon1PlayerItemId($this)
                     ->find($con);
 
                 if (null !== $criteria) {
-                    if (false !== $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial && count($collPlayerDecksRelatedByHeadPlayerItemId)) {
-                        $this->initPlayerDecksRelatedByHeadPlayerItemId(false);
+                    if (false !== $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemIdPartial && count($collPlayerEquipmentsRelatedByWeapon1PlayerItemId)) {
+                        $this->initPlayerEquipmentsRelatedByWeapon1PlayerItemId(false);
 
-                        foreach ($collPlayerDecksRelatedByHeadPlayerItemId as $obj) {
-                            if (false == $this->collPlayerDecksRelatedByHeadPlayerItemId->contains($obj)) {
-                                $this->collPlayerDecksRelatedByHeadPlayerItemId->append($obj);
+                        foreach ($collPlayerEquipmentsRelatedByWeapon1PlayerItemId as $obj) {
+                            if (false == $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId->contains($obj)) {
+                                $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId->append($obj);
                             }
                         }
 
-                        $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial = true;
+                        $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemIdPartial = true;
                     }
 
-                    return $collPlayerDecksRelatedByHeadPlayerItemId;
+                    return $collPlayerEquipmentsRelatedByWeapon1PlayerItemId;
                 }
 
-                if ($partial && $this->collPlayerDecksRelatedByHeadPlayerItemId) {
-                    foreach ($this->collPlayerDecksRelatedByHeadPlayerItemId as $obj) {
+                if ($partial && $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId) {
+                    foreach ($this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId as $obj) {
                         if ($obj->isNew()) {
-                            $collPlayerDecksRelatedByHeadPlayerItemId[] = $obj;
+                            $collPlayerEquipmentsRelatedByWeapon1PlayerItemId[] = $obj;
                         }
                     }
                 }
 
-                $this->collPlayerDecksRelatedByHeadPlayerItemId = $collPlayerDecksRelatedByHeadPlayerItemId;
-                $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial = false;
+                $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId = $collPlayerEquipmentsRelatedByWeapon1PlayerItemId;
+                $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemIdPartial = false;
             }
         }
 
-        return $this->collPlayerDecksRelatedByHeadPlayerItemId;
+        return $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId;
     }
 
     /**
-     * Sets a collection of ChildPlayerDeck objects related by a one-to-many relationship
+     * Sets a collection of ChildPlayerEquipment objects related by a one-to-many relationship
      * to the current object.
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      Collection $playerDecksRelatedByHeadPlayerItemId A Propel collection.
+     * @param      Collection $playerEquipmentsRelatedByWeapon1PlayerItemId A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function setPlayerDecksRelatedByHeadPlayerItemId(Collection $playerDecksRelatedByHeadPlayerItemId, ConnectionInterface $con = null)
+    public function setPlayerEquipmentsRelatedByWeapon1PlayerItemId(Collection $playerEquipmentsRelatedByWeapon1PlayerItemId, ConnectionInterface $con = null)
     {
-        /** @var ChildPlayerDeck[] $playerDecksRelatedByHeadPlayerItemIdToDelete */
-        $playerDecksRelatedByHeadPlayerItemIdToDelete = $this->getPlayerDecksRelatedByHeadPlayerItemId(new Criteria(), $con)->diff($playerDecksRelatedByHeadPlayerItemId);
+        /** @var ChildPlayerEquipment[] $playerEquipmentsRelatedByWeapon1PlayerItemIdToDelete */
+        $playerEquipmentsRelatedByWeapon1PlayerItemIdToDelete = $this->getPlayerEquipmentsRelatedByWeapon1PlayerItemId(new Criteria(), $con)->diff($playerEquipmentsRelatedByWeapon1PlayerItemId);
 
 
-        $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion = $playerDecksRelatedByHeadPlayerItemIdToDelete;
+        $this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion = $playerEquipmentsRelatedByWeapon1PlayerItemIdToDelete;
 
-        foreach ($playerDecksRelatedByHeadPlayerItemIdToDelete as $playerDeckRelatedByHeadPlayerItemIdRemoved) {
-            $playerDeckRelatedByHeadPlayerItemIdRemoved->setPlayerItemRelatedByHeadPlayerItemId(null);
+        foreach ($playerEquipmentsRelatedByWeapon1PlayerItemIdToDelete as $playerEquipmentRelatedByWeapon1PlayerItemIdRemoved) {
+            $playerEquipmentRelatedByWeapon1PlayerItemIdRemoved->setPlayerItemRelatedByWeapon1PlayerItemId(null);
         }
 
-        $this->collPlayerDecksRelatedByHeadPlayerItemId = null;
-        foreach ($playerDecksRelatedByHeadPlayerItemId as $playerDeckRelatedByHeadPlayerItemId) {
-            $this->addPlayerDeckRelatedByHeadPlayerItemId($playerDeckRelatedByHeadPlayerItemId);
+        $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId = null;
+        foreach ($playerEquipmentsRelatedByWeapon1PlayerItemId as $playerEquipmentRelatedByWeapon1PlayerItemId) {
+            $this->addPlayerEquipmentRelatedByWeapon1PlayerItemId($playerEquipmentRelatedByWeapon1PlayerItemId);
         }
 
-        $this->collPlayerDecksRelatedByHeadPlayerItemId = $playerDecksRelatedByHeadPlayerItemId;
-        $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial = false;
+        $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId = $playerEquipmentsRelatedByWeapon1PlayerItemId;
+        $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemIdPartial = false;
 
         return $this;
     }
 
     /**
-     * Returns the number of related PlayerDeck objects.
+     * Returns the number of related PlayerEquipment objects.
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct
      * @param      ConnectionInterface $con
-     * @return int             Count of related PlayerDeck objects.
+     * @return int             Count of related PlayerEquipment objects.
      * @throws PropelException
      */
-    public function countPlayerDecksRelatedByHeadPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    public function countPlayerEquipmentsRelatedByWeapon1PlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByHeadPlayerItemId || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByHeadPlayerItemId) {
+        $partial = $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getPlayerDecksRelatedByHeadPlayerItemId());
+                return count($this->getPlayerEquipmentsRelatedByWeapon1PlayerItemId());
             }
 
-            $query = ChildPlayerDeckQuery::create(null, $criteria);
+            $query = ChildPlayerEquipmentQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByPlayerItemRelatedByWeapon1PlayerItemId($this)
+                ->count($con);
+        }
+
+        return count($this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId);
+    }
+
+    /**
+     * Method called to associate a ChildPlayerEquipment object to this object
+     * through the ChildPlayerEquipment foreign key attribute.
+     *
+     * @param  ChildPlayerEquipment $l ChildPlayerEquipment
+     * @return $this|\app\model\PlayerItem The current object (for fluent API support)
+     */
+    public function addPlayerEquipmentRelatedByWeapon1PlayerItemId(ChildPlayerEquipment $l)
+    {
+        if ($this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId === null) {
+            $this->initPlayerEquipmentsRelatedByWeapon1PlayerItemId();
+            $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemIdPartial = true;
+        }
+
+        if (!$this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId->contains($l)) {
+            $this->doAddPlayerEquipmentRelatedByWeapon1PlayerItemId($l);
+
+            if ($this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion and $this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion->contains($l)) {
+                $this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion->remove($this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ChildPlayerEquipment $playerEquipmentRelatedByWeapon1PlayerItemId The ChildPlayerEquipment object to add.
+     */
+    protected function doAddPlayerEquipmentRelatedByWeapon1PlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByWeapon1PlayerItemId)
+    {
+        $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId[]= $playerEquipmentRelatedByWeapon1PlayerItemId;
+        $playerEquipmentRelatedByWeapon1PlayerItemId->setPlayerItemRelatedByWeapon1PlayerItemId($this);
+    }
+
+    /**
+     * @param  ChildPlayerEquipment $playerEquipmentRelatedByWeapon1PlayerItemId The ChildPlayerEquipment object to remove.
+     * @return $this|ChildPlayerItem The current object (for fluent API support)
+     */
+    public function removePlayerEquipmentRelatedByWeapon1PlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByWeapon1PlayerItemId)
+    {
+        if ($this->getPlayerEquipmentsRelatedByWeapon1PlayerItemId()->contains($playerEquipmentRelatedByWeapon1PlayerItemId)) {
+            $pos = $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId->search($playerEquipmentRelatedByWeapon1PlayerItemId);
+            $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId->remove($pos);
+            if (null === $this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion) {
+                $this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion = clone $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId;
+                $this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion->clear();
+            }
+            $this->playerEquipmentsRelatedByWeapon1PlayerItemIdScheduledForDeletion[]= clone $playerEquipmentRelatedByWeapon1PlayerItemId;
+            $playerEquipmentRelatedByWeapon1PlayerItemId->setPlayerItemRelatedByWeapon1PlayerItemId(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this PlayerItem is new, it will return
+     * an empty collection; or if this PlayerItem has previously
+     * been saved, it will retrieve related PlayerEquipmentsRelatedByWeapon1PlayerItemId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in PlayerItem.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
+     */
+    public function getPlayerEquipmentsRelatedByWeapon1PlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
+        $query->joinWith('Player', $joinBehavior);
+
+        return $this->getPlayerEquipmentsRelatedByWeapon1PlayerItemId($query, $con);
+    }
+
+    /**
+     * Clears out the collPlayerEquipmentsRelatedByWeapon2PlayerItemId collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addPlayerEquipmentsRelatedByWeapon2PlayerItemId()
+     */
+    public function clearPlayerEquipmentsRelatedByWeapon2PlayerItemId()
+    {
+        $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collPlayerEquipmentsRelatedByWeapon2PlayerItemId collection loaded partially.
+     */
+    public function resetPartialPlayerEquipmentsRelatedByWeapon2PlayerItemId($v = true)
+    {
+        $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemIdPartial = $v;
+    }
+
+    /**
+     * Initializes the collPlayerEquipmentsRelatedByWeapon2PlayerItemId collection.
+     *
+     * By default this just sets the collPlayerEquipmentsRelatedByWeapon2PlayerItemId collection to an empty array (like clearcollPlayerEquipmentsRelatedByWeapon2PlayerItemId());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initPlayerEquipmentsRelatedByWeapon2PlayerItemId($overrideExisting = true)
+    {
+        if (null !== $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = PlayerEquipmentTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId = new $collectionClassName;
+        $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId->setModel('\app\model\PlayerEquipment');
+    }
+
+    /**
+     * Gets an array of ChildPlayerEquipment objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildPlayerItem is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
+     * @throws PropelException
+     */
+    public function getPlayerEquipmentsRelatedByWeapon2PlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId) {
+                // return empty collection
+                $this->initPlayerEquipmentsRelatedByWeapon2PlayerItemId();
+            } else {
+                $collPlayerEquipmentsRelatedByWeapon2PlayerItemId = ChildPlayerEquipmentQuery::create(null, $criteria)
+                    ->filterByPlayerItemRelatedByWeapon2PlayerItemId($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemIdPartial && count($collPlayerEquipmentsRelatedByWeapon2PlayerItemId)) {
+                        $this->initPlayerEquipmentsRelatedByWeapon2PlayerItemId(false);
+
+                        foreach ($collPlayerEquipmentsRelatedByWeapon2PlayerItemId as $obj) {
+                            if (false == $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId->contains($obj)) {
+                                $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId->append($obj);
+                            }
+                        }
+
+                        $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemIdPartial = true;
+                    }
+
+                    return $collPlayerEquipmentsRelatedByWeapon2PlayerItemId;
+                }
+
+                if ($partial && $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId) {
+                    foreach ($this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId as $obj) {
+                        if ($obj->isNew()) {
+                            $collPlayerEquipmentsRelatedByWeapon2PlayerItemId[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId = $collPlayerEquipmentsRelatedByWeapon2PlayerItemId;
+                $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemIdPartial = false;
+            }
+        }
+
+        return $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId;
+    }
+
+    /**
+     * Sets a collection of ChildPlayerEquipment objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $playerEquipmentsRelatedByWeapon2PlayerItemId A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildPlayerItem The current object (for fluent API support)
+     */
+    public function setPlayerEquipmentsRelatedByWeapon2PlayerItemId(Collection $playerEquipmentsRelatedByWeapon2PlayerItemId, ConnectionInterface $con = null)
+    {
+        /** @var ChildPlayerEquipment[] $playerEquipmentsRelatedByWeapon2PlayerItemIdToDelete */
+        $playerEquipmentsRelatedByWeapon2PlayerItemIdToDelete = $this->getPlayerEquipmentsRelatedByWeapon2PlayerItemId(new Criteria(), $con)->diff($playerEquipmentsRelatedByWeapon2PlayerItemId);
+
+
+        $this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion = $playerEquipmentsRelatedByWeapon2PlayerItemIdToDelete;
+
+        foreach ($playerEquipmentsRelatedByWeapon2PlayerItemIdToDelete as $playerEquipmentRelatedByWeapon2PlayerItemIdRemoved) {
+            $playerEquipmentRelatedByWeapon2PlayerItemIdRemoved->setPlayerItemRelatedByWeapon2PlayerItemId(null);
+        }
+
+        $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId = null;
+        foreach ($playerEquipmentsRelatedByWeapon2PlayerItemId as $playerEquipmentRelatedByWeapon2PlayerItemId) {
+            $this->addPlayerEquipmentRelatedByWeapon2PlayerItemId($playerEquipmentRelatedByWeapon2PlayerItemId);
+        }
+
+        $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId = $playerEquipmentsRelatedByWeapon2PlayerItemId;
+        $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemIdPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related PlayerEquipment objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related PlayerEquipment objects.
+     * @throws PropelException
+     */
+    public function countPlayerEquipmentsRelatedByWeapon2PlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getPlayerEquipmentsRelatedByWeapon2PlayerItemId());
+            }
+
+            $query = ChildPlayerEquipmentQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByPlayerItemRelatedByWeapon2PlayerItemId($this)
+                ->count($con);
+        }
+
+        return count($this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId);
+    }
+
+    /**
+     * Method called to associate a ChildPlayerEquipment object to this object
+     * through the ChildPlayerEquipment foreign key attribute.
+     *
+     * @param  ChildPlayerEquipment $l ChildPlayerEquipment
+     * @return $this|\app\model\PlayerItem The current object (for fluent API support)
+     */
+    public function addPlayerEquipmentRelatedByWeapon2PlayerItemId(ChildPlayerEquipment $l)
+    {
+        if ($this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId === null) {
+            $this->initPlayerEquipmentsRelatedByWeapon2PlayerItemId();
+            $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemIdPartial = true;
+        }
+
+        if (!$this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId->contains($l)) {
+            $this->doAddPlayerEquipmentRelatedByWeapon2PlayerItemId($l);
+
+            if ($this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion and $this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion->contains($l)) {
+                $this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion->remove($this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ChildPlayerEquipment $playerEquipmentRelatedByWeapon2PlayerItemId The ChildPlayerEquipment object to add.
+     */
+    protected function doAddPlayerEquipmentRelatedByWeapon2PlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByWeapon2PlayerItemId)
+    {
+        $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId[]= $playerEquipmentRelatedByWeapon2PlayerItemId;
+        $playerEquipmentRelatedByWeapon2PlayerItemId->setPlayerItemRelatedByWeapon2PlayerItemId($this);
+    }
+
+    /**
+     * @param  ChildPlayerEquipment $playerEquipmentRelatedByWeapon2PlayerItemId The ChildPlayerEquipment object to remove.
+     * @return $this|ChildPlayerItem The current object (for fluent API support)
+     */
+    public function removePlayerEquipmentRelatedByWeapon2PlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByWeapon2PlayerItemId)
+    {
+        if ($this->getPlayerEquipmentsRelatedByWeapon2PlayerItemId()->contains($playerEquipmentRelatedByWeapon2PlayerItemId)) {
+            $pos = $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId->search($playerEquipmentRelatedByWeapon2PlayerItemId);
+            $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId->remove($pos);
+            if (null === $this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion) {
+                $this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion = clone $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId;
+                $this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion->clear();
+            }
+            $this->playerEquipmentsRelatedByWeapon2PlayerItemIdScheduledForDeletion[]= clone $playerEquipmentRelatedByWeapon2PlayerItemId;
+            $playerEquipmentRelatedByWeapon2PlayerItemId->setPlayerItemRelatedByWeapon2PlayerItemId(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this PlayerItem is new, it will return
+     * an empty collection; or if this PlayerItem has previously
+     * been saved, it will retrieve related PlayerEquipmentsRelatedByWeapon2PlayerItemId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in PlayerItem.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
+     */
+    public function getPlayerEquipmentsRelatedByWeapon2PlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
+        $query->joinWith('Player', $joinBehavior);
+
+        return $this->getPlayerEquipmentsRelatedByWeapon2PlayerItemId($query, $con);
+    }
+
+    /**
+     * Clears out the collPlayerEquipmentsRelatedByHeadPlayerItemId collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addPlayerEquipmentsRelatedByHeadPlayerItemId()
+     */
+    public function clearPlayerEquipmentsRelatedByHeadPlayerItemId()
+    {
+        $this->collPlayerEquipmentsRelatedByHeadPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collPlayerEquipmentsRelatedByHeadPlayerItemId collection loaded partially.
+     */
+    public function resetPartialPlayerEquipmentsRelatedByHeadPlayerItemId($v = true)
+    {
+        $this->collPlayerEquipmentsRelatedByHeadPlayerItemIdPartial = $v;
+    }
+
+    /**
+     * Initializes the collPlayerEquipmentsRelatedByHeadPlayerItemId collection.
+     *
+     * By default this just sets the collPlayerEquipmentsRelatedByHeadPlayerItemId collection to an empty array (like clearcollPlayerEquipmentsRelatedByHeadPlayerItemId());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initPlayerEquipmentsRelatedByHeadPlayerItemId($overrideExisting = true)
+    {
+        if (null !== $this->collPlayerEquipmentsRelatedByHeadPlayerItemId && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = PlayerEquipmentTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collPlayerEquipmentsRelatedByHeadPlayerItemId = new $collectionClassName;
+        $this->collPlayerEquipmentsRelatedByHeadPlayerItemId->setModel('\app\model\PlayerEquipment');
+    }
+
+    /**
+     * Gets an array of ChildPlayerEquipment objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildPlayerItem is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
+     * @throws PropelException
+     */
+    public function getPlayerEquipmentsRelatedByHeadPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerEquipmentsRelatedByHeadPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByHeadPlayerItemId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByHeadPlayerItemId) {
+                // return empty collection
+                $this->initPlayerEquipmentsRelatedByHeadPlayerItemId();
+            } else {
+                $collPlayerEquipmentsRelatedByHeadPlayerItemId = ChildPlayerEquipmentQuery::create(null, $criteria)
+                    ->filterByPlayerItemRelatedByHeadPlayerItemId($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collPlayerEquipmentsRelatedByHeadPlayerItemIdPartial && count($collPlayerEquipmentsRelatedByHeadPlayerItemId)) {
+                        $this->initPlayerEquipmentsRelatedByHeadPlayerItemId(false);
+
+                        foreach ($collPlayerEquipmentsRelatedByHeadPlayerItemId as $obj) {
+                            if (false == $this->collPlayerEquipmentsRelatedByHeadPlayerItemId->contains($obj)) {
+                                $this->collPlayerEquipmentsRelatedByHeadPlayerItemId->append($obj);
+                            }
+                        }
+
+                        $this->collPlayerEquipmentsRelatedByHeadPlayerItemIdPartial = true;
+                    }
+
+                    return $collPlayerEquipmentsRelatedByHeadPlayerItemId;
+                }
+
+                if ($partial && $this->collPlayerEquipmentsRelatedByHeadPlayerItemId) {
+                    foreach ($this->collPlayerEquipmentsRelatedByHeadPlayerItemId as $obj) {
+                        if ($obj->isNew()) {
+                            $collPlayerEquipmentsRelatedByHeadPlayerItemId[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collPlayerEquipmentsRelatedByHeadPlayerItemId = $collPlayerEquipmentsRelatedByHeadPlayerItemId;
+                $this->collPlayerEquipmentsRelatedByHeadPlayerItemIdPartial = false;
+            }
+        }
+
+        return $this->collPlayerEquipmentsRelatedByHeadPlayerItemId;
+    }
+
+    /**
+     * Sets a collection of ChildPlayerEquipment objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $playerEquipmentsRelatedByHeadPlayerItemId A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildPlayerItem The current object (for fluent API support)
+     */
+    public function setPlayerEquipmentsRelatedByHeadPlayerItemId(Collection $playerEquipmentsRelatedByHeadPlayerItemId, ConnectionInterface $con = null)
+    {
+        /** @var ChildPlayerEquipment[] $playerEquipmentsRelatedByHeadPlayerItemIdToDelete */
+        $playerEquipmentsRelatedByHeadPlayerItemIdToDelete = $this->getPlayerEquipmentsRelatedByHeadPlayerItemId(new Criteria(), $con)->diff($playerEquipmentsRelatedByHeadPlayerItemId);
+
+
+        $this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion = $playerEquipmentsRelatedByHeadPlayerItemIdToDelete;
+
+        foreach ($playerEquipmentsRelatedByHeadPlayerItemIdToDelete as $playerEquipmentRelatedByHeadPlayerItemIdRemoved) {
+            $playerEquipmentRelatedByHeadPlayerItemIdRemoved->setPlayerItemRelatedByHeadPlayerItemId(null);
+        }
+
+        $this->collPlayerEquipmentsRelatedByHeadPlayerItemId = null;
+        foreach ($playerEquipmentsRelatedByHeadPlayerItemId as $playerEquipmentRelatedByHeadPlayerItemId) {
+            $this->addPlayerEquipmentRelatedByHeadPlayerItemId($playerEquipmentRelatedByHeadPlayerItemId);
+        }
+
+        $this->collPlayerEquipmentsRelatedByHeadPlayerItemId = $playerEquipmentsRelatedByHeadPlayerItemId;
+        $this->collPlayerEquipmentsRelatedByHeadPlayerItemIdPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related PlayerEquipment objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related PlayerEquipment objects.
+     * @throws PropelException
+     */
+    public function countPlayerEquipmentsRelatedByHeadPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerEquipmentsRelatedByHeadPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByHeadPlayerItemId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByHeadPlayerItemId) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getPlayerEquipmentsRelatedByHeadPlayerItemId());
+            }
+
+            $query = ChildPlayerEquipmentQuery::create(null, $criteria);
             if ($distinct) {
                 $query->distinct();
             }
@@ -1864,28 +2471,28 @@ abstract class PlayerItem implements ActiveRecordInterface
                 ->count($con);
         }
 
-        return count($this->collPlayerDecksRelatedByHeadPlayerItemId);
+        return count($this->collPlayerEquipmentsRelatedByHeadPlayerItemId);
     }
 
     /**
-     * Method called to associate a ChildPlayerDeck object to this object
-     * through the ChildPlayerDeck foreign key attribute.
+     * Method called to associate a ChildPlayerEquipment object to this object
+     * through the ChildPlayerEquipment foreign key attribute.
      *
-     * @param  ChildPlayerDeck $l ChildPlayerDeck
+     * @param  ChildPlayerEquipment $l ChildPlayerEquipment
      * @return $this|\app\model\PlayerItem The current object (for fluent API support)
      */
-    public function addPlayerDeckRelatedByHeadPlayerItemId(ChildPlayerDeck $l)
+    public function addPlayerEquipmentRelatedByHeadPlayerItemId(ChildPlayerEquipment $l)
     {
-        if ($this->collPlayerDecksRelatedByHeadPlayerItemId === null) {
-            $this->initPlayerDecksRelatedByHeadPlayerItemId();
-            $this->collPlayerDecksRelatedByHeadPlayerItemIdPartial = true;
+        if ($this->collPlayerEquipmentsRelatedByHeadPlayerItemId === null) {
+            $this->initPlayerEquipmentsRelatedByHeadPlayerItemId();
+            $this->collPlayerEquipmentsRelatedByHeadPlayerItemIdPartial = true;
         }
 
-        if (!$this->collPlayerDecksRelatedByHeadPlayerItemId->contains($l)) {
-            $this->doAddPlayerDeckRelatedByHeadPlayerItemId($l);
+        if (!$this->collPlayerEquipmentsRelatedByHeadPlayerItemId->contains($l)) {
+            $this->doAddPlayerEquipmentRelatedByHeadPlayerItemId($l);
 
-            if ($this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion and $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion->contains($l)) {
-                $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion->remove($this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion->search($l));
+            if ($this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion and $this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion->contains($l)) {
+                $this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion->remove($this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion->search($l));
             }
         }
 
@@ -1893,29 +2500,29 @@ abstract class PlayerItem implements ActiveRecordInterface
     }
 
     /**
-     * @param ChildPlayerDeck $playerDeckRelatedByHeadPlayerItemId The ChildPlayerDeck object to add.
+     * @param ChildPlayerEquipment $playerEquipmentRelatedByHeadPlayerItemId The ChildPlayerEquipment object to add.
      */
-    protected function doAddPlayerDeckRelatedByHeadPlayerItemId(ChildPlayerDeck $playerDeckRelatedByHeadPlayerItemId)
+    protected function doAddPlayerEquipmentRelatedByHeadPlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByHeadPlayerItemId)
     {
-        $this->collPlayerDecksRelatedByHeadPlayerItemId[]= $playerDeckRelatedByHeadPlayerItemId;
-        $playerDeckRelatedByHeadPlayerItemId->setPlayerItemRelatedByHeadPlayerItemId($this);
+        $this->collPlayerEquipmentsRelatedByHeadPlayerItemId[]= $playerEquipmentRelatedByHeadPlayerItemId;
+        $playerEquipmentRelatedByHeadPlayerItemId->setPlayerItemRelatedByHeadPlayerItemId($this);
     }
 
     /**
-     * @param  ChildPlayerDeck $playerDeckRelatedByHeadPlayerItemId The ChildPlayerDeck object to remove.
+     * @param  ChildPlayerEquipment $playerEquipmentRelatedByHeadPlayerItemId The ChildPlayerEquipment object to remove.
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function removePlayerDeckRelatedByHeadPlayerItemId(ChildPlayerDeck $playerDeckRelatedByHeadPlayerItemId)
+    public function removePlayerEquipmentRelatedByHeadPlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByHeadPlayerItemId)
     {
-        if ($this->getPlayerDecksRelatedByHeadPlayerItemId()->contains($playerDeckRelatedByHeadPlayerItemId)) {
-            $pos = $this->collPlayerDecksRelatedByHeadPlayerItemId->search($playerDeckRelatedByHeadPlayerItemId);
-            $this->collPlayerDecksRelatedByHeadPlayerItemId->remove($pos);
-            if (null === $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion) {
-                $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByHeadPlayerItemId;
-                $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion->clear();
+        if ($this->getPlayerEquipmentsRelatedByHeadPlayerItemId()->contains($playerEquipmentRelatedByHeadPlayerItemId)) {
+            $pos = $this->collPlayerEquipmentsRelatedByHeadPlayerItemId->search($playerEquipmentRelatedByHeadPlayerItemId);
+            $this->collPlayerEquipmentsRelatedByHeadPlayerItemId->remove($pos);
+            if (null === $this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion) {
+                $this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion = clone $this->collPlayerEquipmentsRelatedByHeadPlayerItemId;
+                $this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByHeadPlayerItemIdScheduledForDeletion[]= $playerDeckRelatedByHeadPlayerItemId;
-            $playerDeckRelatedByHeadPlayerItemId->setPlayerItemRelatedByHeadPlayerItemId(null);
+            $this->playerEquipmentsRelatedByHeadPlayerItemIdScheduledForDeletion[]= clone $playerEquipmentRelatedByHeadPlayerItemId;
+            $playerEquipmentRelatedByHeadPlayerItemId->setPlayerItemRelatedByHeadPlayerItemId(null);
         }
 
         return $this;
@@ -1927,7 +2534,7 @@ abstract class PlayerItem implements ActiveRecordInterface
      * an identical criteria, it returns the collection.
      * Otherwise if this PlayerItem is new, it will return
      * an empty collection; or if this PlayerItem has previously
-     * been saved, it will retrieve related PlayerDecksRelatedByHeadPlayerItemId from storage.
+     * been saved, it will retrieve related PlayerEquipmentsRelatedByHeadPlayerItemId from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
@@ -1936,42 +2543,42 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      ConnectionInterface $con optional connection object
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
      */
-    public function getPlayerDecksRelatedByHeadPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerEquipmentsRelatedByHeadPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
-        $query = ChildPlayerDeckQuery::create(null, $criteria);
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
         $query->joinWith('Player', $joinBehavior);
 
-        return $this->getPlayerDecksRelatedByHeadPlayerItemId($query, $con);
+        return $this->getPlayerEquipmentsRelatedByHeadPlayerItemId($query, $con);
     }
 
     /**
-     * Clears out the collPlayerDecksRelatedByLeftArmPlayerItemId collection
+     * Clears out the collPlayerEquipmentsRelatedByLeftArmPlayerItemId collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addPlayerDecksRelatedByLeftArmPlayerItemId()
+     * @see        addPlayerEquipmentsRelatedByLeftArmPlayerItemId()
      */
-    public function clearPlayerDecksRelatedByLeftArmPlayerItemId()
+    public function clearPlayerEquipmentsRelatedByLeftArmPlayerItemId()
     {
-        $this->collPlayerDecksRelatedByLeftArmPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
+        $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Reset is the collPlayerDecksRelatedByLeftArmPlayerItemId collection loaded partially.
+     * Reset is the collPlayerEquipmentsRelatedByLeftArmPlayerItemId collection loaded partially.
      */
-    public function resetPartialPlayerDecksRelatedByLeftArmPlayerItemId($v = true)
+    public function resetPartialPlayerEquipmentsRelatedByLeftArmPlayerItemId($v = true)
     {
-        $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial = $v;
+        $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemIdPartial = $v;
     }
 
     /**
-     * Initializes the collPlayerDecksRelatedByLeftArmPlayerItemId collection.
+     * Initializes the collPlayerEquipmentsRelatedByLeftArmPlayerItemId collection.
      *
-     * By default this just sets the collPlayerDecksRelatedByLeftArmPlayerItemId collection to an empty array (like clearcollPlayerDecksRelatedByLeftArmPlayerItemId());
+     * By default this just sets the collPlayerEquipmentsRelatedByLeftArmPlayerItemId collection to an empty array (like clearcollPlayerEquipmentsRelatedByLeftArmPlayerItemId());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -1980,20 +2587,20 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @return void
      */
-    public function initPlayerDecksRelatedByLeftArmPlayerItemId($overrideExisting = true)
+    public function initPlayerEquipmentsRelatedByLeftArmPlayerItemId($overrideExisting = true)
     {
-        if (null !== $this->collPlayerDecksRelatedByLeftArmPlayerItemId && !$overrideExisting) {
+        if (null !== $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId && !$overrideExisting) {
             return;
         }
 
-        $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
+        $collectionClassName = PlayerEquipmentTableMap::getTableMap()->getCollectionClassName();
 
-        $this->collPlayerDecksRelatedByLeftArmPlayerItemId = new $collectionClassName;
-        $this->collPlayerDecksRelatedByLeftArmPlayerItemId->setModel('\app\model\PlayerDeck');
+        $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId = new $collectionClassName;
+        $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId->setModel('\app\model\PlayerEquipment');
     }
 
     /**
-     * Gets an array of ChildPlayerDeck objects which contain a foreign key that references this object.
+     * Gets an array of ChildPlayerEquipment objects which contain a foreign key that references this object.
      *
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
@@ -2003,108 +2610,108 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      ConnectionInterface $con optional connection object
-     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
      * @throws PropelException
      */
-    public function getPlayerDecksRelatedByLeftArmPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
+    public function getPlayerEquipmentsRelatedByLeftArmPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByLeftArmPlayerItemId || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByLeftArmPlayerItemId) {
+        $partial = $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId) {
                 // return empty collection
-                $this->initPlayerDecksRelatedByLeftArmPlayerItemId();
+                $this->initPlayerEquipmentsRelatedByLeftArmPlayerItemId();
             } else {
-                $collPlayerDecksRelatedByLeftArmPlayerItemId = ChildPlayerDeckQuery::create(null, $criteria)
+                $collPlayerEquipmentsRelatedByLeftArmPlayerItemId = ChildPlayerEquipmentQuery::create(null, $criteria)
                     ->filterByPlayerItemRelatedByLeftArmPlayerItemId($this)
                     ->find($con);
 
                 if (null !== $criteria) {
-                    if (false !== $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial && count($collPlayerDecksRelatedByLeftArmPlayerItemId)) {
-                        $this->initPlayerDecksRelatedByLeftArmPlayerItemId(false);
+                    if (false !== $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemIdPartial && count($collPlayerEquipmentsRelatedByLeftArmPlayerItemId)) {
+                        $this->initPlayerEquipmentsRelatedByLeftArmPlayerItemId(false);
 
-                        foreach ($collPlayerDecksRelatedByLeftArmPlayerItemId as $obj) {
-                            if (false == $this->collPlayerDecksRelatedByLeftArmPlayerItemId->contains($obj)) {
-                                $this->collPlayerDecksRelatedByLeftArmPlayerItemId->append($obj);
+                        foreach ($collPlayerEquipmentsRelatedByLeftArmPlayerItemId as $obj) {
+                            if (false == $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId->contains($obj)) {
+                                $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId->append($obj);
                             }
                         }
 
-                        $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial = true;
+                        $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemIdPartial = true;
                     }
 
-                    return $collPlayerDecksRelatedByLeftArmPlayerItemId;
+                    return $collPlayerEquipmentsRelatedByLeftArmPlayerItemId;
                 }
 
-                if ($partial && $this->collPlayerDecksRelatedByLeftArmPlayerItemId) {
-                    foreach ($this->collPlayerDecksRelatedByLeftArmPlayerItemId as $obj) {
+                if ($partial && $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId) {
+                    foreach ($this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId as $obj) {
                         if ($obj->isNew()) {
-                            $collPlayerDecksRelatedByLeftArmPlayerItemId[] = $obj;
+                            $collPlayerEquipmentsRelatedByLeftArmPlayerItemId[] = $obj;
                         }
                     }
                 }
 
-                $this->collPlayerDecksRelatedByLeftArmPlayerItemId = $collPlayerDecksRelatedByLeftArmPlayerItemId;
-                $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial = false;
+                $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId = $collPlayerEquipmentsRelatedByLeftArmPlayerItemId;
+                $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemIdPartial = false;
             }
         }
 
-        return $this->collPlayerDecksRelatedByLeftArmPlayerItemId;
+        return $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId;
     }
 
     /**
-     * Sets a collection of ChildPlayerDeck objects related by a one-to-many relationship
+     * Sets a collection of ChildPlayerEquipment objects related by a one-to-many relationship
      * to the current object.
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      Collection $playerDecksRelatedByLeftArmPlayerItemId A Propel collection.
+     * @param      Collection $playerEquipmentsRelatedByLeftArmPlayerItemId A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function setPlayerDecksRelatedByLeftArmPlayerItemId(Collection $playerDecksRelatedByLeftArmPlayerItemId, ConnectionInterface $con = null)
+    public function setPlayerEquipmentsRelatedByLeftArmPlayerItemId(Collection $playerEquipmentsRelatedByLeftArmPlayerItemId, ConnectionInterface $con = null)
     {
-        /** @var ChildPlayerDeck[] $playerDecksRelatedByLeftArmPlayerItemIdToDelete */
-        $playerDecksRelatedByLeftArmPlayerItemIdToDelete = $this->getPlayerDecksRelatedByLeftArmPlayerItemId(new Criteria(), $con)->diff($playerDecksRelatedByLeftArmPlayerItemId);
+        /** @var ChildPlayerEquipment[] $playerEquipmentsRelatedByLeftArmPlayerItemIdToDelete */
+        $playerEquipmentsRelatedByLeftArmPlayerItemIdToDelete = $this->getPlayerEquipmentsRelatedByLeftArmPlayerItemId(new Criteria(), $con)->diff($playerEquipmentsRelatedByLeftArmPlayerItemId);
 
 
-        $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion = $playerDecksRelatedByLeftArmPlayerItemIdToDelete;
+        $this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion = $playerEquipmentsRelatedByLeftArmPlayerItemIdToDelete;
 
-        foreach ($playerDecksRelatedByLeftArmPlayerItemIdToDelete as $playerDeckRelatedByLeftArmPlayerItemIdRemoved) {
-            $playerDeckRelatedByLeftArmPlayerItemIdRemoved->setPlayerItemRelatedByLeftArmPlayerItemId(null);
+        foreach ($playerEquipmentsRelatedByLeftArmPlayerItemIdToDelete as $playerEquipmentRelatedByLeftArmPlayerItemIdRemoved) {
+            $playerEquipmentRelatedByLeftArmPlayerItemIdRemoved->setPlayerItemRelatedByLeftArmPlayerItemId(null);
         }
 
-        $this->collPlayerDecksRelatedByLeftArmPlayerItemId = null;
-        foreach ($playerDecksRelatedByLeftArmPlayerItemId as $playerDeckRelatedByLeftArmPlayerItemId) {
-            $this->addPlayerDeckRelatedByLeftArmPlayerItemId($playerDeckRelatedByLeftArmPlayerItemId);
+        $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId = null;
+        foreach ($playerEquipmentsRelatedByLeftArmPlayerItemId as $playerEquipmentRelatedByLeftArmPlayerItemId) {
+            $this->addPlayerEquipmentRelatedByLeftArmPlayerItemId($playerEquipmentRelatedByLeftArmPlayerItemId);
         }
 
-        $this->collPlayerDecksRelatedByLeftArmPlayerItemId = $playerDecksRelatedByLeftArmPlayerItemId;
-        $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial = false;
+        $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId = $playerEquipmentsRelatedByLeftArmPlayerItemId;
+        $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemIdPartial = false;
 
         return $this;
     }
 
     /**
-     * Returns the number of related PlayerDeck objects.
+     * Returns the number of related PlayerEquipment objects.
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct
      * @param      ConnectionInterface $con
-     * @return int             Count of related PlayerDeck objects.
+     * @return int             Count of related PlayerEquipment objects.
      * @throws PropelException
      */
-    public function countPlayerDecksRelatedByLeftArmPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    public function countPlayerEquipmentsRelatedByLeftArmPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByLeftArmPlayerItemId || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByLeftArmPlayerItemId) {
+        $partial = $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getPlayerDecksRelatedByLeftArmPlayerItemId());
+                return count($this->getPlayerEquipmentsRelatedByLeftArmPlayerItemId());
             }
 
-            $query = ChildPlayerDeckQuery::create(null, $criteria);
+            $query = ChildPlayerEquipmentQuery::create(null, $criteria);
             if ($distinct) {
                 $query->distinct();
             }
@@ -2114,28 +2721,28 @@ abstract class PlayerItem implements ActiveRecordInterface
                 ->count($con);
         }
 
-        return count($this->collPlayerDecksRelatedByLeftArmPlayerItemId);
+        return count($this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId);
     }
 
     /**
-     * Method called to associate a ChildPlayerDeck object to this object
-     * through the ChildPlayerDeck foreign key attribute.
+     * Method called to associate a ChildPlayerEquipment object to this object
+     * through the ChildPlayerEquipment foreign key attribute.
      *
-     * @param  ChildPlayerDeck $l ChildPlayerDeck
+     * @param  ChildPlayerEquipment $l ChildPlayerEquipment
      * @return $this|\app\model\PlayerItem The current object (for fluent API support)
      */
-    public function addPlayerDeckRelatedByLeftArmPlayerItemId(ChildPlayerDeck $l)
+    public function addPlayerEquipmentRelatedByLeftArmPlayerItemId(ChildPlayerEquipment $l)
     {
-        if ($this->collPlayerDecksRelatedByLeftArmPlayerItemId === null) {
-            $this->initPlayerDecksRelatedByLeftArmPlayerItemId();
-            $this->collPlayerDecksRelatedByLeftArmPlayerItemIdPartial = true;
+        if ($this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId === null) {
+            $this->initPlayerEquipmentsRelatedByLeftArmPlayerItemId();
+            $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemIdPartial = true;
         }
 
-        if (!$this->collPlayerDecksRelatedByLeftArmPlayerItemId->contains($l)) {
-            $this->doAddPlayerDeckRelatedByLeftArmPlayerItemId($l);
+        if (!$this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId->contains($l)) {
+            $this->doAddPlayerEquipmentRelatedByLeftArmPlayerItemId($l);
 
-            if ($this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion and $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion->contains($l)) {
-                $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion->remove($this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion->search($l));
+            if ($this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion and $this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion->contains($l)) {
+                $this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion->remove($this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion->search($l));
             }
         }
 
@@ -2143,29 +2750,29 @@ abstract class PlayerItem implements ActiveRecordInterface
     }
 
     /**
-     * @param ChildPlayerDeck $playerDeckRelatedByLeftArmPlayerItemId The ChildPlayerDeck object to add.
+     * @param ChildPlayerEquipment $playerEquipmentRelatedByLeftArmPlayerItemId The ChildPlayerEquipment object to add.
      */
-    protected function doAddPlayerDeckRelatedByLeftArmPlayerItemId(ChildPlayerDeck $playerDeckRelatedByLeftArmPlayerItemId)
+    protected function doAddPlayerEquipmentRelatedByLeftArmPlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByLeftArmPlayerItemId)
     {
-        $this->collPlayerDecksRelatedByLeftArmPlayerItemId[]= $playerDeckRelatedByLeftArmPlayerItemId;
-        $playerDeckRelatedByLeftArmPlayerItemId->setPlayerItemRelatedByLeftArmPlayerItemId($this);
+        $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId[]= $playerEquipmentRelatedByLeftArmPlayerItemId;
+        $playerEquipmentRelatedByLeftArmPlayerItemId->setPlayerItemRelatedByLeftArmPlayerItemId($this);
     }
 
     /**
-     * @param  ChildPlayerDeck $playerDeckRelatedByLeftArmPlayerItemId The ChildPlayerDeck object to remove.
+     * @param  ChildPlayerEquipment $playerEquipmentRelatedByLeftArmPlayerItemId The ChildPlayerEquipment object to remove.
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function removePlayerDeckRelatedByLeftArmPlayerItemId(ChildPlayerDeck $playerDeckRelatedByLeftArmPlayerItemId)
+    public function removePlayerEquipmentRelatedByLeftArmPlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByLeftArmPlayerItemId)
     {
-        if ($this->getPlayerDecksRelatedByLeftArmPlayerItemId()->contains($playerDeckRelatedByLeftArmPlayerItemId)) {
-            $pos = $this->collPlayerDecksRelatedByLeftArmPlayerItemId->search($playerDeckRelatedByLeftArmPlayerItemId);
-            $this->collPlayerDecksRelatedByLeftArmPlayerItemId->remove($pos);
-            if (null === $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion) {
-                $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByLeftArmPlayerItemId;
-                $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion->clear();
+        if ($this->getPlayerEquipmentsRelatedByLeftArmPlayerItemId()->contains($playerEquipmentRelatedByLeftArmPlayerItemId)) {
+            $pos = $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId->search($playerEquipmentRelatedByLeftArmPlayerItemId);
+            $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId->remove($pos);
+            if (null === $this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion) {
+                $this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion = clone $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId;
+                $this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByLeftArmPlayerItemIdScheduledForDeletion[]= $playerDeckRelatedByLeftArmPlayerItemId;
-            $playerDeckRelatedByLeftArmPlayerItemId->setPlayerItemRelatedByLeftArmPlayerItemId(null);
+            $this->playerEquipmentsRelatedByLeftArmPlayerItemIdScheduledForDeletion[]= clone $playerEquipmentRelatedByLeftArmPlayerItemId;
+            $playerEquipmentRelatedByLeftArmPlayerItemId->setPlayerItemRelatedByLeftArmPlayerItemId(null);
         }
 
         return $this;
@@ -2177,7 +2784,7 @@ abstract class PlayerItem implements ActiveRecordInterface
      * an identical criteria, it returns the collection.
      * Otherwise if this PlayerItem is new, it will return
      * an empty collection; or if this PlayerItem has previously
-     * been saved, it will retrieve related PlayerDecksRelatedByLeftArmPlayerItemId from storage.
+     * been saved, it will retrieve related PlayerEquipmentsRelatedByLeftArmPlayerItemId from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
@@ -2186,42 +2793,42 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      ConnectionInterface $con optional connection object
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
      */
-    public function getPlayerDecksRelatedByLeftArmPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerEquipmentsRelatedByLeftArmPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
-        $query = ChildPlayerDeckQuery::create(null, $criteria);
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
         $query->joinWith('Player', $joinBehavior);
 
-        return $this->getPlayerDecksRelatedByLeftArmPlayerItemId($query, $con);
+        return $this->getPlayerEquipmentsRelatedByLeftArmPlayerItemId($query, $con);
     }
 
     /**
-     * Clears out the collPlayerDecksRelatedByRightArmPlayerItemId collection
+     * Clears out the collPlayerEquipmentsRelatedByRightArmPlayerItemId collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addPlayerDecksRelatedByRightArmPlayerItemId()
+     * @see        addPlayerEquipmentsRelatedByRightArmPlayerItemId()
      */
-    public function clearPlayerDecksRelatedByRightArmPlayerItemId()
+    public function clearPlayerEquipmentsRelatedByRightArmPlayerItemId()
     {
-        $this->collPlayerDecksRelatedByRightArmPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
+        $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Reset is the collPlayerDecksRelatedByRightArmPlayerItemId collection loaded partially.
+     * Reset is the collPlayerEquipmentsRelatedByRightArmPlayerItemId collection loaded partially.
      */
-    public function resetPartialPlayerDecksRelatedByRightArmPlayerItemId($v = true)
+    public function resetPartialPlayerEquipmentsRelatedByRightArmPlayerItemId($v = true)
     {
-        $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial = $v;
+        $this->collPlayerEquipmentsRelatedByRightArmPlayerItemIdPartial = $v;
     }
 
     /**
-     * Initializes the collPlayerDecksRelatedByRightArmPlayerItemId collection.
+     * Initializes the collPlayerEquipmentsRelatedByRightArmPlayerItemId collection.
      *
-     * By default this just sets the collPlayerDecksRelatedByRightArmPlayerItemId collection to an empty array (like clearcollPlayerDecksRelatedByRightArmPlayerItemId());
+     * By default this just sets the collPlayerEquipmentsRelatedByRightArmPlayerItemId collection to an empty array (like clearcollPlayerEquipmentsRelatedByRightArmPlayerItemId());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -2230,20 +2837,20 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @return void
      */
-    public function initPlayerDecksRelatedByRightArmPlayerItemId($overrideExisting = true)
+    public function initPlayerEquipmentsRelatedByRightArmPlayerItemId($overrideExisting = true)
     {
-        if (null !== $this->collPlayerDecksRelatedByRightArmPlayerItemId && !$overrideExisting) {
+        if (null !== $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId && !$overrideExisting) {
             return;
         }
 
-        $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
+        $collectionClassName = PlayerEquipmentTableMap::getTableMap()->getCollectionClassName();
 
-        $this->collPlayerDecksRelatedByRightArmPlayerItemId = new $collectionClassName;
-        $this->collPlayerDecksRelatedByRightArmPlayerItemId->setModel('\app\model\PlayerDeck');
+        $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId = new $collectionClassName;
+        $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId->setModel('\app\model\PlayerEquipment');
     }
 
     /**
-     * Gets an array of ChildPlayerDeck objects which contain a foreign key that references this object.
+     * Gets an array of ChildPlayerEquipment objects which contain a foreign key that references this object.
      *
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
@@ -2253,108 +2860,108 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      ConnectionInterface $con optional connection object
-     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
      * @throws PropelException
      */
-    public function getPlayerDecksRelatedByRightArmPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
+    public function getPlayerEquipmentsRelatedByRightArmPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByRightArmPlayerItemId || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByRightArmPlayerItemId) {
+        $partial = $this->collPlayerEquipmentsRelatedByRightArmPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId) {
                 // return empty collection
-                $this->initPlayerDecksRelatedByRightArmPlayerItemId();
+                $this->initPlayerEquipmentsRelatedByRightArmPlayerItemId();
             } else {
-                $collPlayerDecksRelatedByRightArmPlayerItemId = ChildPlayerDeckQuery::create(null, $criteria)
+                $collPlayerEquipmentsRelatedByRightArmPlayerItemId = ChildPlayerEquipmentQuery::create(null, $criteria)
                     ->filterByPlayerItemRelatedByRightArmPlayerItemId($this)
                     ->find($con);
 
                 if (null !== $criteria) {
-                    if (false !== $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial && count($collPlayerDecksRelatedByRightArmPlayerItemId)) {
-                        $this->initPlayerDecksRelatedByRightArmPlayerItemId(false);
+                    if (false !== $this->collPlayerEquipmentsRelatedByRightArmPlayerItemIdPartial && count($collPlayerEquipmentsRelatedByRightArmPlayerItemId)) {
+                        $this->initPlayerEquipmentsRelatedByRightArmPlayerItemId(false);
 
-                        foreach ($collPlayerDecksRelatedByRightArmPlayerItemId as $obj) {
-                            if (false == $this->collPlayerDecksRelatedByRightArmPlayerItemId->contains($obj)) {
-                                $this->collPlayerDecksRelatedByRightArmPlayerItemId->append($obj);
+                        foreach ($collPlayerEquipmentsRelatedByRightArmPlayerItemId as $obj) {
+                            if (false == $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId->contains($obj)) {
+                                $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId->append($obj);
                             }
                         }
 
-                        $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial = true;
+                        $this->collPlayerEquipmentsRelatedByRightArmPlayerItemIdPartial = true;
                     }
 
-                    return $collPlayerDecksRelatedByRightArmPlayerItemId;
+                    return $collPlayerEquipmentsRelatedByRightArmPlayerItemId;
                 }
 
-                if ($partial && $this->collPlayerDecksRelatedByRightArmPlayerItemId) {
-                    foreach ($this->collPlayerDecksRelatedByRightArmPlayerItemId as $obj) {
+                if ($partial && $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId) {
+                    foreach ($this->collPlayerEquipmentsRelatedByRightArmPlayerItemId as $obj) {
                         if ($obj->isNew()) {
-                            $collPlayerDecksRelatedByRightArmPlayerItemId[] = $obj;
+                            $collPlayerEquipmentsRelatedByRightArmPlayerItemId[] = $obj;
                         }
                     }
                 }
 
-                $this->collPlayerDecksRelatedByRightArmPlayerItemId = $collPlayerDecksRelatedByRightArmPlayerItemId;
-                $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial = false;
+                $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId = $collPlayerEquipmentsRelatedByRightArmPlayerItemId;
+                $this->collPlayerEquipmentsRelatedByRightArmPlayerItemIdPartial = false;
             }
         }
 
-        return $this->collPlayerDecksRelatedByRightArmPlayerItemId;
+        return $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId;
     }
 
     /**
-     * Sets a collection of ChildPlayerDeck objects related by a one-to-many relationship
+     * Sets a collection of ChildPlayerEquipment objects related by a one-to-many relationship
      * to the current object.
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      Collection $playerDecksRelatedByRightArmPlayerItemId A Propel collection.
+     * @param      Collection $playerEquipmentsRelatedByRightArmPlayerItemId A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function setPlayerDecksRelatedByRightArmPlayerItemId(Collection $playerDecksRelatedByRightArmPlayerItemId, ConnectionInterface $con = null)
+    public function setPlayerEquipmentsRelatedByRightArmPlayerItemId(Collection $playerEquipmentsRelatedByRightArmPlayerItemId, ConnectionInterface $con = null)
     {
-        /** @var ChildPlayerDeck[] $playerDecksRelatedByRightArmPlayerItemIdToDelete */
-        $playerDecksRelatedByRightArmPlayerItemIdToDelete = $this->getPlayerDecksRelatedByRightArmPlayerItemId(new Criteria(), $con)->diff($playerDecksRelatedByRightArmPlayerItemId);
+        /** @var ChildPlayerEquipment[] $playerEquipmentsRelatedByRightArmPlayerItemIdToDelete */
+        $playerEquipmentsRelatedByRightArmPlayerItemIdToDelete = $this->getPlayerEquipmentsRelatedByRightArmPlayerItemId(new Criteria(), $con)->diff($playerEquipmentsRelatedByRightArmPlayerItemId);
 
 
-        $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion = $playerDecksRelatedByRightArmPlayerItemIdToDelete;
+        $this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion = $playerEquipmentsRelatedByRightArmPlayerItemIdToDelete;
 
-        foreach ($playerDecksRelatedByRightArmPlayerItemIdToDelete as $playerDeckRelatedByRightArmPlayerItemIdRemoved) {
-            $playerDeckRelatedByRightArmPlayerItemIdRemoved->setPlayerItemRelatedByRightArmPlayerItemId(null);
+        foreach ($playerEquipmentsRelatedByRightArmPlayerItemIdToDelete as $playerEquipmentRelatedByRightArmPlayerItemIdRemoved) {
+            $playerEquipmentRelatedByRightArmPlayerItemIdRemoved->setPlayerItemRelatedByRightArmPlayerItemId(null);
         }
 
-        $this->collPlayerDecksRelatedByRightArmPlayerItemId = null;
-        foreach ($playerDecksRelatedByRightArmPlayerItemId as $playerDeckRelatedByRightArmPlayerItemId) {
-            $this->addPlayerDeckRelatedByRightArmPlayerItemId($playerDeckRelatedByRightArmPlayerItemId);
+        $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId = null;
+        foreach ($playerEquipmentsRelatedByRightArmPlayerItemId as $playerEquipmentRelatedByRightArmPlayerItemId) {
+            $this->addPlayerEquipmentRelatedByRightArmPlayerItemId($playerEquipmentRelatedByRightArmPlayerItemId);
         }
 
-        $this->collPlayerDecksRelatedByRightArmPlayerItemId = $playerDecksRelatedByRightArmPlayerItemId;
-        $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial = false;
+        $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId = $playerEquipmentsRelatedByRightArmPlayerItemId;
+        $this->collPlayerEquipmentsRelatedByRightArmPlayerItemIdPartial = false;
 
         return $this;
     }
 
     /**
-     * Returns the number of related PlayerDeck objects.
+     * Returns the number of related PlayerEquipment objects.
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct
      * @param      ConnectionInterface $con
-     * @return int             Count of related PlayerDeck objects.
+     * @return int             Count of related PlayerEquipment objects.
      * @throws PropelException
      */
-    public function countPlayerDecksRelatedByRightArmPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    public function countPlayerEquipmentsRelatedByRightArmPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByRightArmPlayerItemId || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByRightArmPlayerItemId) {
+        $partial = $this->collPlayerEquipmentsRelatedByRightArmPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getPlayerDecksRelatedByRightArmPlayerItemId());
+                return count($this->getPlayerEquipmentsRelatedByRightArmPlayerItemId());
             }
 
-            $query = ChildPlayerDeckQuery::create(null, $criteria);
+            $query = ChildPlayerEquipmentQuery::create(null, $criteria);
             if ($distinct) {
                 $query->distinct();
             }
@@ -2364,28 +2971,28 @@ abstract class PlayerItem implements ActiveRecordInterface
                 ->count($con);
         }
 
-        return count($this->collPlayerDecksRelatedByRightArmPlayerItemId);
+        return count($this->collPlayerEquipmentsRelatedByRightArmPlayerItemId);
     }
 
     /**
-     * Method called to associate a ChildPlayerDeck object to this object
-     * through the ChildPlayerDeck foreign key attribute.
+     * Method called to associate a ChildPlayerEquipment object to this object
+     * through the ChildPlayerEquipment foreign key attribute.
      *
-     * @param  ChildPlayerDeck $l ChildPlayerDeck
+     * @param  ChildPlayerEquipment $l ChildPlayerEquipment
      * @return $this|\app\model\PlayerItem The current object (for fluent API support)
      */
-    public function addPlayerDeckRelatedByRightArmPlayerItemId(ChildPlayerDeck $l)
+    public function addPlayerEquipmentRelatedByRightArmPlayerItemId(ChildPlayerEquipment $l)
     {
-        if ($this->collPlayerDecksRelatedByRightArmPlayerItemId === null) {
-            $this->initPlayerDecksRelatedByRightArmPlayerItemId();
-            $this->collPlayerDecksRelatedByRightArmPlayerItemIdPartial = true;
+        if ($this->collPlayerEquipmentsRelatedByRightArmPlayerItemId === null) {
+            $this->initPlayerEquipmentsRelatedByRightArmPlayerItemId();
+            $this->collPlayerEquipmentsRelatedByRightArmPlayerItemIdPartial = true;
         }
 
-        if (!$this->collPlayerDecksRelatedByRightArmPlayerItemId->contains($l)) {
-            $this->doAddPlayerDeckRelatedByRightArmPlayerItemId($l);
+        if (!$this->collPlayerEquipmentsRelatedByRightArmPlayerItemId->contains($l)) {
+            $this->doAddPlayerEquipmentRelatedByRightArmPlayerItemId($l);
 
-            if ($this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion and $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion->contains($l)) {
-                $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion->remove($this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion->search($l));
+            if ($this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion and $this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion->contains($l)) {
+                $this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion->remove($this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion->search($l));
             }
         }
 
@@ -2393,29 +3000,29 @@ abstract class PlayerItem implements ActiveRecordInterface
     }
 
     /**
-     * @param ChildPlayerDeck $playerDeckRelatedByRightArmPlayerItemId The ChildPlayerDeck object to add.
+     * @param ChildPlayerEquipment $playerEquipmentRelatedByRightArmPlayerItemId The ChildPlayerEquipment object to add.
      */
-    protected function doAddPlayerDeckRelatedByRightArmPlayerItemId(ChildPlayerDeck $playerDeckRelatedByRightArmPlayerItemId)
+    protected function doAddPlayerEquipmentRelatedByRightArmPlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByRightArmPlayerItemId)
     {
-        $this->collPlayerDecksRelatedByRightArmPlayerItemId[]= $playerDeckRelatedByRightArmPlayerItemId;
-        $playerDeckRelatedByRightArmPlayerItemId->setPlayerItemRelatedByRightArmPlayerItemId($this);
+        $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId[]= $playerEquipmentRelatedByRightArmPlayerItemId;
+        $playerEquipmentRelatedByRightArmPlayerItemId->setPlayerItemRelatedByRightArmPlayerItemId($this);
     }
 
     /**
-     * @param  ChildPlayerDeck $playerDeckRelatedByRightArmPlayerItemId The ChildPlayerDeck object to remove.
+     * @param  ChildPlayerEquipment $playerEquipmentRelatedByRightArmPlayerItemId The ChildPlayerEquipment object to remove.
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function removePlayerDeckRelatedByRightArmPlayerItemId(ChildPlayerDeck $playerDeckRelatedByRightArmPlayerItemId)
+    public function removePlayerEquipmentRelatedByRightArmPlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByRightArmPlayerItemId)
     {
-        if ($this->getPlayerDecksRelatedByRightArmPlayerItemId()->contains($playerDeckRelatedByRightArmPlayerItemId)) {
-            $pos = $this->collPlayerDecksRelatedByRightArmPlayerItemId->search($playerDeckRelatedByRightArmPlayerItemId);
-            $this->collPlayerDecksRelatedByRightArmPlayerItemId->remove($pos);
-            if (null === $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion) {
-                $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByRightArmPlayerItemId;
-                $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion->clear();
+        if ($this->getPlayerEquipmentsRelatedByRightArmPlayerItemId()->contains($playerEquipmentRelatedByRightArmPlayerItemId)) {
+            $pos = $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId->search($playerEquipmentRelatedByRightArmPlayerItemId);
+            $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId->remove($pos);
+            if (null === $this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion) {
+                $this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion = clone $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId;
+                $this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByRightArmPlayerItemIdScheduledForDeletion[]= $playerDeckRelatedByRightArmPlayerItemId;
-            $playerDeckRelatedByRightArmPlayerItemId->setPlayerItemRelatedByRightArmPlayerItemId(null);
+            $this->playerEquipmentsRelatedByRightArmPlayerItemIdScheduledForDeletion[]= clone $playerEquipmentRelatedByRightArmPlayerItemId;
+            $playerEquipmentRelatedByRightArmPlayerItemId->setPlayerItemRelatedByRightArmPlayerItemId(null);
         }
 
         return $this;
@@ -2427,7 +3034,7 @@ abstract class PlayerItem implements ActiveRecordInterface
      * an identical criteria, it returns the collection.
      * Otherwise if this PlayerItem is new, it will return
      * an empty collection; or if this PlayerItem has previously
-     * been saved, it will retrieve related PlayerDecksRelatedByRightArmPlayerItemId from storage.
+     * been saved, it will retrieve related PlayerEquipmentsRelatedByRightArmPlayerItemId from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
@@ -2436,42 +3043,42 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      ConnectionInterface $con optional connection object
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
      */
-    public function getPlayerDecksRelatedByRightArmPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerEquipmentsRelatedByRightArmPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
-        $query = ChildPlayerDeckQuery::create(null, $criteria);
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
         $query->joinWith('Player', $joinBehavior);
 
-        return $this->getPlayerDecksRelatedByRightArmPlayerItemId($query, $con);
+        return $this->getPlayerEquipmentsRelatedByRightArmPlayerItemId($query, $con);
     }
 
     /**
-     * Clears out the collPlayerDecksRelatedByLeftLegPlayerItemId collection
+     * Clears out the collPlayerEquipmentsRelatedByLeftLegPlayerItemId collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addPlayerDecksRelatedByLeftLegPlayerItemId()
+     * @see        addPlayerEquipmentsRelatedByLeftLegPlayerItemId()
      */
-    public function clearPlayerDecksRelatedByLeftLegPlayerItemId()
+    public function clearPlayerEquipmentsRelatedByLeftLegPlayerItemId()
     {
-        $this->collPlayerDecksRelatedByLeftLegPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
+        $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Reset is the collPlayerDecksRelatedByLeftLegPlayerItemId collection loaded partially.
+     * Reset is the collPlayerEquipmentsRelatedByLeftLegPlayerItemId collection loaded partially.
      */
-    public function resetPartialPlayerDecksRelatedByLeftLegPlayerItemId($v = true)
+    public function resetPartialPlayerEquipmentsRelatedByLeftLegPlayerItemId($v = true)
     {
-        $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial = $v;
+        $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemIdPartial = $v;
     }
 
     /**
-     * Initializes the collPlayerDecksRelatedByLeftLegPlayerItemId collection.
+     * Initializes the collPlayerEquipmentsRelatedByLeftLegPlayerItemId collection.
      *
-     * By default this just sets the collPlayerDecksRelatedByLeftLegPlayerItemId collection to an empty array (like clearcollPlayerDecksRelatedByLeftLegPlayerItemId());
+     * By default this just sets the collPlayerEquipmentsRelatedByLeftLegPlayerItemId collection to an empty array (like clearcollPlayerEquipmentsRelatedByLeftLegPlayerItemId());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -2480,20 +3087,20 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @return void
      */
-    public function initPlayerDecksRelatedByLeftLegPlayerItemId($overrideExisting = true)
+    public function initPlayerEquipmentsRelatedByLeftLegPlayerItemId($overrideExisting = true)
     {
-        if (null !== $this->collPlayerDecksRelatedByLeftLegPlayerItemId && !$overrideExisting) {
+        if (null !== $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId && !$overrideExisting) {
             return;
         }
 
-        $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
+        $collectionClassName = PlayerEquipmentTableMap::getTableMap()->getCollectionClassName();
 
-        $this->collPlayerDecksRelatedByLeftLegPlayerItemId = new $collectionClassName;
-        $this->collPlayerDecksRelatedByLeftLegPlayerItemId->setModel('\app\model\PlayerDeck');
+        $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId = new $collectionClassName;
+        $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId->setModel('\app\model\PlayerEquipment');
     }
 
     /**
-     * Gets an array of ChildPlayerDeck objects which contain a foreign key that references this object.
+     * Gets an array of ChildPlayerEquipment objects which contain a foreign key that references this object.
      *
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
@@ -2503,108 +3110,108 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      ConnectionInterface $con optional connection object
-     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
      * @throws PropelException
      */
-    public function getPlayerDecksRelatedByLeftLegPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
+    public function getPlayerEquipmentsRelatedByLeftLegPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByLeftLegPlayerItemId || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByLeftLegPlayerItemId) {
+        $partial = $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId) {
                 // return empty collection
-                $this->initPlayerDecksRelatedByLeftLegPlayerItemId();
+                $this->initPlayerEquipmentsRelatedByLeftLegPlayerItemId();
             } else {
-                $collPlayerDecksRelatedByLeftLegPlayerItemId = ChildPlayerDeckQuery::create(null, $criteria)
+                $collPlayerEquipmentsRelatedByLeftLegPlayerItemId = ChildPlayerEquipmentQuery::create(null, $criteria)
                     ->filterByPlayerItemRelatedByLeftLegPlayerItemId($this)
                     ->find($con);
 
                 if (null !== $criteria) {
-                    if (false !== $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial && count($collPlayerDecksRelatedByLeftLegPlayerItemId)) {
-                        $this->initPlayerDecksRelatedByLeftLegPlayerItemId(false);
+                    if (false !== $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemIdPartial && count($collPlayerEquipmentsRelatedByLeftLegPlayerItemId)) {
+                        $this->initPlayerEquipmentsRelatedByLeftLegPlayerItemId(false);
 
-                        foreach ($collPlayerDecksRelatedByLeftLegPlayerItemId as $obj) {
-                            if (false == $this->collPlayerDecksRelatedByLeftLegPlayerItemId->contains($obj)) {
-                                $this->collPlayerDecksRelatedByLeftLegPlayerItemId->append($obj);
+                        foreach ($collPlayerEquipmentsRelatedByLeftLegPlayerItemId as $obj) {
+                            if (false == $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId->contains($obj)) {
+                                $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId->append($obj);
                             }
                         }
 
-                        $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial = true;
+                        $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemIdPartial = true;
                     }
 
-                    return $collPlayerDecksRelatedByLeftLegPlayerItemId;
+                    return $collPlayerEquipmentsRelatedByLeftLegPlayerItemId;
                 }
 
-                if ($partial && $this->collPlayerDecksRelatedByLeftLegPlayerItemId) {
-                    foreach ($this->collPlayerDecksRelatedByLeftLegPlayerItemId as $obj) {
+                if ($partial && $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId) {
+                    foreach ($this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId as $obj) {
                         if ($obj->isNew()) {
-                            $collPlayerDecksRelatedByLeftLegPlayerItemId[] = $obj;
+                            $collPlayerEquipmentsRelatedByLeftLegPlayerItemId[] = $obj;
                         }
                     }
                 }
 
-                $this->collPlayerDecksRelatedByLeftLegPlayerItemId = $collPlayerDecksRelatedByLeftLegPlayerItemId;
-                $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial = false;
+                $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId = $collPlayerEquipmentsRelatedByLeftLegPlayerItemId;
+                $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemIdPartial = false;
             }
         }
 
-        return $this->collPlayerDecksRelatedByLeftLegPlayerItemId;
+        return $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId;
     }
 
     /**
-     * Sets a collection of ChildPlayerDeck objects related by a one-to-many relationship
+     * Sets a collection of ChildPlayerEquipment objects related by a one-to-many relationship
      * to the current object.
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      Collection $playerDecksRelatedByLeftLegPlayerItemId A Propel collection.
+     * @param      Collection $playerEquipmentsRelatedByLeftLegPlayerItemId A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function setPlayerDecksRelatedByLeftLegPlayerItemId(Collection $playerDecksRelatedByLeftLegPlayerItemId, ConnectionInterface $con = null)
+    public function setPlayerEquipmentsRelatedByLeftLegPlayerItemId(Collection $playerEquipmentsRelatedByLeftLegPlayerItemId, ConnectionInterface $con = null)
     {
-        /** @var ChildPlayerDeck[] $playerDecksRelatedByLeftLegPlayerItemIdToDelete */
-        $playerDecksRelatedByLeftLegPlayerItemIdToDelete = $this->getPlayerDecksRelatedByLeftLegPlayerItemId(new Criteria(), $con)->diff($playerDecksRelatedByLeftLegPlayerItemId);
+        /** @var ChildPlayerEquipment[] $playerEquipmentsRelatedByLeftLegPlayerItemIdToDelete */
+        $playerEquipmentsRelatedByLeftLegPlayerItemIdToDelete = $this->getPlayerEquipmentsRelatedByLeftLegPlayerItemId(new Criteria(), $con)->diff($playerEquipmentsRelatedByLeftLegPlayerItemId);
 
 
-        $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion = $playerDecksRelatedByLeftLegPlayerItemIdToDelete;
+        $this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion = $playerEquipmentsRelatedByLeftLegPlayerItemIdToDelete;
 
-        foreach ($playerDecksRelatedByLeftLegPlayerItemIdToDelete as $playerDeckRelatedByLeftLegPlayerItemIdRemoved) {
-            $playerDeckRelatedByLeftLegPlayerItemIdRemoved->setPlayerItemRelatedByLeftLegPlayerItemId(null);
+        foreach ($playerEquipmentsRelatedByLeftLegPlayerItemIdToDelete as $playerEquipmentRelatedByLeftLegPlayerItemIdRemoved) {
+            $playerEquipmentRelatedByLeftLegPlayerItemIdRemoved->setPlayerItemRelatedByLeftLegPlayerItemId(null);
         }
 
-        $this->collPlayerDecksRelatedByLeftLegPlayerItemId = null;
-        foreach ($playerDecksRelatedByLeftLegPlayerItemId as $playerDeckRelatedByLeftLegPlayerItemId) {
-            $this->addPlayerDeckRelatedByLeftLegPlayerItemId($playerDeckRelatedByLeftLegPlayerItemId);
+        $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId = null;
+        foreach ($playerEquipmentsRelatedByLeftLegPlayerItemId as $playerEquipmentRelatedByLeftLegPlayerItemId) {
+            $this->addPlayerEquipmentRelatedByLeftLegPlayerItemId($playerEquipmentRelatedByLeftLegPlayerItemId);
         }
 
-        $this->collPlayerDecksRelatedByLeftLegPlayerItemId = $playerDecksRelatedByLeftLegPlayerItemId;
-        $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial = false;
+        $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId = $playerEquipmentsRelatedByLeftLegPlayerItemId;
+        $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemIdPartial = false;
 
         return $this;
     }
 
     /**
-     * Returns the number of related PlayerDeck objects.
+     * Returns the number of related PlayerEquipment objects.
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct
      * @param      ConnectionInterface $con
-     * @return int             Count of related PlayerDeck objects.
+     * @return int             Count of related PlayerEquipment objects.
      * @throws PropelException
      */
-    public function countPlayerDecksRelatedByLeftLegPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    public function countPlayerEquipmentsRelatedByLeftLegPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByLeftLegPlayerItemId || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByLeftLegPlayerItemId) {
+        $partial = $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getPlayerDecksRelatedByLeftLegPlayerItemId());
+                return count($this->getPlayerEquipmentsRelatedByLeftLegPlayerItemId());
             }
 
-            $query = ChildPlayerDeckQuery::create(null, $criteria);
+            $query = ChildPlayerEquipmentQuery::create(null, $criteria);
             if ($distinct) {
                 $query->distinct();
             }
@@ -2614,28 +3221,28 @@ abstract class PlayerItem implements ActiveRecordInterface
                 ->count($con);
         }
 
-        return count($this->collPlayerDecksRelatedByLeftLegPlayerItemId);
+        return count($this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId);
     }
 
     /**
-     * Method called to associate a ChildPlayerDeck object to this object
-     * through the ChildPlayerDeck foreign key attribute.
+     * Method called to associate a ChildPlayerEquipment object to this object
+     * through the ChildPlayerEquipment foreign key attribute.
      *
-     * @param  ChildPlayerDeck $l ChildPlayerDeck
+     * @param  ChildPlayerEquipment $l ChildPlayerEquipment
      * @return $this|\app\model\PlayerItem The current object (for fluent API support)
      */
-    public function addPlayerDeckRelatedByLeftLegPlayerItemId(ChildPlayerDeck $l)
+    public function addPlayerEquipmentRelatedByLeftLegPlayerItemId(ChildPlayerEquipment $l)
     {
-        if ($this->collPlayerDecksRelatedByLeftLegPlayerItemId === null) {
-            $this->initPlayerDecksRelatedByLeftLegPlayerItemId();
-            $this->collPlayerDecksRelatedByLeftLegPlayerItemIdPartial = true;
+        if ($this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId === null) {
+            $this->initPlayerEquipmentsRelatedByLeftLegPlayerItemId();
+            $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemIdPartial = true;
         }
 
-        if (!$this->collPlayerDecksRelatedByLeftLegPlayerItemId->contains($l)) {
-            $this->doAddPlayerDeckRelatedByLeftLegPlayerItemId($l);
+        if (!$this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId->contains($l)) {
+            $this->doAddPlayerEquipmentRelatedByLeftLegPlayerItemId($l);
 
-            if ($this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion and $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion->contains($l)) {
-                $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion->remove($this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion->search($l));
+            if ($this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion and $this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion->contains($l)) {
+                $this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion->remove($this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion->search($l));
             }
         }
 
@@ -2643,29 +3250,29 @@ abstract class PlayerItem implements ActiveRecordInterface
     }
 
     /**
-     * @param ChildPlayerDeck $playerDeckRelatedByLeftLegPlayerItemId The ChildPlayerDeck object to add.
+     * @param ChildPlayerEquipment $playerEquipmentRelatedByLeftLegPlayerItemId The ChildPlayerEquipment object to add.
      */
-    protected function doAddPlayerDeckRelatedByLeftLegPlayerItemId(ChildPlayerDeck $playerDeckRelatedByLeftLegPlayerItemId)
+    protected function doAddPlayerEquipmentRelatedByLeftLegPlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByLeftLegPlayerItemId)
     {
-        $this->collPlayerDecksRelatedByLeftLegPlayerItemId[]= $playerDeckRelatedByLeftLegPlayerItemId;
-        $playerDeckRelatedByLeftLegPlayerItemId->setPlayerItemRelatedByLeftLegPlayerItemId($this);
+        $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId[]= $playerEquipmentRelatedByLeftLegPlayerItemId;
+        $playerEquipmentRelatedByLeftLegPlayerItemId->setPlayerItemRelatedByLeftLegPlayerItemId($this);
     }
 
     /**
-     * @param  ChildPlayerDeck $playerDeckRelatedByLeftLegPlayerItemId The ChildPlayerDeck object to remove.
+     * @param  ChildPlayerEquipment $playerEquipmentRelatedByLeftLegPlayerItemId The ChildPlayerEquipment object to remove.
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function removePlayerDeckRelatedByLeftLegPlayerItemId(ChildPlayerDeck $playerDeckRelatedByLeftLegPlayerItemId)
+    public function removePlayerEquipmentRelatedByLeftLegPlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByLeftLegPlayerItemId)
     {
-        if ($this->getPlayerDecksRelatedByLeftLegPlayerItemId()->contains($playerDeckRelatedByLeftLegPlayerItemId)) {
-            $pos = $this->collPlayerDecksRelatedByLeftLegPlayerItemId->search($playerDeckRelatedByLeftLegPlayerItemId);
-            $this->collPlayerDecksRelatedByLeftLegPlayerItemId->remove($pos);
-            if (null === $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion) {
-                $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByLeftLegPlayerItemId;
-                $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion->clear();
+        if ($this->getPlayerEquipmentsRelatedByLeftLegPlayerItemId()->contains($playerEquipmentRelatedByLeftLegPlayerItemId)) {
+            $pos = $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId->search($playerEquipmentRelatedByLeftLegPlayerItemId);
+            $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId->remove($pos);
+            if (null === $this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion) {
+                $this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion = clone $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId;
+                $this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByLeftLegPlayerItemIdScheduledForDeletion[]= $playerDeckRelatedByLeftLegPlayerItemId;
-            $playerDeckRelatedByLeftLegPlayerItemId->setPlayerItemRelatedByLeftLegPlayerItemId(null);
+            $this->playerEquipmentsRelatedByLeftLegPlayerItemIdScheduledForDeletion[]= clone $playerEquipmentRelatedByLeftLegPlayerItemId;
+            $playerEquipmentRelatedByLeftLegPlayerItemId->setPlayerItemRelatedByLeftLegPlayerItemId(null);
         }
 
         return $this;
@@ -2677,7 +3284,7 @@ abstract class PlayerItem implements ActiveRecordInterface
      * an identical criteria, it returns the collection.
      * Otherwise if this PlayerItem is new, it will return
      * an empty collection; or if this PlayerItem has previously
-     * been saved, it will retrieve related PlayerDecksRelatedByLeftLegPlayerItemId from storage.
+     * been saved, it will retrieve related PlayerEquipmentsRelatedByLeftLegPlayerItemId from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
@@ -2686,42 +3293,42 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      ConnectionInterface $con optional connection object
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
      */
-    public function getPlayerDecksRelatedByLeftLegPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerEquipmentsRelatedByLeftLegPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
-        $query = ChildPlayerDeckQuery::create(null, $criteria);
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
         $query->joinWith('Player', $joinBehavior);
 
-        return $this->getPlayerDecksRelatedByLeftLegPlayerItemId($query, $con);
+        return $this->getPlayerEquipmentsRelatedByLeftLegPlayerItemId($query, $con);
     }
 
     /**
-     * Clears out the collPlayerDecksRelatedByRightLegPlayerItemId collection
+     * Clears out the collPlayerEquipmentsRelatedByRightLegPlayerItemId collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addPlayerDecksRelatedByRightLegPlayerItemId()
+     * @see        addPlayerEquipmentsRelatedByRightLegPlayerItemId()
      */
-    public function clearPlayerDecksRelatedByRightLegPlayerItemId()
+    public function clearPlayerEquipmentsRelatedByRightLegPlayerItemId()
     {
-        $this->collPlayerDecksRelatedByRightLegPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
+        $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Reset is the collPlayerDecksRelatedByRightLegPlayerItemId collection loaded partially.
+     * Reset is the collPlayerEquipmentsRelatedByRightLegPlayerItemId collection loaded partially.
      */
-    public function resetPartialPlayerDecksRelatedByRightLegPlayerItemId($v = true)
+    public function resetPartialPlayerEquipmentsRelatedByRightLegPlayerItemId($v = true)
     {
-        $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial = $v;
+        $this->collPlayerEquipmentsRelatedByRightLegPlayerItemIdPartial = $v;
     }
 
     /**
-     * Initializes the collPlayerDecksRelatedByRightLegPlayerItemId collection.
+     * Initializes the collPlayerEquipmentsRelatedByRightLegPlayerItemId collection.
      *
-     * By default this just sets the collPlayerDecksRelatedByRightLegPlayerItemId collection to an empty array (like clearcollPlayerDecksRelatedByRightLegPlayerItemId());
+     * By default this just sets the collPlayerEquipmentsRelatedByRightLegPlayerItemId collection to an empty array (like clearcollPlayerEquipmentsRelatedByRightLegPlayerItemId());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -2730,20 +3337,20 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @return void
      */
-    public function initPlayerDecksRelatedByRightLegPlayerItemId($overrideExisting = true)
+    public function initPlayerEquipmentsRelatedByRightLegPlayerItemId($overrideExisting = true)
     {
-        if (null !== $this->collPlayerDecksRelatedByRightLegPlayerItemId && !$overrideExisting) {
+        if (null !== $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId && !$overrideExisting) {
             return;
         }
 
-        $collectionClassName = PlayerDeckTableMap::getTableMap()->getCollectionClassName();
+        $collectionClassName = PlayerEquipmentTableMap::getTableMap()->getCollectionClassName();
 
-        $this->collPlayerDecksRelatedByRightLegPlayerItemId = new $collectionClassName;
-        $this->collPlayerDecksRelatedByRightLegPlayerItemId->setModel('\app\model\PlayerDeck');
+        $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId = new $collectionClassName;
+        $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId->setModel('\app\model\PlayerEquipment');
     }
 
     /**
-     * Gets an array of ChildPlayerDeck objects which contain a foreign key that references this object.
+     * Gets an array of ChildPlayerEquipment objects which contain a foreign key that references this object.
      *
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
@@ -2753,108 +3360,108 @@ abstract class PlayerItem implements ActiveRecordInterface
      *
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      ConnectionInterface $con optional connection object
-     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
      * @throws PropelException
      */
-    public function getPlayerDecksRelatedByRightLegPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
+    public function getPlayerEquipmentsRelatedByRightLegPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByRightLegPlayerItemId || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByRightLegPlayerItemId) {
+        $partial = $this->collPlayerEquipmentsRelatedByRightLegPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId) {
                 // return empty collection
-                $this->initPlayerDecksRelatedByRightLegPlayerItemId();
+                $this->initPlayerEquipmentsRelatedByRightLegPlayerItemId();
             } else {
-                $collPlayerDecksRelatedByRightLegPlayerItemId = ChildPlayerDeckQuery::create(null, $criteria)
+                $collPlayerEquipmentsRelatedByRightLegPlayerItemId = ChildPlayerEquipmentQuery::create(null, $criteria)
                     ->filterByPlayerItemRelatedByRightLegPlayerItemId($this)
                     ->find($con);
 
                 if (null !== $criteria) {
-                    if (false !== $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial && count($collPlayerDecksRelatedByRightLegPlayerItemId)) {
-                        $this->initPlayerDecksRelatedByRightLegPlayerItemId(false);
+                    if (false !== $this->collPlayerEquipmentsRelatedByRightLegPlayerItemIdPartial && count($collPlayerEquipmentsRelatedByRightLegPlayerItemId)) {
+                        $this->initPlayerEquipmentsRelatedByRightLegPlayerItemId(false);
 
-                        foreach ($collPlayerDecksRelatedByRightLegPlayerItemId as $obj) {
-                            if (false == $this->collPlayerDecksRelatedByRightLegPlayerItemId->contains($obj)) {
-                                $this->collPlayerDecksRelatedByRightLegPlayerItemId->append($obj);
+                        foreach ($collPlayerEquipmentsRelatedByRightLegPlayerItemId as $obj) {
+                            if (false == $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId->contains($obj)) {
+                                $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId->append($obj);
                             }
                         }
 
-                        $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial = true;
+                        $this->collPlayerEquipmentsRelatedByRightLegPlayerItemIdPartial = true;
                     }
 
-                    return $collPlayerDecksRelatedByRightLegPlayerItemId;
+                    return $collPlayerEquipmentsRelatedByRightLegPlayerItemId;
                 }
 
-                if ($partial && $this->collPlayerDecksRelatedByRightLegPlayerItemId) {
-                    foreach ($this->collPlayerDecksRelatedByRightLegPlayerItemId as $obj) {
+                if ($partial && $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId) {
+                    foreach ($this->collPlayerEquipmentsRelatedByRightLegPlayerItemId as $obj) {
                         if ($obj->isNew()) {
-                            $collPlayerDecksRelatedByRightLegPlayerItemId[] = $obj;
+                            $collPlayerEquipmentsRelatedByRightLegPlayerItemId[] = $obj;
                         }
                     }
                 }
 
-                $this->collPlayerDecksRelatedByRightLegPlayerItemId = $collPlayerDecksRelatedByRightLegPlayerItemId;
-                $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial = false;
+                $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId = $collPlayerEquipmentsRelatedByRightLegPlayerItemId;
+                $this->collPlayerEquipmentsRelatedByRightLegPlayerItemIdPartial = false;
             }
         }
 
-        return $this->collPlayerDecksRelatedByRightLegPlayerItemId;
+        return $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId;
     }
 
     /**
-     * Sets a collection of ChildPlayerDeck objects related by a one-to-many relationship
+     * Sets a collection of ChildPlayerEquipment objects related by a one-to-many relationship
      * to the current object.
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      Collection $playerDecksRelatedByRightLegPlayerItemId A Propel collection.
+     * @param      Collection $playerEquipmentsRelatedByRightLegPlayerItemId A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function setPlayerDecksRelatedByRightLegPlayerItemId(Collection $playerDecksRelatedByRightLegPlayerItemId, ConnectionInterface $con = null)
+    public function setPlayerEquipmentsRelatedByRightLegPlayerItemId(Collection $playerEquipmentsRelatedByRightLegPlayerItemId, ConnectionInterface $con = null)
     {
-        /** @var ChildPlayerDeck[] $playerDecksRelatedByRightLegPlayerItemIdToDelete */
-        $playerDecksRelatedByRightLegPlayerItemIdToDelete = $this->getPlayerDecksRelatedByRightLegPlayerItemId(new Criteria(), $con)->diff($playerDecksRelatedByRightLegPlayerItemId);
+        /** @var ChildPlayerEquipment[] $playerEquipmentsRelatedByRightLegPlayerItemIdToDelete */
+        $playerEquipmentsRelatedByRightLegPlayerItemIdToDelete = $this->getPlayerEquipmentsRelatedByRightLegPlayerItemId(new Criteria(), $con)->diff($playerEquipmentsRelatedByRightLegPlayerItemId);
 
 
-        $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion = $playerDecksRelatedByRightLegPlayerItemIdToDelete;
+        $this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion = $playerEquipmentsRelatedByRightLegPlayerItemIdToDelete;
 
-        foreach ($playerDecksRelatedByRightLegPlayerItemIdToDelete as $playerDeckRelatedByRightLegPlayerItemIdRemoved) {
-            $playerDeckRelatedByRightLegPlayerItemIdRemoved->setPlayerItemRelatedByRightLegPlayerItemId(null);
+        foreach ($playerEquipmentsRelatedByRightLegPlayerItemIdToDelete as $playerEquipmentRelatedByRightLegPlayerItemIdRemoved) {
+            $playerEquipmentRelatedByRightLegPlayerItemIdRemoved->setPlayerItemRelatedByRightLegPlayerItemId(null);
         }
 
-        $this->collPlayerDecksRelatedByRightLegPlayerItemId = null;
-        foreach ($playerDecksRelatedByRightLegPlayerItemId as $playerDeckRelatedByRightLegPlayerItemId) {
-            $this->addPlayerDeckRelatedByRightLegPlayerItemId($playerDeckRelatedByRightLegPlayerItemId);
+        $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId = null;
+        foreach ($playerEquipmentsRelatedByRightLegPlayerItemId as $playerEquipmentRelatedByRightLegPlayerItemId) {
+            $this->addPlayerEquipmentRelatedByRightLegPlayerItemId($playerEquipmentRelatedByRightLegPlayerItemId);
         }
 
-        $this->collPlayerDecksRelatedByRightLegPlayerItemId = $playerDecksRelatedByRightLegPlayerItemId;
-        $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial = false;
+        $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId = $playerEquipmentsRelatedByRightLegPlayerItemId;
+        $this->collPlayerEquipmentsRelatedByRightLegPlayerItemIdPartial = false;
 
         return $this;
     }
 
     /**
-     * Returns the number of related PlayerDeck objects.
+     * Returns the number of related PlayerEquipment objects.
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct
      * @param      ConnectionInterface $con
-     * @return int             Count of related PlayerDeck objects.
+     * @return int             Count of related PlayerEquipment objects.
      * @throws PropelException
      */
-    public function countPlayerDecksRelatedByRightLegPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    public function countPlayerEquipmentsRelatedByRightLegPlayerItemId(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
     {
-        $partial = $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial && !$this->isNew();
-        if (null === $this->collPlayerDecksRelatedByRightLegPlayerItemId || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collPlayerDecksRelatedByRightLegPlayerItemId) {
+        $partial = $this->collPlayerEquipmentsRelatedByRightLegPlayerItemIdPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getPlayerDecksRelatedByRightLegPlayerItemId());
+                return count($this->getPlayerEquipmentsRelatedByRightLegPlayerItemId());
             }
 
-            $query = ChildPlayerDeckQuery::create(null, $criteria);
+            $query = ChildPlayerEquipmentQuery::create(null, $criteria);
             if ($distinct) {
                 $query->distinct();
             }
@@ -2864,28 +3471,28 @@ abstract class PlayerItem implements ActiveRecordInterface
                 ->count($con);
         }
 
-        return count($this->collPlayerDecksRelatedByRightLegPlayerItemId);
+        return count($this->collPlayerEquipmentsRelatedByRightLegPlayerItemId);
     }
 
     /**
-     * Method called to associate a ChildPlayerDeck object to this object
-     * through the ChildPlayerDeck foreign key attribute.
+     * Method called to associate a ChildPlayerEquipment object to this object
+     * through the ChildPlayerEquipment foreign key attribute.
      *
-     * @param  ChildPlayerDeck $l ChildPlayerDeck
+     * @param  ChildPlayerEquipment $l ChildPlayerEquipment
      * @return $this|\app\model\PlayerItem The current object (for fluent API support)
      */
-    public function addPlayerDeckRelatedByRightLegPlayerItemId(ChildPlayerDeck $l)
+    public function addPlayerEquipmentRelatedByRightLegPlayerItemId(ChildPlayerEquipment $l)
     {
-        if ($this->collPlayerDecksRelatedByRightLegPlayerItemId === null) {
-            $this->initPlayerDecksRelatedByRightLegPlayerItemId();
-            $this->collPlayerDecksRelatedByRightLegPlayerItemIdPartial = true;
+        if ($this->collPlayerEquipmentsRelatedByRightLegPlayerItemId === null) {
+            $this->initPlayerEquipmentsRelatedByRightLegPlayerItemId();
+            $this->collPlayerEquipmentsRelatedByRightLegPlayerItemIdPartial = true;
         }
 
-        if (!$this->collPlayerDecksRelatedByRightLegPlayerItemId->contains($l)) {
-            $this->doAddPlayerDeckRelatedByRightLegPlayerItemId($l);
+        if (!$this->collPlayerEquipmentsRelatedByRightLegPlayerItemId->contains($l)) {
+            $this->doAddPlayerEquipmentRelatedByRightLegPlayerItemId($l);
 
-            if ($this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion and $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion->contains($l)) {
-                $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion->remove($this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion->search($l));
+            if ($this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion and $this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion->contains($l)) {
+                $this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion->remove($this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion->search($l));
             }
         }
 
@@ -2893,29 +3500,29 @@ abstract class PlayerItem implements ActiveRecordInterface
     }
 
     /**
-     * @param ChildPlayerDeck $playerDeckRelatedByRightLegPlayerItemId The ChildPlayerDeck object to add.
+     * @param ChildPlayerEquipment $playerEquipmentRelatedByRightLegPlayerItemId The ChildPlayerEquipment object to add.
      */
-    protected function doAddPlayerDeckRelatedByRightLegPlayerItemId(ChildPlayerDeck $playerDeckRelatedByRightLegPlayerItemId)
+    protected function doAddPlayerEquipmentRelatedByRightLegPlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByRightLegPlayerItemId)
     {
-        $this->collPlayerDecksRelatedByRightLegPlayerItemId[]= $playerDeckRelatedByRightLegPlayerItemId;
-        $playerDeckRelatedByRightLegPlayerItemId->setPlayerItemRelatedByRightLegPlayerItemId($this);
+        $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId[]= $playerEquipmentRelatedByRightLegPlayerItemId;
+        $playerEquipmentRelatedByRightLegPlayerItemId->setPlayerItemRelatedByRightLegPlayerItemId($this);
     }
 
     /**
-     * @param  ChildPlayerDeck $playerDeckRelatedByRightLegPlayerItemId The ChildPlayerDeck object to remove.
+     * @param  ChildPlayerEquipment $playerEquipmentRelatedByRightLegPlayerItemId The ChildPlayerEquipment object to remove.
      * @return $this|ChildPlayerItem The current object (for fluent API support)
      */
-    public function removePlayerDeckRelatedByRightLegPlayerItemId(ChildPlayerDeck $playerDeckRelatedByRightLegPlayerItemId)
+    public function removePlayerEquipmentRelatedByRightLegPlayerItemId(ChildPlayerEquipment $playerEquipmentRelatedByRightLegPlayerItemId)
     {
-        if ($this->getPlayerDecksRelatedByRightLegPlayerItemId()->contains($playerDeckRelatedByRightLegPlayerItemId)) {
-            $pos = $this->collPlayerDecksRelatedByRightLegPlayerItemId->search($playerDeckRelatedByRightLegPlayerItemId);
-            $this->collPlayerDecksRelatedByRightLegPlayerItemId->remove($pos);
-            if (null === $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion) {
-                $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion = clone $this->collPlayerDecksRelatedByRightLegPlayerItemId;
-                $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion->clear();
+        if ($this->getPlayerEquipmentsRelatedByRightLegPlayerItemId()->contains($playerEquipmentRelatedByRightLegPlayerItemId)) {
+            $pos = $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId->search($playerEquipmentRelatedByRightLegPlayerItemId);
+            $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId->remove($pos);
+            if (null === $this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion) {
+                $this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion = clone $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId;
+                $this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion->clear();
             }
-            $this->playerDecksRelatedByRightLegPlayerItemIdScheduledForDeletion[]= $playerDeckRelatedByRightLegPlayerItemId;
-            $playerDeckRelatedByRightLegPlayerItemId->setPlayerItemRelatedByRightLegPlayerItemId(null);
+            $this->playerEquipmentsRelatedByRightLegPlayerItemIdScheduledForDeletion[]= clone $playerEquipmentRelatedByRightLegPlayerItemId;
+            $playerEquipmentRelatedByRightLegPlayerItemId->setPlayerItemRelatedByRightLegPlayerItemId(null);
         }
 
         return $this;
@@ -2927,7 +3534,7 @@ abstract class PlayerItem implements ActiveRecordInterface
      * an identical criteria, it returns the collection.
      * Otherwise if this PlayerItem is new, it will return
      * an empty collection; or if this PlayerItem has previously
-     * been saved, it will retrieve related PlayerDecksRelatedByRightLegPlayerItemId from storage.
+     * been saved, it will retrieve related PlayerEquipmentsRelatedByRightLegPlayerItemId from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
@@ -2936,14 +3543,14 @@ abstract class PlayerItem implements ActiveRecordInterface
      * @param      Criteria $criteria optional Criteria object to narrow the query
      * @param      ConnectionInterface $con optional connection object
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
      */
-    public function getPlayerDecksRelatedByRightLegPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerEquipmentsRelatedByRightLegPlayerItemIdJoinPlayer(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
-        $query = ChildPlayerDeckQuery::create(null, $criteria);
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
         $query->joinWith('Player', $joinBehavior);
 
-        return $this->getPlayerDecksRelatedByRightLegPlayerItemId($query, $con);
+        return $this->getPlayerEquipmentsRelatedByRightLegPlayerItemId($query, $con);
     }
 
     /**
@@ -2982,38 +3589,50 @@ abstract class PlayerItem implements ActiveRecordInterface
     public function clearAllReferences($deep = false)
     {
         if ($deep) {
-            if ($this->collPlayerDecksRelatedByHeadPlayerItemId) {
-                foreach ($this->collPlayerDecksRelatedByHeadPlayerItemId as $o) {
+            if ($this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId) {
+                foreach ($this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collPlayerDecksRelatedByLeftArmPlayerItemId) {
-                foreach ($this->collPlayerDecksRelatedByLeftArmPlayerItemId as $o) {
+            if ($this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId) {
+                foreach ($this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collPlayerDecksRelatedByRightArmPlayerItemId) {
-                foreach ($this->collPlayerDecksRelatedByRightArmPlayerItemId as $o) {
+            if ($this->collPlayerEquipmentsRelatedByHeadPlayerItemId) {
+                foreach ($this->collPlayerEquipmentsRelatedByHeadPlayerItemId as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collPlayerDecksRelatedByLeftLegPlayerItemId) {
-                foreach ($this->collPlayerDecksRelatedByLeftLegPlayerItemId as $o) {
+            if ($this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId) {
+                foreach ($this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collPlayerDecksRelatedByRightLegPlayerItemId) {
-                foreach ($this->collPlayerDecksRelatedByRightLegPlayerItemId as $o) {
+            if ($this->collPlayerEquipmentsRelatedByRightArmPlayerItemId) {
+                foreach ($this->collPlayerEquipmentsRelatedByRightArmPlayerItemId as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId) {
+                foreach ($this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collPlayerEquipmentsRelatedByRightLegPlayerItemId) {
+                foreach ($this->collPlayerEquipmentsRelatedByRightLegPlayerItemId as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
         } // if ($deep)
 
-        $this->collPlayerDecksRelatedByHeadPlayerItemId = null;
-        $this->collPlayerDecksRelatedByLeftArmPlayerItemId = null;
-        $this->collPlayerDecksRelatedByRightArmPlayerItemId = null;
-        $this->collPlayerDecksRelatedByLeftLegPlayerItemId = null;
-        $this->collPlayerDecksRelatedByRightLegPlayerItemId = null;
+        $this->collPlayerEquipmentsRelatedByWeapon1PlayerItemId = null;
+        $this->collPlayerEquipmentsRelatedByWeapon2PlayerItemId = null;
+        $this->collPlayerEquipmentsRelatedByHeadPlayerItemId = null;
+        $this->collPlayerEquipmentsRelatedByLeftArmPlayerItemId = null;
+        $this->collPlayerEquipmentsRelatedByRightArmPlayerItemId = null;
+        $this->collPlayerEquipmentsRelatedByLeftLegPlayerItemId = null;
+        $this->collPlayerEquipmentsRelatedByRightLegPlayerItemId = null;
         $this->aPlayer = null;
         $this->aItem = null;
     }

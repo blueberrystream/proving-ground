@@ -21,11 +21,14 @@ use app\model\PlayerBattleLog as ChildPlayerBattleLog;
 use app\model\PlayerBattleLogQuery as ChildPlayerBattleLogQuery;
 use app\model\PlayerDeck as ChildPlayerDeck;
 use app\model\PlayerDeckQuery as ChildPlayerDeckQuery;
+use app\model\PlayerEquipment as ChildPlayerEquipment;
+use app\model\PlayerEquipmentQuery as ChildPlayerEquipmentQuery;
 use app\model\PlayerItem as ChildPlayerItem;
 use app\model\PlayerItemQuery as ChildPlayerItemQuery;
 use app\model\PlayerQuery as ChildPlayerQuery;
 use app\model\Map\PlayerBattleLogTableMap;
 use app\model\Map\PlayerDeckTableMap;
+use app\model\Map\PlayerEquipmentTableMap;
 use app\model\Map\PlayerItemTableMap;
 use app\model\Map\PlayerTableMap;
 
@@ -91,6 +94,12 @@ abstract class Player implements ActiveRecordInterface
     protected $collPlayerItemsPartial;
 
     /**
+     * @var        ObjectCollection|ChildPlayerEquipment[] Collection to store aggregation of ChildPlayerEquipment objects.
+     */
+    protected $collPlayerEquipments;
+    protected $collPlayerEquipmentsPartial;
+
+    /**
      * @var        ObjectCollection|ChildPlayerDeck[] Collection to store aggregation of ChildPlayerDeck objects.
      */
     protected $collPlayerDecks;
@@ -121,6 +130,12 @@ abstract class Player implements ActiveRecordInterface
      * @var ObjectCollection|ChildPlayerItem[]
      */
     protected $playerItemsScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ChildPlayerEquipment[]
+     */
+    protected $playerEquipmentsScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
@@ -537,6 +552,8 @@ abstract class Player implements ActiveRecordInterface
 
             $this->collPlayerItems = null;
 
+            $this->collPlayerEquipments = null;
+
             $this->collPlayerDecks = null;
 
             $this->collPlayerBattleLogsRelatedByPlayerId = null;
@@ -668,6 +685,23 @@ abstract class Player implements ActiveRecordInterface
 
             if ($this->collPlayerItems !== null) {
                 foreach ($this->collPlayerItems as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->playerEquipmentsScheduledForDeletion !== null) {
+                if (!$this->playerEquipmentsScheduledForDeletion->isEmpty()) {
+                    \app\model\PlayerEquipmentQuery::create()
+                        ->filterByPrimaryKeys($this->playerEquipmentsScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->playerEquipmentsScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collPlayerEquipments !== null) {
+                foreach ($this->collPlayerEquipments as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -897,6 +931,21 @@ abstract class Player implements ActiveRecordInterface
                 }
 
                 $result[$key] = $this->collPlayerItems->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collPlayerEquipments) {
+
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'playerEquipments';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'player_equipments';
+                        break;
+                    default:
+                        $key = 'PlayerEquipments';
+                }
+
+                $result[$key] = $this->collPlayerEquipments->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
             if (null !== $this->collPlayerDecks) {
 
@@ -1161,6 +1210,12 @@ abstract class Player implements ActiveRecordInterface
                 }
             }
 
+            foreach ($this->getPlayerEquipments() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addPlayerEquipment($relObj->copy($deepCopy));
+                }
+            }
+
             foreach ($this->getPlayerDecks() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addPlayerDeck($relObj->copy($deepCopy));
@@ -1222,6 +1277,10 @@ abstract class Player implements ActiveRecordInterface
     {
         if ('PlayerItem' == $relationName) {
             $this->initPlayerItems();
+            return;
+        }
+        if ('PlayerEquipment' == $relationName) {
+            $this->initPlayerEquipments();
             return;
         }
         if ('PlayerDeck' == $relationName) {
@@ -1489,6 +1548,406 @@ abstract class Player implements ActiveRecordInterface
     }
 
     /**
+     * Clears out the collPlayerEquipments collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addPlayerEquipments()
+     */
+    public function clearPlayerEquipments()
+    {
+        $this->collPlayerEquipments = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collPlayerEquipments collection loaded partially.
+     */
+    public function resetPartialPlayerEquipments($v = true)
+    {
+        $this->collPlayerEquipmentsPartial = $v;
+    }
+
+    /**
+     * Initializes the collPlayerEquipments collection.
+     *
+     * By default this just sets the collPlayerEquipments collection to an empty array (like clearcollPlayerEquipments());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initPlayerEquipments($overrideExisting = true)
+    {
+        if (null !== $this->collPlayerEquipments && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = PlayerEquipmentTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collPlayerEquipments = new $collectionClassName;
+        $this->collPlayerEquipments->setModel('\app\model\PlayerEquipment');
+    }
+
+    /**
+     * Gets an array of ChildPlayerEquipment objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildPlayer is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
+     * @throws PropelException
+     */
+    public function getPlayerEquipments(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerEquipmentsPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipments || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipments) {
+                // return empty collection
+                $this->initPlayerEquipments();
+            } else {
+                $collPlayerEquipments = ChildPlayerEquipmentQuery::create(null, $criteria)
+                    ->filterByPlayer($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collPlayerEquipmentsPartial && count($collPlayerEquipments)) {
+                        $this->initPlayerEquipments(false);
+
+                        foreach ($collPlayerEquipments as $obj) {
+                            if (false == $this->collPlayerEquipments->contains($obj)) {
+                                $this->collPlayerEquipments->append($obj);
+                            }
+                        }
+
+                        $this->collPlayerEquipmentsPartial = true;
+                    }
+
+                    return $collPlayerEquipments;
+                }
+
+                if ($partial && $this->collPlayerEquipments) {
+                    foreach ($this->collPlayerEquipments as $obj) {
+                        if ($obj->isNew()) {
+                            $collPlayerEquipments[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collPlayerEquipments = $collPlayerEquipments;
+                $this->collPlayerEquipmentsPartial = false;
+            }
+        }
+
+        return $this->collPlayerEquipments;
+    }
+
+    /**
+     * Sets a collection of ChildPlayerEquipment objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $playerEquipments A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildPlayer The current object (for fluent API support)
+     */
+    public function setPlayerEquipments(Collection $playerEquipments, ConnectionInterface $con = null)
+    {
+        /** @var ChildPlayerEquipment[] $playerEquipmentsToDelete */
+        $playerEquipmentsToDelete = $this->getPlayerEquipments(new Criteria(), $con)->diff($playerEquipments);
+
+
+        $this->playerEquipmentsScheduledForDeletion = $playerEquipmentsToDelete;
+
+        foreach ($playerEquipmentsToDelete as $playerEquipmentRemoved) {
+            $playerEquipmentRemoved->setPlayer(null);
+        }
+
+        $this->collPlayerEquipments = null;
+        foreach ($playerEquipments as $playerEquipment) {
+            $this->addPlayerEquipment($playerEquipment);
+        }
+
+        $this->collPlayerEquipments = $playerEquipments;
+        $this->collPlayerEquipmentsPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related PlayerEquipment objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related PlayerEquipment objects.
+     * @throws PropelException
+     */
+    public function countPlayerEquipments(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collPlayerEquipmentsPartial && !$this->isNew();
+        if (null === $this->collPlayerEquipments || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collPlayerEquipments) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getPlayerEquipments());
+            }
+
+            $query = ChildPlayerEquipmentQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByPlayer($this)
+                ->count($con);
+        }
+
+        return count($this->collPlayerEquipments);
+    }
+
+    /**
+     * Method called to associate a ChildPlayerEquipment object to this object
+     * through the ChildPlayerEquipment foreign key attribute.
+     *
+     * @param  ChildPlayerEquipment $l ChildPlayerEquipment
+     * @return $this|\app\model\Player The current object (for fluent API support)
+     */
+    public function addPlayerEquipment(ChildPlayerEquipment $l)
+    {
+        if ($this->collPlayerEquipments === null) {
+            $this->initPlayerEquipments();
+            $this->collPlayerEquipmentsPartial = true;
+        }
+
+        if (!$this->collPlayerEquipments->contains($l)) {
+            $this->doAddPlayerEquipment($l);
+
+            if ($this->playerEquipmentsScheduledForDeletion and $this->playerEquipmentsScheduledForDeletion->contains($l)) {
+                $this->playerEquipmentsScheduledForDeletion->remove($this->playerEquipmentsScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ChildPlayerEquipment $playerEquipment The ChildPlayerEquipment object to add.
+     */
+    protected function doAddPlayerEquipment(ChildPlayerEquipment $playerEquipment)
+    {
+        $this->collPlayerEquipments[]= $playerEquipment;
+        $playerEquipment->setPlayer($this);
+    }
+
+    /**
+     * @param  ChildPlayerEquipment $playerEquipment The ChildPlayerEquipment object to remove.
+     * @return $this|ChildPlayer The current object (for fluent API support)
+     */
+    public function removePlayerEquipment(ChildPlayerEquipment $playerEquipment)
+    {
+        if ($this->getPlayerEquipments()->contains($playerEquipment)) {
+            $pos = $this->collPlayerEquipments->search($playerEquipment);
+            $this->collPlayerEquipments->remove($pos);
+            if (null === $this->playerEquipmentsScheduledForDeletion) {
+                $this->playerEquipmentsScheduledForDeletion = clone $this->collPlayerEquipments;
+                $this->playerEquipmentsScheduledForDeletion->clear();
+            }
+            $this->playerEquipmentsScheduledForDeletion[]= clone $playerEquipment;
+            $playerEquipment->setPlayer(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Player is new, it will return
+     * an empty collection; or if this Player has previously
+     * been saved, it will retrieve related PlayerEquipments from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Player.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
+     */
+    public function getPlayerEquipmentsJoinPlayerItemRelatedByWeapon1PlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
+        $query->joinWith('PlayerItemRelatedByWeapon1PlayerItemId', $joinBehavior);
+
+        return $this->getPlayerEquipments($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Player is new, it will return
+     * an empty collection; or if this Player has previously
+     * been saved, it will retrieve related PlayerEquipments from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Player.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
+     */
+    public function getPlayerEquipmentsJoinPlayerItemRelatedByWeapon2PlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
+        $query->joinWith('PlayerItemRelatedByWeapon2PlayerItemId', $joinBehavior);
+
+        return $this->getPlayerEquipments($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Player is new, it will return
+     * an empty collection; or if this Player has previously
+     * been saved, it will retrieve related PlayerEquipments from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Player.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
+     */
+    public function getPlayerEquipmentsJoinPlayerItemRelatedByHeadPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
+        $query->joinWith('PlayerItemRelatedByHeadPlayerItemId', $joinBehavior);
+
+        return $this->getPlayerEquipments($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Player is new, it will return
+     * an empty collection; or if this Player has previously
+     * been saved, it will retrieve related PlayerEquipments from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Player.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
+     */
+    public function getPlayerEquipmentsJoinPlayerItemRelatedByLeftArmPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
+        $query->joinWith('PlayerItemRelatedByLeftArmPlayerItemId', $joinBehavior);
+
+        return $this->getPlayerEquipments($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Player is new, it will return
+     * an empty collection; or if this Player has previously
+     * been saved, it will retrieve related PlayerEquipments from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Player.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
+     */
+    public function getPlayerEquipmentsJoinPlayerItemRelatedByRightArmPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
+        $query->joinWith('PlayerItemRelatedByRightArmPlayerItemId', $joinBehavior);
+
+        return $this->getPlayerEquipments($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Player is new, it will return
+     * an empty collection; or if this Player has previously
+     * been saved, it will retrieve related PlayerEquipments from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Player.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
+     */
+    public function getPlayerEquipmentsJoinPlayerItemRelatedByLeftLegPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
+        $query->joinWith('PlayerItemRelatedByLeftLegPlayerItemId', $joinBehavior);
+
+        return $this->getPlayerEquipments($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Player is new, it will return
+     * an empty collection; or if this Player has previously
+     * been saved, it will retrieve related PlayerEquipments from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Player.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return ObjectCollection|ChildPlayerEquipment[] List of ChildPlayerEquipment objects
+     */
+    public function getPlayerEquipmentsJoinPlayerItemRelatedByRightLegPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    {
+        $query = ChildPlayerEquipmentQuery::create(null, $criteria);
+        $query->joinWith('PlayerItemRelatedByRightLegPlayerItemId', $joinBehavior);
+
+        return $this->getPlayerEquipments($query, $con);
+    }
+
+    /**
      * Clears out the collPlayerDecks collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
@@ -1730,10 +2189,10 @@ abstract class Player implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksJoinPlayerItemRelatedByHeadPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksJoinPropriumRelatedByFirstPropriumId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
-        $query->joinWith('PlayerItemRelatedByHeadPlayerItemId', $joinBehavior);
+        $query->joinWith('PropriumRelatedByFirstPropriumId', $joinBehavior);
 
         return $this->getPlayerDecks($query, $con);
     }
@@ -1755,10 +2214,10 @@ abstract class Player implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksJoinPlayerItemRelatedByLeftArmPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksJoinPropriumRelatedBySecondPropriumId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
-        $query->joinWith('PlayerItemRelatedByLeftArmPlayerItemId', $joinBehavior);
+        $query->joinWith('PropriumRelatedBySecondPropriumId', $joinBehavior);
 
         return $this->getPlayerDecks($query, $con);
     }
@@ -1780,10 +2239,10 @@ abstract class Player implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksJoinPlayerItemRelatedByRightArmPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksJoinPropriumRelatedByThirdPropriumId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
-        $query->joinWith('PlayerItemRelatedByRightArmPlayerItemId', $joinBehavior);
+        $query->joinWith('PropriumRelatedByThirdPropriumId', $joinBehavior);
 
         return $this->getPlayerDecks($query, $con);
     }
@@ -1805,10 +2264,10 @@ abstract class Player implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksJoinPlayerItemRelatedByLeftLegPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksJoinPropriumRelatedByFourthPropriumId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
-        $query->joinWith('PlayerItemRelatedByLeftLegPlayerItemId', $joinBehavior);
+        $query->joinWith('PropriumRelatedByFourthPropriumId', $joinBehavior);
 
         return $this->getPlayerDecks($query, $con);
     }
@@ -1830,10 +2289,10 @@ abstract class Player implements ActiveRecordInterface
      * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return ObjectCollection|ChildPlayerDeck[] List of ChildPlayerDeck objects
      */
-    public function getPlayerDecksJoinPlayerItemRelatedByRightLegPlayerItemId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
+    public function getPlayerDecksJoinPropriumRelatedByFifthPropriumId(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
     {
         $query = ChildPlayerDeckQuery::create(null, $criteria);
-        $query->joinWith('PlayerItemRelatedByRightLegPlayerItemId', $joinBehavior);
+        $query->joinWith('PropriumRelatedByFifthPropriumId', $joinBehavior);
 
         return $this->getPlayerDecks($query, $con);
     }
@@ -2320,6 +2779,11 @@ abstract class Player implements ActiveRecordInterface
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collPlayerEquipments) {
+                foreach ($this->collPlayerEquipments as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
             if ($this->collPlayerDecks) {
                 foreach ($this->collPlayerDecks as $o) {
                     $o->clearAllReferences($deep);
@@ -2338,6 +2802,7 @@ abstract class Player implements ActiveRecordInterface
         } // if ($deep)
 
         $this->collPlayerItems = null;
+        $this->collPlayerEquipments = null;
         $this->collPlayerDecks = null;
         $this->collPlayerBattleLogsRelatedByPlayerId = null;
         $this->collPlayerBattleLogsRelatedByEnemyPlayerId = null;

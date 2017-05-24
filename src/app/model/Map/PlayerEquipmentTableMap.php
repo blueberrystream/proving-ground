@@ -11,12 +11,12 @@ use Propel\Runtime\Exception\PropelException;
 use Propel\Runtime\Map\RelationMap;
 use Propel\Runtime\Map\TableMap;
 use Propel\Runtime\Map\TableMapTrait;
-use app\model\PlayerDeck;
-use app\model\PlayerDeckQuery;
+use app\model\PlayerEquipment;
+use app\model\PlayerEquipmentQuery;
 
 
 /**
- * This class defines the structure of the 'player_deck' table.
+ * This class defines the structure of the 'player_equipment' table.
  *
  *
  *
@@ -26,7 +26,7 @@ use app\model\PlayerDeckQuery;
  * (i.e. if it's a text column type).
  *
  */
-class PlayerDeckTableMap extends TableMap
+class PlayerEquipmentTableMap extends TableMap
 {
     use InstancePoolTrait;
     use TableMapTrait;
@@ -34,7 +34,7 @@ class PlayerDeckTableMap extends TableMap
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'app.model.Map.PlayerDeckTableMap';
+    const CLASS_NAME = 'app.model.Map.PlayerEquipmentTableMap';
 
     /**
      * The default database name for this class
@@ -44,22 +44,22 @@ class PlayerDeckTableMap extends TableMap
     /**
      * The table name for this class
      */
-    const TABLE_NAME = 'player_deck';
+    const TABLE_NAME = 'player_equipment';
 
     /**
      * The related Propel class for this table
      */
-    const OM_CLASS = '\\app\\model\\PlayerDeck';
+    const OM_CLASS = '\\app\\model\\PlayerEquipment';
 
     /**
      * A class that can be returned by this tableMap
      */
-    const CLASS_DEFAULT = 'app.model.PlayerDeck';
+    const CLASS_DEFAULT = 'app.model.PlayerEquipment';
 
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 9;
+    const NUM_COLUMNS = 11;
 
     /**
      * The number of lazy-loaded columns
@@ -69,52 +69,62 @@ class PlayerDeckTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 9;
+    const NUM_HYDRATE_COLUMNS = 11;
 
     /**
      * the column name for the id field
      */
-    const COL_ID = 'player_deck.id';
+    const COL_ID = 'player_equipment.id';
 
     /**
      * the column name for the player_id field
      */
-    const COL_PLAYER_ID = 'player_deck.player_id';
+    const COL_PLAYER_ID = 'player_equipment.player_id';
 
     /**
-     * the column name for the first_proprium_id field
+     * the column name for the weapon1_player_item_id field
      */
-    const COL_FIRST_PROPRIUM_ID = 'player_deck.first_proprium_id';
+    const COL_WEAPON1_PLAYER_ITEM_ID = 'player_equipment.weapon1_player_item_id';
 
     /**
-     * the column name for the second_proprium_id field
+     * the column name for the weapon2_player_item_id field
      */
-    const COL_SECOND_PROPRIUM_ID = 'player_deck.second_proprium_id';
+    const COL_WEAPON2_PLAYER_ITEM_ID = 'player_equipment.weapon2_player_item_id';
 
     /**
-     * the column name for the third_proprium_id field
+     * the column name for the head_player_item_id field
      */
-    const COL_THIRD_PROPRIUM_ID = 'player_deck.third_proprium_id';
+    const COL_HEAD_PLAYER_ITEM_ID = 'player_equipment.head_player_item_id';
 
     /**
-     * the column name for the fourth_proprium_id field
+     * the column name for the left_arm_player_item_id field
      */
-    const COL_FOURTH_PROPRIUM_ID = 'player_deck.fourth_proprium_id';
+    const COL_LEFT_ARM_PLAYER_ITEM_ID = 'player_equipment.left_arm_player_item_id';
 
     /**
-     * the column name for the fifth_proprium_id field
+     * the column name for the right_arm_player_item_id field
      */
-    const COL_FIFTH_PROPRIUM_ID = 'player_deck.fifth_proprium_id';
+    const COL_RIGHT_ARM_PLAYER_ITEM_ID = 'player_equipment.right_arm_player_item_id';
+
+    /**
+     * the column name for the left_leg_player_item_id field
+     */
+    const COL_LEFT_LEG_PLAYER_ITEM_ID = 'player_equipment.left_leg_player_item_id';
+
+    /**
+     * the column name for the right_leg_player_item_id field
+     */
+    const COL_RIGHT_LEG_PLAYER_ITEM_ID = 'player_equipment.right_leg_player_item_id';
 
     /**
      * the column name for the created_at field
      */
-    const COL_CREATED_AT = 'player_deck.created_at';
+    const COL_CREATED_AT = 'player_equipment.created_at';
 
     /**
      * the column name for the updated_at field
      */
-    const COL_UPDATED_AT = 'player_deck.updated_at';
+    const COL_UPDATED_AT = 'player_equipment.updated_at';
 
     /**
      * The default string format for model objects of the related table
@@ -128,11 +138,11 @@ class PlayerDeckTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'PlayerId', 'FirstPropriumId', 'SecondPropriumId', 'ThirdPropriumId', 'FourthPropriumId', 'FifthPropriumId', 'CreatedAt', 'UpdatedAt', ),
-        self::TYPE_CAMELNAME     => array('id', 'playerId', 'firstPropriumId', 'secondPropriumId', 'thirdPropriumId', 'fourthPropriumId', 'fifthPropriumId', 'createdAt', 'updatedAt', ),
-        self::TYPE_COLNAME       => array(PlayerDeckTableMap::COL_ID, PlayerDeckTableMap::COL_PLAYER_ID, PlayerDeckTableMap::COL_FIRST_PROPRIUM_ID, PlayerDeckTableMap::COL_SECOND_PROPRIUM_ID, PlayerDeckTableMap::COL_THIRD_PROPRIUM_ID, PlayerDeckTableMap::COL_FOURTH_PROPRIUM_ID, PlayerDeckTableMap::COL_FIFTH_PROPRIUM_ID, PlayerDeckTableMap::COL_CREATED_AT, PlayerDeckTableMap::COL_UPDATED_AT, ),
-        self::TYPE_FIELDNAME     => array('id', 'player_id', 'first_proprium_id', 'second_proprium_id', 'third_proprium_id', 'fourth_proprium_id', 'fifth_proprium_id', 'created_at', 'updated_at', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, )
+        self::TYPE_PHPNAME       => array('Id', 'PlayerId', 'Weapon1PlayerItemId', 'Weapon2PlayerItemId', 'HeadPlayerItemId', 'LeftArmPlayerItemId', 'RightArmPlayerItemId', 'LeftLegPlayerItemId', 'RightLegPlayerItemId', 'CreatedAt', 'UpdatedAt', ),
+        self::TYPE_CAMELNAME     => array('id', 'playerId', 'weapon1PlayerItemId', 'weapon2PlayerItemId', 'headPlayerItemId', 'leftArmPlayerItemId', 'rightArmPlayerItemId', 'leftLegPlayerItemId', 'rightLegPlayerItemId', 'createdAt', 'updatedAt', ),
+        self::TYPE_COLNAME       => array(PlayerEquipmentTableMap::COL_ID, PlayerEquipmentTableMap::COL_PLAYER_ID, PlayerEquipmentTableMap::COL_WEAPON1_PLAYER_ITEM_ID, PlayerEquipmentTableMap::COL_WEAPON2_PLAYER_ITEM_ID, PlayerEquipmentTableMap::COL_HEAD_PLAYER_ITEM_ID, PlayerEquipmentTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID, PlayerEquipmentTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID, PlayerEquipmentTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID, PlayerEquipmentTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID, PlayerEquipmentTableMap::COL_CREATED_AT, PlayerEquipmentTableMap::COL_UPDATED_AT, ),
+        self::TYPE_FIELDNAME     => array('id', 'player_id', 'weapon1_player_item_id', 'weapon2_player_item_id', 'head_player_item_id', 'left_arm_player_item_id', 'right_arm_player_item_id', 'left_leg_player_item_id', 'right_leg_player_item_id', 'created_at', 'updated_at', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
     );
 
     /**
@@ -142,11 +152,11 @@ class PlayerDeckTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'PlayerId' => 1, 'FirstPropriumId' => 2, 'SecondPropriumId' => 3, 'ThirdPropriumId' => 4, 'FourthPropriumId' => 5, 'FifthPropriumId' => 6, 'CreatedAt' => 7, 'UpdatedAt' => 8, ),
-        self::TYPE_CAMELNAME     => array('id' => 0, 'playerId' => 1, 'firstPropriumId' => 2, 'secondPropriumId' => 3, 'thirdPropriumId' => 4, 'fourthPropriumId' => 5, 'fifthPropriumId' => 6, 'createdAt' => 7, 'updatedAt' => 8, ),
-        self::TYPE_COLNAME       => array(PlayerDeckTableMap::COL_ID => 0, PlayerDeckTableMap::COL_PLAYER_ID => 1, PlayerDeckTableMap::COL_FIRST_PROPRIUM_ID => 2, PlayerDeckTableMap::COL_SECOND_PROPRIUM_ID => 3, PlayerDeckTableMap::COL_THIRD_PROPRIUM_ID => 4, PlayerDeckTableMap::COL_FOURTH_PROPRIUM_ID => 5, PlayerDeckTableMap::COL_FIFTH_PROPRIUM_ID => 6, PlayerDeckTableMap::COL_CREATED_AT => 7, PlayerDeckTableMap::COL_UPDATED_AT => 8, ),
-        self::TYPE_FIELDNAME     => array('id' => 0, 'player_id' => 1, 'first_proprium_id' => 2, 'second_proprium_id' => 3, 'third_proprium_id' => 4, 'fourth_proprium_id' => 5, 'fifth_proprium_id' => 6, 'created_at' => 7, 'updated_at' => 8, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, )
+        self::TYPE_PHPNAME       => array('Id' => 0, 'PlayerId' => 1, 'Weapon1PlayerItemId' => 2, 'Weapon2PlayerItemId' => 3, 'HeadPlayerItemId' => 4, 'LeftArmPlayerItemId' => 5, 'RightArmPlayerItemId' => 6, 'LeftLegPlayerItemId' => 7, 'RightLegPlayerItemId' => 8, 'CreatedAt' => 9, 'UpdatedAt' => 10, ),
+        self::TYPE_CAMELNAME     => array('id' => 0, 'playerId' => 1, 'weapon1PlayerItemId' => 2, 'weapon2PlayerItemId' => 3, 'headPlayerItemId' => 4, 'leftArmPlayerItemId' => 5, 'rightArmPlayerItemId' => 6, 'leftLegPlayerItemId' => 7, 'rightLegPlayerItemId' => 8, 'createdAt' => 9, 'updatedAt' => 10, ),
+        self::TYPE_COLNAME       => array(PlayerEquipmentTableMap::COL_ID => 0, PlayerEquipmentTableMap::COL_PLAYER_ID => 1, PlayerEquipmentTableMap::COL_WEAPON1_PLAYER_ITEM_ID => 2, PlayerEquipmentTableMap::COL_WEAPON2_PLAYER_ITEM_ID => 3, PlayerEquipmentTableMap::COL_HEAD_PLAYER_ITEM_ID => 4, PlayerEquipmentTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID => 5, PlayerEquipmentTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID => 6, PlayerEquipmentTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID => 7, PlayerEquipmentTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID => 8, PlayerEquipmentTableMap::COL_CREATED_AT => 9, PlayerEquipmentTableMap::COL_UPDATED_AT => 10, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'player_id' => 1, 'weapon1_player_item_id' => 2, 'weapon2_player_item_id' => 3, 'head_player_item_id' => 4, 'left_arm_player_item_id' => 5, 'right_arm_player_item_id' => 6, 'left_leg_player_item_id' => 7, 'right_leg_player_item_id' => 8, 'created_at' => 9, 'updated_at' => 10, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
     );
 
     /**
@@ -159,21 +169,23 @@ class PlayerDeckTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('player_deck');
-        $this->setPhpName('PlayerDeck');
+        $this->setName('player_equipment');
+        $this->setPhpName('PlayerEquipment');
         $this->setIdentifierQuoting(false);
-        $this->setClassName('\\app\\model\\PlayerDeck');
+        $this->setClassName('\\app\\model\\PlayerEquipment');
         $this->setPackage('app.model');
         $this->setUseIdGenerator(true);
-        $this->setPrimaryKeyMethodInfo('player_deck_id_seq');
+        $this->setPrimaryKeyMethodInfo('player_equipment_id_seq');
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('player_id', 'PlayerId', 'INTEGER', 'player', 'id', true, null, null);
-        $this->addForeignKey('first_proprium_id', 'FirstPropriumId', 'INTEGER', 'proprium', 'id', true, null, null);
-        $this->addForeignKey('second_proprium_id', 'SecondPropriumId', 'INTEGER', 'proprium', 'id', true, null, null);
-        $this->addForeignKey('third_proprium_id', 'ThirdPropriumId', 'INTEGER', 'proprium', 'id', true, null, null);
-        $this->addForeignKey('fourth_proprium_id', 'FourthPropriumId', 'INTEGER', 'proprium', 'id', true, null, null);
-        $this->addForeignKey('fifth_proprium_id', 'FifthPropriumId', 'INTEGER', 'proprium', 'id', true, null, null);
+        $this->addForeignKey('weapon1_player_item_id', 'Weapon1PlayerItemId', 'INTEGER', 'player_item', 'id', true, null, null);
+        $this->addForeignKey('weapon2_player_item_id', 'Weapon2PlayerItemId', 'INTEGER', 'player_item', 'id', true, null, null);
+        $this->addForeignKey('head_player_item_id', 'HeadPlayerItemId', 'INTEGER', 'player_item', 'id', true, null, null);
+        $this->addForeignKey('left_arm_player_item_id', 'LeftArmPlayerItemId', 'INTEGER', 'player_item', 'id', true, null, null);
+        $this->addForeignKey('right_arm_player_item_id', 'RightArmPlayerItemId', 'INTEGER', 'player_item', 'id', true, null, null);
+        $this->addForeignKey('left_leg_player_item_id', 'LeftLegPlayerItemId', 'INTEGER', 'player_item', 'id', true, null, null);
+        $this->addForeignKey('right_leg_player_item_id', 'RightLegPlayerItemId', 'INTEGER', 'player_item', 'id', true, null, null);
         $this->addColumn('created_at', 'CreatedAt', 'TIMESTAMP', true, null, null);
         $this->addColumn('updated_at', 'UpdatedAt', 'TIMESTAMP', true, null, null);
     } // initialize()
@@ -190,38 +202,52 @@ class PlayerDeckTableMap extends TableMap
     1 => ':id',
   ),
 ), null, null, null, false);
-        $this->addRelation('PropriumRelatedByFirstPropriumId', '\\app\\model\\Proprium', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('PlayerItemRelatedByWeapon1PlayerItemId', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
-    0 => ':first_proprium_id',
+    0 => ':weapon1_player_item_id',
     1 => ':id',
   ),
 ), null, null, null, false);
-        $this->addRelation('PropriumRelatedBySecondPropriumId', '\\app\\model\\Proprium', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('PlayerItemRelatedByWeapon2PlayerItemId', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
-    0 => ':second_proprium_id',
+    0 => ':weapon2_player_item_id',
     1 => ':id',
   ),
 ), null, null, null, false);
-        $this->addRelation('PropriumRelatedByThirdPropriumId', '\\app\\model\\Proprium', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('PlayerItemRelatedByHeadPlayerItemId', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
-    0 => ':third_proprium_id',
+    0 => ':head_player_item_id',
     1 => ':id',
   ),
 ), null, null, null, false);
-        $this->addRelation('PropriumRelatedByFourthPropriumId', '\\app\\model\\Proprium', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('PlayerItemRelatedByLeftArmPlayerItemId', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
-    0 => ':fourth_proprium_id',
+    0 => ':left_arm_player_item_id',
     1 => ':id',
   ),
 ), null, null, null, false);
-        $this->addRelation('PropriumRelatedByFifthPropriumId', '\\app\\model\\Proprium', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('PlayerItemRelatedByRightArmPlayerItemId', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
-    0 => ':fifth_proprium_id',
+    0 => ':right_arm_player_item_id',
+    1 => ':id',
+  ),
+), null, null, null, false);
+        $this->addRelation('PlayerItemRelatedByLeftLegPlayerItemId', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
+  0 =>
+  array (
+    0 => ':left_leg_player_item_id',
+    1 => ':id',
+  ),
+), null, null, null, false);
+        $this->addRelation('PlayerItemRelatedByRightLegPlayerItemId', '\\app\\model\\PlayerItem', RelationMap::MANY_TO_ONE, array (
+  0 =>
+  array (
+    0 => ':right_leg_player_item_id',
     1 => ':id',
   ),
 ), null, null, null, false);
@@ -297,7 +323,7 @@ class PlayerDeckTableMap extends TableMap
      */
     public static function getOMClass($withPrefix = true)
     {
-        return $withPrefix ? PlayerDeckTableMap::CLASS_DEFAULT : PlayerDeckTableMap::OM_CLASS;
+        return $withPrefix ? PlayerEquipmentTableMap::CLASS_DEFAULT : PlayerEquipmentTableMap::OM_CLASS;
     }
 
     /**
@@ -311,22 +337,22 @@ class PlayerDeckTableMap extends TableMap
      *
      * @throws PropelException Any exceptions caught during processing will be
      *                         rethrown wrapped into a PropelException.
-     * @return array           (PlayerDeck object, last column rank)
+     * @return array           (PlayerEquipment object, last column rank)
      */
     public static function populateObject($row, $offset = 0, $indexType = TableMap::TYPE_NUM)
     {
-        $key = PlayerDeckTableMap::getPrimaryKeyHashFromRow($row, $offset, $indexType);
-        if (null !== ($obj = PlayerDeckTableMap::getInstanceFromPool($key))) {
+        $key = PlayerEquipmentTableMap::getPrimaryKeyHashFromRow($row, $offset, $indexType);
+        if (null !== ($obj = PlayerEquipmentTableMap::getInstanceFromPool($key))) {
             // We no longer rehydrate the object, since this can cause data loss.
             // See http://www.propelorm.org/ticket/509
             // $obj->hydrate($row, $offset, true); // rehydrate
-            $col = $offset + PlayerDeckTableMap::NUM_HYDRATE_COLUMNS;
+            $col = $offset + PlayerEquipmentTableMap::NUM_HYDRATE_COLUMNS;
         } else {
-            $cls = PlayerDeckTableMap::OM_CLASS;
-            /** @var PlayerDeck $obj */
+            $cls = PlayerEquipmentTableMap::OM_CLASS;
+            /** @var PlayerEquipment $obj */
             $obj = new $cls();
             $col = $obj->hydrate($row, $offset, false, $indexType);
-            PlayerDeckTableMap::addInstanceToPool($obj, $key);
+            PlayerEquipmentTableMap::addInstanceToPool($obj, $key);
         }
 
         return array($obj, $col);
@@ -349,18 +375,18 @@ class PlayerDeckTableMap extends TableMap
         $cls = static::getOMClass(false);
         // populate the object(s)
         while ($row = $dataFetcher->fetch()) {
-            $key = PlayerDeckTableMap::getPrimaryKeyHashFromRow($row, 0, $dataFetcher->getIndexType());
-            if (null !== ($obj = PlayerDeckTableMap::getInstanceFromPool($key))) {
+            $key = PlayerEquipmentTableMap::getPrimaryKeyHashFromRow($row, 0, $dataFetcher->getIndexType());
+            if (null !== ($obj = PlayerEquipmentTableMap::getInstanceFromPool($key))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj->hydrate($row, 0, true); // rehydrate
                 $results[] = $obj;
             } else {
-                /** @var PlayerDeck $obj */
+                /** @var PlayerEquipment $obj */
                 $obj = new $cls();
                 $obj->hydrate($row);
                 $results[] = $obj;
-                PlayerDeckTableMap::addInstanceToPool($obj, $key);
+                PlayerEquipmentTableMap::addInstanceToPool($obj, $key);
             } // if key exists
         }
 
@@ -381,23 +407,27 @@ class PlayerDeckTableMap extends TableMap
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_ID);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_PLAYER_ID);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_FIRST_PROPRIUM_ID);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_SECOND_PROPRIUM_ID);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_THIRD_PROPRIUM_ID);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_FOURTH_PROPRIUM_ID);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_FIFTH_PROPRIUM_ID);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_CREATED_AT);
-            $criteria->addSelectColumn(PlayerDeckTableMap::COL_UPDATED_AT);
+            $criteria->addSelectColumn(PlayerEquipmentTableMap::COL_ID);
+            $criteria->addSelectColumn(PlayerEquipmentTableMap::COL_PLAYER_ID);
+            $criteria->addSelectColumn(PlayerEquipmentTableMap::COL_WEAPON1_PLAYER_ITEM_ID);
+            $criteria->addSelectColumn(PlayerEquipmentTableMap::COL_WEAPON2_PLAYER_ITEM_ID);
+            $criteria->addSelectColumn(PlayerEquipmentTableMap::COL_HEAD_PLAYER_ITEM_ID);
+            $criteria->addSelectColumn(PlayerEquipmentTableMap::COL_LEFT_ARM_PLAYER_ITEM_ID);
+            $criteria->addSelectColumn(PlayerEquipmentTableMap::COL_RIGHT_ARM_PLAYER_ITEM_ID);
+            $criteria->addSelectColumn(PlayerEquipmentTableMap::COL_LEFT_LEG_PLAYER_ITEM_ID);
+            $criteria->addSelectColumn(PlayerEquipmentTableMap::COL_RIGHT_LEG_PLAYER_ITEM_ID);
+            $criteria->addSelectColumn(PlayerEquipmentTableMap::COL_CREATED_AT);
+            $criteria->addSelectColumn(PlayerEquipmentTableMap::COL_UPDATED_AT);
         } else {
             $criteria->addSelectColumn($alias . '.id');
             $criteria->addSelectColumn($alias . '.player_id');
-            $criteria->addSelectColumn($alias . '.first_proprium_id');
-            $criteria->addSelectColumn($alias . '.second_proprium_id');
-            $criteria->addSelectColumn($alias . '.third_proprium_id');
-            $criteria->addSelectColumn($alias . '.fourth_proprium_id');
-            $criteria->addSelectColumn($alias . '.fifth_proprium_id');
+            $criteria->addSelectColumn($alias . '.weapon1_player_item_id');
+            $criteria->addSelectColumn($alias . '.weapon2_player_item_id');
+            $criteria->addSelectColumn($alias . '.head_player_item_id');
+            $criteria->addSelectColumn($alias . '.left_arm_player_item_id');
+            $criteria->addSelectColumn($alias . '.right_arm_player_item_id');
+            $criteria->addSelectColumn($alias . '.left_leg_player_item_id');
+            $criteria->addSelectColumn($alias . '.right_leg_player_item_id');
             $criteria->addSelectColumn($alias . '.created_at');
             $criteria->addSelectColumn($alias . '.updated_at');
         }
@@ -412,7 +442,7 @@ class PlayerDeckTableMap extends TableMap
      */
     public static function getTableMap()
     {
-        return Propel::getServiceContainer()->getDatabaseMap(PlayerDeckTableMap::DATABASE_NAME)->getTable(PlayerDeckTableMap::TABLE_NAME);
+        return Propel::getServiceContainer()->getDatabaseMap(PlayerEquipmentTableMap::DATABASE_NAME)->getTable(PlayerEquipmentTableMap::TABLE_NAME);
     }
 
     /**
@@ -420,16 +450,16 @@ class PlayerDeckTableMap extends TableMap
      */
     public static function buildTableMap()
     {
-        $dbMap = Propel::getServiceContainer()->getDatabaseMap(PlayerDeckTableMap::DATABASE_NAME);
-        if (!$dbMap->hasTable(PlayerDeckTableMap::TABLE_NAME)) {
-            $dbMap->addTableObject(new PlayerDeckTableMap());
+        $dbMap = Propel::getServiceContainer()->getDatabaseMap(PlayerEquipmentTableMap::DATABASE_NAME);
+        if (!$dbMap->hasTable(PlayerEquipmentTableMap::TABLE_NAME)) {
+            $dbMap->addTableObject(new PlayerEquipmentTableMap());
         }
     }
 
     /**
-     * Performs a DELETE on the database, given a PlayerDeck or Criteria object OR a primary key value.
+     * Performs a DELETE on the database, given a PlayerEquipment or Criteria object OR a primary key value.
      *
-     * @param mixed               $values Criteria or PlayerDeck object or primary key or array of primary keys
+     * @param mixed               $values Criteria or PlayerEquipment object or primary key or array of primary keys
      *              which is used to create the DELETE statement
      * @param  ConnectionInterface $con the connection to use
      * @return int             The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -440,27 +470,27 @@ class PlayerDeckTableMap extends TableMap
      public static function doDelete($values, ConnectionInterface $con = null)
      {
         if (null === $con) {
-            $con = Propel::getServiceContainer()->getWriteConnection(PlayerDeckTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(PlayerEquipmentTableMap::DATABASE_NAME);
         }
 
         if ($values instanceof Criteria) {
             // rename for clarity
             $criteria = $values;
-        } elseif ($values instanceof \app\model\PlayerDeck) { // it's a model object
+        } elseif ($values instanceof \app\model\PlayerEquipment) { // it's a model object
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
-            $criteria = new Criteria(PlayerDeckTableMap::DATABASE_NAME);
-            $criteria->add(PlayerDeckTableMap::COL_ID, (array) $values, Criteria::IN);
+            $criteria = new Criteria(PlayerEquipmentTableMap::DATABASE_NAME);
+            $criteria->add(PlayerEquipmentTableMap::COL_ID, (array) $values, Criteria::IN);
         }
 
-        $query = PlayerDeckQuery::create()->mergeWith($criteria);
+        $query = PlayerEquipmentQuery::create()->mergeWith($criteria);
 
         if ($values instanceof Criteria) {
-            PlayerDeckTableMap::clearInstancePool();
+            PlayerEquipmentTableMap::clearInstancePool();
         } elseif (!is_object($values)) { // it's a primary key, or an array of pks
             foreach ((array) $values as $singleval) {
-                PlayerDeckTableMap::removeInstanceFromPool($singleval);
+                PlayerEquipmentTableMap::removeInstanceFromPool($singleval);
             }
         }
 
@@ -468,20 +498,20 @@ class PlayerDeckTableMap extends TableMap
     }
 
     /**
-     * Deletes all rows from the player_deck table.
+     * Deletes all rows from the player_equipment table.
      *
      * @param ConnectionInterface $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).
      */
     public static function doDeleteAll(ConnectionInterface $con = null)
     {
-        return PlayerDeckQuery::create()->doDeleteAll($con);
+        return PlayerEquipmentQuery::create()->doDeleteAll($con);
     }
 
     /**
-     * Performs an INSERT on the database, given a PlayerDeck or Criteria object.
+     * Performs an INSERT on the database, given a PlayerEquipment or Criteria object.
      *
-     * @param mixed               $criteria Criteria or PlayerDeck object containing data that is used to create the INSERT statement.
+     * @param mixed               $criteria Criteria or PlayerEquipment object containing data that is used to create the INSERT statement.
      * @param ConnectionInterface $con the ConnectionInterface connection to use
      * @return mixed           The new primary key.
      * @throws PropelException Any exceptions caught during processing will be
@@ -490,22 +520,22 @@ class PlayerDeckTableMap extends TableMap
     public static function doInsert($criteria, ConnectionInterface $con = null)
     {
         if (null === $con) {
-            $con = Propel::getServiceContainer()->getWriteConnection(PlayerDeckTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(PlayerEquipmentTableMap::DATABASE_NAME);
         }
 
         if ($criteria instanceof Criteria) {
             $criteria = clone $criteria; // rename for clarity
         } else {
-            $criteria = $criteria->buildCriteria(); // build Criteria from PlayerDeck object
+            $criteria = $criteria->buildCriteria(); // build Criteria from PlayerEquipment object
         }
 
-        if ($criteria->containsKey(PlayerDeckTableMap::COL_ID) && $criteria->keyContainsValue(PlayerDeckTableMap::COL_ID) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.PlayerDeckTableMap::COL_ID.')');
+        if ($criteria->containsKey(PlayerEquipmentTableMap::COL_ID) && $criteria->keyContainsValue(PlayerEquipmentTableMap::COL_ID) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.PlayerEquipmentTableMap::COL_ID.')');
         }
 
 
         // Set the correct dbName
-        $query = PlayerDeckQuery::create()->mergeWith($criteria);
+        $query = PlayerEquipmentQuery::create()->mergeWith($criteria);
 
         // use transaction because $criteria could contain info
         // for more than one table (I guess, conceivably)
@@ -514,7 +544,7 @@ class PlayerDeckTableMap extends TableMap
         });
     }
 
-} // PlayerDeckTableMap
+} // PlayerEquipmentTableMap
 // This is the static code needed to register the TableMap for this table with the main Propel class.
 //
-PlayerDeckTableMap::buildTableMap();
+PlayerEquipmentTableMap::buildTableMap();
