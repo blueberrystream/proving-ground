@@ -105,7 +105,8 @@ if (isset($_POST['enemy_player_id'])) {
         'challenged' => false,
     ], PlayerBattleLogTableMap::TYPE_FIELDNAME);
 
-    if ($player_points['hit_point'] <= 0 && $enemy_player_points['hit_point'] <= 0) {
+    if ($player_points['hit_point'] <= 0 && $enemy_player_points['hit_point'] <= 0
+        || $player_points['hit_point'] === $enemy_player_points['hit_point']) {
         echo '引き分け<br>';
         $player_battle_log->setResult(PlayerBattleLog::RESULT_DRAW);
         $enemy_player_battle_log->setResult(PlayerBattleLog::RESULT_DRAW);
