@@ -1,8 +1,11 @@
 <?php
 require_once '../autoload.php';
 
+use Propel\Runtime\Propel;
+
 use app\model\PlayerQuery;
 use app\model\PlayerEquipment;
+use app\model\Map\PlayerEquipmentTableMap;
 
 $player_id = $_COOKIE['player_id'];
 if (is_null($player_id)) {
@@ -33,7 +36,18 @@ if (!empty($_POST)) {
     $player_equipment->setLeftLegPlayerItemId($_POST['left_leg_player_item_id']);
     $player_equipment->setRightLegPlayerItemId($_POST['right_leg_player_item_id']);
 
-    $player_equipment->save();
+    $connection = Propel::getWriteConnection(PlayerEquipmentTableMap::DATABASE_NAME);
+    try {
+        $player_equipment->save();
+        if ($player->countPlayerDecks() !== 0) {
+            $player->getPlayerDecks()->delete();
+        }
+        $connection->commit();
+    } catch (\Exception $e) {
+        $connection->rollback();
+        throw $e;
+    }
+
     header('Location: /menu.php');
     return;
 } else {
@@ -45,6 +59,7 @@ if (!empty($_POST)) {
 ?>
 武器1と武器2を同じにはできないです。<br>
 各部位、必ずなにかしらを装備しないとダメです。<br>
+装備するとデッキは空になります。
 <form method="post">
 <ul>
 <li>武器1:<select name="weapon1_player_item_id">
