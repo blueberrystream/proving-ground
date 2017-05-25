@@ -23,6 +23,16 @@ foreach ($menu_items as $menu_item) {
 ?>
 </ol>
 
+<h2>status</h2>
+<ul>
+<?php
+$points = $player->getPoints();
+foreach ($points as $key => $point) {
+    printf('<li>%s: %d</li>', $key, $point);
+}
+?>
+</ul>
+
 <h2>equipment</h2>
 <ul>
 <?php

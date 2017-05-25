@@ -16,5 +16,30 @@ use app\model\Base\Player as BasePlayer;
  */
 class Player extends BasePlayer
 {
+    public function getPoints() {
+        $points = [
+            'hit_point' => 0,
+            'attack_point' => 0,
+            'defense_point' => 0,
+        ];
 
+        if ($this->countPlayerEquipments() === 0) {
+            return $points;
+        }
+
+        $player_equipment = $this->getPlayerEquipments()->getFirst();
+        $item_property_names = ['Weapon1', 'Weapon2', 'Head', 'LeftArm', 'RightArm', 'LeftLeg', 'RightLeg'];
+        foreach ($item_property_names as $item_property_name) {
+            $method_name = "getPlayerItemRelatedBy${item_property_name}PlayerItemId";
+            $items[] = $player_equipment->$method_name()->getItem();
+        }
+
+        foreach ($items as $item) {
+            $points['hit_point'] += $item->getHitPoint();
+            $points['attack_point'] += $item->getAttackPoint();
+            $points['defense_point'] += $item->getDefensePoint();
+        }
+
+        return $points;
+    }
 }

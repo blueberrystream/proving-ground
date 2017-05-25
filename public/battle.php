@@ -14,34 +14,12 @@ if (is_null($player_id)) {
     return;
 }
 
-function getPoints($player) {
-    $player_equipment = $player->getPlayerEquipments()->getFirst();
-    $item_property_names = ['Weapon1', 'Weapon2', 'Head', 'LeftArm', 'RightArm', 'LeftLeg', 'RightLeg'];
-    foreach ($item_property_names as $item_property_name) {
-        $method_name = "getPlayerItemRelatedBy${item_property_name}PlayerItemId";
-        $items[] = $player_equipment->$method_name()->getItem();
-    }
-
-    $points = [
-        'hit_point' => 0,
-        'attack_point' => 0,
-        'defense_point' => 0,
-    ];
-    foreach ($items as $item) {
-        $points['hit_point'] += $item->getHitPoint();
-        $points['attack_point'] += $item->getAttackPoint();
-        $points['defense_point'] += $item->getDefensePoint();
-    }
-
-    return $points;
-}
-
 if (isset($_POST['enemy_player_id'])) {
     $player = PlayerQuery::create()->findPK($player_id);
     $enemy_player = PlayerQuery::create()->findPK($_POST['enemy_player_id']);
 
-    $player_points = getPoints($player);
-    $enemy_player_points = getPoints($enemy_player);
+    $player_points = $player->getPoints();
+    $enemy_player_points = $enemy_player->getPoints();
 
     echo '<pre>';
     echo 'before battle<br>';
