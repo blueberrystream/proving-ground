@@ -67,14 +67,14 @@ if (isset($_POST['enemy_player_id'])) {
                 printf('<li>相手の攻撃！自分に%dポイントのダメージ！</li>', $damage_point);
                 break;
             default:
-                $damage_point = $player_points['attack_point'] - $enemy_player_points['defense_point'];
+                $damage_point = round(($player_points['attack_point'] - $enemy_player_points['defense_point']) * 0.5);
                 if ($damage_point < 0) {
                     $damage_point = 0;
                 }
                 $enemy_player_points['hit_point'] -= $damage_point;
                 printf('<li>自分の攻撃！相手に%dポイントのダメージ！</li>', $damage_point);
 
-                $damage_point = $enemy_player_points['attack_point'] - $player_points['defense_point'];
+                $damage_point = round(($enemy_player_points['attack_point'] - $player_points['defense_point']) * 0.5);
                 if ($damage_point < 0) {
                     $damage_point = 0;
                 }
