@@ -120,7 +120,10 @@ if (isset($_POST['enemy_player_id'])) {
         $enemy_player_battle_log->setResult(PlayerBattleLog::RESULT_LOSE);
     } else {
         echo '謎<br>';
+        $player_battle_log->setResult(PlayerBattleLog::RESULT_ERROR);
+        $enemy_player_battle_log->setResult(PlayerBattleLog::RESULT_ERROR);
     }
+    echo '<br>';
 
     $connection = Propel::getWriteConnection(PlayerBattleLogTableMap::DATABASE_NAME);
     try {
