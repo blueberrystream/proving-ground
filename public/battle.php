@@ -88,6 +88,11 @@ if (isset($_POST['enemy_player_id'])) {
                 }
                 break;
         }
+
+        // どちらかのHPが0以下であれば即時中止
+        if ($player_points['hit_point'] <= 0 || $enemy_player_points['hit_point'] <= 0) {
+            break;
+        }
     }
 
     echo '<pre>';
